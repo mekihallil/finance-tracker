@@ -1,9 +1,9 @@
-POST http://localhost:5000/transaction/create
+POST http://localhost:5000/api/transaction/create
 Content-Type :application/json
 
 {
   "title": "Test title",
-  "amount": 5000,
+  "amount": 9000,
   "type": "income",
   "category": "Test"
 }

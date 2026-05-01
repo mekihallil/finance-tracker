@@ -5,10 +5,32 @@ import { Transaction, type TInterface } from "../models/transaction.models.js";
 export const getTransaction = async (req: Request, res: Response) => {
   try {
     const transactions: TInterface[] = await Transaction.find();
+
     res.status(200).json(transactions);
   } catch (error) {
     res.status(500).json({ message: "Transaction not found", error });
   }
+};
+// Summery Transaction
+export const getSummary = async (req: Request, res: Response) => {
+  const transactions = await Transaction.find();
+  // Total income
+  const totalIncome = transactions
+    .filter((t) => t.type === "income")
+    .reduce((sum, t) => sum + t.amount, 0);
+  // Total expense
+  const totalExpense = transactions
+    .filter((t) => t.type === "expense")
+    .reduce((sum, t) => sum + t.amount, 0);
+
+  const balance = totalIncome - totalExpense;
+
+  res.status(200).json({
+    totalIncome,
+    totalExpense,
+    balance,
+    transactionCount: transactions.length,
+  });
 };
 
 // Create Transactions

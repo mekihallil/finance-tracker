@@ -10,6 +10,6 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-app.use("/transaction", router);
+app.use("/api/transaction", router);
 
 export default app;

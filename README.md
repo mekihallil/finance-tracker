@@ -29,12 +29,15 @@ A professional full-stack application built with the **MERN Stack** and **TypeSc
 ## 📂 Project Structure
 
 ```text
-├── client/           # React + Vite (Frontend)
-├── server/           # Node.js + Express (Backend)
+├── fontend/           # React + Vite (Frontend)
+├── backend/           # Node.js + Express (Backend)
 │   ├── src/
+│   │   ├── config/       # Database connection
 │   │   ├── controllers/  # Request handlers & Business logic
+│   │   ├── middlewares/  # Error handlers
 │   │   ├── models/       # Database schemas & Interfaces
 │   │   ├── routes/       # API endpoint definitions
+│   │   ├── validations/  # Request validation
 │   │   └── index.ts      # Main server entry point
 └── README.md
 
