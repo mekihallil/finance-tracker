@@ -1,12 +1,5 @@
-import { Document, Model, model, Schema } from "mongoose";
-
-export interface TInterface extends Document {
-  title: string;
-  amount: number;
-  type: "income" | "expense";
-  category: string;
-  createAt: Date;
-}
+import { Model, model, Schema } from "mongoose";
+import type { TInterface } from "../interface/transaction.interface.js";
 
 const TransactionSchema: Schema<TInterface> = new Schema(
   {

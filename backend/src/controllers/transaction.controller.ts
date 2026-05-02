@@ -1,5 +1,6 @@
 import type { Request, Response } from "express";
-import { Transaction, type TInterface } from "../models/transaction.models.js";
+import type { TInterface } from "../interface/transaction.interface.js";
+import { Transaction } from "../models/transaction.models.js";
 
 // get Transactions
 export const getTransaction = async (req: Request, res: Response) => {

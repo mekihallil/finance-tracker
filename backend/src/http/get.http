@@ -1,2 +1,2 @@
-GET http://localhost:5000/transaction/
+GET http://localhost:5000/api/transaction/
 Content-Type :application/json
