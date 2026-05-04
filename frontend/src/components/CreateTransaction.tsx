@@ -1,9 +1,12 @@
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Loader2, PlusCircle } from "lucide-react";
 import { type FC, type ReactElement } from "react";
 import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { PlusCircle, Loader2 } from "lucide-react";
 import { useTransaction } from "../hook/userTransaction.hook";
-import { transactionSchema, type TransactionFormData } from "../types/transactionSchema.type";
+import {
+  transactionSchema,
+  type TransactionFormData,
+} from "../types/transactionSchema.type";
 
 export const CreateTransaction: FC = (): ReactElement => {
   const { createTransactionMutation } = useTransaction();
@@ -13,9 +16,14 @@ export const CreateTransaction: FC = (): ReactElement => {
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<TransactionFormData >({
+  } = useForm<TransactionFormData>({
     resolver: zodResolver(transactionSchema),
-    defaultValues: { type: "expense", category: "Food" },
+    defaultValues: {
+      title: "",
+      type: "expense",
+      category: "Food",
+      amount: undefined,
+    },
   });
 
   const onSubmit = (data: TransactionFormData) => {
@@ -29,44 +37,76 @@ export const CreateTransaction: FC = (): ReactElement => {
   return (
     <section className="w-full lg:w-1/2 mx-auto bg-white p-8 rounded-3xl border border-gray-100 shadow-sm mt-10">
       <header className="mb-6">
-        <h2 className="text-xl font-bold text-gray-800 tracking-tight">Add Transaction</h2>
-        <p className="text-sm text-gray-400 font-medium">Record a new income or expense</p>
+        <h2 className="text-xl font-bold text-gray-800 tracking-tight">
+          Add Transaction
+        </h2>
+        <p className="text-sm text-gray-400 font-medium">
+          Record a new income or expense
+        </p>
       </header>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
         {/* Title Input */}
         <div className="flex flex-col gap-1.5">
-          <label htmlFor="title" className="text-[10px] font-bold uppercase text-gray-400 tracking-widest">Description</label>
+          <label
+            htmlFor="title"
+            className="text-[10px] font-bold uppercase text-gray-400 tracking-widest"
+          >
+            Description
+          </label>
           <input
             {...register("title")}
             id="title"
             placeholder="e.g. Monthly Salary"
             className={`p-3 rounded-xl border bg-gray-50 outline-none transition-all focus:ring-2 ${
-              errors.title ? "border-red-300 focus:ring-red-50" : "border-gray-100 focus:ring-blue-50"
+              errors.title
+                ? "border-red-300 focus:ring-red-50"
+                : "border-gray-100 focus:ring-blue-50"
             }`}
           />
-          {errors.title && <span className="text-xs text-red-500 font-medium">{errors.title.message}</span>}
+          {errors.title && (
+            <span className="text-xs text-red-500 font-medium">
+              {errors.title.message}
+            </span>
+          )}
         </div>
 
         <div className="grid grid-cols-2 gap-4">
           {/* Amount Input */}
           <div className="flex flex-col gap-1.5">
-            <label htmlFor="amount" className="text-[10px] font-bold uppercase text-gray-400 tracking-widest">Amount (Birr)</label>
+            <label
+              htmlFor="amount"
+              className="text-[10px] font-bold uppercase text-gray-400 tracking-widest"
+            >
+              Amount (Birr)
+            </label>
             <input
               {...register("amount")}
               id="amount"
+              {...register("amount", { valueAsNumber: true })}
               type="number"
               placeholder="0.00"
               className={`p-3 rounded-xl border bg-gray-50 outline-none transition-all focus:ring-2 ${
-                errors.amount ? "border-red-300 focus:ring-red-50" : "border-gray-100 focus:ring-blue-50"
+                errors.amount
+                  ? "border-red-300 focus:ring-red-50"
+                  : "border-gray-100 focus:ring-blue-50"
               }`}
             />
-            {errors.amount && <span className="text-xs text-red-500 font-medium">{errors.amount.message}</span>}
+            {errors.amount && (
+              <span className="text-xs text-red-500 font-medium">
+                {errors.amount.message}
+              </span>
+            )}
           </div>
 
           {/* Category Select */}
           <div className="flex flex-col gap-1.5">
-            <label htmlFor="category" className="text-[10px] font-bold uppercase text-gray-400 tracking-widest">Category</label>
+            <label
+              htmlFor="category"
+              className="text-[10px] font-bold uppercase text-gray-400 tracking-widest"
+            >
+              Category
+            </label>
             <select
               {...register("category")}
               id="category"
@@ -84,11 +124,21 @@ export const CreateTransaction: FC = (): ReactElement => {
         {/* Type Selector (Custom Toggle Style) */}
         <div className="flex p-1 bg-gray-100 rounded-2xl border border-gray-200">
           <label className="flex-1 flex items-center justify-center gap-2 p-3 rounded-xl cursor-pointer has-checked:bg-white has-checked:shadow-sm transition-all">
-            <input {...register("type")} type="radio" value="income" className="sr-only" />
+            <input
+              {...register("type")}
+              type="radio"
+              value="income"
+              className="sr-only"
+            />
             <span className="text-sm font-bold text-gray-600">Income</span>
           </label>
           <label className="flex-1 flex items-center justify-center gap-2 p-3 rounded-xl cursor-pointer has-checked:bg-white has-checked:shadow-sm transition-all">
-            <input {...register("type")} type="radio" value="expense" className="sr-only" />
+            <input
+              {...register("type")}
+              type="radio"
+              value="expense"
+              className="sr-only"
+            />
             <span className="text-sm font-bold text-gray-600">Expense</span>
           </label>
         </div>
