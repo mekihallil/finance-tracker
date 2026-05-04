@@ -13,7 +13,7 @@ export const AddTransaction: FC = (): ReactElement => {
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<TransactionFormData>({
+  } = useForm<TransactionFormData >({
     resolver: zodResolver(transactionSchema),
     defaultValues: { type: "expense", category: "Food" },
   });
@@ -83,11 +83,11 @@ export const AddTransaction: FC = (): ReactElement => {
 
         {/* Type Selector (Custom Toggle Style) */}
         <div className="flex p-1 bg-gray-100 rounded-2xl border border-gray-200">
-          <label className="flex-1 flex items-center justify-center gap-2 p-3 rounded-xl cursor-pointer has-[:checked]:bg-white has-[:checked]:shadow-sm transition-all">
+          <label className="flex-1 flex items-center justify-center gap-2 p-3 rounded-xl cursor-pointer has-checked:bg-white has-checked:shadow-sm transition-all">
             <input {...register("type")} type="radio" value="income" className="sr-only" />
             <span className="text-sm font-bold text-gray-600">Income</span>
           </label>
-          <label className="flex-1 flex items-center justify-center gap-2 p-3 rounded-xl cursor-pointer has-[:checked]:bg-white has-[:checked]:shadow-sm transition-all">
+          <label className="flex-1 flex items-center justify-center gap-2 p-3 rounded-xl cursor-pointer has-checked:bg-white has-checked:shadow-sm transition-all">
             <input {...register("type")} type="radio" value="expense" className="sr-only" />
             <span className="text-sm font-bold text-gray-600">Expense</span>
           </label>

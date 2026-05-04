@@ -67,14 +67,15 @@ export const GetTransactions: FC = (): ReactElement => {
 
                   {/* <time> provides machine-readable date info */}
                   <time className="text-[10px] font-medium ">
-                    {new Date(transaction.createAt).toLocaleString("en-US", {
-                      hour: "2-digit",
-                      minute: "2-digit",
-                      weekday: "short",
-                      month: "short",
-                      day: "2-digit",
-                      year: "numeric",
-                    })}
+                    {transaction.createAt &&
+                      new Date(transaction.createAt).toLocaleString("en-US", {
+                        hour: "2-digit",
+                        minute: "2-digit",
+                        weekday: "short",
+                        month: "short",
+                        day: "2-digit",
+                        year: "numeric",
+                      })}
                   </time>
                 </div>
                 <del className="place-content-center ml-1">

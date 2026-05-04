@@ -4,7 +4,7 @@ export interface TInterface {
   amount: number;
   type: "income" | "expense";
   category: string;
-  createAt: Date;
+  createAt?: Date;
 }
 
 export interface IdparticalTInterface extends TInterface {
