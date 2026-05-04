@@ -5,7 +5,7 @@ import { PlusCircle, Loader2 } from "lucide-react";
 import { useTransaction } from "../hook/userTransaction.hook";
 import { transactionSchema, type TransactionFormData } from "../types/transactionSchema.type";
 
-export const AddTransaction: FC = (): ReactElement => {
+export const CreateTransaction: FC = (): ReactElement => {
   const { createTransactionMutation } = useTransaction();
 
   const {
