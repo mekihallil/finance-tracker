@@ -5,9 +5,9 @@ import { Summary } from "../components/Summary";
 export const Dashboard = () => {
   return (
     <>
-      <div className="mx-50">
+      <div className="mx-50 max-lg:mx-1">
         <Summary />
-        <div className="flex">
+        <div className="flex max-lg:flex-col">
           <CreateTransaction />
           <GetTransactions />
         </div>
