@@ -28,8 +28,8 @@ export const GetTransactions: FC = (): ReactElement => {
   }
 
   return (
-    <section className="w-full lg:w-2/3 mx-auto pb-20">
-      <h2 className="py-8 text-center text-2xl font-bold text-gray-800 tracking-tight">
+    <section className="w-full  mx-auto pb-20 max-lg:w-77 max-lg:mx-auto">
+      <h2 className="py-8 text-center text-2xl font-bold text-gray-800 ">
         Recent Activity
       </h2>
 
