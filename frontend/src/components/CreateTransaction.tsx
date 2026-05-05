@@ -35,7 +35,7 @@ export const CreateTransaction: FC = (): ReactElement => {
   };
 
   return (
-    <section className="w-full lg:w-1/2 mx-auto bg-white p-8 rounded-3xl border border-gray-100 shadow-sm mt-10">
+    <section className="w-full lg:w-1/2 mx-auto bg-white p-8 rounded-3xl border border-gray-100 shadow-sm mt-10 max-lg:w-77 max-lg:mx-auto">
       <header className="mb-6">
         <h2 className="text-xl font-bold text-gray-800 tracking-tight">
           Add Transaction
