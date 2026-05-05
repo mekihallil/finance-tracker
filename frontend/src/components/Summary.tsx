@@ -35,9 +35,9 @@ export const Summary: FC = (): ReactElement => {
 
   return (
     <section className="mt-10">
-      <div className="flex justify-between">
+      <div className="flex justify-between max-lg:flex-col-reverse">
         {/* Total Balance Card */}
-        <article className=" w-70 p-6 rounded-2xl shadow-sm border border-gray-100">
+        <article className=" w-70 p-6 rounded-2xl shadow-sm border border-gray-100 max-lg:w-77 max-lg:mx-auto">
           <header className="flex items-center gap-2 mb-3">
             <Wallet size={20} className="text-blue-600" />
             <h3 className="text-gray-500 text-sm font-medium uppercase">
@@ -51,7 +51,7 @@ export const Summary: FC = (): ReactElement => {
         </article>
 
         {/* Total Expense Card */}
-        <article className="w-70 p-6 rounded-2xl shadow-sm border border-gray-100 ">
+        <article className="w-70 p-6 rounded-2xl shadow-sm border border-gray-100 max-lg:w-77 max-lg:mx-auto">
           <header className="flex items-center gap-2 mb-3">
             <ArrowDownCircle size={20} className="text-red-500" />
             <h3 className="text-gray-500 text-sm font-medium uppercase">
@@ -65,7 +65,7 @@ export const Summary: FC = (): ReactElement => {
         </article>
 
         {/* Total Income Card */}
-        <article className="w-70 p-6 rounded-2xl shadow-sm border border-gray-100 ">
+        <article className="w-70 p-6 rounded-2xl shadow-sm border border-gray-100 max-lg:w-77  max-lg:mx-auto">
           <header className="flex items-center gap-2 mb-3">
             <ArrowUpCircle size={20} className="text-green-700" />
             <h3 className="text-gray-500 text-sm font-medium uppercase ">
@@ -79,7 +79,7 @@ export const Summary: FC = (): ReactElement => {
         </article>
 
         {/* Total Transactions Card */}
-        <article className="p-6 rounded-2xl shadow-sm border border-gray-100 ">
+        <article className="p-6 rounded-2xl shadow-sm border border-gray-100 max-lg:w-77  max-lg:mx-auto">
           <header className="flex items-center gap-2 mb-3">
             <ArrowUpDown size={20} className="text-gray-400" />
             <h3 className="text-gray-500 text-sm font-medium uppercase ">
