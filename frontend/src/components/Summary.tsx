@@ -2,18 +2,46 @@ import {
   ArrowDownCircle,
   ArrowUpCircle,
   ArrowUpDown,
+  Moon,
+  Sun,
   Wallet,
 } from "lucide-react";
-import { type FC, type ReactElement } from "react";
+import { useEffect, useState, type FC, type ReactElement } from "react";
 import { useTransaction } from "../hook/userTransaction.hook";
 
 export const Summary: FC = (): ReactElement => {
+const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  const [mode, setMode] = useState(isDark);
+  useEffect(() => {
+    if (mode) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  }, [mode]);
+
+
+  
   const { transactionSummaryQuery } = useTransaction();
   const summary = transactionSummaryQuery;
 
   if (summary.isLoading) {
     return (
+
+      
       <div className="flex justify-center p-10">
+        <div onClick={() => setMode(!mode)}>
+                {mode ? (
+                  <Moon 
+                    fontSize="medium"
+                  />
+                ) : (
+                  <Sun 
+                    fontSize="medium"
+                  />
+                )}
+        </div>
+              
         <span className="animate-pulse text-gray-400 font-medium">
           Loading summary...
         </span>
