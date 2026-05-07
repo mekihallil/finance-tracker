@@ -28,8 +28,8 @@ export const GetTransactions: FC = (): ReactElement => {
   }
 
   return (
-    <section className="w-full  mx-auto pb-20 max-lg:w-77 max-lg:mx-auto">
-      <h2 className="py-8 text-center text-2xl font-bold text-gray-800 ">
+    <section className="w-150  mx-auto pb-20 max-lg:w-77 max-lg:mx-auto">
+      <h2 className="py-8 text-center text-2xl font-bold text-gray-800 dark:text-white">
         Recent Activity
       </h2>
 
@@ -43,7 +43,7 @@ export const GetTransactions: FC = (): ReactElement => {
           >
             <div className="flex justify-between items-start">
               <header>
-                <h3 className="text-xl text-gray-900 capitalize">
+                <h3 className="text-xl text-gray-900 dark:text-white capitalize">
                   {transaction.title}
                 </h3>
                 <span className="mt-1 px-2 py-1 text-[10px] text-gray-500 rounded-md">

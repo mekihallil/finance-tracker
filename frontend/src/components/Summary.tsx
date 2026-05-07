@@ -10,7 +10,7 @@ import { useEffect, useState, type FC, type ReactElement } from "react";
 import { useTransaction } from "../hook/userTransaction.hook";
 
 export const Summary: FC = (): ReactElement => {
-const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
   const [mode, setMode] = useState(isDark);
   useEffect(() => {
     if (mode) {
@@ -20,28 +20,12 @@ const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
     }
   }, [mode]);
 
-
-  
   const { transactionSummaryQuery } = useTransaction();
   const summary = transactionSummaryQuery;
 
   if (summary.isLoading) {
     return (
-
-      
       <div className="flex justify-center p-10">
-        <div onClick={() => setMode(!mode)}>
-                {mode ? (
-                  <Moon 
-                    fontSize="medium"
-                  />
-                ) : (
-                  <Sun 
-                    fontSize="medium"
-                  />
-                )}
-        </div>
-              
         <span className="animate-pulse text-gray-400 font-medium">
           Loading summary...
         </span>
@@ -62,13 +46,19 @@ const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
   const data = summary.data;
 
   return (
-    <section className="mt-10">
+    <section className="">
+      <div className="flex justify-center">
+        <div onClick={() => setMode(!mode)}>
+          {mode ? <Moon size={50} /> : <Sun size={50} />}
+        </div>
+      </div>
+
       <div className="flex justify-between max-lg:flex-col-reverse">
         {/* Total Balance Card */}
         <article className=" w-70 p-6 rounded-2xl shadow-sm border border-gray-100 max-lg:w-77 max-lg:mx-auto">
           <header className="flex items-center gap-2 mb-3">
             <Wallet size={20} className="text-blue-600" />
-            <h3 className="text-gray-500 text-sm font-medium uppercase">
+            <h3 className="text-gray-500 dark:text-white text-sm font-medium uppercase">
               Total Balance
             </h3>
           </header>
@@ -82,7 +72,7 @@ const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
         <article className="w-70 p-6 rounded-2xl shadow-sm border border-gray-100 max-lg:w-77 max-lg:mx-auto">
           <header className="flex items-center gap-2 mb-3">
             <ArrowDownCircle size={20} className="text-red-500" />
-            <h3 className="text-gray-500 text-sm font-medium uppercase">
+            <h3 className="text-gray-500 dark:text-white text-sm font-medium uppercase">
               Total Expense
             </h3>
           </header>
@@ -96,7 +86,7 @@ const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
         <article className="w-70 p-6 rounded-2xl shadow-sm border border-gray-100 max-lg:w-77  max-lg:mx-auto">
           <header className="flex items-center gap-2 mb-3">
             <ArrowUpCircle size={20} className="text-green-700" />
-            <h3 className="text-gray-500 text-sm font-medium uppercase ">
+            <h3 className="text-gray-500 dark:text-white text-sm font-medium uppercase ">
               Total Income
             </h3>
           </header>
@@ -110,11 +100,11 @@ const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
         <article className="p-6 rounded-2xl shadow-sm border border-gray-100 max-lg:w-77  max-lg:mx-auto">
           <header className="flex items-center gap-2 mb-3">
             <ArrowUpDown size={20} className="text-gray-400" />
-            <h3 className="text-gray-500 text-sm font-medium uppercase ">
+            <h3 className="text-gray-500 dark:text-white text-sm font-medium uppercase ">
               Transactions
             </h3>
           </header>
-          <p className="text-3xl font-bold text-center text-gray-800">
+          <p className="text-3xl font-bold text-center text-gray-800 dark:text-white">
             {data?.transactionCount || 0}
           </p>
         </article>
