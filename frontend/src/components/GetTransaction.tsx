@@ -1,11 +1,13 @@
 import { Trash2 } from "lucide-react";
 import type { FC, ReactElement } from "react";
+import { useNavigate } from "react-router";
 import { useTransaction } from "../hook/userTransaction.hook";
 import type { IdparticalTInterface } from "../interface/transaction.interface";
 
 export const GetTransactions: FC = (): ReactElement => {
   const { getTransactionsQuery, deleteTransactionMutation } = useTransaction();
   const { data, isLoading, isError, error } = getTransactionsQuery;
+  const navigate = useNavigate();
 
   if (isLoading) {
     return (
@@ -78,15 +80,26 @@ export const GetTransactions: FC = (): ReactElement => {
                       })}
                   </time>
                 </div>
-                <del className="place-content-center ml-1">
-                  <button
-                    onClick={() =>
-                      deleteTransactionMutation.mutate(transaction._id)
-                    }
-                  >
-                    <Trash2 size={18} color="red" />
-                  </button>
-                </del>
+                <div>
+                  {/* edit Transaction  */}
+                  <div>
+                    <button
+                      className="bg-blue-500 text-white px-3 py-1 rounded"
+                      onClick={() => navigate(`/edit/${transaction._id}`)} // አድራሻውን ይቀይረዋል
+                    >
+                      Edit
+                    </button>
+                  </div>
+                  <del className="place-content-center ml-1">
+                    <button
+                      onClick={() =>
+                        deleteTransactionMutation.mutate(transaction._id)
+                      }
+                    >
+                      <Trash2 size={18} color="red" />
+                    </button>
+                  </del>
+                </div>
               </div>
             </div>
           </li>
