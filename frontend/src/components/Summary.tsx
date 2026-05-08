@@ -47,9 +47,10 @@ export const Summary: FC = (): ReactElement => {
 
   return (
     <section className="">
-      <div className="flex justify-center">
-        <div onClick={() => setMode(!mode)}>
-          {mode ? <Moon size={50} /> : <Sun size={50} />}
+      <div className="flex justify-end">
+        {/* Dark and light modes  */}
+        <div className="p-5" onClick={() => setMode(!mode)}>
+          {mode ? <Sun size={30} /> : <Moon size={30} />}
         </div>
       </div>
 
