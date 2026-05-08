@@ -3,15 +3,14 @@ import { UpdateTransaction } from "../components/UpdateTransaction";
 import { useTransaction } from "../hook/userTransaction.hook";
 
 export const EditPage = () => {
-  const { id } = useParams(); // IDውን ከ URL ይወስዳል
+  const { id } = useParams();
   const { getTransactionsQuery } = useTransaction();
 
-  // ካሉት ትራንዛክሽኖች ውስጥ የዚህን ID ዳታ ፈልግ
   const transactionToEdit = getTransactionsQuery.data?.find(
     (t) => t._id === id,
   );
 
-  if (!transactionToEdit) return <div>ዳታው አልተገኘም...</div>;
+  if (!transactionToEdit) return <div>data empty...</div>;
 
   return (
     <div className="p-10">
