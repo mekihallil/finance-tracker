@@ -3,6 +3,7 @@ import { Loader2, Save } from "lucide-react";
 import { type FC, type ReactElement } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
+import { toast } from "sonner";
 import { useTransaction } from "../hook/userTransaction.hook";
 import type { updateInterface } from "../interface/update.interface";
 import {
@@ -36,7 +37,11 @@ export const UpdateTransaction: FC<updateInterface> = ({
       { id, data: formData },
       {
         onSuccess: () => {
+          toast.success("Transaction updated successfully!");
           navigate("/");
+        },
+        onError: () => {
+          toast.error("Failed to update transaction.");
         },
       },
     );
@@ -70,6 +75,7 @@ export const UpdateTransaction: FC<updateInterface> = ({
             {errors.title && (
               <span className="text-xs text-red-500 font-medium">
                 {errors.title.message}
+                {toast.error(errors.title.message)}
               </span>
             )}
           </div>
@@ -97,6 +103,7 @@ export const UpdateTransaction: FC<updateInterface> = ({
               {errors.amount && (
                 <span className="text-xs text-red-500 font-medium">
                   {errors.amount.message}
+                  {toast.error(errors.amount.message)}
                 </span>
               )}
             </div>
