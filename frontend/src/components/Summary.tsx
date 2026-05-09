@@ -7,6 +7,7 @@ import {
   Wallet,
 } from "lucide-react";
 import { useEffect, useState, type FC, type ReactElement } from "react";
+import { toast } from "sonner";
 import { useTransaction } from "../hook/userTransaction.hook";
 
 export const Summary: FC = (): ReactElement => {
@@ -38,6 +39,7 @@ export const Summary: FC = (): ReactElement => {
       <div role="alert" className="p-4 bg-red-50 rounded-lg">
         <span className="text-red-500 font-bold">
           Error: {summary.error.message}
+          {toast.error(summary.error.message)}
         </span>
       </div>
     );
@@ -49,7 +51,22 @@ export const Summary: FC = (): ReactElement => {
     <section className="">
       <div className="flex justify-end">
         {/* Dark and light modes  */}
-        <div className="p-5" onClick={() => setMode(!mode)}>
+        <div
+          className="p-5"
+          onClick={() => {
+            setMode(!mode);
+            {
+              toast(`Hello ${mode ? "Lightness" : "Darkness"} !`, {
+                icon: "👏",
+                style: {
+                  borderRadius: "10px",
+                  background: "#333",
+                  color: "#fff",
+                },
+              });
+            }
+          }}
+        >
           {mode ? <Sun size={30} /> : <Moon size={30} />}
         </div>
       </div>
