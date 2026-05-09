@@ -2,6 +2,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2, PlusCircle } from "lucide-react";
 import { type FC, type ReactElement } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import { useTransaction } from "../hook/userTransaction.hook";
 import {
   transactionSchema,
@@ -29,7 +30,11 @@ export const CreateTransaction: FC = (): ReactElement => {
   const onSubmit = (data: TransactionFormData) => {
     createTransactionMutation.mutate(data, {
       onSuccess: () => {
-        reset(); // Clear form only if database update is successful
+        toast.success("Transaction registered successfully!");
+        reset();
+      },
+      onError: () => {
+        toast.error("Failed to register transaction.");
       },
     });
   };
@@ -42,8 +47,10 @@ export const CreateTransaction: FC = (): ReactElement => {
           Record a new income or expense
         </p>
       </header>
-      <section className="p-8 border rounded-3xl shadow-sm border-gray-100 dark:border-black
-       ">
+      <section
+        className="p-8 border rounded-3xl shadow-sm border-gray-100 dark:border-black
+       "
+      >
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
           {/* Title Input */}
           <div className="flex flex-col gap-1.5">
@@ -57,7 +64,7 @@ export const CreateTransaction: FC = (): ReactElement => {
               {...register("title")}
               id="title"
               placeholder="e.g. Monthly Salary"
-              className={`p-3 rounded-xl border bg-gray-50 dark:bg-black outline-none transition-all focus:ring-2 ${
+              className={`p-3 rounded-xl border bg-gray-50 dark:bg-gray-950 outline-none transition-all focus:ring-2 ${
                 errors.title
                   ? "border-red-300 focus:ring-red-50"
                   : "border-gray-100 focus:ring-blue-50"
@@ -66,6 +73,7 @@ export const CreateTransaction: FC = (): ReactElement => {
             {errors.title && (
               <span className="text-xs text-red-500 font-medium">
                 {errors.title.message}
+                {toast.error(`${errors.title.message}`)}
               </span>
             )}
           </div>
@@ -85,7 +93,7 @@ export const CreateTransaction: FC = (): ReactElement => {
                 {...register("amount", { valueAsNumber: true })}
                 type="number"
                 placeholder="0.00"
-                className={`p-3 rounded-xl border bg-gray-50 dark:bg-black outline-none transition-all focus:ring-2 ${
+                className={`p-3 rounded-xl border bg-gray-50 dark:bg-gray-950 outline-none transition-all focus:ring-2 ${
                   errors.amount
                     ? "border-red-300 focus:ring-red-50"
                     : "border-gray-100 focus:ring-blue-50"
@@ -94,6 +102,7 @@ export const CreateTransaction: FC = (): ReactElement => {
               {errors.amount && (
                 <span className="text-xs text-red-500 font-medium">
                   {errors.amount.message}
+                  {toast.error(`${errors.amount.message}`)}
                 </span>
               )}
             </div>
@@ -109,7 +118,7 @@ export const CreateTransaction: FC = (): ReactElement => {
               <select
                 {...register("category")}
                 id="category"
-                className="p-3 rounded-xl border border-gray-100 bg-gray-50  dark:bg-black outline-none focus:ring-2 focus:ring-blue-50 font-medium text-gray-600"
+                className="p-3 rounded-xl border border-gray-100 bg-gray-50  dark:bg-gray-950 outline-none focus:ring-2 focus:ring-blue-50 font-medium text-gray-600"
               >
                 <option value="Food">Food</option>
                 <option value="Salary">Salary</option>
@@ -121,24 +130,28 @@ export const CreateTransaction: FC = (): ReactElement => {
           </div>
 
           {/* Type Selector (Custom Toggle Style) */}
-          <div className="flex p-1 bg-gray-100 rounded-2xl border border-gray-200">
-            <label className="flex-1 flex items-center justify-center gap-2 p-3 rounded-xl cursor-pointer has-checked:bg-white dark:has-checked:bg-black has-checked:shadow-sm transition-all">
+          <div className="flex p-1 bg-gray-950 rounded-2xl border border-gray-200">
+            <label className="flex-1 flex items-center justify-center gap-2 p-3 rounded-xl  cursor-pointer has-checked:bg-white dark:has-checked:bg-transparent dark:has-checked:border-2 has-checked:shadow-sm transition-all">
               <input
                 {...register("type")}
                 type="radio"
                 value="income"
                 className="sr-only"
               />
-              <span className="text-sm font-bold text-gray-600">Income</span>
+              <span className="text-sm font-bold text-gray-600 dark:text-white">
+                Income
+              </span>
             </label>
-            <label className="flex-1 flex items-center justify-center gap-2 p-3 rounded-xl cursor-pointer has-checked:bg-white dark:has-checked:bg-black has-checked:shadow-sm transition-all">
+            <label className="flex-1 flex items-center justify-center gap-2 p-3 rounded-xl cursor-pointer has-checked:bg-white dark:has-checked:bg-transparent dark:has-checked:border-2 has-checked:shadow-2xl transition-all">
               <input
                 {...register("type")}
                 type="radio"
                 value="expense"
                 className="sr-only"
               />
-              <span className="text-sm font-bold text-gray-600">Expense</span>
+              <span className="text-sm font-bold text-gray-600 dark:text-white">
+                Expense
+              </span>
             </label>
           </div>
 
