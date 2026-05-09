@@ -1,6 +1,7 @@
 import { PencilLine, Trash2 } from "lucide-react";
 import type { FC, ReactElement } from "react";
 import { useNavigate } from "react-router";
+import { toast } from "sonner";
 import { useTransaction } from "../hook/userTransaction.hook";
 import type { IdparticalTInterface } from "../interface/transaction.interface";
 
@@ -90,14 +91,29 @@ export const GetTransactions: FC = (): ReactElement => {
                       <PencilLine size={18} />
                     </button>
                   </div>
-                  <del className="ml-4">
+
+                  {/* Delete Transaction  */}
+                  <del className="">
                     <button
-                      className="cursor-pointer"
-                      onClick={() =>
-                        deleteTransactionMutation.mutate(transaction._id)
-                      }
+                      className="p-2 text-gray-400 hover:text-red-500 transition-colors"
+                      onClick={() => {
+                        toast.warning("Are you sure?", {
+                          description: `${transaction.category}/${transaction.amount.toLocaleString()}ETB transaction will be permanently deleted.`,
+                          action: {
+                            label: "Delete",
+                            onClick: () => {
+                              deleteTransactionMutation.mutate(transaction._id);
+                            },
+                          },
+                          cancel: {
+                            label: "Cancel",
+                            onClick: () => console.log("Cancel"),
+                          },
+                          duration: 10000,
+                        });
+                      }}
                     >
-                      <Trash2 size={18} color="red" />
+                      <Trash2 color="red" size={18} />
                     </button>
                   </del>
                 </div>
