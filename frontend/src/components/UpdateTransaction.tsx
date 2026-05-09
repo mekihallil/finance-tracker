@@ -84,7 +84,6 @@ export const UpdateTransaction: FC<updateInterface> = ({
                 Amount (Birr)
               </label>
               <input
-                {...register("amount")}
                 id="amount"
                 {...register("amount", { valueAsNumber: true })}
                 type="number"

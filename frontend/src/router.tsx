@@ -1,6 +1,6 @@
 import { createBrowserRouter } from "react-router";
 import { App } from "./App";
-import { EditPage } from "./components/EditPage";
+import { EditPage } from "./page/EditPage";
 export const router = createBrowserRouter([
   {
     path: "/",

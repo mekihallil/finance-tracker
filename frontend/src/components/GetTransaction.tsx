@@ -1,4 +1,4 @@
-import { Trash2 } from "lucide-react";
+import { PencilLine, Trash2 } from "lucide-react";
 import type { FC, ReactElement } from "react";
 import { useNavigate } from "react-router";
 import { useTransaction } from "../hook/userTransaction.hook";
@@ -82,16 +82,17 @@ export const GetTransactions: FC = (): ReactElement => {
                 </div>
                 <div>
                   {/* edit Transaction  */}
-                  <div>
+                  <div className="">
                     <button
-                      className="bg-blue-500 text-white px-3 py-1 rounded"
-                      onClick={() => navigate(`/edit/${transaction._id}`)} // አድራሻውን ይቀይረዋል
+                      className="cursor-pointer px-3 py-1 rounded"
+                      onClick={() => navigate(`/edit/${transaction._id}`)}
                     >
-                      Edit
+                      <PencilLine size={18} />
                     </button>
                   </div>
-                  <del className="place-content-center ml-1">
+                  <del className="ml-4">
                     <button
+                      className="cursor-pointer"
                       onClick={() =>
                         deleteTransactionMutation.mutate(transaction._id)
                       }
