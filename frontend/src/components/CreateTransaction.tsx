@@ -22,7 +22,7 @@ export const CreateTransaction: FC = (): ReactElement => {
     defaultValues: {
       title: "",
       type: "expense",
-      category: "Food",
+      category: "",
       amount: undefined,
     },
   });
@@ -126,6 +126,12 @@ export const CreateTransaction: FC = (): ReactElement => {
                 <option value="Rent">Rent</option>
                 <option value="Health">Health</option>
               </select>
+              {errors.category && (
+                <span className="text-xs text-red-500 font-medium">
+                  {errors.category.message}
+                  {toast.error(`${errors.category.message}`)}
+                </span>
+              )}
             </div>
           </div>
 

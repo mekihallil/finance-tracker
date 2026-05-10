@@ -6,7 +6,9 @@ export const transactionSchema = z.object({
     .number({ error: "Please enter a valid number" })
     .positive("Amount must be a positive number"),
   type: z.enum(["income", "expense"]),
-  category: z.string().min(1, "Please select a category"),
+  category: z
+    .string({ error: "Please select a category" })
+    .min(1, "Please select a category"),
 });
 
 export type TransactionFormData = z.infer<typeof transactionSchema>;

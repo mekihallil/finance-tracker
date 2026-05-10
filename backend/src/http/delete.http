@@ -1,4 +1,4 @@
-DELETE http://localhost:5000/transaction/delete/69f110b85cea26284bca3814
+DELETE http://localhost:5000/api/transaction/delete/{id}
 Content-Type :application/json
 
 {

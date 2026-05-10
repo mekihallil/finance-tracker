@@ -1,4 +1,4 @@
-PATCH http://localhost:5000/transaction/update/69f110b85cea26284bca3815
+PATCH http://localhost:5000/api/transaction/update/{id}
 Content-Type :application/json
 
 {
