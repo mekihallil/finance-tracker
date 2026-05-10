@@ -1,48 +1,113 @@
-# 💰 Personal Finance Tracker (Full-Stack)
 
-A professional full-stack application built with the **MERN Stack** and **TypeScript**. This tool helps users manage their daily income and expenses with a clean, intuitive interface and robust backend logic.
+# 💰 Finance Tracker Pro (Full-Stack TypeScript)
 
-## 🚀 Tech Stack
+A production-grade, type-safe financial management system built with the **MERN Stack**. This application features a highly decoupled architecture, modern server-state management.
 
-### Backend
+---
 
-- **Node.js & Express** - Server-side logic
-- **TypeScript** - For static typing and scalable architecture
-- **MongoDB & Mongoose** - NoSQL Database and Schema modeling
-- **dotenv** - Environment variable management
-- **CORS** - Cross-Origin Resource Sharing
+## 🚀 Key Features
 
-### Frontend (In Progress)
+- **Full CRUD Engine:** Securely manage income and expense records.
+- **Advanced Dashboard:** Real-time financial summaries (Balance, Income, Expense) using backend aggregation logic.
+- **Modern Theme Engine:** Stateful Dark/Light mode implementation using React Context API and Tailwind CSS v4.
+- **Server-State Management:** Efficient data fetching, caching, and optimistic updates via **TanStack Query (React Query)**.
+- **End-to-End Type Safety:** Strict TypeScript implementation across both Frontend and Backend to eliminate runtime errors.
+- **Robust Validation:** Data integrity ensured by **Zod** schema validation on both API requests and Frontend forms.
+- **Professional Testing Workflow:** Built-in API testing using `.http` files for rapid development and documentation.
 
-- **React.js** with TypeScript
-- **Tailwind CSS** - Modern styling
-- **Axios** - HTTP client for API requests
+---
 
-## ✨ Key Features
+## 🛠️ Tech Stack
 
-- [x] **Full CRUD Operations:** Create, Read, Update, and Delete financial transactions.
-- [x] **Type Safety:** Built with TypeScript from the ground up to prevent runtime errors.
-- [x] **RESTful API:** Clean and predictable API endpoints.
-- [ ] **Data Visualization:** Monthly charts and expense breakdowns (Upcoming).
-- [ ] **Authentication:** Secure user login and registration with JWT (Upcoming).
+### **Frontend**
+- **Framework:** React 18+ (Vite)
+- **Styling:** Tailwind CSS v4
+- **State Management:** TanStack Query v5 & React Context API
+- **API Client:** Axios
+- **Form Handling:** React Hook Form + Zod
+- **Notifications:** Sonner
 
-## 📂 Project Structure
+### **Backend**
+- **Runtime:** Node.js
+- **Framework:** Express.js
+- **Database:** MongoDB (via Mongoose)
+- **Architecture:** Controller-Service-Route Pattern
+- **Testing:** REST Client (`.http` integration)
+
+---
+
+## 📂 Project Architecture
+
+The project follows the **Separation of Concerns (SoC)** principle for high scalability:
 
 ```text
-├── fontend/           # React + Vite (Frontend)
-├── backend/           # Node.js + Express (Backend)
-│   ├── src/
-│   │   ├── config/       # Database connection
-│   │   ├── controllers/  # Request handlers & Business logic
-│   │   ├── middlewares/  # Error handlers
-│   │   ├── models/       # Database schemas & Interfaces
-│   │   ├── routes/       # API endpoint definitions
-│   │   ├── validations/  # Request validation
-│   │   └── index.ts      # Main server entry point
-└── README.md
+backend/src/
+├── config/        # Database & Environment configuration
+├── controllers/   # Request handling & Business logic
+├── http/          # Professional .http API testing files
+├── interface/     # Global TypeScript interfaces
+├── middlewares/   # Zod validation & Error handling
+├── models/        # Mongoose Data Models
+├── routes/        # API route definitions
+├── validations/   # Zod schemas
+├── app.ts         # Express configuration
+└── index.ts       # Server entry point
 
+frontend/src/
+├── components/    # Reusable UI components (Atomic design)
+├── context/       # Theme & Global State Providers
+├── hook/          # Custom TanStack Query hooks
+├── interface/     # UI Data interfaces
+├── lib/           # Utility libraries (Axios instances)
+├── page/          # Routed page components
+├── services/      # API communication layer (Axios services)
+└── types/         # Localized TS types & Zod schemas
 
+🚦 Getting Started
 
+1. Installation
+
+# Clone the repository
 git clone https://github.com/mekihallil/finance-tracker.git
-cd finance-tracker
-```
+
+# Install Backend dependencies
+cd backend
+npm install
+
+# Install Frontend dependencies
+cd ../frontend
+npm install
+
+2. Environment Setup
+
+Create a .env file in the backend/ directory:
+
+PORT=5000
+MONGO_URI=your_mongodb_connection_string
+
+3. Running the Project
+
+Start Backend: npm run dev (Runs on port 5000)
+Start Frontend: npm run dev (Runs on port 5173)
+
+🧪 Testing the API
+
+Instead of external tools like Postman, this project uses the VS Code REST
+Client pattern. Navigate to backend/src/http and open any .http file to test
+endpoints directly from your editor.
+
+GET http://localhost:5000/api/transaction/summary
+Content-Type: application/json
+
+🧠 Core Engineering Principles
+
+1.  Decoupled Logic: The UI (components) never talks directly to the API. It uses hooks, which use services, ensuring the code is easy to test and maintain.
+2.  Predictable State: Using React Query ensures that the UI is always in sync with the database without manual useEffect management.
+3.  Clean Code: reusable code once to handle complex tasks automatically.
+
+👤 Author
+  
+  Meki Hallil
+
+  - https://www.linkedin.com/in/meki-hallil
+  - https://github.com/mekihallil
