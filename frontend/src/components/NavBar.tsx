@@ -1,5 +1,6 @@
-import { CirclePlus, House, Sun, Target, Users, Zap } from "lucide-react";
-import type { FC, ReactElement } from "react";
+import { CirclePlus, House, Moon, Sun, Target, Users, Zap } from "lucide-react";
+import { useEffect, useState, type FC, type ReactElement } from "react";
+import { toast } from "sonner";
 
 type nav = {
   title: string;
@@ -13,9 +14,18 @@ const navData: nav[] = [
 ];
 
 export const NavBar: FC = (): ReactElement => {
+  const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  const [mode, setMode] = useState(isDark);
+  useEffect(() => {
+    if (mode) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  }, [mode]);
   return (
     <>
-      <section className="flex flex-col justify-between fixed  bg-[#181E27] h-dvh w-72.5">
+      <section className="flex flex-col justify-between fixed top-0  dark:bg-[#181E27] h-dvh w-72.5">
         <section>
           <header className="text-center text-2xl ">
             <div className="flex items-center justify-between py-6.25 px-8">
@@ -28,9 +38,26 @@ export const NavBar: FC = (): ReactElement => {
                   Professional Edition
                 </p>
               </p>
-              <Sun size={15} />
+              {/* Dark and light modes  */}
+              <div
+                onClick={() => {
+                  setMode(!mode);
+                  {
+                    toast(`Hello ${mode ? "Lightness" : "Darkness"} !`, {
+                      icon: "👏",
+                      style: {
+                        borderRadius: "10px",
+                        background: "#333",
+                        color: "#fff",
+                      },
+                    });
+                  }
+                }}
+              >
+                {mode ? <Sun size={20} /> : <Moon size={20} />}
+              </div>
             </div>
-            <hr className="text-gray-700" />
+            <hr className="dark:text-gray-700 text-[#e3e2e2]" />
           </header>
           <section className="mt-8 mx-4.5">
             {navData.map((n) => {
@@ -46,7 +73,7 @@ export const NavBar: FC = (): ReactElement => {
           </section>
         </section>
         <footer className="text-center text-sm py-3">
-          <hr className="text-gray-700" />
+          <hr className="dark:text-gray-700 text-[#e3e2e2]" />
           <p className="mt-4">Professional Finance Tracker</p>
           <p>v1.0 Premiun</p>
         </footer>

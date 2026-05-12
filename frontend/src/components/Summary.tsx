@@ -2,24 +2,14 @@ import {
   ArrowDownCircle,
   ArrowUpCircle,
   ArrowUpDown,
-  Moon,
-  Sun,
   Wallet,
 } from "lucide-react";
-import { useEffect, useState, type FC, type ReactElement } from "react";
+import {  type FC, type ReactElement } from "react";
 import { toast } from "sonner";
 import { useTransaction } from "../hook/userTransaction.hook";
 
 export const Summary: FC = (): ReactElement => {
-  const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-  const [mode, setMode] = useState(isDark);
-  useEffect(() => {
-    if (mode) {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
-  }, [mode]);
+  
 
   const { transactionSummaryQuery } = useTransaction();
   const summary = transactionSummaryQuery;
@@ -49,27 +39,7 @@ export const Summary: FC = (): ReactElement => {
 
   return (
     <section className="">
-      <div className="flex justify-end">
-        {/* Dark and light modes  */}
-        <div
-          className="p-5"
-          onClick={() => {
-            setMode(!mode);
-            {
-              toast(`Hello ${mode ? "Lightness" : "Darkness"} !`, {
-                icon: "👏",
-                style: {
-                  borderRadius: "10px",
-                  background: "#333",
-                  color: "#fff",
-                },
-              });
-            }
-          }}
-        >
-          {mode ? <Sun size={30} /> : <Moon size={30} />}
-        </div>
-      </div>
+      
 
       <div className="flex justify-between max-lg:flex-col-reverse">
         {/* Total Balance Card */}
