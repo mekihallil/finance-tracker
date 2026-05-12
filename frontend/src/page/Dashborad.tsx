@@ -6,11 +6,9 @@ import { Summary } from "../components/Summary";
 export const Dashboard = () => {
   return (
     <>
-      <section className="flex">
-        <nav className="w-1/6 ">
-          <NavBar />
-        </nav>
-        <div className="w-4.5/6 mx-auto max-lg:mx-1">
+      <section>
+        <NavBar />
+        <div className="ml-80 max-lg:mx-1">
           <Summary />
           <div className="flex gap-5 max-lg:flex-col">
             <CreateTransaction />
