@@ -7,13 +7,13 @@ import "./index.css";
 import { router } from "./router";
 
 const queryClient = new QueryClient();
-const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+const isDark = window.matchMedia("(prefers-color-scheme: light)").matches;
 
 createRoot(document.getElementById("root")!).render(
   <ThemeProvider storageKey="vite-hi-theme">
     <Toaster
-      theme={isDark ? "dark" : "light"}
-      position="top-center"
+      theme={isDark ? "light" : "dark"}
+      position="top-right"
       richColors
     />
     <QueryClientProvider client={queryClient}>

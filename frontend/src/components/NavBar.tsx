@@ -30,7 +30,7 @@ export const NavBar: FC = (): ReactElement => {
           <header className="text-center text-2xl ">
             <div className="flex items-center justify-between py-6.25 px-8">
               <Zap size={30} />
-              <p>
+              <p> 
                 <p className="text-xl text-[#29B866] font-bold">
                   FinanceTracker
                 </p>
@@ -72,7 +72,7 @@ export const NavBar: FC = (): ReactElement => {
             })}
           </section>
         </section>
-        <footer className="text-center text-sm py-3">
+        <footer className="text-center text-[13px] py-3">
           <hr className="dark:text-gray-700 text-[#e3e2e2]" />
           <p className="mt-4">Professional Finance Tracker</p>
           <p>v1.0 Premiun</p>
