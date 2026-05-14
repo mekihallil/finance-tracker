@@ -4,7 +4,7 @@ export const FinancialDashbord = () => {
   return (
     <>
       <article>
-        <section className="flex justify-between place-items-center dark:bg-[#182029]  h-31.25 my-8.75 mr-8 px-11 rounded-4xl">
+        <section className="flex justify-between place-items-center  h-31.25 my-8.75 mr-8 px-11 border border-gray-200 rounded-4xl dark:bg-[#182029] shadow-2xl">
           <section className="flex  items-center ">
             <Sparkles />
             <h1 className=" pl-6">
