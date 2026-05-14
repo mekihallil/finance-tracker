@@ -24,7 +24,7 @@ export const TotalInfo: FC = (): ReactElement => {
               <div className="text-[#94A3B8] text-[12px]">from last month</div>
             </section>
           </article>
-          <article className="flex flex-col justify-between bg-linear-to-tl to-[#30373E] border rounded-2xl w-68.75 p-6.25 ">
+          <article className="flex flex-col justify-between dark:bg-linear-to-tl dark:to-[#30373E] border rounded-2xl w-68.75 p-6.25 ">
             <header className="flex justify-between">
               <Wallet size={20} className="mx-4 my-5" />
               <div>
@@ -42,7 +42,7 @@ export const TotalInfo: FC = (): ReactElement => {
               <div className="text-[#94A3B8] text-[12px]">from last month</div>
             </section>
           </article>
-          <article className="flex flex-col justify-between bg-linear-to-tl to-[#30373E] border rounded-2xl w-68.75 p-6.25 ">
+          <article className="flex flex-col justify-between dark:bg-linear-to-tl dark:to-[#30373E] border rounded-2xl w-68.75 p-6.25 ">
             <header className="flex justify-between">
               <Wallet size={20} className="mx-4 my-5" />
               <div>
@@ -60,7 +60,7 @@ export const TotalInfo: FC = (): ReactElement => {
               <div className="text-[#94A3B8] text-[12px]">from last month</div>
             </section>
           </article>
-          <article className="flex flex-col justify-between bg-linear-to-tl to-[#30373E] border rounded-2xl w-68.75 p-6.25 ">
+          <article className="flex flex-col justify-between dark:bg-linear-to-tl dark:to-[#30373E] border rounded-2xl w-68.75 p-6.25 ">
             <header className="flex justify-between">
               <Wallet size={20} className="mx-4 my-5" />
               <div>
