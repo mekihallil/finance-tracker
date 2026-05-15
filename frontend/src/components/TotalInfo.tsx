@@ -6,6 +6,7 @@ export const TotalInfo: FC = (): ReactElement => {
     <>
       <article>
         <section className="flex gap-8 mb-8.75 pr-8 ">
+          {/* Total spend  */}
           <article className="flex flex-col justify-between dark:bg-linear-to-tl dark:to-[#30373E] border border-gray-200 rounded-2xl shadow-2xl w-68.75 p-6.25 ">
             <header className="flex justify-between">
               <Wallet size={20} className="mx-4 my-5" />
@@ -24,6 +25,7 @@ export const TotalInfo: FC = (): ReactElement => {
               <div className="text-[#94A3B8] text-[12px]">from last month</div>
             </section>
           </article>
+          {/* Monthly Budget  */}
           <article className="flex flex-col justify-between dark:bg-linear-to-tl dark:to-[#30373E] border border-gray-200 rounded-2xl shadow-2xl w-68.75 p-6.25 ">
             <header className="flex justify-between">
               <Wallet size={20} className="mx-4 my-5" />
@@ -42,6 +44,7 @@ export const TotalInfo: FC = (): ReactElement => {
               <div className="text-[#94A3B8] text-[12px]">from last month</div>
             </section>
           </article>
+          {/* saving progress  */}
           <article className="flex flex-col justify-between dark:bg-linear-to-tl dark:to-[#30373E] border border-gray-200 rounded-2xl shadow-2xl w-68.75 p-6.25 ">
             <header className="flex justify-between">
               <Wallet size={20} className="mx-4 my-5" />
@@ -60,6 +63,7 @@ export const TotalInfo: FC = (): ReactElement => {
               <div className="text-[#94A3B8] text-[12px]">from last month</div>
             </section>
           </article>
+          {/* Group Expense  */}
           <article className="flex flex-col justify-between dark:bg-linear-to-tl dark:to-[#30373E] border border-gray-200 rounded-2xl shadow-2xl w-68.75 p-6.25 ">
             <header className="flex justify-between">
               <Wallet size={20} className="mx-4 my-5" />
