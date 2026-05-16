@@ -1,4 +1,4 @@
-import { PencilLine, Trash2 } from "lucide-react";
+import { DollarSign, PencilLine, Trash2 } from "lucide-react";
 import type { FC, ReactElement } from "react";
 import { useNavigate } from "react-router";
 import { toast } from "sonner";
@@ -31,18 +31,25 @@ export const GetTransactions: FC = (): ReactElement => {
   }
 
   return (
-    <section className="w-150  mx-auto pb-20 max-lg:w-77 max-lg:mx-auto">
-      <h2 className="py-8 text-center text-2xl font-bold text-gray-800 dark:text-white">
-        Recent Activity
+    <section className="w-full rounded-3xl dark:bg-[#182029] my-8 mr-10 p-10 max-lg:w-77 max-lg:mx-auto ">
+      <h2 className="flex items-center text-gray-800 pb-8 dark:text-white">
+        <div className="mr-5 ">
+          {" "}
+          <DollarSign />{" "}
+        </div>
+        <div>
+          <p className="text-[#29B866] font-bold">Recent Activity</p>
+          <p className="text-[#84A3B8]">Your latest transactions</p>
+        </div>
       </h2>
 
       {/* <ul> is the semantic tag for lists of items */}
-      <ul className="space-y-4">
+      <ul className="space-y-4 ">
         {data?.map((transaction: IdparticalTInterface) => (
           /* <li> represents a single list item */
           <li
             key={transaction._id}
-            className="border border-gray-100 rounded-2xl p-5 shadow-sm hover:shadow-md hover:border-gray-200 "
+            className="border border-gray-600 rounded-2xl p-5 shadow-sm hover:shadow-md hover:border-gray-200 "
           >
             <div className="flex justify-between items-start">
               <header>
