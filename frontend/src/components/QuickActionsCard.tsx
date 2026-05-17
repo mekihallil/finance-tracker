@@ -6,7 +6,7 @@ export const QuickAction: FC = (): ReactElement => {
     <>
       <section>
         <header>
-          <section className="my-8.75 mr-8 px-11 border border-gray-200 rounded-4xl dark:bg-[#182029] shadow-2xl">
+          <section className="my-8.75 mr-8 px-11 border border-gray-200 rounded-3xl shadow-2xl  dark:bg-[#182029] dark:border-[#182029] ">
             <section className="flex items-center pt-4 ">
               <Sparkles size={15} />
               <h1 className=" pl-4">
