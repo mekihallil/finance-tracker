@@ -1,10 +1,11 @@
 import { FinancialDashbord } from "@/components/FinancialDashboard";
+import { GetExpenses } from "@/components/GetExpense";
 import { QuickAction } from "@/components/QuickActionsCard";
 import { TotalInfo } from "@/components/TotalInfo";
+import type { FC, ReactElement } from "react";
 import { NavBar } from "../components/NavBar";
-import { GetExpenses } from "@/components/GetExpense";
 
-export const Dashboard = () => {
+export const Dashboard: FC = (): ReactElement => {
   return (
     <>
       <section>

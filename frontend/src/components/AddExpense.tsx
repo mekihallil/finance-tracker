@@ -1,5 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Loader2, PlusCircle } from "lucide-react";
+import { DollarSign, Loader2, PlusCircle } from "lucide-react";
 import { type FC, type ReactElement } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
@@ -10,7 +10,7 @@ import {
   type ExpenseFormData,
 } from "../types/expenseSchema.type";
 
-export const CreateExpense: FC = (): ReactElement => {
+export const AddExpense: FC = (): ReactElement => {
   const { createExpenseMutation } = useExpense();
 
   const {
@@ -41,17 +41,19 @@ export const CreateExpense: FC = (): ReactElement => {
   };
 
   return (
-    <section className="  max-lg:w-77 max-lg:mx-auto">
-      <header className="mb-6 pt-8 pl-8">
-        <h2 className="text-xl font-bold  tracking-tight">Add Expense</h2>
-        <p className="text-sm text-gray-400 dark:text-white font-medium">
-          Record a new income or expense
-        </p>
-      </header>
+    <section className=" max-lg:w-77 max-lg:mx-auto">
       <section
         className="p-8 border rounded-3xl shadow-sm border-gray-100 dark:border-black
        "
       >
+        <header className="mb-6">
+          <h1 className="flex gap-3 font-bold  tracking-tight">
+            <i>
+              <DollarSign />
+            </i>
+            <h1 >Add New Expense</h1>
+          </h1>
+        </header>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
           {/* Title Input */}
           <div className="flex flex-col gap-1.5">
@@ -64,7 +66,7 @@ export const CreateExpense: FC = (): ReactElement => {
             <input
               {...register("title")}
               id="title"
-              placeholder="e.g. Monthly Salary"
+              placeholder="What did you spend on?"
               className={`p-3 rounded-xl border bg-gray-50 dark:bg-gray-950 outline-none transition-all focus:ring-2 ${
                 errors.title
                   ? "border-red-300 focus:ring-red-50"
@@ -116,17 +118,20 @@ export const CreateExpense: FC = (): ReactElement => {
               >
                 Category
               </label>
-              <select
+              <section
                 {...register("category")}
                 id="category"
                 className="p-3 rounded-xl border border-gray-100 bg-gray-50  dark:bg-gray-950 outline-none focus:ring-2 focus:ring-blue-50 font-medium text-gray-600"
               >
-                <option value="Food">Food</option>
-                <option value="Salary">Salary</option>
-                <option value="Transport">Transport</option>
-                <option value="Rent">Rent</option>
-                <option value="Health">Health</option>
-              </select>
+                <li value="Food">Food</li>
+                <li value="Transport">Transport</li>
+                <li value="Coffee">Coffee</li>
+                <li value="Shopping">Shopping</li>
+                <li value="Rent">Rent</li>
+                <li value="Education">Education</li>
+                <li value="Entertainment">Entertainment</li>
+                <li value="Health">Health</li>
+              </section>
               {errors.category && (
                 <span className="text-xs text-red-500 font-medium">
                   {errors.category.message}

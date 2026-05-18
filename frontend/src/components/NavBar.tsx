@@ -1,21 +1,24 @@
 import { CirclePlus, House, Moon, Sun, Target, Users, Zap } from "lucide-react";
 import { useEffect, useState, type FC, type ReactElement } from "react";
+import { useNavigate } from "react-router";
 import { toast } from "sonner";
 
 type nav = {
   title: string;
   icon: ReactElement;
+  url: string;
 };
 const navData: nav[] = [
-  { title: "Dashboard", icon: <House size={15} /> },
-  { title: "Expenses", icon: <CirclePlus size={15} /> },
-  { title: "Savings", icon: <Target size={15} /> },
-  { title: "Split Bills", icon: <Users size={15} /> },
+  { title: "Dashboard", icon: <House size={15} />, url: "" },
+  { title: "Expenses", icon: <CirclePlus size={15} />, url: "expense" },
+  { title: "Savings", icon: <Target size={15} />, url: "" },
+  { title: "Split Bills", icon: <Users size={15} />, url: "" },
 ];
 
 export const NavBar: FC = (): ReactElement => {
   const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
   const [mode, setMode] = useState(isDark);
+  const navigate = useNavigate();
   useEffect(() => {
     if (mode) {
       document.documentElement.classList.add("dark");
@@ -30,7 +33,7 @@ export const NavBar: FC = (): ReactElement => {
           <header className="text-center text-2xl ">
             <div className="flex items-center justify-between py-6.25 px-8">
               <Zap size={30} />
-              <p> 
+              <p>
                 <p className="text-xl text-[#29B866] font-bold">
                   FinanceTracker
                 </p>
@@ -63,10 +66,10 @@ export const NavBar: FC = (): ReactElement => {
             {navData.map((n) => {
               return (
                 <div className="flex justify-between items-center h-12 w-63.75 my-4 pl-4 cursor-pointer hover:border hover:rounded-2xl hover:bg-[#29B866]">
-                  <section className="flex ">
+                  <button onClick={() => navigate(n.url)} className="flex ">
                     <div className="flex items-center">{n.icon}</div>
                     <p className="pl-6 "> {n.title}</p>
-                  </section>
+                  </button>
                 </div>
               );
             })}

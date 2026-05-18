@@ -1,13 +1,6 @@
 import { timeAgo } from "@/context/data";
-import {
-  DollarSign,
-  PencilLine,
-  Trash2,
-  TrendingDown,
-  TrendingUp,
-} from "lucide-react";
+import { DollarSign, TrendingDown, TrendingUp, X } from "lucide-react";
 import type { FC, ReactElement } from "react";
-import { useNavigate } from "react-router";
 import { toast } from "sonner";
 import { useExpense } from "../hook/userExpense.hook";
 import type { IdparticalEInterface } from "../interface/expense.interface";
@@ -15,7 +8,6 @@ import type { IdparticalEInterface } from "../interface/expense.interface";
 export const GetExpenses: FC = (): ReactElement => {
   const { getExpensesQuery, deleteExpenseMutation } = useExpense();
   const { data, isLoading, isError, error } = getExpensesQuery;
-  const navigate = useNavigate();
 
   if (isLoading) {
     return (
@@ -106,16 +98,6 @@ export const GetExpenses: FC = (): ReactElement => {
                     </span>
                   </div>
                   <div>
-                    {/* edit Expense  */}
-                    <div className="">
-                      <button
-                        className="cursor-pointer px-3 py-1 rounded"
-                        onClick={() => navigate(`/edit/${expense._id}`)}
-                      >
-                        <PencilLine size={18} />
-                      </button>
-                    </div>
-
                     {/* Delete Expense  */}
                     <del className="">
                       <button
@@ -137,7 +119,7 @@ export const GetExpenses: FC = (): ReactElement => {
                           });
                         }}
                       >
-                        <Trash2 color="red" size={18} />
+                        <X size={18} />
                       </button>
                     </del>
                   </div>
