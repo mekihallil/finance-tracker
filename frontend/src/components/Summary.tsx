@@ -6,13 +6,13 @@ import {
 } from "lucide-react";
 import {  type FC, type ReactElement } from "react";
 import { toast } from "sonner";
-import { useTransaction } from "../hook/userTransaction.hook";
+import { useExpense } from "../hook/userExpense.hook";
 
 export const Summary: FC = (): ReactElement => {
   
 
-  const { transactionSummaryQuery } = useTransaction();
-  const summary = transactionSummaryQuery;
+  const { expenseSummaryQuery } = useExpense();
+  const summary = expenseSummaryQuery;
 
   if (summary.isLoading) {
     return (
@@ -84,16 +84,16 @@ export const Summary: FC = (): ReactElement => {
           </p>
         </article>
 
-        {/* Total Transactions Card */}
+        {/* Total Expenses Card */}
         <article className="p-6 rounded-2xl shadow-sm border border-gray-100 max-lg:w-77  max-lg:mx-auto">
           <header className="flex items-center gap-2 mb-3">
             <ArrowUpDown size={20} className="text-gray-400" />
             <h3 className="text-gray-500 dark:text-white text-sm font-medium uppercase ">
-              Transactions
+              Expenses
             </h3>
           </header>
           <p className="text-3xl font-bold text-center text-gray-800 dark:text-white">
-            {data?.transactionCount || 0}
+            {data?.expenseCount || 0}
           </p>
         </article>
       </div>

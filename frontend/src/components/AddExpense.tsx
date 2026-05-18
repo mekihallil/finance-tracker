@@ -3,22 +3,23 @@ import { Loader2, PlusCircle } from "lucide-react";
 import { type FC, type ReactElement } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
-import { useTransaction } from "../hook/userTransaction.hook";
-import {
-  transactionSchema,
-  type TransactionFormData,
-} from "../types/transactionSchema.type";
 
-export const CreateTransaction: FC = (): ReactElement => {
-  const { createTransactionMutation } = useTransaction();
+import { useExpense } from "@/hook/userExpense.hook";
+import {
+  expenseSchema,
+  type ExpenseFormData,
+} from "../types/expenseSchema.type";
+
+export const CreateExpense: FC = (): ReactElement => {
+  const { createExpenseMutation } = useExpense();
 
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<TransactionFormData>({
-    resolver: zodResolver(transactionSchema),
+  } = useForm<ExpenseFormData>({
+    resolver: zodResolver(expenseSchema),
     defaultValues: {
       title: "",
       type: "expense",
@@ -27,14 +28,14 @@ export const CreateTransaction: FC = (): ReactElement => {
     },
   });
 
-  const onSubmit = (data: TransactionFormData) => {
-    createTransactionMutation.mutate(data, {
+  const onSubmit = (data: ExpenseFormData) => {
+    createExpenseMutation.mutate(data, {
       onSuccess: () => {
-        toast.success("Transaction registered successfully!");
+        toast.success("Expense registered successfully!");
         reset();
       },
       onError: () => {
-        toast.error("Failed to register transaction.");
+        toast.error("Failed to register expense.");
       },
     });
   };
@@ -42,7 +43,7 @@ export const CreateTransaction: FC = (): ReactElement => {
   return (
     <section className="  max-lg:w-77 max-lg:mx-auto">
       <header className="mb-6 pt-8 pl-8">
-        <h2 className="text-xl font-bold  tracking-tight">Add Transaction</h2>
+        <h2 className="text-xl font-bold  tracking-tight">Add Expense</h2>
         <p className="text-sm text-gray-400 dark:text-white font-medium">
           Record a new income or expense
         </p>
@@ -164,15 +165,15 @@ export const CreateTransaction: FC = (): ReactElement => {
           {/* Submit Button */}
           <button
             type="submit"
-            disabled={createTransactionMutation.isPending}
+            disabled={createExpenseMutation.isPending}
             className="w-full flex items-center justify-center gap-2 bg-gray-900 text-white p-4 rounded-2xl font-bold hover:bg-black transition-all disabled:bg-gray-300"
           >
-            {createTransactionMutation.isPending ? (
+            {createExpenseMutation.isPending ? (
               <Loader2 className="animate-spin" size={20} />
             ) : (
               <>
                 <PlusCircle size={20} />
-                <span>Save Transaction</span>
+                <span>Save Expense</span>
               </>
             )}
           </button>

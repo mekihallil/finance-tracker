@@ -1,4 +1,4 @@
-export interface TInterface {
+export interface EInterface {
   id?: string;
   title: string;
   amount: number;
@@ -7,6 +7,6 @@ export interface TInterface {
   createAt?: Date;
 }
 
-export interface IdparticalTInterface extends TInterface {
+export interface IdparticalEInterface extends EInterface {
   _id: string;
 }

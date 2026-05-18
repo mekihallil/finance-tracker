@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const transactionSchema = z.object({
+export const expenseSchema = z.object({
   title: z.string().min(3, "Title must be at least 3 characters"),
   amount: z
     .number({ error: "Please enter a valid number" })
@@ -11,4 +11,4 @@ export const transactionSchema = z.object({
     .min(1, "Please select a category"),
 });
 
-export type TransactionFormData = z.infer<typeof transactionSchema>;
+export type ExpenseFormData = z.infer<typeof expenseSchema>;

@@ -1,8 +1,8 @@
 import { FinancialDashbord } from "@/components/FinancialDashboard";
 import { QuickAction } from "@/components/QuickActionsCard";
 import { TotalInfo } from "@/components/TotalInfo";
-import { GetTransactions } from "../components/GetTransaction";
 import { NavBar } from "../components/NavBar";
+import { GetExpenses } from "@/components/GetExpense";
 
 export const Dashboard = () => {
   return (
@@ -14,8 +14,8 @@ export const Dashboard = () => {
           <TotalInfo />
           <QuickAction />
           {/* <div className="flex gap-5 max-lg:flex-col"> */}
-          {/* <CreateTransaction /> */}
-          <GetTransactions />
+          {/* <CreateExpense /> */}
+          <GetExpenses />
           {/* </div> */}
           {/* <Summary /> */}
         </div>
