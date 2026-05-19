@@ -1,5 +1,18 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { DollarSign, Loader2, PlusCircle, SpoolIcon } from "lucide-react";
+import {
+  CarTaxiFront,
+  Coffee,
+  DollarSign,
+  ForkKnifeCrossedIcon,
+  Gamepad2,
+  GraduationCap,
+  Heart,
+  House,
+  Loader2,
+  PlusCircle,
+  ShoppingCart,
+  SpoolIcon,
+} from "lucide-react";
 import { type FC, type ReactElement } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
@@ -16,14 +29,14 @@ type category = {
   categoryName: string;
 };
 const categoryData: category[] = [
-  { id: 1, icons: <SpoolIcon />, categoryName: "Food" },
-  { id: 2, icons: <SpoolIcon />, categoryName: "Transport" },
-  { id: 3, icons: <SpoolIcon />, categoryName: "Coffee" },
-  { id: 4, icons: <SpoolIcon />, categoryName: "Shopping" },
-  { id: 5, icons: <SpoolIcon />, categoryName: "Rent" },
-  { id: 6, icons: <SpoolIcon />, categoryName: "Education" },
-  { id: 7, icons: <SpoolIcon />, categoryName: "Entertainment" },
-  { id: 8, icons: <SpoolIcon />, categoryName: "Health" },
+  { id: 1, icons: <ForkKnifeCrossedIcon />, categoryName: "Food" },
+  { id: 2, icons: <CarTaxiFront />, categoryName: "Transport" },
+  { id: 3, icons: <Coffee />, categoryName: "Coffee" },
+  { id: 4, icons: <ShoppingCart />, categoryName: "Shopping" },
+  { id: 5, icons: <House />, categoryName: "Rent" },
+  { id: 6, icons: <GraduationCap />, categoryName: "Education" },
+  { id: 7, icons: <Gamepad2 />, categoryName: "Entertainment" },
+  { id: 8, icons: <Heart />, categoryName: "Health" },
 ];
 
 export const AddExpense: FC = (): ReactElement => {
@@ -83,7 +96,7 @@ export const AddExpense: FC = (): ReactElement => {
                   {...register("amount", { valueAsNumber: true })}
                   type="number"
                   placeholder="0.00"
-                  className={` p-2 rounded-2xl bg-gray-50 dark:bg-[#283243]  transition-all focus:ring-2 ${
+                  className={` p-2 rounded-2xl  bg-gray-50 outline-none dark:bg-[#283243]  transition-all focus:ring-2 ${
                     errors.amount
                       ? "border-red-300 focus:ring-red-50"
                       : "border-gray-100 focus:ring-blue-50"
@@ -121,6 +134,21 @@ export const AddExpense: FC = (): ReactElement => {
                   </span>
                 )}
               </div>
+              {/* Submit Button */}
+              <button
+                type="submit"
+                disabled={createExpenseMutation.isPending}
+                className="w-full flex items-center justify-center gap-2 bg-gray-900 text-white p-4 rounded-2xl font-bold hover:bg-black transition-all disabled:bg-gray-300"
+              >
+                {createExpenseMutation.isPending ? (
+                  <Loader2 className="animate-spin" size={20} />
+                ) : (
+                  <>
+                    <PlusCircle size={20} />
+                    <span>Save Expense</span>
+                  </>
+                )}
+              </button>
             </div>
             {/* Category Select */}
             <div className="flex w-1/2">
@@ -147,7 +175,7 @@ export const AddExpense: FC = (): ReactElement => {
                         />
                         <div className="flex flex-col justify-center text-center">
                           <i className="mx-auto">{c.icons}</i>
-                          <span className="text-sm font-bold text-gray-600 dark:text-white">
+                          <span className="font-semibold text-[13px] text-gray-600 dark:text-white">
                             {c.categoryName}
                           </span>
                         </div>
@@ -155,32 +183,16 @@ export const AddExpense: FC = (): ReactElement => {
                     );
                   })}
                 </div>
-              </section>
-
               {errors.category && (
                 <span className="text-xs text-red-500 font-medium">
                   {errors.category.message}
                   {toast.error(`${errors.category.message}`)}
                 </span>
               )}
+              </section>
+
             </div>
           </section>
-
-          {/* Submit Button */}
-          <button
-            type="submit"
-            disabled={createExpenseMutation.isPending}
-            className="w-full flex items-center justify-center gap-2 bg-gray-900 text-white p-4 rounded-2xl font-bold hover:bg-black transition-all disabled:bg-gray-300"
-          >
-            {createExpenseMutation.isPending ? (
-              <Loader2 className="animate-spin" size={20} />
-            ) : (
-              <>
-                <PlusCircle size={20} />
-                <span>Save Expense</span>
-              </>
-            )}
-          </button>
         </form>
       </section>
     </section>
