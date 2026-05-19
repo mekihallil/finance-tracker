@@ -1,5 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { DollarSign, Loader2, PlusCircle } from "lucide-react";
+import { DollarSign, Loader2, PlusCircle, SpoolIcon } from "lucide-react";
 import { type FC, type ReactElement } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
@@ -9,6 +9,22 @@ import {
   expenseSchema,
   type ExpenseFormData,
 } from "../types/expenseSchema.type";
+
+type category = {
+  id: number;
+  icons: ReactElement;
+  categoryName: string;
+};
+const categoryData: category[] = [
+  { id: 1, icons: <SpoolIcon />, categoryName: "Food" },
+  { id: 2, icons: <SpoolIcon />, categoryName: "Transport" },
+  { id: 3, icons: <SpoolIcon />, categoryName: "Coffee" },
+  { id: 4, icons: <SpoolIcon />, categoryName: "Shopping" },
+  { id: 5, icons: <SpoolIcon />, categoryName: "Rent" },
+  { id: 6, icons: <SpoolIcon />, categoryName: "Education" },
+  { id: 7, icons: <SpoolIcon />, categoryName: "Entertainment" },
+  { id: 8, icons: <SpoolIcon />, categoryName: "Health" },
+];
 
 export const AddExpense: FC = (): ReactElement => {
   const { createExpenseMutation } = useExpense();
@@ -42,96 +58,105 @@ export const AddExpense: FC = (): ReactElement => {
 
   return (
     <section className=" max-lg:w-77 max-lg:mx-auto">
-      <section
-        className="p-8 border rounded-3xl shadow-sm border-gray-100 dark:border-black
-       "
-      >
+      <section className="mr-10 p-8 rounded-3xl shadow-sm border-gray-100 bg-[#2C3546] dark:border-black">
         <header className="mb-6">
           <h1 className="flex gap-3 font-bold  tracking-tight">
             <i>
               <DollarSign />
             </i>
-            <h1 >Add New Expense</h1>
+            <h1>Add New Expense</h1>
           </h1>
         </header>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
-          {/* Title Input */}
-          <div className="flex flex-col gap-1.5">
-            <label
-              htmlFor="title"
-              className="text-[10px] font-bold uppercase text-gray-400  tracking-widest"
-            >
-              Description
-            </label>
-            <input
-              {...register("title")}
-              id="title"
-              placeholder="What did you spend on?"
-              className={`p-3 rounded-xl border bg-gray-50 dark:bg-gray-950 outline-none transition-all focus:ring-2 ${
-                errors.title
-                  ? "border-red-300 focus:ring-red-50"
-                  : "border-gray-100 focus:ring-blue-50"
-              }`}
-            />
-            {errors.title && (
-              <span className="text-xs text-red-500 font-medium">
-                {errors.title.message}
-                {toast.error(`${errors.title.message}`)}
-              </span>
-            )}
-          </div>
-
-          <div className="grid grid-cols-2 gap-4">
-            {/* Amount Input */}
-            <div className="flex flex-col gap-1.5">
-              <label
-                htmlFor="amount"
-                className="text-[10px] font-bold uppercase text-gray-400 dark:text-white tracking-widest"
-              >
-                Amount (Birr)
-              </label>
-              <input
-                {...register("amount")}
-                id="amount"
-                {...register("amount", { valueAsNumber: true })}
-                type="number"
-                placeholder="0.00"
-                className={`p-3 rounded-xl border bg-gray-50 dark:bg-gray-950 outline-none transition-all focus:ring-2 ${
-                  errors.amount
-                    ? "border-red-300 focus:ring-red-50"
-                    : "border-gray-100 focus:ring-blue-50"
-                }`}
-              />
-              {errors.amount && (
-                <span className="text-xs text-red-500 font-medium">
-                  {errors.amount.message}
-                  {toast.error(`${errors.amount.message}`)}
-                </span>
-              )}
+          <section className="flex space-x-10">
+            <div className="felx w-1/2 space-y-10">
+              {/* Amount Input */}
+              <div className="flex flex-col">
+                <label
+                  htmlFor="amount"
+                  className="text-[14px] font-bold text-gray-400"
+                >
+                  Amount ($)
+                </label>
+                <input
+                  id="amount"
+                  {...register("amount", { valueAsNumber: true })}
+                  type="number"
+                  placeholder="0.00"
+                  className={` p-2 rounded-2xl bg-gray-50 dark:bg-[#283243]  transition-all focus:ring-2 ${
+                    errors.amount
+                      ? "border-red-300 focus:ring-red-50"
+                      : "border-gray-100 focus:ring-blue-50"
+                  }`}
+                />
+                {errors.amount && (
+                  <span className="text-xs text-red-500 font-medium">
+                    {errors.amount.message}
+                    {toast.error(`${errors.amount.message}`)}
+                  </span>
+                )}
+              </div>
+              {/* Title Input */}
+              <div className="flex flex-col">
+                <label
+                  htmlFor="title"
+                  className="text-[14px] font-bold text-gray-400"
+                >
+                  Description
+                </label>
+                <input
+                  {...register("title")}
+                  id="title"
+                  placeholder="What did you spend on?"
+                  className={`text-sm p-2 rounded-xl  bg-gray-50 dark:bg-[#283243] outline-none transition-all focus:ring-2 ${
+                    errors.title
+                      ? "border-red-300 focus:ring-red-50"
+                      : "border-gray-100 focus:ring-blue-50"
+                  }`}
+                />
+                {errors.title && (
+                  <span className="text-xs text-red-500 font-medium">
+                    {errors.title.message}
+                    {toast.error(`${errors.title.message}`)}
+                  </span>
+                )}
+              </div>
             </div>
-
             {/* Category Select */}
-            <div className="flex flex-col gap-1.5">
-              <label
-                htmlFor="category"
-                className="text-[10px] font-bold uppercase text-gray-400 tracking-widest"
-              >
-                Category
-              </label>
-              <section
-                {...register("category")}
-                id="category"
-                className="p-3 rounded-xl border border-gray-100 bg-gray-50  dark:bg-gray-950 outline-none focus:ring-2 focus:ring-blue-50 font-medium text-gray-600"
-              >
-                <li value="Food">Food</li>
-                <li value="Transport">Transport</li>
-                <li value="Coffee">Coffee</li>
-                <li value="Shopping">Shopping</li>
-                <li value="Rent">Rent</li>
-                <li value="Education">Education</li>
-                <li value="Entertainment">Entertainment</li>
-                <li value="Health">Health</li>
+            <div className="flex w-1/2">
+              <section className="w-full">
+                <label
+                  htmlFor="category"
+                  className="text-[14px] font-bold text-gray-400"
+                >
+                  Category
+                </label>
+
+                <div className="grid grid-cols-2 gap-2">
+                  {categoryData.map((c) => {
+                    return (
+                      <label
+                        key={c.id}
+                        className=" p-3 rounded-xl  cursor-pointer has-checked:bg-white dark:bg-[#283243] dark:has-checked:bg-transparent  transition-all"
+                      >
+                        <input
+                          {...register("category")}
+                          type="radio"
+                          value={c.categoryName}
+                          className="sr-only"
+                        />
+                        <div className="flex flex-col justify-center text-center">
+                          <i className="mx-auto">{c.icons}</i>
+                          <span className="text-sm font-bold text-gray-600 dark:text-white">
+                            {c.categoryName}
+                          </span>
+                        </div>
+                      </label>
+                    );
+                  })}
+                </div>
               </section>
+
               {errors.category && (
                 <span className="text-xs text-red-500 font-medium">
                   {errors.category.message}
@@ -139,33 +164,7 @@ export const AddExpense: FC = (): ReactElement => {
                 </span>
               )}
             </div>
-          </div>
-
-          {/* Type Selector (Custom Toggle Style) */}
-          <div className="flex p-1 bg-gray-950 rounded-2xl border border-gray-200">
-            <label className="flex-1 flex items-center justify-center gap-2 p-3 rounded-xl  cursor-pointer has-checked:bg-white dark:has-checked:bg-transparent dark:has-checked:border-2 has-checked:shadow-sm transition-all">
-              <input
-                {...register("type")}
-                type="radio"
-                value="income"
-                className="sr-only"
-              />
-              <span className="text-sm font-bold text-gray-600 dark:text-white">
-                Income
-              </span>
-            </label>
-            <label className="flex-1 flex items-center justify-center gap-2 p-3 rounded-xl cursor-pointer has-checked:bg-white dark:has-checked:bg-transparent dark:has-checked:border-2 has-checked:shadow-2xl transition-all">
-              <input
-                {...register("type")}
-                type="radio"
-                value="expense"
-                className="sr-only"
-              />
-              <span className="text-sm font-bold text-gray-600 dark:text-white">
-                Expense
-              </span>
-            </label>
-          </div>
+          </section>
 
           {/* Submit Button */}
           <button
