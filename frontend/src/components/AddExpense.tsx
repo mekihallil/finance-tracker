@@ -11,7 +11,6 @@ import {
   Loader2,
   PlusCircle,
   ShoppingCart,
-  SpoolIcon,
 } from "lucide-react";
 import { type FC, type ReactElement } from "react";
 import { useForm } from "react-hook-form";
@@ -71,7 +70,7 @@ export const AddExpense: FC = (): ReactElement => {
 
   return (
     <section className=" max-lg:w-77 max-lg:mx-auto">
-      <section className="mr-10 p-8 rounded-3xl shadow-sm border-gray-100 bg-[#2C3546] dark:border-black">
+      <section className="mr-10 p-8 rounded-3xl shadow-sm border-gray-100 dark:bg-[#2C3546] dark:border-black">
         <header className="mb-6">
           <h1 className="flex gap-3 font-bold  tracking-tight">
             <i>
@@ -138,7 +137,7 @@ export const AddExpense: FC = (): ReactElement => {
               <button
                 type="submit"
                 disabled={createExpenseMutation.isPending}
-                className="w-full flex items-center justify-center gap-2 bg-gray-900 text-white p-4 rounded-2xl font-bold hover:bg-black transition-all disabled:bg-gray-300"
+                className="w-full flex items-center justify-center gap-2 p-4 rounded-2xl font-bold dark:bg-[#131c2a] bg-[#c1c1c1] hover:scale-95 transition-all disabled:bg-gray-300"
               >
                 {createExpenseMutation.isPending ? (
                   <Loader2 className="animate-spin" size={20} />
@@ -165,7 +164,7 @@ export const AddExpense: FC = (): ReactElement => {
                     return (
                       <label
                         key={c.id}
-                        className=" p-3 rounded-xl  cursor-pointer has-checked:bg-white dark:bg-[#283243] dark:has-checked:bg-transparent  transition-all"
+                        className=" p-3 rounded-xl  cursor-pointer has-checked:bg-white dark:bg-[#131c2a] bg-[#c1c1c1]  dark:has-checked:bg-transparent  transition-all"
                       >
                         <input
                           {...register("category")}
