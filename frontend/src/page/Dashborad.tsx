@@ -3,7 +3,7 @@ import { GetExpenses } from "@/components/GetExpense";
 import { QuickAction } from "@/components/QuickActionsCard";
 import { TotalInfo } from "@/components/TotalInfo";
 import type { FC, ReactElement } from "react";
-import { NavBar } from "../components/NavBar";
+import { NavBar } from "../page/NavBar";
 
 export const Dashboard: FC = (): ReactElement => {
   return (
@@ -14,11 +14,7 @@ export const Dashboard: FC = (): ReactElement => {
           <FinancialDashbord />
           <TotalInfo />
           <QuickAction />
-          {/* <div className="flex gap-5 max-lg:flex-col"> */}
-          {/* <CreateExpense /> */}
           <GetExpenses />
-          {/* </div> */}
-          {/* <Summary /> */}
         </div>
       </section>
     </>
