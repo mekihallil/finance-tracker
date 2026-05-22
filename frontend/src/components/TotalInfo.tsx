@@ -5,7 +5,7 @@ export const TotalInfo: FC = (): ReactElement => {
   return (
     <>
       <article>
-        <section className="flex gap-8 mb-8.75 pr-8 ">
+        <section className="flex gap-8 mb-8.75">
           {/* Total spend  */}
           <article className="flex flex-col justify-between dark:bg-linear-to-tl dark:to-[#30373E] border border-gray-200 rounded-2xl shadow-2xl w-68.75 p-6.25 ">
             <header className="flex justify-between">

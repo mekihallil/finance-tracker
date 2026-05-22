@@ -37,7 +37,7 @@ export const ThisMonth: FC = (): ReactElement => {
   return (
     <>
       <section className="mt-8">
-        <div className="grid grid-cols-3 gap-8  mr-10">
+        <div className="grid grid-cols-3 gap-8">
           {monthData.map((item) => {
             const Icon = item.icon;
             return (

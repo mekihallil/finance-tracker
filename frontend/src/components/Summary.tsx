@@ -4,13 +4,11 @@ import {
   ArrowUpDown,
   Wallet,
 } from "lucide-react";
-import {  type FC, type ReactElement } from "react";
+import { type FC, type ReactElement } from "react";
 import { toast } from "sonner";
 import { useExpense } from "../hook/userExpense.hook";
 
 export const Summary: FC = (): ReactElement => {
-  
-
   const { expenseSummaryQuery } = useExpense();
   const summary = expenseSummaryQuery;
 
@@ -38,9 +36,7 @@ export const Summary: FC = (): ReactElement => {
   const data = summary.data;
 
   return (
-    <section className="">
-      
-
+    <section>
       <div className="flex justify-between max-lg:flex-col-reverse">
         {/* Total Balance Card */}
         <article className=" w-70 p-6 rounded-2xl shadow-sm border border-gray-100 max-lg:w-77 max-lg:mx-auto">
