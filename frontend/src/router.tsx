@@ -1,7 +1,7 @@
 import { createBrowserRouter } from "react-router";
-import { App } from "./app";
-import { AddExpense } from "./components/AddExpense";
+import { App } from "./App";
 import { Dashboard } from "./page/Dashborad";
+import { Expense } from "./page/Expense";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -14,7 +14,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "expense",
-        element: <AddExpense />,
+        element: <Expense />,
       },
     ],
   },
