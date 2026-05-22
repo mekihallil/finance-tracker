@@ -1,6 +1,15 @@
-import { CirclePlus, House, Moon, Sun, Target, Users, Zap } from "lucide-react";
+import {
+  CirclePlus,
+  Dot,
+  House,
+  Moon,
+  Sun,
+  Target,
+  Users,
+  Zap,
+} from "lucide-react";
 import { useEffect, useState, type FC, type ReactElement } from "react";
-import { Link, useNavigate } from "react-router";
+import { Link, useLocation } from "react-router";
 import { toast } from "sonner";
 
 type nav = {
@@ -18,7 +27,6 @@ const navData: nav[] = [
 export const NavBar: FC = (): ReactElement => {
   const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
   const [mode, setMode] = useState(isDark);
-  const navigate = useNavigate();
   useEffect(() => {
     if (mode) {
       document.documentElement.classList.add("dark");
@@ -26,6 +34,9 @@ export const NavBar: FC = (): ReactElement => {
       document.documentElement.classList.remove("dark");
     }
   }, [mode]);
+  const path = useLocation().pathname;
+  // console.log(path);
+
   return (
     <>
       <section className="flex flex-col justify-between fixed top-0 dark:bg-[#181E27] shadow-2xl h-dvh w-72.5">
@@ -63,14 +74,18 @@ export const NavBar: FC = (): ReactElement => {
             <hr className="dark:text-gray-700 text-[#e3e2e2]" />
           </header>
           <section className="mt-8 mx-4.5">
-            {navData.map((n) => {
+            {navData.map((item) => {
               return (
-                <div className="flex justify-between items-center h-12 w-63.75 my-4 pl-4 cursor-pointer hover:border hover:rounded-2xl hover:bg-[#29B866]">
-                  <button onClick={() => navigate(n.url)} className="flex ">
-                    <div className="flex items-center">{n.icon}</div>
-                    <Link to={n.url}>{n.title}</Link>
-                  </button>
-                </div>
+                <Link
+                  to={item.url}
+                  className={`flex justify-between items-center h-12 w-63.75 my-4 pl-4 cursor-pointer ${path == item.url ? "border rounded-2xl  bg-[#29B866]" : ""} `}
+                >
+                  <div className="flex ">
+                    <div className="flex items-center px-3">{item.icon}</div>
+                    <p>{item.title}</p>
+                  </div>
+                  {path == item.url && <Dot size={40} />}
+                </Link>
               );
             })}
           </section>
