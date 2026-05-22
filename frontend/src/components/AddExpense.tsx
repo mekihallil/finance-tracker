@@ -70,7 +70,7 @@ export const AddExpense: FC = (): ReactElement => {
 
   return (
     <section className=" max-lg:w-77 max-lg:mx-auto">
-      <section className="mr-10 p-8 rounded-3xl shadow-sm border-gray-100 dark:bg-[#2C3546] dark:border-black">
+      <section className="p-8 rounded-3xl shadow-sm border-gray-100 dark:bg-[#2C3546] dark:border-black">
         <header className="mb-6">
           <h1 className="flex gap-3 font-bold  tracking-tight">
             <i>
@@ -182,14 +182,13 @@ export const AddExpense: FC = (): ReactElement => {
                     );
                   })}
                 </div>
-              {errors.category && (
-                <span className="text-xs text-red-500 font-medium">
-                  {errors.category.message}
-                  {toast.error(`${errors.category.message}`)}
-                </span>
-              )}
+                {errors.category && (
+                  <span className="text-xs text-red-500 font-medium">
+                    {errors.category.message}
+                    {toast.error(`${errors.category.message}`)}
+                  </span>
+                )}
               </section>
-
             </div>
           </section>
         </form>

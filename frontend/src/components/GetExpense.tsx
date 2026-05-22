@@ -30,7 +30,7 @@ export const GetExpenses: FC = (): ReactElement => {
   }
 
   return (
-    <article className="mr-8">
+    <article className="">
       <section className="w-full rounded-3xl shadow-2xl dark:bg-[#182029] my-8 mr-30 p-10 max-lg:mx-auto ">
         <h2 className="flex items-center text-gray-800 pb-8 dark:text-white">
           <div className="mr-5 ">
