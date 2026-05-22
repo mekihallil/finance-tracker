@@ -1,6 +1,6 @@
 import { CirclePlus, House, Moon, Sun, Target, Users, Zap } from "lucide-react";
 import { useEffect, useState, type FC, type ReactElement } from "react";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { toast } from "sonner";
 
 type nav = {
@@ -9,10 +9,10 @@ type nav = {
   url: string;
 };
 const navData: nav[] = [
-  { title: "Dashboard", icon: <House size={15} />, url: "" },
-  { title: "Expenses", icon: <CirclePlus size={15} />, url: "expense" },
-  { title: "Savings", icon: <Target size={15} />, url: "" },
-  { title: "Split Bills", icon: <Users size={15} />, url: "" },
+  { title: "Dashboard", icon: <House size={15} />, url: "/" },
+  { title: "Expenses", icon: <CirclePlus size={15} />, url: "/expense" },
+  { title: "Savings", icon: <Target size={15} />, url: "/savings" },
+  { title: "Split Bills", icon: <Users size={15} />, url: "/split-bill" },
 ];
 
 export const NavBar: FC = (): ReactElement => {
@@ -68,7 +68,7 @@ export const NavBar: FC = (): ReactElement => {
                 <div className="flex justify-between items-center h-12 w-63.75 my-4 pl-4 cursor-pointer hover:border hover:rounded-2xl hover:bg-[#29B866]">
                   <button onClick={() => navigate(n.url)} className="flex ">
                     <div className="flex items-center">{n.icon}</div>
-                    <p className="pl-6 "> {n.title}</p>
+                    <Link to={n.url}>{n.title}</Link>
                   </button>
                 </div>
               );

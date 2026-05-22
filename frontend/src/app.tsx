@@ -1,14 +1,13 @@
 import { type FC, type ReactElement } from "react";
-import { Dashboard } from "./page/Dashborad";
-import NavBar from "./page/NavBar";
-export const NavBar: FC = (): ReactElement => {
+import { Outlet } from "react-router";
+import { NavBar } from "./page/NavBar";
+export const App: FC = (): ReactElement => {
   return (
-    <>
-      <article>
-        <NavBar>
-          <Dashboard />
-        </NavBar>
-      </article>
-    </>
+    <div>
+      <NavBar />
+      <main>
+        <Outlet />
+      </main>
+    </div>
   );
 };

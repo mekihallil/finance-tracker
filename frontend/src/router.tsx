@@ -1,13 +1,21 @@
 import { createBrowserRouter } from "react-router";
+import { App } from "./app";
+import { AddExpense } from "./components/AddExpense";
 import { Dashboard } from "./page/Dashborad";
-import { Expense } from "./page/Expense";
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <Dashboard />,
-  },
-  {
-    path: "/expense",
-    element: <Expense />,
+    element: <App />,
+
+    children: [
+      {
+        index: true,
+        element: <Dashboard />,
+      },
+      {
+        path: "expense",
+        element: <AddExpense />,
+      },
+    ],
   },
 ]);
