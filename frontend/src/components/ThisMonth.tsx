@@ -37,18 +37,18 @@ export const ThisMonth: FC = (): ReactElement => {
   return (
     <>
       <section className="mt-8">
-        <div className="grid grid-cols-3 gap-8">
+        <div className="grid grid-cols-3 gap-8 ">
           {monthData.map((item) => {
             const Icon = item.icon;
             return (
               <article
                 key={item.id}
-                className="flex items-center border rounded-2xl p-6 "
+                className="flex items-center shadow-2xl rounded-2xl dark:bg-[#2C3546] p-6 "
               >
                 <div className="pr-3">{Icon}</div>
                 <div>
-                  <p>{item.title}</p>
-                  <h1 className="text-3xl font-bold">{item.amount}</h1>
+                  <p className=" text-[#64748B] font-medium">{item.title}</p>
+                  <h1 className="text-2xl font-bold">{item.amount}</h1>
                 </div>
               </article>
             );
