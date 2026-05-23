@@ -1,5 +1,6 @@
 import { AddExpense } from "@/components/AddExpense";
 import { ExpenseTitle } from "@/components/ExpenseTitle";
+import { RecentExpense } from "@/components/RecentExpense";
 import { ThisMonth } from "@/components/ThisMonth";
 import type { FC, ReactElement } from "react";
 
@@ -11,6 +12,7 @@ export const Expense: FC = (): ReactElement => {
           <ExpenseTitle />
           <AddExpense />
           <ThisMonth />
+          <RecentExpense />
         </div>
       </section>
     </>
