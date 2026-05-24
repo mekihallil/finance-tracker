@@ -3,14 +3,14 @@ import {
   CarTaxiFront,
   Coffee,
   DollarSign,
-  ForkKnifeCrossedIcon,
   Gamepad2,
   GraduationCap,
   Heart,
   House,
   Loader2,
   PlusCircle,
-  ShoppingCart,
+  ShoppingBag,
+  Utensils,
 } from "lucide-react";
 import { type FC, type ReactElement } from "react";
 import { useForm } from "react-hook-form";
@@ -28,10 +28,10 @@ type category = {
   categoryName: string;
 };
 const categoryData: category[] = [
-  { id: 1, icons: <ForkKnifeCrossedIcon />, categoryName: "Food" },
+  { id: 1, icons: <Utensils />, categoryName: "Food" },
   { id: 2, icons: <CarTaxiFront />, categoryName: "Transport" },
   { id: 3, icons: <Coffee />, categoryName: "Coffee" },
-  { id: 4, icons: <ShoppingCart />, categoryName: "Shopping" },
+  { id: 4, icons: <ShoppingBag />, categoryName: "Shopping" },
   { id: 5, icons: <House />, categoryName: "Rent" },
   { id: 6, icons: <GraduationCap />, categoryName: "Education" },
   { id: 7, icons: <Gamepad2 />, categoryName: "Entertainment" },
