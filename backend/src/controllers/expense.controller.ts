@@ -84,7 +84,9 @@ export const monthlyExpense = async (req: Request, res: Response) => {
       (acc, item) => acc + item.amount,
       0,
     );
-    const perDayAvarage = totalTodayExpense / expenses.length;
+    const perDayAvarage =
+      totalTodayExpense > 0 &&
+      Number((totalTodayExpense / expenses.length).toFixed(2));
     res.status(200).json({
       totalTodayExpense,
       perDayAvarage,
