@@ -68,11 +68,10 @@ export const deleteExpense = async (req: Request, res: Response) => {
 };
 
 // monthly Expense
-export const monthlyExpense = async (req: Request, res: Response) => {
+export const getmonthlyExpense = async (req: Request, res: Response) => {
   try {
     const start = new Date(new Date()).setHours(0, 0, 0, 0);
     const end = new Date(new Date()).setHours(23, 59, 59, 999);
-    const currentYear = new Date().getFullYear();
 
     const expenses = await Expense.find({
       createAt: {
@@ -93,6 +92,6 @@ export const monthlyExpense = async (req: Request, res: Response) => {
       totalExpenseTransaction: expenses.length,
     });
   } catch (error) {
-    console.log(error);
+    res.status(400).json({ message: "Failed to delete Expense" });
   }
 };
