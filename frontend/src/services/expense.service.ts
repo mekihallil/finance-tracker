@@ -1,8 +1,9 @@
-import type { TSInterface } from "../interface/summary.interface";
+import type { MEInterface } from "@/interface/monthsExpense.interface";
 import type {
-  IdparticalEInterface,
   EInterface,
+  IdparticalEInterface,
 } from "../interface/expense.interface";
+import type { TSInterface } from "../interface/summary.interface";
 import { apiClient } from "./api.service";
 
 export const expenseService = {
@@ -30,5 +31,11 @@ export const expenseService = {
   },
   delete: async (_id: string) => {
     await apiClient.delete(`expense/delete/${_id}`);
+  },
+  monthlyExpense: async () => {
+    const { data } = await apiClient.get<MEInterface>(
+      "/expense/monthly-expense",
+    );
+    return data;
   },
 };

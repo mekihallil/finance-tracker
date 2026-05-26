@@ -17,11 +17,16 @@ export const useExpense = () => {
     queryKey: ["summary"],
     queryFn: expenseService.summary,
   });
+  const expenseMonthlyQuery = useQuery({
+    queryKey: ["monthly"],
+    queryFn: expenseService.monthlyExpense,
+  });
   const createExpenseMutation = useMutation({
     mutationFn: (data: EInterface) => expenseService.create(data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["expenses"] });
       queryClient.invalidateQueries({ queryKey: ["summary"] });
+      queryClient.invalidateQueries({ queryKey: ["monthly"] });
     },
   });
   const updateExpenseMutation = useMutation({
@@ -30,6 +35,7 @@ export const useExpense = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["expenses"] });
       queryClient.invalidateQueries({ queryKey: ["summary"] });
+      queryClient.invalidateQueries({ queryKey: ["monthly"] });
     },
   });
 
@@ -38,12 +44,14 @@ export const useExpense = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["expenses"] });
       queryClient.invalidateQueries({ queryKey: ["summary"] });
+      queryClient.invalidateQueries({ queryKey: ["monthly"] });
     },
   });
 
   return {
     getExpensesQuery,
     expenseSummaryQuery,
+    expenseMonthlyQuery,
     createExpenseMutation,
     updateExpenseMutation,
     deleteExpenseMutation,

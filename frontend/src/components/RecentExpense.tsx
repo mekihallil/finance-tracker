@@ -60,7 +60,10 @@ export const RecentExpense: FC = (): ReactElement => {
         {/* <ul> is the semantic tag for lists of items */}
         <ul className="space-y-2.5 px-3 pb-5">
           {expense?.map((expense: IdparticalEInterface) => {
-            const categoryInfo = Category[expense.category];
+            const categoryInfo = Category[expense.category] || {
+              icon: ShoppingBag,
+              bg: "#6B7280",
+            };
             const Icon = categoryInfo.icon;
             /* <li> represents a single list item */
             return (
