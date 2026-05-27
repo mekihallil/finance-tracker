@@ -44,14 +44,14 @@ export const NavBar: FC = (): ReactElement => {
           <header className="text-center text-2xl ">
             <div className="flex items-center justify-between py-6.25 px-8">
               <Zap size={30} />
-              <p>
+              <div>
                 <p className="text-xl text-[#29B866] font-bold">
                   FinanceTracker
                 </p>
                 <p className="text-[13px] text-start text-gray-500 font-semibold">
                   Professional Edition
                 </p>
-              </p>
+              </div>
               {/* Dark and light modes  */}
               <div
                 onClick={() => {
@@ -77,6 +77,7 @@ export const NavBar: FC = (): ReactElement => {
             {navData.map((item) => {
               return (
                 <Link
+                  key={item.title}
                   to={item.url}
                   className={`flex justify-between items-center h-12 w-63.75 my-4 pl-4 cursor-pointer ${path == item.url ? "border rounded-2xl  bg-[#29B866]" : ""} `}
                 >

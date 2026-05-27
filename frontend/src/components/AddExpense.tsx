@@ -72,12 +72,12 @@ export const AddExpense: FC = (): ReactElement => {
     <section className=" max-lg:w-77 max-lg:mx-auto">
       <section className="p-8 rounded-3xl shadow-sm border-gray-100 dark:bg-[#2C3546] dark:border-black">
         <header className="mb-6">
-          <h1 className="flex gap-3 font-bold  tracking-tight">
+          <div className="flex gap-3 font-bold  tracking-tight">
             <i>
               <DollarSign />
             </i>
             <h1>Add New Expense</h1>
-          </h1>
+          </div>
         </header>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
           <section className="flex space-x-10">

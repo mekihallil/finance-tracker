@@ -1,4 +1,5 @@
 import { Plus, Sparkles } from "lucide-react";
+import { Link } from "react-router";
 
 export const FinancialDashbord = () => {
   return (
@@ -19,7 +20,9 @@ export const FinancialDashbord = () => {
 
           <div className="flex items-center">
             <Plus size={15} />
-            <p className="pl-2">Add Expenses</p>
+            <Link to={"/expense"} className="pl-2">
+              Add Expenses
+            </Link>
           </div>
         </section>
       </article>
