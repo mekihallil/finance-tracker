@@ -36,14 +36,14 @@ export const ThisMonth: FC = (): ReactElement => {
       </div>
     );
   }
-  if (!data?.totalTodayExpense) {
-    console.log("");
+  if (!data?.totalMonthExpense) {
+    console.log("No expenses this month");
   }
   const monthData: MonthData[] = [
     {
       id: 1,
       title: "This Month",
-      amount: data?.totalTodayExpense || 0.0,
+      amount: data?.totalMonthExpense || 0.0,
       icon: <Calendar size={20} />,
       color: "text-blue-600",
     },

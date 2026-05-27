@@ -1,5 +1,5 @@
 export interface MEInterface {
-  totalTodayExpense: number ;
+  totalMonthExpense: number ;
   perDayAvarage: number;
   totalExpenseTransaction: number;
 }

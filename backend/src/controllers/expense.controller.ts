@@ -70,26 +70,52 @@ export const deleteExpense = async (req: Request, res: Response) => {
 // monthly Expense
 export const getmonthlyExpense = async (req: Request, res: Response) => {
   try {
-    const start = new Date(new Date()).setHours(0, 0, 0, 0);
-    const end = new Date(new Date()).setHours(23, 59, 59, 999);
+    // Daily Date Range 
+    const startDay = new Date();
+    startDay.setHours(0, 0, 0, 0);
+    const endDay = new Date();
+    endDay.setHours(23, 59, 59, 999);
 
-    const expenses = await Expense.find({
+    const todayExpenses = await Expense.find({
       createAt: {
-        $gte: start,
-        $lte: end,
+        $gte: startDay,
+        $lte: endDay,
       },
     });
-    const totalTodayExpense = expenses.reduce(
+    const totalDayExpense = todayExpenses.reduce(
       (acc, item) => acc + item.amount,
       0,
     );
+
     const perDayAvarage =
-      totalTodayExpense > 0 &&
-      Number((totalTodayExpense / expenses.length).toFixed(2));
+      totalDayExpense > 0 &&
+      Number((totalDayExpense / todayExpenses.length).toFixed(2));
+
+    // Monthly Date Range 
+
+    const startMonth = new Date();
+    startMonth.setHours(0, 0, 0, 0);
+
+    const endMonth = new Date();
+    endMonth.setMonth(endMonth.getMonth() + 1);
+    endMonth.setHours(23, 59, 59, 999);
+
+    const monthExpenses = await Expense.find({
+      createAt: {
+        $gte: startMonth,
+        $lte: endMonth,
+      },
+    });
+
+    const totalMonthExpense = monthExpenses.reduce(
+      (acc, item) => acc + item.amount,
+      0,
+    );
+
     res.status(200).json({
-      totalTodayExpense,
+      totalMonthExpense,
       perDayAvarage,
-      totalExpenseTransaction: expenses.length,
+      totalExpenseTransaction: monthExpenses.length,
     });
   } catch (error) {
     res.status(400).json({ message: "Failed to delete Expense" });
