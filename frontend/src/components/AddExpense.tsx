@@ -52,7 +52,6 @@ export const AddExpense: FC = (): ReactElement => {
       title: "",
       type: "expense",
       category: "",
-      amount: 0,
     },
   });
 
