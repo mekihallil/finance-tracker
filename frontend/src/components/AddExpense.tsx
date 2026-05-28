@@ -22,12 +22,12 @@ import {
   type ExpenseFormData,
 } from "../types/expenseSchema.type";
 
-type category = {
+type Category = {
   id: number;
   icons: ReactElement;
   categoryName: string;
 };
-const categoryData: category[] = [
+const categoryData: Category[] = [
   { id: 1, icons: <Utensils />, categoryName: "Food" },
   { id: 2, icons: <CarTaxiFront />, categoryName: "Transport" },
   { id: 3, icons: <Coffee />, categoryName: "Coffee" },
@@ -52,7 +52,7 @@ export const AddExpense: FC = (): ReactElement => {
       title: "",
       type: "expense",
       category: "",
-      amount: undefined,
+      amount: 0,
     },
   });
 
@@ -81,7 +81,7 @@ export const AddExpense: FC = (): ReactElement => {
         </header>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
           <section className="flex space-x-10">
-            <div className="felx w-1/2 space-y-10">
+            <div className="w-1/2 space-y-10">
               {/* Amount Input */}
               <div className="flex flex-col">
                 <label
@@ -94,6 +94,7 @@ export const AddExpense: FC = (): ReactElement => {
                   id="amount"
                   {...register("amount", { valueAsNumber: true })}
                   type="number"
+                  step="0.01"
                   placeholder="0.00"
                   className={` p-2 rounded-2xl  bg-gray-50 outline-none dark:bg-[#283243]  transition-all focus:ring-2 ${
                     errors.amount
