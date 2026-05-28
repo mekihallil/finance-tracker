@@ -70,7 +70,7 @@ export const deleteExpense = async (req: Request, res: Response) => {
 // monthly Expense
 export const getmonthlyExpense = async (req: Request, res: Response) => {
   try {
-    // Daily Date Range 
+    // Daily Date Range
     const startDay = new Date();
     startDay.setHours(0, 0, 0, 0);
     const endDay = new Date();
@@ -91,19 +91,20 @@ export const getmonthlyExpense = async (req: Request, res: Response) => {
       totalDayExpense > 0 &&
       Number((totalDayExpense / todayExpenses.length).toFixed(2));
 
-    // Monthly Date Range 
+    // Monthly Date Range
 
     const startMonth = new Date();
+    startMonth.setDate(1);
     startMonth.setHours(0, 0, 0, 0);
 
     const endMonth = new Date();
     endMonth.setMonth(endMonth.getMonth() + 1);
-    endMonth.setHours(23, 59, 59, 999);
-
+    endMonth.setHours(0, 0, 0, 0);
+    endMonth.setDate(1);
     const monthExpenses = await Expense.find({
       createAt: {
         $gte: startMonth,
-        $lte: endMonth,
+        $lt: endMonth,
       },
     });
 

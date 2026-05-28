@@ -36,7 +36,7 @@ export const ThisMonth: FC = (): ReactElement => {
       </div>
     );
   }
-  if (!data?.totalMonthExpense) {
+  if (!data) {
     console.log("No expenses this month");
   }
   const monthData: MonthData[] = [
