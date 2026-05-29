@@ -1,0 +1,9 @@
+PATCH http://localhost:5000/api/transaction/update/{id}
+Content-Type :application/json
+
+{
+  "title": "N",
+  "amount": 5000,
+  "type": "income",
+  "category": "Test"
+}

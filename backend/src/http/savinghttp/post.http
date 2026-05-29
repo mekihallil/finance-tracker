@@ -1,0 +1,9 @@
+POST http://localhost:5000/api/saving/
+Content-Type :application/json
+
+{
+  "name": "Emergency Fund",
+  "category": "Investment",
+  "amount": 500.00,
+  "date": "2026-09-29"
+}
