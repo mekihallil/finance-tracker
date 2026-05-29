@@ -1,4 +1,4 @@
-import { Schema } from "mongoose";
+import { Model, model, Schema } from "mongoose";
 import type { SInterface } from "../interface/saving.interface.js";
 
 const SavingSchema: Schema<SInterface> = new Schema(
@@ -18,3 +18,4 @@ const SavingSchema: Schema<SInterface> = new Schema(
   },
   { timestamps: true },
 );
+export const Saving: Model<SInterface> = model("Saving", SavingSchema);
