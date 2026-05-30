@@ -20,7 +20,7 @@ type nav = {
 const navData: nav[] = [
   { title: "Dashboard", icon: <House size={15} />, url: "/" },
   { title: "Expenses", icon: <CirclePlus size={15} />, url: "/expense" },
-  { title: "Savings", icon: <Target size={15} />, url: "/savings" },
+  { title: "Savings", icon: <Target size={15} />, url: "/saving" },
   { title: "Split Bills", icon: <Users size={15} />, url: "/split-bill" },
 ];
 
