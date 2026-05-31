@@ -1,7 +1,7 @@
 import { Model, model, Schema } from "mongoose";
-import type { EInterface } from "../interface/expense.interface.js";
+import type { IExpense } from "../interface/expense.interface.js";
 
-const ExpenseSchema: Schema<EInterface> = new Schema(
+const ExpenseSchema: Schema<IExpense> = new Schema(
   {
     title: {
       type: String,
@@ -22,7 +22,7 @@ const ExpenseSchema: Schema<EInterface> = new Schema(
   { timestamps: true },
 );
 
-export const Expense: Model<EInterface> = model(
+export const Expense: Model<IExpense> = model(
   "Expense",
   ExpenseSchema,
 );

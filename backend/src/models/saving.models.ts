@@ -1,7 +1,7 @@
 import { Model, model, Schema } from "mongoose";
-import type { SInterface } from "../interface/saving.interface.js";
+import type { ISaving } from "../interface/saving.interface.js";
 
-const SavingSchema: Schema<SInterface> = new Schema(
+const SavingSchema: Schema<ISaving> = new Schema(
   {
     name: {
       type: String,
@@ -14,8 +14,9 @@ const SavingSchema: Schema<SInterface> = new Schema(
       required: true,
     },
     amount: { type: Number, required: true, trim: true },
-    date: { type: Date, required: true, default: Date.now },
+    goal: { type: Number, required: true, trim: true },
+    date: { type: String, required: true },
   },
   { timestamps: true },
 );
-export const Saving: Model<SInterface> = model("Saving", SavingSchema);
+export const Saving: Model<ISaving> = model("Saving", SavingSchema);

@@ -1,9 +1,9 @@
 import type { Request, Response } from "express";
-import type { SInterface } from "../interface/saving.interface.js";
+import type { ISaving } from "../interface/saving.interface.js";
 import { Saving } from "../models/saving.models.js";
 
 export const addSaving = async (
-  req: Request<{}, {}, SInterface>,
+  req: Request<{}, {}, ISaving>,
   res: Response,
 ) => {
   try {

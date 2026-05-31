@@ -1,11 +1,11 @@
 import type { Request, Response } from "express";
-import type { EInterface } from "../interface/expense.interface.js";
+import type { IExpense } from "../interface/expense.interface.js";
 import { Expense } from "../models/expense.models.js";
 
 // get expenses
 export const getExpense = async (req: Request, res: Response) => {
   try {
-    const expenses: EInterface[] = await Expense.find();
+    const expenses: IExpense[] = await Expense.find();
 
     res.status(200).json(expenses);
   } catch (error) {
@@ -36,7 +36,7 @@ export const getSummary = async (req: Request, res: Response) => {
 
 // Create expenses
 export const createExpense = async (
-  req: Request<{}, {}, EInterface>,
+  req: Request<{}, {}, IExpense>,
   res: Response,
 ) => {
   try {

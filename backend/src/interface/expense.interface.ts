@@ -1,4 +1,4 @@
-export interface EInterface {
+export interface IExpense {
   title: string;
   amount: number;
   type: "income" | "expense";

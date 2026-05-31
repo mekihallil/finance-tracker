@@ -1,6 +1,9 @@
-export interface SInterface {
+export interface ISaving {
+  id?: string;
   name: string;
   category: string;
   amount: number;
-  date: Date;
+  goal: number;
+  date: string;
+  createdAt?: string;
 }
