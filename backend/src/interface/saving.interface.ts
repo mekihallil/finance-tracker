@@ -4,6 +4,6 @@ export interface ISaving {
   category: string;
   amount: number;
   goal: number;
-  date: string;
+  date: Date;
   createdAt?: string;
 }

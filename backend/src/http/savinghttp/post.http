@@ -4,6 +4,7 @@ Content-Type :application/json
 {
   "name": "Emergency Fund",
   "category": "Investment",
-  "amount": 500.00,
+  "amount": 0,
+  "goal": 90,
   "date": "2026-09-29"
 }

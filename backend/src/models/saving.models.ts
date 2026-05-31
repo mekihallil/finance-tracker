@@ -15,7 +15,7 @@ const SavingSchema: Schema<ISaving> = new Schema(
     },
     amount: { type: Number, required: true, trim: true },
     goal: { type: Number, required: true, trim: true },
-    date: { type: String, required: true },
+    date: { type: Date, required: true },
   },
   { timestamps: true },
 );
