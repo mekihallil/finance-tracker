@@ -7,22 +7,33 @@ export const addSaving = async (
   res: Response,
 ) => {
   try {
-    const { name, category, amount, date } = req.body;
+    const { name, category, amount, goal, date } = req.body;
 
     // Input validation
-    if (!name || !category || amount == null || !date) {
+    if (!name || !category || goal == null || !date) {
       res.status(400).json({
-        message: "All fields are required: name, category, amount, date",
+        message: "All fields are required: name, category, amount, goal, date",
       });
       return;
     }
 
-    if (typeof amount !== "number" || amount <= 0) {
-      res.status(400).json({ message: "Amount must be a positive number" });
+    if (
+      (typeof goal !== "number" || goal <= 0) &&
+      (typeof amount !== "number" || amount < 0)
+    ) {
+      res
+        .status(400)
+        .json({ message: "Amount and Goal must be a positive number" });
       return;
     }
 
-    const newSaving = await new Saving({ name, category, amount, date }).save();
+    const newSaving = await new Saving({
+      name,
+      category,
+      amount,
+      goal,
+      date,
+    }).save();
 
     res.status(201).json(newSaving);
   } catch (error) {
