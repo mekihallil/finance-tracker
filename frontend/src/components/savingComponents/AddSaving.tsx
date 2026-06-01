@@ -33,7 +33,7 @@ export const AddSaving: FC = (): ReactElement => {
             </div>
           </section>
         </section>
-        <section className="flex gap-">
+        <section className="flex gap-3">
           <button className="px-3 py-1 hover:scale-[1.03] transition-transform">
             Add Goal
           </button>
