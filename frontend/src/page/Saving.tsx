@@ -1,4 +1,4 @@
-import { AddSaving } from "@/components/savingComponents/addSaving";
+import { AddSaving } from "@/components/savingComponents/AddSaving";
 import { SavingTitle } from "@/components/savingComponents/SavingTitle";
 import type { FC, ReactElement } from "react";
 
