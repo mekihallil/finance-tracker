@@ -11,10 +11,10 @@ export const SavingTitle: FC = (): ReactElement => {
             Track your savings goals and earn rewards
           </p>
         </div>
-        <section className="flex gap-3">
+        <button className="flex gap-3">
           <Plus size={18} className="my-auto"/>
           <p>Add Goal</p>
-        </section>
+        </button>
       </article>
     </>
   );

@@ -1,4 +1,5 @@
 import { AddSaving } from "@/components/savingComponents/AddSaving";
+import { BadgesAndRewards } from "@/components/savingComponents/BadgesAndRewards";
 import { OverallProgress } from "@/components/savingComponents/OverallProgress";
 import { SavingTitle } from "@/components/savingComponents/SavingTitle";
 import type { FC, ReactElement } from "react";
@@ -11,6 +12,7 @@ export const Saving: FC = (): ReactElement => {
           <SavingTitle />
           <OverallProgress />
           <AddSaving />
+          <BadgesAndRewards/>
         </div>
       </section>
     </>
