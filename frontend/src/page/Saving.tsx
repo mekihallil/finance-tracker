@@ -1,5 +1,6 @@
 import { AddSaving } from "@/components/savingComponents/AddSaving";
 import { BadgesAndRewards } from "@/components/savingComponents/BadgesAndRewards";
+import { Goals } from "@/components/savingComponents/Goals";
 import { OverallProgress } from "@/components/savingComponents/OverallProgress";
 import { SavingTitle } from "@/components/savingComponents/SavingTitle";
 import { SmartSavingsTips } from "@/components/savingComponents/SmartSavingTip";
@@ -12,6 +13,7 @@ export const Saving: FC = (): ReactElement => {
         <div className="ml-80 mr-10">
           <SavingTitle />
           <OverallProgress />
+          <Goals />
           <AddSaving />
           <BadgesAndRewards />
           <SmartSavingsTips />

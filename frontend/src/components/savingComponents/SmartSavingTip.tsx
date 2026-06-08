@@ -43,7 +43,10 @@ export const SmartSavingsTips: FC = (): ReactElement => {
         <section className="grid grid-cols-2 gap-4 justify-center mt-5">
           {tips.map((item) => {
             return (
-              <div className="grid gap-2 text-[15px] font-semibold border border-gray-600 rounded-2xl p-4">
+              <div
+                key={item.id}
+                className="grid gap-2 text-[15px] font-semibold border border-gray-600 rounded-2xl p-4"
+              >
                 <h3>{item.name}</h3>
                 <h6 className="text-sm text-gray-400">{item.description}</h6>
               </div>
