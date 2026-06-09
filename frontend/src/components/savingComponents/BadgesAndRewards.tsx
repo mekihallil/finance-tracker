@@ -26,7 +26,7 @@ const rewards: Rewards[] = [
 
   {
     id: 3,
-    icon: <Crown size={30} color="#9099b0" />,
+    icon: <Crown size={24} color="white" />,
     name: "Goal Crusher",
     description: "Reached your first savings goal",
     status: "Earned",
@@ -34,7 +34,7 @@ const rewards: Rewards[] = [
 
   {
     id: 4,
-    icon: <Star />,
+    icon: <Star size={24} color="white" />,
     name: "First Saver",
     description: "Saved your first $100",
     status: "Earned",
@@ -44,7 +44,7 @@ const rewards: Rewards[] = [
 export const BadgesAndRewards: FC = (): ReactElement => {
   return (
     <>
-      <article className="rounded-[20px] dark:bg-[#2C3546] p-7 mb-7 mt-7">
+      <article className="rounded-[20px] dark:bg-[#2C3546] border border-gray-300 p-7 mb-7 mt-7">
         <header className="flex gap-2">
           <Award />
           <h2 className="font-medium ">Badges & Rewards</h2>

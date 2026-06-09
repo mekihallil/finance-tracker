@@ -3,7 +3,7 @@ import type { FC, ReactElement } from "react";
 export const AddSaving: FC = (): ReactElement => {
   return (
     <>
-      <article className=" rounded-2xl dark:bg-[#2C3546] p-5">
+      <article className=" rounded-2xl dark:bg-[#2C3546] border border-gray-300 p-5">
         <section className="w-full mb-5">
           <h2 className="mb-5 font-medium ">Add New Savings Goal</h2>
           <section className="flex gap-3 my-3 ">
