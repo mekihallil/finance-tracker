@@ -11,7 +11,7 @@ export const SavingTitle: FC = (): ReactElement => {
             Track your savings goals and earn rewards
           </p>
         </div>
-        <button className="flex gap-3">
+        <button className="flex gap-3 border rounded-2xl px-5 py-2 ">
           <Plus size={18} className="my-auto"/>
           <p>Add Goal</p>
         </button>

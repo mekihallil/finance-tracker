@@ -5,10 +5,10 @@ export const Goals: FC = (): ReactElement => {
   return (
     <>
       <article className="grid grid-cols-2 ">
-        <section className="rounded-[20px] dark:bg-[#2C3546] p-7 mb-7">
+        <section className="rounded-[20px] border border-gray-300 dark:bg-[#2C3546] p-7 mb-7">
           <header className="flex justify-between gap-2">
             <h2 className="font-medium ">Goal Title</h2>
-            <h2 className="font-semibold text-[12px] bg-[#444F61] rounded-2xl py-1 px-2">
+            <h2 className="font-semibold text-[12px] bg-gray-400/25 rounded-2xl py-1 px-2">
               Category
             </h2>
           </header>
@@ -23,7 +23,7 @@ export const Goals: FC = (): ReactElement => {
               <h1>0 days left</h1>
             </div>
           </section>
-          <section className="flex justify-center gap-2 bg-[#263042] rounded-2xl p-1 mt-1">
+          <section className="flex justify-center gap-2 dark:hover:text-black hover:text-gray-500 dark:bg-[#263042] border border-[#263042] rounded-2xl p-1 mt-1">
             <DollarSign size={15} className="my-auto" />
             <button>Add Money</button>
           </section>
