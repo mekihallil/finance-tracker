@@ -164,7 +164,7 @@ export const AddExpense: FC = (): ReactElement => {
                     return (
                       <label
                         key={c.id}
-                        className=" p-3 rounded-xl  cursor-pointer has-checked:bg-white dark:bg-[#131c2a] bg-[#c1c1c1]  dark:has-checked:bg-transparent  transition-all"
+                        className=" p-3 rounded-xl  cursor-pointer has-checked:bg-white dark:bg-[#131c2a] bg-[#c1c1c1] hover:rounded-3xl dark:has-checked:bg-transparent  transition-all"
                       >
                         <input
                           {...register("category")}
