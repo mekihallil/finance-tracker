@@ -9,7 +9,7 @@ import type { FC, ReactElement } from "react";
 export const Saving: FC = (): ReactElement => {
   return (
     <>
-      <section className="bg-[#FAFAFB]">
+      <section className="bg-[#FAFAFB] dark:bg-[#11161D]">
         <div className="ml-80 mr-10">
           <SavingTitle />
           <OverallProgress />
