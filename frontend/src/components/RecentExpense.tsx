@@ -52,9 +52,9 @@ export const RecentExpense: FC = (): ReactElement => {
   const expense = data?.filter((item) => item.type === "expense");
   return (
     <article className="mb-10">
-      <section className="w-full rounded-3xl shadow-2xl dark:bg-[#2C3546] my-8 mr-30  max-lg:mx-auto ">
+      <section className="w-full rounded-3xl shadow-2xl dark:bg-[#2C3546] my-8 mr-30 p-10 max-lg:mx-auto ">
         <h2 className="flex items-center text-gray-800 dark:text-white">
-          <p className="font-bold text-xl p-6">Recent Expenses</p>
+          <p className="font-bold text-xl">Recent Expenses</p>
         </h2>
 
         {/* <ul> is the semantic tag for lists of items */}
