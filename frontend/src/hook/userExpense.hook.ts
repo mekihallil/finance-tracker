@@ -5,56 +5,50 @@ import type {
   IdparticalEInterface,
 } from "../interface/expense.interface";
 
+const EXPENSE_QUERY_KEYS = {
+  expense: ["expenses"],
+  monthly: ["monthly"],
+  summary: ["summary"],
+  getsaving: ["getsaving"],
+};
+
 export const useExpense = () => {
   const queryClient = useQueryClient();
+  // invalidate all queries
+  const invalidateAllQueries = () => {
+    Promise.all(
+      Object.values(EXPENSE_QUERY_KEYS).map((queryKey) => {
+        queryClient.invalidateQueries({ queryKey });
+      }),
+    );
+  };
 
   const getExpensesQuery = useQuery<IdparticalEInterface[]>({
-    queryKey: ["expenses"],
+    queryKey: EXPENSE_QUERY_KEYS.expense,
     queryFn: expenseService.getAll,
   });
 
   const expenseSummaryQuery = useQuery({
-    queryKey: ["summary"],
+    queryKey: EXPENSE_QUERY_KEYS.summary,
     queryFn: expenseService.summary,
   });
   const expenseMonthlyQuery = useQuery({
-    queryKey: ["monthly"],
+    queryKey: EXPENSE_QUERY_KEYS.monthly,
     queryFn: expenseService.monthlyExpense,
   });
   const createExpenseMutation = useMutation({
     mutationFn: (data: EInterface) => expenseService.create(data),
-    onSuccess: () => {
-      // expense query
-      queryClient.invalidateQueries({ queryKey: ["expenses"] });
-      queryClient.invalidateQueries({ queryKey: ["summary"] });
-      queryClient.invalidateQueries({ queryKey: ["monthly"] });
-      // saving query
-      queryClient.invalidateQueries({ queryKey: ["getsaving"] });
-    },
+    onSuccess: () => invalidateAllQueries,
   });
   const updateExpenseMutation = useMutation({
     mutationFn: ({ id, data }: { id: string; data: EInterface }) =>
       expenseService.update(id, data),
-    onSuccess: () => {
-      // expense query
-      queryClient.invalidateQueries({ queryKey: ["expenses"] });
-      queryClient.invalidateQueries({ queryKey: ["summary"] });
-      queryClient.invalidateQueries({ queryKey: ["monthly"] });
-      // saving query
-      queryClient.invalidateQueries({ queryKey: ["getsaving"] });
-    },
+    onSuccess: () => invalidateAllQueries,
   });
 
   const deleteExpenseMutation = useMutation({
     mutationFn: (id: string) => expenseService.delete(id),
-    onSuccess: () => {
-      // expense query
-      queryClient.invalidateQueries({ queryKey: ["expenses"] });
-      queryClient.invalidateQueries({ queryKey: ["summary"] });
-      queryClient.invalidateQueries({ queryKey: ["monthly"] });
-      // saving query
-      queryClient.invalidateQueries({ queryKey: ["getsaving"] });
-    },
+    onSuccess: () => invalidateAllQueries,
   });
 
   return {
