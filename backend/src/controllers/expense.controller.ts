@@ -1,5 +1,5 @@
 import type { Request, Response } from "express";
-import type { IExpense } from "../interface/expense.interface.js";
+import type { IExpense } from "../validations/expense.validation.js";
 import { Expense } from "../models/expense.models.js";
 
 // get expenses

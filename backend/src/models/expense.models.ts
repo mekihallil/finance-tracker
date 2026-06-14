@@ -1,5 +1,5 @@
 import { Model, model, Schema } from "mongoose";
-import type { IExpense } from "../interface/expense.interface.js";
+import type { IExpense } from "../validations/expense.validation.js";
 
 const ExpenseSchema: Schema<IExpense> = new Schema(
   {
@@ -22,7 +22,4 @@ const ExpenseSchema: Schema<IExpense> = new Schema(
   { timestamps: true },
 );
 
-export const Expense: Model<IExpense> = model(
-  "Expense",
-  ExpenseSchema,
-);
+export const Expense: Model<IExpense> = model("Expense", ExpenseSchema);

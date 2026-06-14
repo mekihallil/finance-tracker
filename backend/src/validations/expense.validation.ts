@@ -5,4 +5,7 @@ export const expenseValidationSchema = z.object({
   amount: z.number().positive("Amount must be positive number"),
   type: z.enum(["income", "expense"]),
   category: z.string().min(1, "Category is required"),
+  createAt: { type: Date, required: true, default: Date.now },
 });
+
+export type IExpense = z.infer<typeof expenseValidationSchema>;

@@ -1,4 +1,3 @@
-import type { ObjectId } from "mongoose";
 import z from "zod";
 
 export const savingValidateSchema = z
@@ -15,4 +14,3 @@ export const savingValidateSchema = z
   });
 
 export type ISaving = z.infer<typeof savingValidateSchema>;
-

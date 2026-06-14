@@ -1,5 +1,5 @@
 import { Model, model, Schema } from "mongoose";
-import type { ISaving } from "../interface/saving.interface.js";
+import type { ISaving } from "../validations/saving.validation.js";
 
 const SavingSchema: Schema<ISaving> = new Schema(
   {
