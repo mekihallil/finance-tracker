@@ -1,9 +1,7 @@
 import { savingService } from "@/services/saving.service";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 
-export const UserSaving = () => {
-  const queryClient = useQueryClient();
-
+export const useSaving = () => {
   const getSavings = useQuery({
     queryKey: ["getsaving"],
     queryFn: savingService.getGoalSaving,

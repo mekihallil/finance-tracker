@@ -24,27 +24,36 @@ export const useExpense = () => {
   const createExpenseMutation = useMutation({
     mutationFn: (data: EInterface) => expenseService.create(data),
     onSuccess: () => {
+      // expense query
       queryClient.invalidateQueries({ queryKey: ["expenses"] });
       queryClient.invalidateQueries({ queryKey: ["summary"] });
       queryClient.invalidateQueries({ queryKey: ["monthly"] });
+      // saving query
+      queryClient.invalidateQueries({ queryKey: ["getsaving"] });
     },
   });
   const updateExpenseMutation = useMutation({
     mutationFn: ({ id, data }: { id: string; data: EInterface }) =>
       expenseService.update(id, data),
     onSuccess: () => {
+      // expense query
       queryClient.invalidateQueries({ queryKey: ["expenses"] });
       queryClient.invalidateQueries({ queryKey: ["summary"] });
       queryClient.invalidateQueries({ queryKey: ["monthly"] });
+      // saving query
+      queryClient.invalidateQueries({ queryKey: ["getsaving"] });
     },
   });
 
   const deleteExpenseMutation = useMutation({
     mutationFn: (id: string) => expenseService.delete(id),
     onSuccess: () => {
+      // expense query
       queryClient.invalidateQueries({ queryKey: ["expenses"] });
       queryClient.invalidateQueries({ queryKey: ["summary"] });
       queryClient.invalidateQueries({ queryKey: ["monthly"] });
+      // saving query
+      queryClient.invalidateQueries({ queryKey: ["getsaving"] });
     },
   });
 
