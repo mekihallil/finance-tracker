@@ -1,16 +1,31 @@
 import { useSaving } from "@/hook/userSaving.hook";
 import { Target } from "lucide-react";
 import type { FC, ReactElement } from "react";
+import { toast } from "sonner";
 
 export const OverallProgress: FC = (): ReactElement => {
   const GetSavings = useSaving();
   const savings = GetSavings;
 
   if (savings.isLoading) {
-    return <div>... loading</div>;
+    return (
+      <div className="flex justify-center p-10">
+        <span className="animate-pulse text-gray-400 font-medium">
+          Loading Savings...
+        </span>
+      </div>
+    );
   }
+
   if (savings.isError) {
-    return <div>error</div>;
+    return (
+      <div role="alert" className="p-4 bg-red-50 rounded-lg">
+        <span className="text-red-500 font-bold">
+          Error: {savings.error.message}
+          {toast.error(savings.error.message)}
+        </span>
+      </div>
+    );
   }
   const data = savings.data;
   return (
