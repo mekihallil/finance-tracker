@@ -5,7 +5,7 @@ export const Goals: FC = (): ReactElement => {
   return (
     <>
       <article className="grid grid-cols-2 ">
-        <section className="rounded-[20px] border border-gray-300 dark:bg-[#2C3546] p-7 mb-7">
+        <section className="rounded-[20px] border border-gray-300 dark:bg-[#2C3546] dark:border-none p-7 mb-7">
           <header className="flex justify-between gap-2">
             <h2 className="font-medium ">Goal Title</h2>
             <h2 className="font-semibold text-[12px] bg-gray-400/25 rounded-2xl py-1 px-2">

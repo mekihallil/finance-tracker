@@ -44,7 +44,7 @@ const rewards: Rewards[] = [
 export const BadgesAndRewards: FC = (): ReactElement => {
   return (
     <>
-      <article className="rounded-[20px] dark:bg-[#2C3546] border border-gray-300 p-7 mb-7 mt-7">
+      <article className="rounded-[20px] dark:bg-[#2C3546] border border-gray-300 dark:border-none p-7 mb-7 mt-7">
         <header className="flex gap-2">
           <Award />
           <h2 className="font-medium ">Badges & Rewards</h2>

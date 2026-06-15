@@ -13,8 +13,8 @@ export const Saving: FC = (): ReactElement => {
         <div className="ml-80 mr-10">
           <SavingTitle />
           <OverallProgress />
-          <Goals />
           <AddSaving />
+          <Goals />
           <BadgesAndRewards />
           <SmartSavingsTips />
         </div>
