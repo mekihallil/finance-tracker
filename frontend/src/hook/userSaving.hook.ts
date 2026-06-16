@@ -6,5 +6,10 @@ export const useSaving = () => {
     queryKey: ["getsaving"],
     queryFn: savingService.getGoalSaving,
   });
-  return getSavings;
+  const goals = useQuery({
+    queryKey: ["goals"],
+    queryFn: savingService.getGoals,
+  });
+
+  return {  getSavings, goals };
 };

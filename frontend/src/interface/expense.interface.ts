@@ -9,4 +9,5 @@ export interface EInterface {
 
 export interface IdparticalEInterface extends EInterface {
   _id: string;
+  goal: number;
 }
