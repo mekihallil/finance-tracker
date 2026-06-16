@@ -53,7 +53,10 @@ export const BadgesAndRewards: FC = (): ReactElement => {
           {rewards.map((item) => {
             const Icon = item.icon;
             return (
-              <div className="grid place-items-center  border-2 rounded-[20px] pt-6.5 pb-4.5 px-auto mt-6">
+              <div
+                key={item.id}
+                className="grid place-items-center  border-2 rounded-[20px] pt-6.5 pb-4.5 px-auto mt-6"
+              >
                 <i
                   className={`${item.id === 3 ? "rounded-full flex items-center justify-center w-13 h-13 bg-[#51545B]" : item.id === 4 ? "rounded-full flex items-center justify-center w-13 h-13 bg-[#2B7FFF]" : ""}`}
                 >

@@ -10,6 +10,7 @@ const EXPENSE_QUERY_KEYS = {
   monthly: ["monthly"],
   summary: ["summary"],
   getsaving: ["getsaving"],
+  queryKey: ["goals"],
 };
 
 export const useExpense = () => {

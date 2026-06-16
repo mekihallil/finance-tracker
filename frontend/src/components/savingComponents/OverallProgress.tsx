@@ -4,7 +4,8 @@ import { useEffect } from "react";
 import { toast } from "sonner";
 
 export const OverallProgress = () => {
-  const savings = useSaving();
+  const { getSavings } = useSaving();
+  const savings = getSavings;
 
   useEffect(() => {
     if (savings.isError) {
