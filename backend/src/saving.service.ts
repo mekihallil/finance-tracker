@@ -42,5 +42,8 @@ export const getGoals = async () => {
   const goals = await Saving.find();
   if (!goals.length) throw new NotFoundError("No goals found");
 
-  return goals;
+  return goals.map((g) => ({
+    ...g.toObject(),
+    percentage: parseFloat(((g.amount / g.goal) * 100).toFixed(1)),
+  }));
 };
