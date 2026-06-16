@@ -2,12 +2,12 @@ import { NotFoundError } from "./error/saving.error.js";
 import { Saving } from "./models/saving.models.js";
 import { savingValidateSchema } from "./validations/saving.validation.js";
 
-export const createSaving  = async (body: unknown) => {
+export const createSaving = async (body: unknown) => {
   const saving = savingValidateSchema.parse(body);
   return await new Saving(saving).save();
 };
 
-export const getSavingProgress  = async () => {
+export const getSavingProgress = async () => {
   const savings = await Saving.find();
 
   if (!savings.length) throw new NotFoundError("No Savings found");
@@ -35,4 +35,12 @@ export const getSavingProgress  = async () => {
     percentageSaving,
     isComplete,
   };
+};
+
+// goals
+export const getGoals = async () => {
+  const goals = await Saving.find();
+  if (!goals.length) throw new NotFoundError("No goals found");
+
+  return goals;
 };

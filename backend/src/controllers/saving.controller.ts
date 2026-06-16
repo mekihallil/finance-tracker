@@ -2,7 +2,11 @@ import type { Request, Response } from "express";
 import { StatusCodes } from "http-status-codes";
 import { ZodError } from "zod";
 import { NotFoundError } from "../error/saving.error.js";
-import { createSaving, getSavingProgress } from "../saving.service.js";
+import {
+  createSaving,
+  getGoals,
+  getSavingProgress,
+} from "../saving.service.js";
 
 // Add savings
 export const addSaving = async (req: Request, res: Response) => {
@@ -31,5 +35,19 @@ export const getGoalSaving = async (req: Request, res: Response) => {
     res
       .status(StatusCodes.INTERNAL_SERVER_ERROR)
       .json({ message: "Internal server error" });
+  }
+};
+
+// Each Goals
+export const goals = async (req: Request, res: Response) => {
+  try {
+    const goals = await getGoals();
+    res.status(StatusCodes.OK).json(goals);
+  } catch (error) {
+    if (error instanceof NotFoundError)
+      return res.status(StatusCodes.NOT_FOUND).json({ message: error.message });
+    res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({ message: "Internal Server error" });
   }
 };
