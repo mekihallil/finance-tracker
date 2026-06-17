@@ -1,16 +1,13 @@
 import { expenseService } from "@/services/expense.service";
+import type { ExpenseFormData } from "@/types/expenseSchema.type";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import type {
-  EInterface,
-  IdparticalEInterface,
-} from "../interface/expense.interface";
 
 const EXPENSE_QUERY_KEYS = {
   expense: ["expenses"],
   monthly: ["monthly"],
   summary: ["summary"],
   getsaving: ["getsaving"],
-  queryKey: ["goals"],
+  goal: ["goals"],
 };
 
 export const useExpense = () => {
@@ -24,7 +21,7 @@ export const useExpense = () => {
     );
   };
 
-  const getExpensesQuery = useQuery<IdparticalEInterface[]>({
+  const getExpensesQuery = useQuery<ExpenseFormData[]>({
     queryKey: EXPENSE_QUERY_KEYS.expense,
     queryFn: expenseService.getAll,
   });
@@ -38,11 +35,11 @@ export const useExpense = () => {
     queryFn: expenseService.monthlyExpense,
   });
   const createExpenseMutation = useMutation({
-    mutationFn: (data: EInterface) => expenseService.create(data),
+    mutationFn: (data: ExpenseFormData) => expenseService.create(data),
     onSuccess: () => invalidateAllQueries,
   });
   const updateExpenseMutation = useMutation({
-    mutationFn: ({ id, data }: { id: string; data: EInterface }) =>
+    mutationFn: ({ id, data }: { id: string; data: ExpenseFormData }) =>
       expenseService.update(id, data),
     onSuccess: () => invalidateAllQueries,
   });

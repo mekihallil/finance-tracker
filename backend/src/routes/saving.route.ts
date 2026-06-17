@@ -9,7 +9,7 @@ import { savingValidateSchema } from "../validations/saving.validation.js";
 
 const router = Router();
 
-router.post("/", validate(savingValidateSchema), addSaving);
+router.post("/create", validate(savingValidateSchema), addSaving);
 router.get("/getsaving", getGoalSaving);
 router.get("/goals", goals);
 

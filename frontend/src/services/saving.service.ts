@@ -1,3 +1,4 @@
+import type { SavingFormData } from "@/types/savingSchema.tyes";
 import { apiClient } from "./api.service";
 
 export const savingService = {
@@ -7,6 +8,10 @@ export const savingService = {
   },
   getGoals: async () => {
     const { data } = await apiClient.get("/saving/goals");
+    return data;
+  },
+  create: async (saving: SavingFormData) => {
+    const { data } = await apiClient.post("/saving/create", saving);
     return data;
   },
 };

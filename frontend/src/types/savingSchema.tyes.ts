@@ -5,11 +5,10 @@ export const savingSchema = z.object({
   amount: z
     .float64({ error: "Please enter a valid number" })
     .positive("Amount must be a positive number"),
-  type: z.enum(["income", "expense"]),
   category: z
     .string({ error: "Please select a category" })
     .min(1, "Please select a category"),
-  targetDate: z.coerce.date(),
+  targetDate: z.date(),
 });
 
 export type SavingFormData = z.infer<typeof savingSchema>;

@@ -1,4 +1,4 @@
-POST http://localhost:5000/api/saving/
+POST http://localhost:5000/api/saving/create
 Content-Type :application/json
 
 {
