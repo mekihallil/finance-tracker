@@ -6,8 +6,8 @@ export const AddSaving: FC = (): ReactElement => {
       <article className=" rounded-2xl dark:bg-[#2C3546] border border-gray-300  dark:border-none p-5 mb-7">
         <section className="w-full mb-5">
           <h2 className="mb-5 font-medium ">Add New Savings Goal</h2>
-          <section className="flex gap-3 my-3 ">
-            <div className="grid w-1/3">
+          <section className="grid grid-cols-4 gap-3 my-3 ">
+            <div className="grid">
               <label htmlFor="">Goal Name</label>
               <input
                 className=" rounded-xl p-1 dark:border dark:border-[#202B3D] dark:bg-[#283243] text-gray-300"
@@ -15,7 +15,7 @@ export const AddSaving: FC = (): ReactElement => {
                 placeholder="e.g New Phone"
               />
             </div>
-            <div className="grid w-1/3">
+            <div className="grid">
               <label htmlFor="">Target Amount</label>
               <input
                 className=" rounded-xl p-1 dark:border dark:border-[#202B3D] dark:bg-[#283243] text-gray-300"
@@ -24,10 +24,18 @@ export const AddSaving: FC = (): ReactElement => {
                 step="0.01"
               />
             </div>
+            <div className="grid">
+              <label htmlFor="">Category</label>
+              <input
+                className=" rounded-xl p-1 dark:border dark:border-[#202B3D] dark:bg-[#283243] text-gray-300"
+                type="text"
+                placeholder="laptop"
+              />
+            </div>
             <div className="grid ">
               <label htmlFor="">Target Date</label>
               <input
-                className="pr-40  rounded-xl p-1 dark:border dark:border-[#202B3D] dark:bg-[#283243] text-gray-300 px-4 py-1"
+                className="rounded-xl dark:border dark:border-[#202B3D] dark:bg-[#283243] text-gray-300 py-1"
                 type="date"
               />
             </div>

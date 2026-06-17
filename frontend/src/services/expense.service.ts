@@ -1,41 +1,28 @@
-import type { MEInterface } from "@/interface/monthsExpense.interface";
-import type {
-  EInterface,
-  IdparticalEInterface,
-} from "../interface/expense.interface";
-import type { TSInterface } from "../interface/summary.interface";
+import type { ExpenseFormData } from "@/types/expenseSchema.type";
 import { apiClient } from "./api.service";
 
 export const expenseService = {
   getAll: async () => {
-    const { data } = await apiClient.get<IdparticalEInterface[]>("/expense");
+    const { data } = await apiClient.get("/expense");
     return data;
   },
   summary: async () => {
-    const { data } = await apiClient.get<TSInterface>("/expense/summary");
+    const { data } = await apiClient.get("/expense/summary");
     return data;
   },
-  create: async (expense: EInterface) => {
-    const { data } = await apiClient.post<EInterface>(
-      "/expense/create",
-      expense,
-    );
+  create: async (expense: ExpenseFormData) => {
+    const { data } = await apiClient.post("/expense/create", expense);
     return data;
   },
-  update: async (_id: string, expenses: EInterface) => {
-    const { data } = await apiClient.patch<EInterface>(
-      `/expense/update/${_id}`,
-      expenses,
-    );
+  update: async (_id: string, expenses: ExpenseFormData) => {
+    const { data } = await apiClient.patch(`/expense/update/${_id}`, expenses);
     return data;
   },
   delete: async (_id: string) => {
     await apiClient.delete(`expense/delete/${_id}`);
   },
   monthlyExpense: async () => {
-    const { data } = await apiClient.get<MEInterface>(
-      "/expense/monthly-expense",
-    );
+    const { data } = await apiClient.get("/expense/monthly-expense");
     return data;
   },
 };
