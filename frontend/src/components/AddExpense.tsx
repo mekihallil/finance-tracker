@@ -104,7 +104,7 @@ export const AddExpense: FC = (): ReactElement => {
                 {errors.amount && (
                   <span className="text-xs text-red-500 font-medium">
                     {errors.amount.message}
-                    {toast.error(`${errors.amount.message}`)}
+                    {/* {toast.error(`${errors.amount.message}`)} */}
                   </span>
                 )}
               </div>
@@ -129,7 +129,7 @@ export const AddExpense: FC = (): ReactElement => {
                 {errors.title && (
                   <span className="text-xs text-red-500 font-medium">
                     {errors.title.message}
-                    {toast.error(`${errors.title.message}`)}
+                    {/* {toast.error(`${errors.title.message}`)} */}
                   </span>
                 )}
               </div>
@@ -185,7 +185,7 @@ export const AddExpense: FC = (): ReactElement => {
                 {errors.category && (
                   <span className="text-xs text-red-500 font-medium">
                     {errors.category.message}
-                    {toast.error(`${errors.category.message}`)}
+                    {/* {toast.error(`${errors.category.message}`)} */}
                   </span>
                 )}
               </section>

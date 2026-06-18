@@ -4,8 +4,8 @@ import { useEffect, type FC, type ReactElement } from "react";
 import { toast } from "sonner";
 
 export const Goals: FC = (): ReactElement | null => {
-  const { goals } = useSaving();
-
+  const { goalsQuery } = useSaving();
+  const goals = goalsQuery;
   useEffect(() => {
     if (goals.isError) {
       toast.error(goals.error.message);
@@ -44,7 +44,7 @@ export const Goals: FC = (): ReactElement | null => {
           className="rounded-[20px] border border-gray-300 dark:bg-[#2C3546] dark:border-none p-7 "
         >
           <header className="flex justify-between gap-2">
-            <h2 className="font-medium">{item.title}</h2>
+            <h2 className="font-medium">{item.name}</h2>
             <h2 className="font-semibold text-[12px] bg-gray-400/25 rounded-2xl py-1 px-2">
               {item.category}
             </h2>
