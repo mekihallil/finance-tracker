@@ -7,9 +7,13 @@ import {
   getGoals,
   getSavingProgress,
 } from "../saving.service.js";
+import type { ISaving } from "../validations/saving.validation.js";
 
 // Add savings
-export const addSaving = async (req: Request, res: Response) => {
+export const addSaving = async (
+  req: Request<{}, {}, ISaving>,
+  res: Response,
+) => {
   try {
     const saving = await createSaving(req.body);
     res.status(StatusCodes.CREATED).json(saving);

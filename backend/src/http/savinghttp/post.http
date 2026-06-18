@@ -1,10 +1,10 @@
 POST http://localhost:5000/api/saving/create
-Content-Type :application/json
+Content-Type: application/json
 
 {
   "name": "Emergency Fund",
-  "category": "Investment",
-  "amount": 8000,
-  "goal": 9000,
-  "date": "2026-09-29"
+  "category": "savings",
+  "amount": 500,
+  "goal": 5000,
+  "date": "2026-06-18"
 }
