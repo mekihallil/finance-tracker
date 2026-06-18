@@ -2,23 +2,35 @@ import { savingService } from "@/services/saving.service";
 import type { SavingFormData } from "@/types/savingSchema.tyes";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
+const SAVING_QUERY_KEYS = {
+  saving: ["getsaving"],
+  goals: ["goals"],
+} as const;
+
 export const useSaving = () => {
   const queryClient = useQueryClient();
-  const getSavings = useQuery({
-    queryKey: ["getsaving"],
+  
+  const invalidateAllQueries = () =>
+    Promise.all(
+      Object.values(SAVING_QUERY_KEYS).map((queryKey) =>
+        queryClient.invalidateQueries({ queryKey }),
+      ),
+    );
+
+  const savingQuery = useQuery({
+    queryKey: SAVING_QUERY_KEYS.saving,
     queryFn: savingService.getGoalSaving,
   });
-  const goals = useQuery({
-    queryKey: ["goals"],
+
+  const goalsQuery = useQuery({
+    queryKey: SAVING_QUERY_KEYS.goals,
     queryFn: savingService.getGoals,
   });
-  const createSaving = useMutation({
+
+  const createSavingMutation = useMutation({
     mutationFn: (data: SavingFormData) => savingService.create(data),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["getsaving"] });
-      queryClient.invalidateQueries({ queryKey: ["goals"] });
-    },
+    onSuccess: invalidateAllQueries,
   });
 
-  return { getSavings, goals, createSaving };
+  return { savingQuery, goalsQuery, createSavingMutation };
 };
