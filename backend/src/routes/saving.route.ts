@@ -1,5 +1,6 @@
 import { Router } from "express";
 import {
+  addMoneyToGoal,
   addSaving,
   getGoalSaving,
   goals,
@@ -12,5 +13,5 @@ const router = Router();
 router.get("/getsaving", getGoalSaving);
 router.get("/goals", goals);
 router.post("/create", validate(savingValidateSchema), addSaving);
-
+router.patch("/update/:id", addMoneyToGoal);
 export default router;
