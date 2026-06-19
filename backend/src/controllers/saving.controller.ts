@@ -4,6 +4,7 @@ import { ZodError } from "zod";
 import { NotFoundError } from "../error/saving.error.js";
 import {
   createSaving,
+  getAmount,
   getGoals,
   getSavingProgress,
 } from "../saving.service.js";
@@ -53,5 +54,31 @@ export const goals = async (req: Request, res: Response) => {
     res
       .status(StatusCodes.INTERNAL_SERVER_ERROR)
       .json({ message: "Internal Server error" });
+  }
+};
+
+// Update amount
+export const addMoneyToGoal = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    const { amount } = req.body;
+
+    if (!id || Array.isArray(id)) {
+      return res.status(400).json({ message: "Valid ID is required" });
+    }
+
+    if (typeof amount !== "number" || isNaN(amount)) {
+      return res.status(400).json({ message: "Valid amount is required" });
+    }
+
+    const updatedGoal = await getAmount(id, amount);
+
+    if (!updatedGoal) {
+      return res.status(404).json({ message: "Goal not found" });
+    }
+
+    res.status(200).json(updatedGoal);
+  } catch (error) {
+    res.status(500).json({ message: "Failed to add money", error });
   }
 };

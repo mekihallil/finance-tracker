@@ -47,3 +47,13 @@ export const getGoals = async () => {
     percentage: parseFloat(((g.amount / g.goal) * 100).toFixed(1)),
   }));
 };
+
+// update
+export const getAmount = async (id: string, amount: number) => {
+  const updatedGoal = await Saving.findByIdAndUpdate(
+    id,
+    { $inc: { amount } },
+    { new: true, runValidators: true },
+  );
+  return updatedGoal; // null if not found, or the updated doc
+};
