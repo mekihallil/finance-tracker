@@ -44,8 +44,8 @@ export const Goals: FC = (): ReactElement | null => {
           className="rounded-[20px] border border-gray-300 dark:bg-[#2C3546] dark:border-none p-7 "
         >
           <header className="flex justify-between gap-2">
-            <h2 className="font-medium">{item.name}</h2>
-            <h2 className="font-semibold text-[12px] bg-gray-400/25 rounded-2xl py-1 px-2">
+            <h2 className="font-medium text-xl capitalize">{item.name}</h2>
+            <h2 className="font-semibold text-[12px] capitalize bg-gray-400/25 rounded-2xl py-1 px-2">
               {item.category}
             </h2>
           </header>

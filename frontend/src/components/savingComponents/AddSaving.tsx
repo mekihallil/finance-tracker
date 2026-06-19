@@ -104,17 +104,16 @@ export const AddSaving: FC = (): ReactElement => {
           <section className="flex gap-3">
             <button
               type="submit"
-              onClick={() => console.log("Clicked")}
               disabled={createSavingMutation.isPending}
-              className="flex px-3 py-1 hover:scale-[1.03] transition-transform"
+              className="flex gap-2 px-3 py-1 hover:scale-[1.03] transition-transform"
             >
               {createSavingMutation.isPending ? (
                 <Loader2 className="animate-spin" size={20} />
               ) : (
-                <>
-                  <PlusCircle size={20} />
+                <div className="flex gap-1 mt-auto">
+                  <PlusCircle size={20} className="mt-0.5"/>
                   <span>Add Goal</span>
-                </>
+                </div>
               )}
             </button>
             <button className="border rounded-2xl px-3 py-1">Cancel</button>
