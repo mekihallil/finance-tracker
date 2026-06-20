@@ -1,7 +1,8 @@
 import { useSaving } from "@/hook/userSaving.hook";
-import { Calendar, DollarSign } from "lucide-react";
+import { Calendar } from "lucide-react";
 import { useEffect, type FC, type ReactElement } from "react";
 import { toast } from "sonner";
+import { UpdatePopoverPage } from "./updatePopoverPage";
 
 export const Goals: FC = (): ReactElement | null => {
   const { goalsQuery } = useSaving();
@@ -60,9 +61,10 @@ export const Goals: FC = (): ReactElement | null => {
               <h1>0 days left</h1>
             </div>
           </section>
-          <section className="flex justify-center gap-2 dark:hover:text-black hover:text-gray-500 dark:bg-[#263042] border border-[#263042] rounded-2xl p-1 mt-1">
-            <DollarSign size={15} className="my-auto" />
-            <button>Add Money</button>
+          <section className="flex justify-center">
+            <button>
+              <UpdatePopoverPage />
+            </button>
           </section>
         </section>
       ))}
