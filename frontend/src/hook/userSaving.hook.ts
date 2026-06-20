@@ -9,7 +9,7 @@ const SAVING_QUERY_KEYS = {
 
 export const useSaving = () => {
   const queryClient = useQueryClient();
-  
+
   const invalidateAllQueries = () =>
     Promise.all(
       Object.values(SAVING_QUERY_KEYS).map((queryKey) =>
@@ -32,5 +32,10 @@ export const useSaving = () => {
     onSuccess: invalidateAllQueries,
   });
 
-  return { savingQuery, goalsQuery, createSavingMutation };
+  const updateAmount = useMutation({
+    mutationFn: ({ id, amount }: { id: string; amount: number }) =>
+      savingService.updateAmount(id, amount),
+    onSuccess: invalidateAllQueries,
+  });
+  return { savingQuery, goalsQuery, createSavingMutation, updateAmount };
 };
