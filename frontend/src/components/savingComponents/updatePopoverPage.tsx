@@ -29,7 +29,6 @@ export function UpdatePopoverPage() {
               <Label htmlFor="maxHeight">Amount</Label>
               <Input id="amount" defaultValue="" className="col-span-2 h-8" />
             </div>
-
             <Button variant="outline">Submit</Button>
           </div>
         </div>

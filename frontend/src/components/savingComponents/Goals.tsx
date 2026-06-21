@@ -2,7 +2,7 @@ import { useSaving } from "@/hook/userSaving.hook";
 import { Calendar } from "lucide-react";
 import { useEffect, type FC, type ReactElement } from "react";
 import { toast } from "sonner";
-import { UpdatePopoverPage } from "./updatePopoverPage";
+import { UpdatePopoverPage } from "./UpdatePopoverPage";
 
 export const Goals: FC = (): ReactElement | null => {
   const { goalsQuery } = useSaving();
@@ -62,7 +62,7 @@ export const Goals: FC = (): ReactElement | null => {
             </div>
           </section>
           <section className="flex justify-center">
-            <button>
+            <button className="flex justify-center">
               <UpdatePopoverPage />
             </button>
           </section>
