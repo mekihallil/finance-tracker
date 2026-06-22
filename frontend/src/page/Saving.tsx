@@ -4,16 +4,21 @@ import { Goals } from "@/components/savingComponents/Goals";
 import { OverallProgress } from "@/components/savingComponents/OverallProgress";
 import { SavingTitle } from "@/components/savingComponents/SavingTitle";
 import { SmartSavingsTips } from "@/components/savingComponents/SmartSavingTip";
-import type { FC, ReactElement } from "react";
+import { useState, type FC, type ReactElement } from "react";
 
-export const Saving: FC = (): ReactElement => {
+interface savingProp {
+  OnClick: () => void;
+}
+
+export const Saving: FC<savingProp> = (): ReactElement => {
+  const [open, setOpen] = useState(false);
   return (
     <>
       <section className="bg-[#FAFAFB] dark:bg-[#11161D]">
         <div className="ml-80 mr-10">
-          <SavingTitle />
+          <SavingTitle OnClick={() => setOpen(!open)} />
           <OverallProgress />
-          <AddSaving />
+          <AddSaving addGoal={open} />
           <Goals />
           <BadgesAndRewards />
           <SmartSavingsTips />

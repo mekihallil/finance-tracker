@@ -38,7 +38,7 @@ export const Goals: FC = (): ReactElement | null => {
   if (!data || !Array.isArray(data)) return null;
 
   return (
-    <article className="grid grid-cols-2 gap-5">
+    <article className="grid grid-cols-2 gap-5 ">
       {data.map((item) => (
         <section
           key={item._id}

@@ -5,7 +5,11 @@ import { Loader2, PlusCircle } from "lucide-react";
 import type { FC, ReactElement } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
-export const AddSaving: FC = (): ReactElement => {
+
+interface AddSavinglProp {
+  addGoal:boolean
+}
+export const AddSaving: FC<AddSavinglProp> = ({addGoal}): ReactElement => {
   const { createSavingMutation } = useSaving();
   const {
     register,
@@ -31,7 +35,9 @@ export const AddSaving: FC = (): ReactElement => {
     });
   };
   return (
-    <article className=" rounded-2xl dark:bg-[#2C3546] border border-gray-300  dark:border-none p-5 mb-7">
+    <article
+      className={`${addGoal ? "block": "hidden"}  rounded-2xl dark:bg-[#2C3546] border border-gray-300  dark:border-none p-5 mb-7`}
+    >
       <section className="w-full mb-5">
         <h2 className="mb-5 font-medium ">Add New Savings Goal</h2>
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -111,7 +117,7 @@ export const AddSaving: FC = (): ReactElement => {
                 <Loader2 className="animate-spin" size={20} />
               ) : (
                 <div className="flex gap-1 mt-auto">
-                  <PlusCircle size={20} className="mt-0.5"/>
+                  <PlusCircle size={20} className="mt-0.5" />
                   <span>Add Goal</span>
                 </div>
               )}

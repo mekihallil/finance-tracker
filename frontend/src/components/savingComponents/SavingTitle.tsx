@@ -1,7 +1,10 @@
 import { Plus } from "lucide-react";
-import type { FC, ReactElement } from "react";
+import { type FC, type ReactElement } from "react";
 
-export const SavingTitle: FC = (): ReactElement => {
+interface savingTitleProp {
+  OnClick: () => void;
+}
+export const SavingTitle: FC<savingTitleProp> = ({OnClick}): ReactElement => {
   return (
     <>
       <article className="flex items-center justify-between">
@@ -11,8 +14,11 @@ export const SavingTitle: FC = (): ReactElement => {
             Track your savings goals and earn rewards
           </p>
         </div>
-        <button className="flex gap-3 border rounded-2xl px-5 py-2 ">
-          <Plus size={18} className="my-auto"/>
+        <button
+          onClick={OnClick}
+          className="flex gap-3 border rounded-2xl px-5 py-2 "
+        >
+          <Plus size={18} className="my-auto" />
           <p>Add Goal</p>
         </button>
       </article>
