@@ -1,6 +1,47 @@
-import { Goal, Plus, Sparkles, TrendingUp, Users } from "lucide-react";
+import {
+  Goal,
+  Plus,
+  Sparkles,
+  TrendingUp,
+  Users,
+  type LucideIcon,
+} from "lucide-react";
 import type { FC, ReactElement } from "react";
 import { Link } from "react-router";
+
+interface actionItem {
+  label: string;
+  icon: LucideIcon;
+  href: string;
+  bgColor: string;
+}
+
+const actionList: actionItem[] = [
+  {
+    label: "Add Expenses",
+    icon: Plus,
+    href: "/expense",
+    bgColor: "#15AE7B",
+  },
+  {
+    label: "Set Goal",
+    icon: Goal,
+    href: "/saving",
+    bgColor: "#246CFE",
+  },
+  {
+    label: "Split Bill",
+    icon: Users,
+    href: "/",
+    bgColor: "#A840FF",
+  },
+  {
+    label: "View Trends",
+    icon: TrendingUp,
+    href: "/",
+    bgColor: "#F8590C",
+  },
+];
 
 export const QuickAction: FC = (): ReactElement => {
   return (
@@ -18,34 +59,20 @@ export const QuickAction: FC = (): ReactElement => {
               </h1>
             </section>
             {/* quick cardes */}
-            <section className="grid grid-cols-4 gap-4 mt-10 mb-5">
-              <button className="bg-[#15AE7B] rounded-2xl text-center p-5">
-                <div>
-                  <Plus size={15} className="m-auto" />
-                </div>
-                <Link to={"/expense"} className="pl-2">
-                  Add Expenses
-                </Link>
-              </button>
-              <button className="bg-[#246CFE] rounded-2xl text-center p-5">
-                <div>
-                  <Goal size={15} className="m-auto" />
-                </div>
-                <p>Set Goal</p>
-              </button>
-              <button className="bg-[#A840FF] rounded-2xl text-center p-5">
-                <div>
-                  <Users size={15} className="m-auto" />
-                </div>
-                <p>Split Bill</p>
-              </button>
-              <button className="bg-[#F8590C] rounded-2xl text-center p-5">
-                <div>
-                  <TrendingUp size={15} className="m-auto" />
-                </div>
-                <p>View Trends</p>
-              </button>
-            </section>
+            <nav className="grid grid-cols-4 gap-4 mt-8 mb-6">
+              {actionList.map((action) => {
+                const Icon = action.icon;
+                return (
+                  <Link
+                    to={action.href}
+                    className={`bg-[${action.bgColor}] rounded-2xl text-center p-5`}
+                  >
+                    <Icon size={15} className="m-auto" />
+                    <p className="pl-2">{action.label}</p>
+                  </Link>
+                );
+              })}
+            </nav>
           </section>
         </header>
       </section>
