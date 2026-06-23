@@ -1,5 +1,6 @@
 import { Goal, Plus, Sparkles, TrendingUp, Users } from "lucide-react";
 import type { FC, ReactElement } from "react";
+import { Link } from "react-router";
 
 export const QuickAction: FC = (): ReactElement => {
   return (
@@ -22,7 +23,9 @@ export const QuickAction: FC = (): ReactElement => {
                 <div>
                   <Plus size={15} className="m-auto" />
                 </div>
-                <p>Add Expense</p>
+                <Link to={"/expense"} className="pl-2">
+                  Add Expenses
+                </Link>
               </button>
               <button className="bg-[#246CFE] rounded-2xl text-center p-5">
                 <div>
