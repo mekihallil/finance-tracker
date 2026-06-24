@@ -16,7 +16,7 @@ export const Saving: FC<savingProp> = (): ReactElement => {
     <>
       <section className="bg-[#FAFAFB] dark:bg-[#11161D]">
         <div className="ml-80 mr-10">
-          <SavingTitle OnClick={() => setOpen(!open)} />
+          <SavingTitle onClick={() => setOpen(!open)} />
           <OverallProgress />
           <AddSaving addGoal={open} />
           <Goals />
