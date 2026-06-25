@@ -14,7 +14,7 @@ export const SavingTitle: FC<savingTitleProp> = ({ onClick }): ReactElement => {
             Track your savings goals and earn rewards
           </p>
         </div>
-        <button type="button" onClick={onClick} className="...">
+        <button type="button" onClick={onClick} className="flex gap-3 border rounded-2xl px-4 py-2 hover:-translate-y-1 ">
           <Plus size={18} className="my-auto" aria-hidden="true" />
           <span>Add Goal</span>
         </button>
