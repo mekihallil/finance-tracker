@@ -65,7 +65,8 @@ export const QuickAction: FC = (): ReactElement => {
                 return (
                   <Link
                     to={action.href}
-                    className={`bg-[${action.bgColor}] rounded-2xl text-center p-5`}
+                    className="grid gap-3 rounded-2xl text-center p-5"
+                    style={{ backgroundColor: action.bgColor }}
                   >
                     <Icon size={15} className="m-auto" />
                     <p className="pl-2">{action.label}</p>
