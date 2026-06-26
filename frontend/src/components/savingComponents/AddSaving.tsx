@@ -6,10 +6,10 @@ import type { FC, ReactElement } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
-interface AddSavinglProp {
-  addGoal:boolean
+interface AddSavinglProps {
+  isOpen: boolean;
 }
-export const AddSaving: FC<AddSavinglProp> = ({addGoal}): ReactElement => {
+export const AddSaving: FC<AddSavinglProps> = ({ isOpen }): ReactElement => {
   const { createSavingMutation } = useSaving();
   const {
     register,
@@ -18,9 +18,6 @@ export const AddSaving: FC<AddSavinglProp> = ({addGoal}): ReactElement => {
     formState: { errors },
   } = useForm<SavingFormData>({
     resolver: zodResolver(savingSchema),
-    defaultValues: {
-      amount: 0,
-    },
   });
 
   const onSubmit = (data: SavingFormData) => {
@@ -34,10 +31,11 @@ export const AddSaving: FC<AddSavinglProp> = ({addGoal}): ReactElement => {
       },
     });
   };
+
+  if (!isOpen) return <></>;
+
   return (
-    <article
-      className={`${addGoal ? "block": "hidden"}  rounded-2xl dark:bg-[#2C3546] border border-gray-300  dark:border-none p-5 mb-7`}
-    >
+    <article className="rounded-2xl dark:bg-[#2C3546] border border-gray-300  dark:border-none p-5 mb-7">
       <section className="w-full mb-5">
         <h2 className="mb-5 font-medium ">Add New Savings Goal</h2>
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -46,6 +44,7 @@ export const AddSaving: FC<AddSavinglProp> = ({addGoal}): ReactElement => {
               <label htmlFor="name">Goal Name</label>
               <input
                 id="name"
+                maxLength={100}
                 {...register("name")}
                 className=" rounded-xl p-1 dark:border dark:border-[#202B3D] dark:bg-[#283243] text-gray-300"
                 type="text"
@@ -62,6 +61,8 @@ export const AddSaving: FC<AddSavinglProp> = ({addGoal}): ReactElement => {
               <label htmlFor="amount">Target Amount</label>
               <input
                 id="amount"
+                min={0}
+                maxLength={999_999_999}
                 {...register("goal", { valueAsNumber: true })}
                 className=" rounded-xl p-1 dark:border dark:border-[#202B3D] dark:bg-[#283243] text-gray-300"
                 type="number"
@@ -76,7 +77,7 @@ export const AddSaving: FC<AddSavinglProp> = ({addGoal}): ReactElement => {
               )}
             </div>
             <div className="grid">
-              <label htmlFor="">Category</label>
+              <label htmlFor="Category">Category</label>
               <input
                 id="category"
                 {...register("category")}
