@@ -18,7 +18,7 @@ export const Saving: FC<savingProp> = (): ReactElement => {
         <div className="ml-80 mr-10">
           <SavingTitle onClick={() => setOpen(!open)} />
           <OverallProgress />
-          <AddSaving addGoal={open} />
+          <AddSaving isOpen={open} />
           <Goals />
           <BadgesAndRewards />
           <SmartSavingsTips />
