@@ -1,89 +1,84 @@
-import { TrendingDown, Wallet } from "lucide-react";
+import { TrendingDown, TrendingUp, Wallet } from "lucide-react";
 import type { FC, ReactElement } from "react";
+
+interface StatCard {
+  id: string;
+  label: string;
+  value: string;
+  percentageChange: number;
+  subLabel: string;
+}
+
+// Replace with real data from a hook e.g. useDashboardStats()
+const STAT_CARDS: StatCard[] = [
+  {
+    id: "total-spent",
+    label: "Total Spent",
+    value: "$1,250.75",
+    percentageChange: -12,
+    subLabel: "from last month",
+  },
+  {
+    id: "monthly-budget",
+    label: "Monthly Budget",
+    value: "$3,000.00",
+    percentageChange: 5,
+    subLabel: "remaining this month",
+  },
+  {
+    id: "saving-progress",
+    label: "Saving Progress",
+    value: "$540.00",
+    percentageChange: -8,
+    subLabel: "toward your goal",
+  },
+  {
+    id: "group-expense",
+    label: "Group Expense",
+    value: "$320.50",
+    percentageChange: 3,
+    subLabel: "shared this month",
+  },
+];
+
+interface StatCardItemProps {
+  card: StatCard;
+}
+
+const StatCardItem: FC<StatCardItemProps> = ({ card }): ReactElement => {
+  const isNegative = card.percentageChange < 0;
+
+  return (
+    <article className="flex flex-col justify-between dark:bg-linear-to-tl dark:to-[#30373E] border border-gray-200 rounded-2xl shadow-2xl w-68.75 p-6.25">
+      <header className="flex justify-between">
+        <Wallet size={20} className="mx-4 my-5" />
+        <div className="flex gap-1 items-center rounded-2xl px-1.75 py-0.75 dark:bg-[#3D2025] text-[#FF6467]">
+          {isNegative ? (
+            <TrendingDown size={13} className="ml-0.5" />
+          ) : (
+            <TrendingUp size={13} className="ml-0.5" />
+          )}
+          <p className="text-[12px] font-semibold">
+            {Math.abs(card.percentageChange)}%
+          </p>
+        </div>
+      </header>
+
+      <section>
+        <div className="text-[#94A3B8] font-semibold">{card.label}</div>
+        <div className="text-[#2CC66D] font-bold text-[28px]">{card.value}</div>
+        <div className="text-[#94A3B8] text-[12px]">{card.subLabel}</div>
+      </section>
+    </article>
+  );
+};
 
 export const TotalInfo: FC = (): ReactElement => {
   return (
-    <>
-      <article>
-        <section className="flex gap-8 mb-8.75">
-          {/* Total spend  */}
-          <article className="flex flex-col justify-between dark:bg-linear-to-tl dark:to-[#30373E] border border-gray-200 rounded-2xl shadow-2xl w-68.75 p-6.25 ">
-            <header className="flex justify-between">
-              <Wallet size={20} className="mx-4 my-5" />
-              <div>
-                <div className="flex gap-1 items-center rounded-2xl px-1.75 py-0.75 dark:bg-[#3D2025] text-[#FF6467]">
-                  <TrendingDown size={13} className="ml-0.5" />
-                  <p className="text-[12px] font-semibold">12% </p>
-                </div>
-              </div>
-            </header>
-            <section className="">
-              <div className="text-[#94A3B8] font-semibold">Total Spent</div>
-              <div className="text-[#2CC66D] font-bold text-[28px]">
-                $1250.75
-              </div>
-              <div className="text-[#94A3B8] text-[12px]">from last month</div>
-            </section>
-          </article>
-          {/* Monthly Budget  */}
-          <article className="flex flex-col justify-between dark:bg-linear-to-tl dark:to-[#30373E] border border-gray-200 rounded-2xl shadow-2xl w-68.75 p-6.25 ">
-            <header className="flex justify-between">
-              <Wallet size={20} className="mx-4 my-5" />
-              <div>
-                <div className="flex gap-1 items-center rounded-2xl px-1.75 py-0.75 dark:bg-[#3D2025] text-[#FF6467]">
-                  <TrendingDown size={13} className="ml-0.5" />
-                  <p className="text-[12px] font-semibold">12% </p>
-                </div>
-              </div>
-            </header>
-            <section className="">
-              <div className="text-[#94A3B8] font-semibold">Total Spent</div>
-              <div className="text-[#2CC66D] font-bold text-[28px]">
-                $1250.75
-              </div>
-              <div className="text-[#94A3B8] text-[12px]">from last month</div>
-            </section>
-          </article>
-          {/* saving progress  */}
-          <article className="flex flex-col justify-between dark:bg-linear-to-tl dark:to-[#30373E] border border-gray-200 rounded-2xl shadow-2xl w-68.75 p-6.25 ">
-            <header className="flex justify-between">
-              <Wallet size={20} className="mx-4 my-5" />
-              <div>
-                <div className="flex gap-1 items-center rounded-2xl px-1.75 py-0.75 dark:bg-[#3D2025] text-[#FF6467]">
-                  <TrendingDown size={13} className="ml-0.5" />
-                  <p className="text-[12px] font-semibold">12% </p>
-                </div>
-              </div>
-            </header>
-            <section className="">
-              <div className="text-[#94A3B8] font-semibold">Total Spent</div>
-              <div className="text-[#2CC66D] font-bold text-[28px]">
-                $1250.75
-              </div>
-              <div className="text-[#94A3B8] text-[12px]">from last month</div>
-            </section>
-          </article>
-          {/* Group Expense  */}
-          <article className="flex flex-col justify-between dark:bg-linear-to-tl dark:to-[#30373E] border border-gray-200 rounded-2xl shadow-2xl w-68.75 p-6.25 ">
-            <header className="flex justify-between">
-              <Wallet size={20} className="mx-4 my-5" />
-              <div>
-                <div className="flex gap-1 items-center rounded-2xl px-1.75 py-0.75 dark:bg-[#3D2025] text-[#FF6467]">
-                  <TrendingDown size={13} className="ml-0.5" />
-                  <p className="text-[12px] font-semibold">12% </p>
-                </div>
-              </div>
-            </header>
-            <section className="">
-              <div className="text-[#94A3B8] font-semibold">Total Spent</div>
-              <div className="text-[#2CC66D] font-bold text-[28px]">
-                $1250.75
-              </div>
-              <div className="text-[#94A3B8] text-[12px]">from last month</div>
-            </section>
-          </article>
-        </section>
-      </article>
-    </>
+    <section className="flex gap-8 mb-8.75">
+      {STAT_CARDS.map((card) => (
+        <StatCardItem key={card.id} card={card} />
+      ))}
+    </section>
   );
 };
