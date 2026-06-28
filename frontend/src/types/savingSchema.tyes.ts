@@ -1,6 +1,7 @@
 import { z } from "zod";
 
 export const savingSchema = z.object({
+  id: z.string(),
   name: z.string().min(3, "Title must be at least 3 characters"),
   category: z
     .string({ error: "Please select a category" })
