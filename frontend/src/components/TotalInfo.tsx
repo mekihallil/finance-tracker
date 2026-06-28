@@ -52,15 +52,17 @@ const StatCardItem: FC<StatCardItemProps> = ({ card }): ReactElement => {
     <article className="flex flex-col justify-between dark:bg-linear-to-tl dark:to-[#30373E] border border-gray-200 rounded-2xl shadow-2xl w-68.75 p-6.25">
       <header className="flex justify-between">
         <Wallet size={20} className="mx-4 my-5" />
-        <div className="flex gap-1 items-center rounded-2xl px-1.75 py-0.75 dark:bg-[#3D2025] text-[#FF6467]">
-          {isNegative ? (
-            <TrendingDown size={13} className="ml-0.5" />
-          ) : (
-            <TrendingUp size={13} className="ml-0.5" />
-          )}
-          <p className="text-[12px] font-semibold">
-            {Math.abs(card.percentageChange)}%
-          </p>
+        <div className="flex items-start ">
+          <div className="flex gap-1 items-center rounded-2xl text-xl py-1 px-2 bg-red-500/10 text-red-500">
+            {isNegative ? (
+              <TrendingDown size={13} className="ml-0.5" />
+            ) : (
+              <TrendingUp size={13} className="ml-0.5" />
+            )}
+            <p className="text-[12px] font-semibold">
+              {Math.abs(card.percentageChange)}%
+            </p>
+          </div>
         </div>
       </header>
 
