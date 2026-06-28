@@ -32,10 +32,10 @@ export const useSaving = () => {
     onSuccess: invalidateAllQueries,
   });
 
-  const updateAmount = useMutation({
+  const AddMoney = useMutation({
     mutationFn: ({ id, amount }: { id: string; amount: number }) =>
-      savingService.updateAmount(id, amount),
+      savingService.AddMoney(id, amount),
     onSuccess: invalidateAllQueries,
   });
-  return { savingQuery, goalsQuery, createSavingMutation, updateAmount };
+  return { savingQuery, goalsQuery, createSavingMutation, AddMoney };
 };

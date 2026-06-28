@@ -14,7 +14,7 @@ export const savingService = {
     const { data } = await apiClient.post("/saving/create", saving);
     return data;
   },
-  updateAmount: async (id: string, amount: number) => {
+  AddMoney: async (id: string, amount: number) => {
     const { data } = await apiClient.patch(`/saving/update/${id}`, amount);
     return data;
   },
