@@ -62,9 +62,9 @@ export const Goals: FC = (): ReactElement | null => {
             </div>
           </section>
           <section className="flex justify-center">
-            <button className="flex justify-center">
+            <div className="flex justify-center">
               <AddMoneyPopover />
-            </button>
+            </div>
           </section>
         </section>
       ))}
