@@ -63,7 +63,7 @@ export const Goals: FC = (): ReactElement | null => {
           </section>
           <section className="flex justify-center">
             <div className="flex justify-center">
-              <AddMoneyPopover />
+              <AddMoneyPopover savingId={item._id} />
             </div>
           </section>
         </section>
