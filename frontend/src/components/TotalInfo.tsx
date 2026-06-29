@@ -9,7 +9,7 @@ interface StatCard {
   subLabel: string;
 }
 
-// Replace with real data from a hook e.g. useDashboardStats()
+
 const STAT_CARDS: StatCard[] = [
   {
     id: "total-spent",
