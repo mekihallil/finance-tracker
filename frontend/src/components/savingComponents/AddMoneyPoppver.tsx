@@ -17,7 +17,7 @@ import type { FC, ReactElement } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 type AddMoneyPopoverProps = {
   savingId: string;
@@ -27,6 +27,7 @@ export const AddMoneyPopover: FC<AddMoneyPopoverProps> = ({
   savingId,
 }): ReactElement => {
   const { AddMoney } = useSaving();
+  const [open, setOpen] = useState(false);
   const {
     register,
     reset,
@@ -49,6 +50,7 @@ export const AddMoneyPopover: FC<AddMoneyPopoverProps> = ({
         onSuccess() {
           toast.success("Amount added successfully!");
           reset();
+          setOpen(false);
         },
         onError: () => {
           toast.error("Failed to amount add");
@@ -57,9 +59,9 @@ export const AddMoneyPopover: FC<AddMoneyPopoverProps> = ({
     );
   };
   return (
-    <Popover>
+    <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
-        <Button variant="outline">
+        <Button variant="outline" onClick={() => setOpen(true)}>
           <DollarSign size={15} className="my-auto" /> Add Money
         </Button>
       </PopoverTrigger>
