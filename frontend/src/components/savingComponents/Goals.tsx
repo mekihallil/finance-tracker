@@ -58,7 +58,7 @@ export const Goals: FC = (): ReactElement | null => {
             </section>
             <div className="h-2 w-full rounded-full bg-gray-200 dark:bg-gray-700 overflow-hidden">
               <div
-                className="h-full bg-emerald-500 transition-all"
+                className="h-full bg-emerald-500 rounded-r-full transition-all"
                 style={{ width: `${Math.min(percentage, 100)}%` }}
               />
             </div>
