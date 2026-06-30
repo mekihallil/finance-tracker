@@ -17,6 +17,8 @@ import type { FC, ReactElement } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
+import { useEffect } from "react";
+
 type AddMoneyPopoverProps = {
   savingId: string;
 };
@@ -33,6 +35,12 @@ export const AddMoneyPopover: FC<AddMoneyPopoverProps> = ({
   } = useForm<SavingResponse>({
     resolver: zodResolver(savingResponseSchema),
   });
+
+  useEffect(() => {
+    if (errors.amount?.message) {
+      toast.error(errors.amount.message);
+    }
+  }, [errors.amount?.message]);
 
   const onSubmit = ({ amount }: SavingResponse) => {
     AddMoney.mutate(
