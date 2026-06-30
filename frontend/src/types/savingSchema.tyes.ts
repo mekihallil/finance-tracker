@@ -8,16 +8,13 @@ export const savingSchema = z.object({
   goal: z
     .number({ error: "Please enter a valid number" })
     .positive("Amount must be a positive number"),
-
-  amount: z
-    .number({ error: "Please enter a valid number" })
-    .nonnegative("Amount cannot be negative")
-    .max(999_999_999, "Amount exceeds maximum allowed"),
   date: z.date(),
 });
 
-export const savingResponseSchema = savingSchema.extend({
-  id: z.string({ error: "ID is required" }),
+export const savingResponseSchema = z.object({
+  amount: z
+    .number({ error: "Please enter a valid number" })
+    .max(999_999_999, "Amount exceeds maximum allowed"),
 });
 
 export type SavingFormData = z.infer<typeof savingSchema>;
