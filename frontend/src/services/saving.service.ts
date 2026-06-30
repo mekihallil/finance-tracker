@@ -15,7 +15,7 @@ export const savingService = {
     return data;
   },
   AddMoney: async (id: string, amount: number) => {
-    const { data } = await apiClient.patch(`/saving/update/${id}`, amount);
+    const { data } = await apiClient.patch(`/saving/update/${id}`, { amount });
     return data;
   },
 };
