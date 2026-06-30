@@ -50,10 +50,10 @@ export const getGoals = async () => {
 
 // update
 export const getAmount = async (id: string, amount: number) => {
-  const updatedGoal = await Saving.findByIdAndUpdate(
+  const addAmonut = await Saving.findByIdAndUpdate(
     id,
     { $inc: { amount } },
     { new: true, runValidators: true },
   );
-  return updatedGoal; // null if not found, or the updated doc
+  return addAmonut; // null if not found, or the updated doc
 };

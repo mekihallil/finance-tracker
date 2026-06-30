@@ -71,13 +71,13 @@ export const addMoneyToGoal = async (req: Request, res: Response) => {
       return res.status(400).json({ message: "Valid amount is required" });
     }
 
-    const updatedGoal = await getAmount(id, amount);
+    const addamount = await getAmount(id, amount);
 
-    if (!updatedGoal) {
+    if (!addamount) {
       return res.status(404).json({ message: "Goal not found" });
     }
 
-    res.status(200).json(updatedGoal);
+    res.status(200).json(addamount);
   } catch (error) {
     res.status(500).json({ message: "Failed to add money", error });
   }
