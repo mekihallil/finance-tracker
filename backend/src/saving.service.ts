@@ -45,6 +45,7 @@ export const getGoals = async () => {
   return goals.map((g) => ({
     ...g.toObject(),
     percentage: parseFloat(((g.amount / g.goal) * 100).toFixed(1)),
+    isComplete: g.amount >= g.goal,
   }));
 };
 
