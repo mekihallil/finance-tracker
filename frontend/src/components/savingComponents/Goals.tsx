@@ -34,7 +34,6 @@ export const Goals: FC = (): ReactElement | null => {
   }
 
   const data = goals.data;
-
   if (!data || !Array.isArray(data)) return null;
 
   return (
@@ -71,7 +70,10 @@ export const Goals: FC = (): ReactElement | null => {
             </section>
             <section className="flex justify-center">
               <div className="flex justify-center">
-                <AddMoneyPopover savingId={item._id} />
+                <AddMoneyPopover
+                  savingId={item._id}
+                  isComplete={item.isComplete}
+                />
               </div>
             </section>
           </section>
