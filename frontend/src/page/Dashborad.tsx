@@ -1,7 +1,7 @@
-import { FinancialDashbord } from "@/components/FinancialDashboard";
-import { GetExpenses } from "@/components/GetExpense";
-import { QuickAction } from "@/components/QuickActionsCard";
-import { TotalInfo } from "@/components/TotalInfo";
+import { FinancialDashbord } from "@/components/dashboard/FinancialDashboard";
+import { GetExpenses } from "@/components/dashboard/GetExpense";
+import { QuickAction } from "@/components/dashboard/QuickActionsCard";
+import { TotalInfo } from "@/components/dashboard/TotalInfo";
 import type { FC, ReactElement } from "react";
 
 export const Dashboard: FC = (): ReactElement => {
