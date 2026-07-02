@@ -5,7 +5,7 @@ import { toast } from "sonner";
 
 export const OverallProgress = () => {
   const { savingQuery } = useSaving();
-  const savings = savingQuery   ;
+  const savings = savingQuery;
 
   useEffect(() => {
     if (savings.isError) {
@@ -34,6 +34,12 @@ export const OverallProgress = () => {
   }
   const data = savings.data;
   if (!data) return null;
+
+  const currentSavings = Number(data.currentSavings ?? 0).toFixed(2);
+  const goalSavings = Number(data.goalSavings ?? 0).toFixed(2);
+  const percentageSaving = Number(data.percentageSaving ?? 0).toFixed(2);
+  const remainingSaving = Number(data.remainingSaving ?? 0).toFixed(2);
+
   return (
     <article className="rounded-[20px] dark:bg-[#2C3546] border border-gray-300 dark:border-none p-7 mb-7">
       <header className="flex gap-2">
@@ -41,12 +47,12 @@ export const OverallProgress = () => {
         <h2 className="font-medium">Overall Progress</h2>
       </header>
       <section className="flex justify-between py-7">
-        <p className="font-semibold text-3xl">${data.currentSavings ?? 0}</p>
-        <p className="text-xl text-gray-400">of ${data.goalSavings ?? 0}</p>
+        <p className="font-semibold text-3xl">${currentSavings}</p>
+        <p className="text-xl text-gray-400">of ${goalSavings}</p>
       </section>
       <section className="flex justify-between pt-3 text-gray-400">
-        <p>{data.percentageSaving ?? 0}% complete</p>
-        <p>${data.remainingSaving ?? 0} to go</p>
+        <p>{percentageSaving}% complete</p>
+        <p>${remainingSaving} to go</p>
       </section>
     </article>
   );
