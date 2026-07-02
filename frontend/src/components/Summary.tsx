@@ -6,7 +6,7 @@ import {
 } from "lucide-react";
 import { type FC, type ReactElement } from "react";
 import { toast } from "sonner";
-import { useExpense } from "../hook/userExpense.hook";
+import { useExpense } from "@/hook/userExpense.hook";
 
 export const Summary: FC = (): ReactElement => {
   const { expenseSummaryQuery } = useExpense();
