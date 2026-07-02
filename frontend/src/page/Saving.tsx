@@ -1,9 +1,9 @@
-import { AddSaving } from "@/components/savingComponents/AddSaving";
-import { BadgesAndRewards } from "@/components/savingComponents/BadgesAndRewards";
-import { Goals } from "@/components/savingComponents/Goals";
-import { OverallProgress } from "@/components/savingComponents/OverallProgress";
-import { SavingTitle } from "@/components/savingComponents/SavingTitle";
-import { SmartSavingsTips } from "@/components/savingComponents/SmartSavingTip";
+import { AddSaving } from "@/components/saving/AddSaving";
+import { BadgesAndRewards } from "@/components/saving/BadgesAndRewards";
+import { Goals } from "@/components/saving/Goals";
+import { OverallProgress } from "@/components/saving/OverallProgress";
+import { SavingTitle } from "@/components/saving/SavingTitle";
+import { SmartSavingsTips } from "@/components/saving/SmartSavingTip";
 import { useState, type FC, type ReactElement } from "react";
 
 interface savingProp {
