@@ -2,12 +2,9 @@ import type { Request, Response } from "express";
 import { StatusCodes } from "http-status-codes";
 import { ZodError } from "zod";
 import { NotFoundError } from "../error/saving.error.js";
-import {
-  createSaving,
-  getAmount,
-  getGoals,
-  getSavingProgress,
-} from "../saving.service.js";
+import { createSaving, getSavingProgress } from "../service/saving.service.js";
+
+import { getAmount, getGoals } from "../service/goal.service.js";
 import type { ISaving } from "../validations/saving.validation.js";
 
 // Add savings
