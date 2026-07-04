@@ -1,3 +1,5 @@
+import { useExpense } from "@/hook/userExpense.hook";
+import type { ExpenseFormDataWithId } from "@/types/expenseSchema.type";
 import {
   Car,
   Coffee,
@@ -12,8 +14,6 @@ import {
 } from "lucide-react";
 import type { FC, ReactElement } from "react";
 import { toast } from "sonner";
-import { useExpense } from "@/hook/userExpense.hook";
-import type { IdparticalEInterface } from "../interface/expense.interface";
 
 const Category: Record<string, { icon: LucideIcon; bg: string }> = {
   Food: { icon: Utensils, bg: "#2ECC71" },
@@ -59,7 +59,7 @@ export const RecentExpense: FC = (): ReactElement => {
 
         {/* <ul> is the semantic tag for lists of items */}
         <ul className="space-y-2.5 px-3 pb-5">
-          {expense?.map((expense: IdparticalEInterface) => {
+          {expense?.map((expense:ExpenseFormDataWithId) => {
             const categoryInfo = Category[expense.category] || {
               icon: ShoppingBag,
               bg: "#6B7280",
