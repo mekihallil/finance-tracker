@@ -93,8 +93,8 @@ export const RecentExpense: FC = (): ReactElement => {
                           {expense.category}
                         </span>
                         <span className="font-semibold ml-3 text-center text-[14px] rounded-full text-gray-500">
-                          {expense.createAt &&
-                            new Date(expense.createAt).toLocaleDateString(
+                          {expense.createdAt &&
+                            new Date(expense.createdAt).toLocaleDateString(
                               "en-US",
                               {
                                 year: "numeric",

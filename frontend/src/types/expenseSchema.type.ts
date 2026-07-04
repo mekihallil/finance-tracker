@@ -13,7 +13,7 @@ export const expenseSchema = z.object({
 
 export const expenseSchemaWithIdAndDate = expenseSchema.extend({
   _id: z.string(),
-  createAt: z.coerce.date(),
+  createdAt: z.coerce.date(),
 });
 
 export type ExpenseFormDataWithId = z.infer<typeof expenseSchemaWithIdAndDate>;
