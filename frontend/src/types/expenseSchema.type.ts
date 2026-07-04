@@ -16,5 +16,5 @@ export const expenseSchemaWithIdAndDate = expenseSchema.extend({
   createAt: z.coerce.date(),
 });
 
-export type ExpenseFormData = z.infer<typeof expenseSchema>;
 export type ExpenseFormDataWithId = z.infer<typeof expenseSchemaWithIdAndDate>;
+export type ExpenseFormData = z.infer<typeof expenseSchema>;
