@@ -1,9 +1,9 @@
 import { timeAgo } from "@/context/data";
+import { useExpense } from "@/hook/userExpense.hook";
+import type { ExpenseFormDataWithId } from "@/types/expenseSchema.type";
 import { DollarSign, TrendingDown, TrendingUp, X } from "lucide-react";
 import type { FC, ReactElement } from "react";
 import { toast } from "sonner";
-import { useExpense } from "@/hook/userExpense.hook";
-import type { IdparticalEInterface } from "@/interface/expense.interface";
 
 export const GetExpenses: FC = (): ReactElement => {
   const { getExpensesQuery, deleteExpenseMutation } = useExpense();
@@ -44,7 +44,7 @@ export const GetExpenses: FC = (): ReactElement => {
 
         {/* <ul> is the semantic tag for lists of items */}
         <ul className="space-y-1.5">
-          {data?.map((expense: IdparticalEInterface) => (
+          {data?.map((expense: ExpenseFormDataWithId) => (
             /* <li> represents a single list item */
             <li
               key={expense._id}
@@ -77,7 +77,7 @@ export const GetExpenses: FC = (): ReactElement => {
                         {expense.category}
                       </span>
                       <span className="font-semibold ml-3 text-center text-[13px] rounded-full text-gray-500">
-                        {expense.createAt && timeAgo(expense.createAt)}
+                        {expense.createdAt && timeAgo(expense.createdAt)}
                       </span>
                     </section>
                   </section>
