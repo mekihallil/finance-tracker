@@ -1,6 +1,5 @@
 import { timeAgo } from "@/context/data";
 import { useExpense } from "@/hook/userExpense.hook";
-import type { ExpenseFormDataWithId } from "@/types/expenseSchema.type";
 import { DollarSign, TrendingDown, TrendingUp, X } from "lucide-react";
 import type { FC, ReactElement } from "react";
 import { toast } from "sonner";
@@ -31,7 +30,7 @@ export const GetExpenses: FC = (): ReactElement => {
 
   return (
     <article className="">
-      <section className="w-full rounded-3xl shadow-2xl dark:bg-[#182029] my-8 mr-30 p-10 max-lg:mx-auto ">
+      <section className="w-full rounded-3xl shadow-2xl dark:bg-[#182029] my-8 mr-28 p-10 max-lg:mx-auto ">
         <h2 className="flex items-center text-gray-800 pb-8 dark:text-white">
           <div className="mr-5 ">
             <DollarSign />
@@ -44,7 +43,7 @@ export const GetExpenses: FC = (): ReactElement => {
 
         {/* <ul> is the semantic tag for lists of items */}
         <ul className="space-y-1.5">
-          {data?.map((expense: ExpenseFormDataWithId) => (
+          {data?.map((expense) => (
             /* <li> represents a single list item */
             <li
               key={expense._id}
@@ -73,7 +72,7 @@ export const GetExpenses: FC = (): ReactElement => {
                     </h3>
                     {/* Category and Time ago */}
                     <section>
-                      <span className="font-medium mt-1 px-1.5 text-[14px] rounded-full bg-[#F0F3F4] dark:bg-[#4B5567]  bg-">
+                      <span className="font-medium mt-1 px-1.5 text-[14px] rounded-full bg-[#F0F3F4] dark:bg-[#4B5567]">
                         {expense.category}
                       </span>
                       <span className="font-semibold ml-3 text-center text-[13px] rounded-full text-gray-500">
@@ -99,29 +98,32 @@ export const GetExpenses: FC = (): ReactElement => {
                   </div>
                   <div>
                     {/* Delete Expense  */}
-                    <del className="">
-                      <button
-                        className="p-2 text-gray-400 hover:text-red-500 transition-colors"
-                        onClick={() => {
-                          toast.warning("Are you sure?", {
-                            description: `${expense.category}/${expense.amount.toLocaleString()}ETB expense will be permanently deleted.`,
-                            action: {
-                              label: "Delete",
-                              onClick: () => {
-                                deleteExpenseMutation.mutate(expense._id);
-                              },
+
+                    <button
+                      className="p-2 text-gray-400 hover:text-red-500 transition-colors"
+                      onClick={() => {
+                        toast.warning("Are you sure?", {
+                          description: `${expense.category}/$${expense.amount.toLocaleString()}expense will be permanently deleted.`,
+                          action: {
+                            label: "Delete",
+                            onClick: () => {
+                              deleteExpenseMutation.mutate(expense._id, {
+                                onError: () => {
+                                  toast.error("Failed to delete exxpense");
+                                },
+                              });
                             },
-                            cancel: {
-                              label: "Cancel",
-                              onClick: () => console.log("Cancel"),
-                            },
-                            duration: 10000,
-                          });
-                        }}
-                      >
-                        <X size={18} />
-                      </button>
-                    </del>
+                          },
+                          cancel: {
+                            label: "Cancel",
+                            onClick: () => console.log("Cancel"),
+                          },
+                          duration: 10000,
+                        });
+                      }}
+                    >
+                      <X size={18} />
+                    </button>
                   </div>
                 </div>
               </div>
