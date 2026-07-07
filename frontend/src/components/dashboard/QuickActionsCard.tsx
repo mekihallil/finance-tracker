@@ -9,14 +9,14 @@ import {
 import type { FC, ReactElement } from "react";
 import { Link } from "react-router";
 
-interface actionItem {
+interface ActionItem {
   label: string;
   icon: LucideIcon;
   href: string;
   bgColor: string;
 }
 
-const actionList: actionItem[] = [
+const actionList: ActionItem[] = [
   {
     label: "Add Expenses",
     icon: Plus,
@@ -45,38 +45,35 @@ const actionList: actionItem[] = [
 
 export const QuickAction: FC = (): ReactElement => {
   return (
-    <>
-      <section>
-        <header>
-          <section className="my-8.75 px-11 border border-gray-200 rounded-3xl shadow-2xl  dark:bg-[#182029] dark:border-[#182029] ">
-            <section className="flex items-center pt-4 ">
-              <Sparkles size={15} />
-              <h1 className=" pl-4">
-                <p className="text-[#29B866] font-bold">Quick Actions</p>
-                <p className="text-[#84A3B8]">
-                  Manage your finances efficiently
-                </p>
-              </h1>
-            </section>
-            {/* quick cardes */}
-            <nav className="grid grid-cols-4 gap-4 mt-8 mb-6">
-              {actionList.map((action) => {
-                const Icon = action.icon;
-                return (
-                  <Link
-                    to={action.href}
-                    className="grid gap-3 rounded-2xl text-center p-5"
-                    style={{ backgroundColor: action.bgColor }}
-                  >
-                    <Icon size={15} className="m-auto" />
-                    <p className="pl-2">{action.label}</p>
-                  </Link>
-                );
-              })}
-            </nav>
+    <section>
+      <header>
+        <section className="my-8.75 px-11 border border-gray-200 rounded-3xl shadow-2xl  dark:bg-[#182029] dark:border-[#182029] ">
+          <section className="flex items-center pt-4 ">
+            <Sparkles size={15} />
+            <div className=" pl-4">
+              <p className="text-[#29B866] font-bold">Quick Actions</p>
+              <p className="text-[#84A3B8]">Manage your finances efficiently</p>
+            </div>
           </section>
-        </header>
-      </section>
-    </>
+          {/* quick cardes */}
+          <nav className="grid grid-cols-4 gap-4 mt-8 mb-6">
+            {actionList.map((action) => {
+              const Icon = action.icon;
+              return (
+                <Link
+                  key={action.label}
+                  to={action.href}
+                  className="grid gap-3 rounded-2xl text-center p-5"
+                  style={{ backgroundColor: action.bgColor }}
+                >
+                  <Icon size={20} className="m-auto" />
+                  <p className="pl-2">{action.label}</p>
+                </Link>
+              );
+            })}
+          </nav>
+        </section>
+      </header>
+    </section>
   );
 };
