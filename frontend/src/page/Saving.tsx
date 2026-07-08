@@ -6,11 +6,7 @@ import { SavingTitle } from "@/components/saving/SavingTitle";
 import { SmartSavingsTips } from "@/components/saving/SmartSavingTip";
 import { useState, type FC, type ReactElement } from "react";
 
-interface savingProp {
-  OnClick: () => void;
-}
-
-export const Saving: FC<savingProp> = (): ReactElement => {
+export const Saving: FC = (): ReactElement => {
   const [open, setOpen] = useState(false);
   return (
     <>
