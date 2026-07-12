@@ -5,15 +5,15 @@ import { toast } from "sonner";
 
 export const OverallProgress = () => {
   const { savingQuery } = useSaving();
-  const savings = savingQuery;
+  const {data, isLoading,isError,error} = savingQuery;
 
   useEffect(() => {
-    if (savings.isError) {
-      toast.error(savings.error.message);
+    if (isError) {
+      toast.error(error.message);
     }
-  }, [savings.isError, savings.error]);
+  }, [isError,error]);
 
-  if (savings.isLoading) {
+  if (isLoading) {
     return (
       <div className="flex justify-center p-10">
         <span className="animate-pulse text-gray-400 font-medium">
@@ -23,17 +23,15 @@ export const OverallProgress = () => {
     );
   }
 
-  if (savings.isError) {
+  if (isError) {
     return (
       <div role="alert" className="p-4 bg-red-50 rounded-lg">
         <span className="text-red-500 font-bold">
-          Error: {savings.error.message}
+          Error: {error.message}
         </span>
       </div>
     );
   }
-  const data = savings.data;
-  if (!data) return null;
 
   const currentSavings = Number(data.currentSavings ?? 0).toFixed(2);
   const goalSavings = Number(data.goalSavings ?? 0).toFixed(2);
