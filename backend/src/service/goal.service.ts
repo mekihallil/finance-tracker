@@ -1,10 +1,10 @@
-import { NotFoundError } from "../error/saving.error.js";
 import { Saving } from "../models/saving.models.js";
 
 // goals
 export const getGoals = async () => {
   const goals = await Saving.find();
-  if (!goals.length) throw new NotFoundError("No goals found");
+
+  if (!goals.length) return [];
 
   return goals.map((g) => ({
     ...g.toObject(),
