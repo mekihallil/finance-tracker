@@ -10,7 +10,15 @@ export const createSaving = async (body: unknown) => {
 export const getSavingProgress = async () => {
   const savings = await Saving.find();
 
-  if (!savings.length) throw new NotFoundError("No Savings found");
+  if (!savings.length) {
+    return {
+      goalSavings: 0,
+      currentSavings: 0,
+      remainingSaving: 0,
+      percentageSaving: 0,
+      isComplete: false,
+    };
+  }
 
   const goalSavings = savings
     .filter((s) => s.goal)
