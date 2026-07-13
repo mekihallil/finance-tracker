@@ -5,13 +5,13 @@ import { toast } from "sonner";
 
 export const OverallProgress = () => {
   const { savingQuery } = useSaving();
-  const {data, isLoading,isError,error} = savingQuery;
+  const { data, isLoading, isError, error } = savingQuery;
 
   useEffect(() => {
     if (isError) {
       toast.error(error.message);
     }
-  }, [isError,error]);
+  }, [isError, error]);
 
   if (isLoading) {
     return (
@@ -27,8 +27,7 @@ export const OverallProgress = () => {
     return (
       <div role="alert" className="p-4 bg-red-50 rounded-lg">
         <span className="text-red-500 font-bold">
-          Error: {error.message}
-        </span>
+          Error: {error.message}</span>
       </div>
     );
   }
