@@ -9,13 +9,12 @@ export const savingSchema = z.object({
   amount: z.number().min(0, "Amount cannot be negative"),
   goal: z
     .number({ error: "Please enter a valid number" })
-    .positive("Amount must be a positive number"),
+    .min(0, "Amount cannot be negative"),
   date: z.date(),
   createdAt: z.date().optional(),
 });
-export const addMoneySchema = savingSchema.extend({
+export const addMoneySchema = z.object({
   amount: z.number().positive("Amount must be greater than 0"),
 });
-
-export type AddMoneyFormData = z.infer<typeof addMoneySchema>;
+export type AddMoneyFormData = z.input<typeof addMoneySchema>;
 export type SavingFormData = z.infer<typeof savingSchema>;
