@@ -18,6 +18,9 @@ export const AddSaving: FC<AddSavinglProps> = ({ isOpen }): ReactElement => {
     formState: { errors },
   } = useForm<SavingFormData>({
     resolver: zodResolver(savingSchema),
+    defaultValues: {
+      amount: 0,
+    },
   });
 
   const onSubmit = (data: SavingFormData) => {
