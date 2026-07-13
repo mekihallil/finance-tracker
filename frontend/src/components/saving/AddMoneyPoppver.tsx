@@ -7,13 +7,15 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { useSaving } from "@/hook/userSaving.hook";
-import { savingSchema, type SavingFormData } from "@/types/savingSchema.tyes";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { DollarSign, Loader2 } from "lucide-react";
 import type { FC, ReactElement } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
-
+import {
+  addMoneySchema,
+  type AddMoneyFormData,
+} from "@/types/savingSchema.tyes";
 import { useEffect, useState } from "react";
 
 type AddMoneyPopoverProps = {
@@ -32,8 +34,8 @@ export const AddMoneyPopover: FC<AddMoneyPopoverProps> = ({
     reset,
     handleSubmit,
     formState: { errors },
-  } = useForm<SavingFormData>({
-    resolver: zodResolver(savingSchema),
+  } = useForm<AddMoneyFormData>({
+    resolver: zodResolver(addMoneySchema),
   });
 
   useEffect(() => {
@@ -42,7 +44,7 @@ export const AddMoneyPopover: FC<AddMoneyPopoverProps> = ({
     }
   }, [errors.amount?.message]);
 
-  const onSubmit = ({ amount }: SavingFormData) => {
+  const onSubmit = ({ amount }: AddMoneyFormData) => {
     AddMoney.mutate(
       { id: savingId, amount },
       {
