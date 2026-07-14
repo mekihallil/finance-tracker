@@ -26,16 +26,21 @@ export const OverallProgress = () => {
   if (isError) {
     return (
       <div role="alert" className="p-4 bg-red-50 rounded-lg">
-        <span className="text-red-500 font-bold">
-          Error: {error.message}</span>
+        <span className="text-red-500 font-bold">Error: {error.message}</span>
       </div>
     );
   }
 
-  const currentSavings = Number(data.currentSavings ?? 0).toFixed(2);
-  const goalSavings = Number(data.goalSavings ?? 0).toFixed(2);
-  const percentageSaving = Number(data.percentageSaving ?? 0).toFixed(2);
-  const remainingSaving = Number(data.remainingSaving ?? 0).toFixed(2);
+  const formatMoney = (value: number) =>
+    value.toLocaleString("en-US", {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    });
+
+  const currentSavings = formatMoney(Number(data.currentSavings ?? 0));
+  const goalSavings = formatMoney(Number(data.goalSavings ?? 0));
+  const percentageSaving = formatMoney(Number(data.percentageSaving ?? 0));
+  const remainingSaving = formatMoney(Number(data.remainingSaving ?? 0));
 
   return (
     <article className="rounded-[20px] dark:bg-[#2C3546] border border-gray-300 dark:border-none p-7 mb-7">
