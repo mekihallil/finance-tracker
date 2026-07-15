@@ -38,47 +38,46 @@ export const Goals: FC = (): ReactElement | null => {
 
   return (
     <article className="grid grid-cols-2 gap-5 ">
-      {data.map((item) => {
-        const percentage = item.percentage ?? 0;
-        return (
-          <section
-            key={item._id}
-            className="rounded-[20px] border border-gray-300 dark:bg-[#2C3546] dark:border-none p-7 "
-          >
-            <header className="flex justify-between gap-2">
-              <h2 className="font-medium text-xl capitalize">{item.name}</h2>
-              <h2 className="font-semibold text-[12px] capitalize bg-gray-400/25 rounded-2xl py-1 px-2">
-                {item.category}
-              </h2>
-            </header>
-            <section className="flex justify-between py-7">
-              <h1 className="font-semibold text-2xl">${item.amount}</h1>
-              <h1 className="text-sm text-gray-400">of ${item.goal}</h1>
-            </section>
-            <div className="h-2 w-full rounded-full bg-gray-200 dark:bg-gray-700 overflow-hidden">
-              <div
-                className="h-full bg-emerald-500 rounded-r-full transition-all"
-                style={{ width: `${Math.min(percentage, 100)}%` }}
-              />
-            </div>
-            <section className="flex justify-between pt-3 text-gray-400">
-              <h1>{item.percentage ?? 0}% complete</h1>
-              <div className="flex gap-2">
-                <Calendar size={15} className="my-auto" />
-                <h1>0 days left</h1>
-              </div>
-            </section>
-            <section className="flex justify-center">
-              <div className="flex justify-center">
-                <AddMoneyPopover
-                  savingId={item._id}
-                  isComplete={item.isComplete}
+      {data.map(
+        ({ _id, name, category, amount, goal, percentage, isComplete }) => {
+          const Percentage = percentage ?? 0;
+          return (
+            <section
+              key={_id}
+              className="rounded-[20px] border border-gray-300 dark:bg-[#2C3546] dark:border-none p-7 "
+            >
+              <header className="flex justify-between gap-2">
+                <h2 className="font-medium text-xl capitalize">{name}</h2>
+                <h2 className="font-semibold text-[12px] capitalize bg-gray-400/25 rounded-2xl py-1 px-2">
+                  {category}
+                </h2>
+              </header>
+              <section className="flex justify-between py-7">
+                <h1 className="font-semibold text-2xl">${amount}</h1>
+                <h1 className="text-sm text-gray-400">of ${goal}</h1>
+              </section>
+              <div className="h-2 w-full rounded-full bg-gray-200 dark:bg-gray-700 overflow-hidden">
+                <div
+                  className="h-full bg-emerald-500 rounded-r-full transition-all"
+                  style={{ width: `${Math.min(Percentage, 100)}%` }}
                 />
               </div>
+              <section className="flex justify-between pt-3 text-gray-400">
+                <h1>{Percentage ?? 0}% complete</h1>
+                <div className="flex gap-2">
+                  <Calendar size={15} className="my-auto" />
+                  <h1>0 days left</h1>
+                </div>
+              </section>
+              <section className="flex justify-center">
+                <div className="flex justify-center">
+                  <AddMoneyPopover savingId={_id} isComplete={isComplete} />
+                </div>
+              </section>
             </section>
-          </section>
-        );
-      })}
+          );
+        },
+      )}
     </article>
   );
 };
