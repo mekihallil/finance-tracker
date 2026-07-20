@@ -9,7 +9,6 @@ interface StatCard {
   subLabel: string;
 }
 
-
 const STAT_CARDS: StatCard[] = [
   {
     id: "total-spent",
@@ -75,7 +74,7 @@ const StatCardItem: FC<StatCardItemProps> = ({ card }): ReactElement => {
   );
 };
 
-export const TotalInfo: FC = (): ReactElement => {
+export const AccountSummary: FC = (): ReactElement => {
   return (
     <section className="flex gap-8 mb-8.75">
       {STAT_CARDS.map((card) => (

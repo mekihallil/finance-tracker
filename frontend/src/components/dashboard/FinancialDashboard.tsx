@@ -1,7 +1,7 @@
 import { Plus, Sparkles } from "lucide-react";
 import { Link } from "react-router";
 
-export const FinancialDashbord = () => {
+export const FinancialDashbaord = () => {
   return (
     <>
       <article>

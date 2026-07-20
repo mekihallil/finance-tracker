@@ -43,7 +43,7 @@ const actionList: ActionItem[] = [
   },
 ];
 
-export const QuickAction: FC = (): ReactElement => {
+export const QuickActions: FC = (): ReactElement => {
   return (
     <section>
       <section className="my-8.75 px-11 border border-gray-200 rounded-3xl shadow-2xl  dark:bg-[#182029] dark:border-[#182029] ">

@@ -4,7 +4,7 @@ import { DollarSign, TrendingDown, TrendingUp, X } from "lucide-react";
 import type { FC, ReactElement } from "react";
 import { toast } from "sonner";
 
-export const GetExpenses: FC = (): ReactElement => {
+export const RecentExpenses: FC = (): ReactElement => {
   const { getExpensesQuery, deleteExpenseMutation } = useExpense();
   const { data, isLoading, isError, error } = getExpensesQuery;
 
