@@ -26,7 +26,7 @@ const Category: Record<string, { icon: LucideIcon; bg: string }> = {
   Health: { icon: Heart, bg: "#FB2C36" },
 };
 
-export const RecentExpense: FC = (): ReactElement => {
+export const RecentExpenses: FC = (): ReactElement => {
   const { getExpensesQuery, deleteExpenseMutation } = useExpense();
   const { data, isLoading, isError, error } = getExpensesQuery;
 

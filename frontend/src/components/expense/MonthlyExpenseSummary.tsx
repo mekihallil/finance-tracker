@@ -12,7 +12,7 @@ type MonthData = {
   color: string;
 };
 
-export const ThisMonth: FC = (): ReactElement => {
+export const MonthlyExpenseSummary: FC = (): ReactElement => {
   const { expenseMonthlyQuery } = useExpense();
   const expense = expenseMonthlyQuery;
   const data = expense.data;
