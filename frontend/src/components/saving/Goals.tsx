@@ -36,10 +36,42 @@ export const Goals: FC = (): ReactElement | null => {
   const data = goals.data;
   if (!data || !Array.isArray(data)) return null;
 
+  const leftDays = (diff: number) => {
+    const minute = 1000 * 60;
+    const hour = minute * 60;
+    const day = hour * 24;
+    const month = day * 30;
+    const year = month * 12 + 5;
+
+    const years = Math.floor(diff / year);
+    const months = Math.floor(diff / month);
+    const days = Math.floor(diff / day);
+    const hours = Math.floor(diff / hour);
+    const minutes = Math.floor(diff / minute);
+
+    let label: string;
+    if (years >= 1) label = `${years} year${years > 1 ? "s" : ""} left`;
+    else if (months >= 1)
+      label = `${months} month${months > 1 ? "s" : ""} left`;
+    else if (days >= 1) label = `${days} day${days > 1 ? "s" : ""} left`;
+    else if (hours >= 1) label = `${hours} hour${hours > 1 ? "s" : ""} left`;
+    else label = `${minutes} minute${minutes > 1 ? "s" : ""} left`;
+
+    return label;
+  };
   return (
     <article className="grid grid-cols-2 gap-5 ">
       {data.map(
-        ({ _id, name, category, amount, goal, percentage, isComplete }) => {
+        ({
+          _id,
+          name,
+          category,
+          amount,
+          goal,
+          percentage,
+          isComplete,
+          diff,
+        }) => {
           const Percentage = percentage ?? 0;
           return (
             <section
@@ -66,7 +98,7 @@ export const Goals: FC = (): ReactElement | null => {
                 <h1>{Percentage ?? 0}% complete</h1>
                 <div className="flex gap-2">
                   <Calendar size={15} className="my-auto" />
-                  <h1>0 days left</h1>
+                  <h1>{leftDays(diff)}</h1>
                 </div>
               </section>
               <section className="flex justify-center">
