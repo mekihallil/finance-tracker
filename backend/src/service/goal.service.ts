@@ -10,6 +10,7 @@ export const getGoals = async () => {
     ...g.toObject(),
     percentage: parseFloat(((g.amount / g.goal) * 100).toFixed(1)),
     isComplete: g.amount >= g.goal,
+    diff: new Date(g.date).getTime() - Date.now(),
   }));
 };
 
