@@ -1,43 +1,44 @@
 import { Award, Crown, Medal, Star, Trophy } from "lucide-react";
-import type { FC, ReactElement } from "react";
+import type { ComponentType, FC, ReactElement } from "react";
 
-type Rewards = {
+type BadgeStatus = "earned" | "locked";
+type Reward = {
   id: number;
-  icon: ReactElement;
+  icon: ComponentType<{ size?: number; color?: string }>;
   name: string;
   description: string;
-  status: "Earned" | "";
+  status: BadgeStatus;
 };
-const rewards: Rewards[] = [
+const reward: Reward[] = [
   {
     id: 1,
-    icon: <Medal />,
+    icon: Medal,
     name: "First Saver",
     description: "Saved your first $100",
-    status: "Earned",
+    status: "earned",
   },
   {
     id: 2,
-    icon: <Trophy />,
+    icon: Trophy,
     name: "Consistent Saver",
     description: "Saved for 30 days straight",
-    status: "Earned",
+    status: "earned",
   },
 
   {
     id: 3,
-    icon: <Crown size={24} color="white" />,
+    icon: Crown,
     name: "Goal Crusher",
     description: "Reached your first savings goal",
-    status: "Earned",
+    status: "earned",
   },
 
   {
     id: 4,
-    icon: <Star size={24} color="white" />,
+    icon: Star,
     name: "First Saver",
     description: "Saved your first $100",
-    status: "Earned",
+    status: "earned",
   },
 ];
 
@@ -50,23 +51,29 @@ export const BadgesAndRewards: FC = (): ReactElement => {
           <h2 className="font-medium ">Badges & Rewards</h2>
         </header>
         <section className="grid grid-cols-4 gap-3 justify-center">
-          {rewards.map((item) => {
+          {reward.map((item) => {
             const Icon = item.icon;
             return (
               <div
                 key={item.id}
                 className="grid place-items-center  border-2 rounded-[20px] pt-6.5 pb-4.5 px-auto mt-6"
               >
-                <i
+                <span
                   className={`${item.id === 3 ? "rounded-full flex items-center justify-center w-13 h-13 bg-[#51545B]" : item.id === 4 ? "rounded-full flex items-center justify-center w-13 h-13 bg-[#2B7FFF]" : ""}`}
                 >
-                  {Icon}
-                </i>
+                  <Icon size={30} color="white" />
+                </span>
                 <div className="text-center">
-                  <h3 className="">{item.name}</h3>
-                  <h6 className="text-sm text-gray-400">{item.description}</h6>
+                  <h3>{item.name}</h3>
+                  <p className="text-sm text-gray-400">{item.description}</p>
                 </div>
-                <span className="text-sm mt-2">{item.status}</span>
+                <span className="text-sm mt-2">
+                  {item.status === "earned" ? (
+                    <span className="text-green-400">Earned</span>
+                  ) : (
+                    <span className="text-gray-400">Locked</span>
+                  )}
+                </span>
               </div>
             );
           })}
