@@ -160,22 +160,22 @@ export const AddExpense: FC = (): ReactElement => {
                 </label>
 
                 <div className="grid grid-cols-2 gap-2">
-                  {categoryData.map((c) => {
+                  {categoryData.map(({id,icons,categoryName,}) => {
                     return (
                       <label
-                        key={c.id}
+                        key={id}
                         className=" p-3 rounded-xl  cursor-pointer has-checked:bg-white dark:bg-[#131c2a] bg-[#c1c1c1] hover:rounded-3xl dark:has-checked:bg-transparent  transition-all"
                       >
                         <input
                           {...register("category")}
                           type="radio"
-                          value={c.categoryName}
+                          value={categoryName}
                           className="sr-only"
                         />
                         <div className="flex flex-col justify-center text-center">
-                          <i className="mx-auto">{c.icons}</i>
+                          <i className="mx-auto">{icons}</i>
                           <span className="font-semibold text-[13px] text-gray-600 dark:text-white">
-                            {c.categoryName}
+                            {categoryName}
                           </span>
                         </div>
                       </label>
