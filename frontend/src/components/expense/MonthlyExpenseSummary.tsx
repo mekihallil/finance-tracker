@@ -66,20 +66,20 @@ export const MonthlyExpenseSummary: FC = (): ReactElement => {
     <>
       <section className="mt-8">
         <div className="grid grid-cols-3 gap-8 ">
-          {monthData.map((item) => {
-            const Icon = item.icon;
+          {monthData.map(({id,icon,title,amount}) => {
+            const Icon = icon;
             return (
               <article
-                key={item.id}
+                key={id}
                 className="flex items-center shadow-2xl rounded-2xl dark:bg-[#2C3546] p-6 "
               >
                 <div className="pr-3">{Icon}</div>
                 <div>
-                  <p className=" text-[#64748B] font-medium">{item.title}</p>
+                  <p className=" text-[#64748B] font-medium">{title}</p>
                   <h1 className="text-2xl font-bold">
-                    {item.id === 2
-                      ? item.amount.toLocaleString()
-                      : "$" + item.amount.toLocaleString()}
+                    {id === 2
+                      ? amount.toLocaleString()
+                      : "$" + amount.toLocaleString()}
                   </h1>
                 </div>
               </article>
