@@ -56,17 +56,17 @@ export const QuickActions: FC = (): ReactElement => {
         </section>
         {/* quick cardes */}
         <nav className="grid grid-cols-4 gap-4 mt-8 mb-6">
-          {actionList.map((action) => {
-            const Icon = action.icon;
+          {actionList.map(({ icon, label, href, bgColor }) => {
+            const Icon = icon;
             return (
               <Link
-                key={action.label}
-                to={action.href}
+                key={label}
+                to={href}
                 className="grid gap-3 rounded-2xl text-center p-5"
-                style={{ backgroundColor: action.bgColor }}
+                style={{ backgroundColor: bgColor }}
               >
                 <Icon size={20} className="m-auto" />
-                <p className="pl-2">{action.label}</p>
+                <p className="pl-2">{label}</p>
               </Link>
             );
           })}
