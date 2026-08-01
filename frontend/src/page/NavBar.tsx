@@ -74,18 +74,18 @@ export const NavBar: FC = (): ReactElement => {
             <hr className="dark:text-gray-700 text-[#e3e2e2]" />
           </header>
           <section className="mt-8 mx-4.5">
-            {navData.map((item) => {
+            {navData.map(({ title, url, icon }) => {
               return (
                 <Link
-                  key={item.title}
-                  to={item.url}
-                  className={`flex justify-between items-center h-12 w-63.75 my-4 pl-4 cursor-pointer ${path == item.url ? "border rounded-2xl  bg-[#29B866]" : ""} `}
+                  key={title}
+                  to={url}
+                  className={`flex justify-between items-center h-12 w-63.75 my-4 pl-4 cursor-pointer ${path == url ? "border rounded-2xl  bg-[#29B866]" : ""} `}
                 >
                   <div className="flex ">
-                    <div className="flex items-center px-3">{item.icon}</div>
-                    <p>{item.title}</p>
+                    <div className="flex items-center px-3">{icon}</div>
+                    <p>{title}</p>
                   </div>
-                  {path == item.url && <Dot size={40} />}
+                  {path == url && <Dot size={40} />}
                 </Link>
               );
             })}
