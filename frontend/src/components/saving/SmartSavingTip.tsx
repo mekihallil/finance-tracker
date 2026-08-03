@@ -34,7 +34,6 @@ const tips: Tips[] = [
 
 export const SmartSavingsTips: FC = (): ReactElement => {
   return (
-    <>
       <article className="rounded-[20px] dark:bg-[#2C3546] border border-gray-300 dark:border-none p-7 mb-7 mt-7">
         <header className="flex gap-2">
           <TrendingUp />
@@ -54,6 +53,5 @@ export const SmartSavingsTips: FC = (): ReactElement => {
           })}
         </section>
       </article>
-    </>
   );
 };

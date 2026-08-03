@@ -1,15 +1,14 @@
 import { Plus } from "lucide-react";
 import { type FC, type ReactElement } from "react";
 
-interface savingTitleProp {
+interface savingTitleProps {
   onClick: () => void;
 }
-export const SavingTitle: FC<savingTitleProp> = ({ onClick }): ReactElement => {
+export const SavingTitle: FC<savingTitleProps> = ({ onClick }): ReactElement => {
   return (
-    <>
-      <article className="flex items-center justify-between">
+      <header className="flex items-center justify-between">
         <div className="py-6">
-          <p className="text-[26px] font-semibold">Savings Progress</p>
+          <h1 className="text-[26px] font-semibold">Savings Progress</h1>
           <p className="text-[18px] text-[#64748B]">
             Track your savings goals and earn rewards
           </p>
@@ -18,7 +17,6 @@ export const SavingTitle: FC<savingTitleProp> = ({ onClick }): ReactElement => {
           <Plus size={18} className="my-auto" aria-hidden="true" />
           <span>Add Goal</span>
         </button>
-      </article>
-    </>
+      </header>
   );
 };
