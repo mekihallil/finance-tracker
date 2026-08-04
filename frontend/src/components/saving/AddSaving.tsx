@@ -8,8 +8,12 @@ import { toast } from "sonner";
 
 interface AddSavinglProps {
   isOpen: boolean;
+  onClick: () => void;
 }
-export const AddSaving: FC<AddSavinglProps> = ({ isOpen }): ReactElement => {
+export const AddSaving: FC<AddSavinglProps> = ({
+  isOpen,
+  onClick,
+}): ReactElement => {
   const { createSavingMutation } = useSaving();
   const {
     register,
@@ -126,7 +130,9 @@ export const AddSaving: FC<AddSavinglProps> = ({ isOpen }): ReactElement => {
                 </div>
               )}
             </button>
-            <button className="border rounded-2xl px-3 py-1">Cancel</button>
+            <button className="border rounded-2xl px-3 py-1" onClick={onClick}>
+              Cancel
+            </button>
           </section>
         </form>
       </section>

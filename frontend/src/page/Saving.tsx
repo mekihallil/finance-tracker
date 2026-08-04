@@ -14,7 +14,7 @@ export const Saving: FC = (): ReactElement => {
         <div className="ml-80 mr-10">
           <SavingTitle onClick={() => setOpen(!open)} />
           <OverallProgress />
-          <AddSaving isOpen={open} />
+          <AddSaving isOpen={open} onClick={() => setOpen(!open)} />
           <Goals />
           <BadgesAndRewards />
           <SmartSavingsTips />
