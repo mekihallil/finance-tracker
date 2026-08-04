@@ -1,5 +1,5 @@
 import { BalanceUtils } from "@/components/split-bill/BalanceUtils";
-import { SplitTitle } from "@/components/split-bill/SavingTitle";
+import { SplitTitle } from "@/components/split-bill/SplitTitle";
 import { type FC, type ReactElement } from "react";
 
 export const SplitBill: FC = (): ReactElement => {
