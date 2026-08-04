@@ -15,7 +15,7 @@ export const SplitTitle: FC = (): ReactElement => {
         className="flex gap-3 border rounded-2xl px-4 py-2 hover:-translate-y-1 "
       >
         <Plus size={18} className="my-auto" aria-hidden="true" />
-        <span>New Split</span>
+        <button>New Split</button>
       </button>
     </article>
   );
