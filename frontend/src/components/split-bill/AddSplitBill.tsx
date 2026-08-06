@@ -1,7 +1,13 @@
 import { Plus } from "lucide-react";
 import { type FC, type ReactElement } from "react";
+interface addSplitBillProps {
+  isOpen: boolean;
+}
 
-export const AddSplitBill: FC = (): ReactElement => {
+export const AddSplitBill: FC<addSplitBillProps> = ({
+  isOpen,
+}): ReactElement => {
+  if (!isOpen) return <></>;
   return (
     <article className="bg-[#2C3546] rounded-3xl p-7 mt-8">
       <h1 className="mb-8">Create New Split</h1>
@@ -46,7 +52,10 @@ export const AddSplitBill: FC = (): ReactElement => {
               placeholder="Email"
             />
 
-            <button className="grid place-content-center border rounded-xl bg-[#283243] mx-2"> <Plus size={20}/> </button>
+            <button className="grid place-content-center border rounded-xl bg-[#283243] mx-2">
+              {" "}
+              <Plus size={20} />{" "}
+            </button>
           </div>
         </div>
       </div>
