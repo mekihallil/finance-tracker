@@ -10,7 +10,7 @@ export const SplitBill: FC = (): ReactElement => {
       <div className="ml-80 mr-10">
         <SplitTitle onClick={()=> setOpen(!open)} />
         <BalanceUtils />
-        <AddSplitBill isOpen={open} />
+        <AddSplitBill isOpen={open} onClick={()=> setOpen(!open)}/>
       </div>
     </section>
   );

@@ -2,10 +2,12 @@ import { Plus } from "lucide-react";
 import { type FC, type ReactElement } from "react";
 interface addSplitBillProps {
   isOpen: boolean;
+  onClick: () => void;
 }
 
 export const AddSplitBill: FC<addSplitBillProps> = ({
   isOpen,
+  onClick,
 }): ReactElement => {
   if (!isOpen) return <></>;
   return (
@@ -53,15 +55,16 @@ export const AddSplitBill: FC<addSplitBillProps> = ({
             />
 
             <button className="grid place-content-center border rounded-xl bg-[#283243] mx-2">
-              {" "}
-              <Plus size={20} />{" "}
+              <Plus size={20} />
             </button>
           </div>
         </div>
       </div>
       <div className="flex gap-6 ml-5 mt-5">
         <button>Create Split</button>
-        <button className="border py-1 px-4 rounded-xl">Cancel</button>
+        <button className="border py-1 px-4 rounded-xl" onClick={onClick}>
+          Cancel
+        </button>
       </div>
     </article>
   );
