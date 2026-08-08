@@ -2,12 +2,12 @@ import { Plus } from "lucide-react";
 import { type FC, type ReactElement } from "react";
 interface addSplitBillProps {
   isOpen: boolean;
-  onClick: () => void;
+  onClose: () => void;
 }
 
 export const AddSplitBill: FC<addSplitBillProps> = ({
   isOpen,
-  onClick,
+  onClose,
 }): ReactElement => {
   if (!isOpen) return <></>;
   return (
@@ -62,7 +62,7 @@ export const AddSplitBill: FC<addSplitBillProps> = ({
       </div>
       <div className="flex gap-6 ml-5 mt-5">
         <button>Create Split</button>
-        <button className="border py-1 px-4 rounded-xl" onClick={onClick}>
+        <button className="border py-1 px-4 rounded-xl" onClick={onClose}>
           Cancel
         </button>
       </div>

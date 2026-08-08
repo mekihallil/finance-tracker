@@ -2,10 +2,10 @@ import { Plus } from "lucide-react";
 import { type FC, type ReactElement } from "react";
 
 interface splitTitleProps {
-  onClick: () => void;
+  onOpen: () => void;
 }
 
-export const SplitTitle: FC<splitTitleProps> = ({ onClick }): ReactElement => {
+export const SplitTitle: FC<splitTitleProps> = ({ onOpen }): ReactElement => {
   return (
     <article className="flex items-center justify-between">
       <div className="py-6">
@@ -16,7 +16,7 @@ export const SplitTitle: FC<splitTitleProps> = ({ onClick }): ReactElement => {
       </div>
       <button
         type="button"
-        onClick={onClick}
+        onClick={onOpen}
         className="flex gap-3 border rounded-2xl px-4 py-2 hover:-translate-y-1 "
       >
         <Plus size={18} className="my-auto" aria-hidden="true" />
