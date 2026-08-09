@@ -15,18 +15,52 @@ export const AddSplitBill: FC<addSplitBillProps> = ({
       <h1 className="mb-8">Create New Split</h1>
       <div className="grid gap-6.5">
         <div className="grid">
-          <label htmlFor="">What's this for?</label>
-          <div className="grid grid-cols-2 gap-3">
-            <input
-              className="bg-[#283243] p-2 rounded-2xl border border-[#202B3D]"
-              type="text"
-              placeholder="e.g., Dinner at Pizza Place"
-            />
-            <input
-              className="bg-[#283243] p-2 rounded-2xl border border-[#202B3D]"
-              type="number"
-              placeholder="0.00"
-            />
+          <div className="grid grid-cols-3 gap-3">
+            <div className="grid ">
+              <label htmlFor="" className="p-1">
+                What's this for?
+              </label>
+              <input
+                className="bg-[#283243] p-2 rounded-2xl border border-[#202B3D]"
+                type="text"
+                placeholder="e.g., Dinner at Pizza Place"
+              />
+            </div>
+            <div className="grid">
+              <label htmlFor="" className="p-1">
+                Amount
+              </label>
+              <input
+                className="bg-[#283243] p-2 rounded-2xl border border-[#202B3D]"
+                type="number"
+                placeholder="0.00"
+              />
+            </div>
+            <div className="grid">
+              <label htmlFor="" className="p-1">
+                Category
+              </label>
+              <select
+                name="category"
+                className="rounded-2xl border border-[#202B3D] p-2"
+              >
+                <option value="Taxi" className="bg-[#283243] p-2">
+                  Taxi
+                </option>
+                <option value="Food" className="bg-[#283243] p-2">
+                  Food
+                </option>
+                <option value="Travel" className="bg-[#283243] p-2">
+                  Travel
+                </option>
+                <option value="Rent" className="bg-[#283243] p-2">
+                  Rent
+                </option>
+                <option value="Other" className="bg-[#283243] p-2">
+                  Other
+                </option>
+              </select>
+            </div>
           </div>
         </div>
         <div>
