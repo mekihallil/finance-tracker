@@ -5,6 +5,38 @@ interface addSplitBillProps {
   onClose: () => void;
 }
 
+type Category = {
+  id: number;
+  category: string;
+};
+
+const CategoryData: Category[] = [
+  {
+    id: 1,
+    category: "Food",
+  },
+  {
+    id: 2,
+    category: "Rent",
+  },
+  {
+    id: 3,
+    category: "Taxi",
+  },
+  {
+    id: 4,
+    category: "Travel",
+  },
+  {
+    id: 5,
+    category: "Utilities",
+  },
+  {
+    id: 6,
+    category: "Other",
+  },
+];
+
 export const AddSplitBill: FC<addSplitBillProps> = ({
   isOpen,
   onClose,
@@ -44,21 +76,13 @@ export const AddSplitBill: FC<addSplitBillProps> = ({
                 name="category"
                 className="rounded-2xl border border-[#202B3D] p-2"
               >
-                <option value="Taxi" className="bg-[#283243] p-2">
-                  Taxi
-                </option>
-                <option value="Food" className="bg-[#283243] p-2">
-                  Food
-                </option>
-                <option value="Travel" className="bg-[#283243] p-2">
-                  Travel
-                </option>
-                <option value="Rent" className="bg-[#283243] p-2">
-                  Rent
-                </option>
-                <option value="Other" className="bg-[#283243] p-2">
-                  Other
-                </option>
+                {CategoryData.map(({ id, category }) => {
+                  return (
+                    <option value={category} key={id} className="bg-[#283243] p-2">
+                      {category}
+                    </option>
+                  );
+                })}
               </select>
             </div>
           </div>
