@@ -11,8 +11,8 @@ export const SplitBill: FC = (): ReactElement => {
   const closeAddBill = useCallback(() => setIsAddOpen(false), []);
 
   return (
-    <section>
-      <div className="mx-4">
+    <section className="bg-[#FAFAFB] dark:bg-[#11161D]">
+        <div className="ml-80 mr-10">
         <SplitTitle onOpen={openAddBill} />
         <BalanceSummary />
         <AddSplitBill isOpen={isAddOpen} onClose={closeAddBill} />
