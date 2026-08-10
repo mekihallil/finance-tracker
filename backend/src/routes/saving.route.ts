@@ -1,10 +1,6 @@
 import { Router } from "express";
-import {
-  addMoneyToGoal,
-  addSaving,
-  getGoalSaving,
-  goals,
-} from "../controllers/saving.controller.js";
+import { addMoneyToGoal, goals } from "../controllers/goal.controller.js";
+import { addSaving, getGoalSaving } from "../controllers/saving.controller.js";
 import { validate } from "../middlewares/validate.middlewares.js";
 import { savingValidateSchema } from "../validations/saving.validation.js";
 
