@@ -1,4 +1,4 @@
-import { NotFoundError } from "../error/saving.error.js";
+import { NotFoundError } from "../error/error.js";
 import { Saving } from "../models/saving.models.js";
 import { savingValidateSchema } from "../validations/saving.validation.js";
 
