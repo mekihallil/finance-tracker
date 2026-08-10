@@ -1,37 +1,35 @@
 import type { Request, Response } from "express";
-import type { IExpense } from "../validations/expense.validation.js";
+import { StatusCodes } from "http-status-codes";
 import { Expense } from "../models/expense.models.js";
+import {
+  CreateExpense,
+  DeleteExpense,
+  GetExpense,
+  GetSummary,
+} from "../service/expense.service.js";
+import type { IExpense } from "../validations/expense.validation.js";
 
 // get expenses
 export const getExpense = async (req: Request, res: Response) => {
   try {
-    const expenses: IExpense[] = await Expense.find();
-
-    res.status(200).json(expenses);
+    const expenses = await GetExpense();
+    res.status(StatusCodes.OK).json(expenses);
   } catch (error) {
-    res.status(500).json({ message: "Expense not found", error });
+    res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({ message: "Expense not found", error });
   }
 };
 // Summery expenses
 export const getSummary = async (req: Request, res: Response) => {
-  const expenses = await Expense.find();
-  // Total income
-  const totalIncome = expenses
-    .filter((t) => t.type === "income")
-    .reduce((sum, t) => sum + t.amount, 0);
-  // Total expense
-  const totalExpense = expenses
-    .filter((t) => t.type === "expense")
-    .reduce((sum, t) => sum + t.amount, 0);
-
-  const balance = totalIncome - totalExpense;
-
-  res.status(200).json({
-    totalIncome,
-    totalExpense,
-    balance,
-    expenseCount: expenses.length,
-  });
+  try {
+    const expenses = await GetSummary();
+    res.status(StatusCodes.OK).json(expenses);
+  } catch (error) {
+    res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({ message: "Expense not found", error });
+  }
 };
 
 // Create expenses
@@ -41,15 +39,12 @@ export const createExpense = async (
 ) => {
   try {
     const { title, amount, type, category } = req.body;
-    const newExpense = await new Expense({
-      title,
-      amount,
-      type,
-      category,
-    }).save();
-    res.status(201).json(newExpense);
+    const newExpense = CreateExpense({ title, amount, type, category });
+    res.status(StatusCodes.CREATED).json(newExpense);
   } catch (error) {
-    res.status(500).json({ message: "Can not add new expense" });
+    res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({ message: "Can not add new expense" });
   }
 };
 
@@ -57,13 +52,19 @@ export const createExpense = async (
 export const deleteExpense = async (req: Request, res: Response) => {
   try {
     const { _id } = req.params;
-    const deletExpense = await Expense.findByIdAndDelete(_id);
+    const deletExpense = await DeleteExpense(_id);
     if (!deletExpense) {
-      res.status(400).json({ message: "Expense not found" });
+      res
+        .status(StatusCodes.BAD_REQUEST)
+        .json({ message: "Expense not found" });
     }
-    res.status(200).json({ message: "Expense deleted successfully" });
+    res
+      .status(StatusCodes.OK)
+      .json({ message: "Expense deleted successfully" });
   } catch (error) {
-    res.status(400).json({ message: "Failed to delete Expense" });
+    res
+      .status(StatusCodes.BAD_REQUEST)
+      .json({ message: "Failed to delete Expense" });
   }
 };
 
