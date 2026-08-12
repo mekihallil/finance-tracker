@@ -8,18 +8,7 @@ import {
   GetSummary,
 } from "../service/expense.service.js";
 import type { IExpense } from "../validations/expense.validation.js";
-
-const sendError = (
-  res: Response,
-  status: StatusCodes,
-  message: string,
-  error?: unknown,
-): void => {
-  if (error != undefined) {
-    console.error(message, error);
-  }
-  res.status(status).json({ message });
-};
+import { sendError } from "../error/error.js";
 
 // get expenses
 export const getExpense = async (
