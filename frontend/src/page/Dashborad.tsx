@@ -9,7 +9,9 @@ export const Dashboard: FC = (): ReactElement => {
     <main>
       <div className="ml-80 mr-10">
         <FinancialDashbaord />
-        <AccountSummary />
+        <div className="flex justify-center">
+          <AccountSummary />
+        </div>
         <QuickActions />
         <RecentExpenses />
       </div>

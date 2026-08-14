@@ -76,7 +76,7 @@ const StatCardItem: FC<StatCardItemProps> = ({ card }): ReactElement => {
 
 export const AccountSummary: FC = (): ReactElement => {
   return (
-    <section className="flex gap-8 mb-8.75">
+    <section className="grid grid-cols-4 gap-8 mb-8.75">
       {STAT_CARDS.map((card) => (
         <StatCardItem key={card.id} card={card} />
       ))}
