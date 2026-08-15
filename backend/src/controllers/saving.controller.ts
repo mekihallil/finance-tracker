@@ -1,7 +1,7 @@
 import type { Request, Response } from "express";
 import { StatusCodes } from "http-status-codes";
 import { ZodError } from "zod";
-import { NotFoundError } from "../error/error.js";
+import { NotFoundError, sendError } from "../error/error.js";
 import { createSaving, getSavingProgress } from "../service/saving.service.js";
 
 import { getAmount, getGoals } from "../service/goal.service.js";
@@ -20,9 +20,7 @@ export const addSaving = async (
       return res
         .status(StatusCodes.BAD_REQUEST)
         .json({ message: error.flatten() });
-    res
-      .status(StatusCodes.INTERNAL_SERVER_ERROR)
-      .json({ message: "Internal server error" });
+    sendError(res,StatusCodes.INTERNAL_SERVER_ERROR,"Internal Server error",error)
   }
 };
 
