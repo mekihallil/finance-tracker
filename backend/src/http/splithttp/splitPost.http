@@ -1,0 +1,11 @@
+POST http://localhost:5000/api/split/create
+Content-Type: application/json
+
+{
+    "title": "split title",
+    "amount": 2000,
+    "participants": [
+        { "name": "meki", "email": "email@gmail.com" },
+        { "name": "meki", "email": "email@gmail.com" }
+    ]
+}
