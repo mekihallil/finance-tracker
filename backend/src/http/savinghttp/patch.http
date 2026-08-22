@@ -1,6 +1,0 @@
-PATCH http://localhost:5000/api/saving/update/6a344794c5c39e4ac8700a73
-Content-Type: application/json
-
-{
-  "amount": 50000
-}

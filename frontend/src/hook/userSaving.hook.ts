@@ -1,3 +1,4 @@
+import { goalService } from "@/services/goal.service";
 import { savingService } from "@/services/saving.service";
 import type { SavingFormData } from "@/types/savingSchema.tyes";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -24,7 +25,7 @@ export const useSaving = () => {
 
   const goalsQuery = useQuery({
     queryKey: SAVING_QUERY_KEYS.goals,
-    queryFn: savingService.getGoals,
+    queryFn: goalService.getAllGoals,
   });
 
   const createSavingMutation = useMutation({
@@ -34,7 +35,7 @@ export const useSaving = () => {
 
   const AddMoney = useMutation({
     mutationFn: ({ id, amount }: { id: string; amount: number }) =>
-      savingService.AddMoney(id, amount),
+      goalService.updateGoals(id, amount),
     onSuccess: invalidateAllQueries,
   });
   return { savingQuery, goalsQuery, createSavingMutation, AddMoney };
