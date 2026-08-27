@@ -55,7 +55,8 @@ export const Goals: FC = (): ReactElement | null => {
       label = `${months} month${months > 1 ? "s" : ""} left`;
     else if (days >= 1) label = `${days} day${days > 1 ? "s" : ""} left`;
     else if (hours >= 1) label = `${hours} hour${hours > 1 ? "s" : ""} left`;
-    else label = `${minutes} minute${minutes > 1 ? "s" : ""} left`;
+    else if (minutes >= 1) label = `${minutes} minute${minutes > 1 ? "s" : ""} left`;
+    else label = `0 day left`;
 
     return label;
   };
