@@ -1,5 +1,5 @@
 import { TrendingDown, TrendingUp, Wallet } from "lucide-react";
-import type { FC, ReactElement } from "react";
+import { type FC, type ReactElement } from "react";
 
 interface StatCard {
   id: string;
@@ -46,7 +46,6 @@ interface StatCardItemProps {
 
 const StatCardItem: FC<StatCardItemProps> = ({ card }): ReactElement => {
   const isNegative = card.percentageChange < 0;
-
   return (
     <article className="flex flex-col justify-between dark:bg-linear-to-tl dark:to-[#30373E] border border-gray-200 rounded-2xl shadow-2xl w-68.75 p-6.25">
       <header className="flex justify-between">

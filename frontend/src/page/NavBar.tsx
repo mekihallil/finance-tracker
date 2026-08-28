@@ -76,17 +76,19 @@ export const NavBar: FC = (): ReactElement => {
           <section className="mt-8 mx-4.5">
             {navData.map(({ title, url, icon }) => {
               return (
-                <Link
-                  key={title}
-                  to={url}
-                  className={`flex justify-between items-center h-12 w-63.75 my-4 pl-4 cursor-pointer ${path == url ? "border rounded-2xl  bg-[#29B866]" : ""} `}
-                >
-                  <div className="flex ">
-                    <div className="flex items-center px-3">{icon}</div>
-                    <p>{title}</p>
-                  </div>
-                  {path == url && <Dot size={40} />}
-                </Link>
+                <div  className="hover:text-black hover:translate-x-2 duration-300">
+                  <Link
+                    key={title}
+                    to={url}
+                    className={`flex justify-between items-center h-12 w-63.75 my-4 pl-4 cursor-pointer ${path == url ? "border rounded-2xl  bg-[#29B866]" : ""} `}
+                  >
+                    <div className="flex ">
+                      <div className="flex items-center px-3">{icon}</div>
+                      <p>{title}</p>
+                    </div>
+                    {path == url && <Dot size={40} />}
+                  </Link>
+                </div>
               );
             })}
           </section>
