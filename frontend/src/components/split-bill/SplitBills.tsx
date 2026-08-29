@@ -3,7 +3,7 @@ import { type FC, type ReactElement } from "react";
 
 export const SplitBills: FC = (): ReactElement => {
   return (
-    <article className="bg-[#2C3546] rounded-3xl p-7 mt-8">
+    <article className="border border-gray-300 rounded-3xl p-7 mt-8 shadow-2xl dark:bg-[#2C3546]">
       <div className="flex justify-between">
         <section className="flex gap-4">
           <div>
