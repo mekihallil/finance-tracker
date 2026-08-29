@@ -43,7 +43,7 @@ export const AddSplitBill: FC<addSplitBillProps> = ({
 }): ReactElement => {
   if (!isOpen) return <></>;
   return (
-    <article className="bg-[#2C3546] rounded-3xl p-7 mt-8">
+    <article className="border border-black dark:bg-[#2C3546] rounded-3xl p-7 mt-8">
       <h1 className="mb-8">Create New Split</h1>
       <div className="grid gap-6.5">
         <div className="grid">
@@ -53,7 +53,7 @@ export const AddSplitBill: FC<addSplitBillProps> = ({
                 What's this for?
               </label>
               <input
-                className="bg-[#283243] p-2 rounded-2xl border border-[#202B3D]"
+                className="dark:bg-[#283243] p-2 rounded-2xl bg-gray-200 dark:border border-[#202B3D]"
                 type="text"
                 placeholder="e.g., Dinner at Pizza Place"
               />
@@ -63,7 +63,7 @@ export const AddSplitBill: FC<addSplitBillProps> = ({
                 Amount
               </label>
               <input
-                className="bg-[#283243] p-2 rounded-2xl border border-[#202B3D]"
+                className="dark:bg-[#283243] p-2 rounded-2xl bg-gray-200 dark:border border-[#202B3D]"
                 type="number"
                 placeholder="0.00"
               />
@@ -74,11 +74,11 @@ export const AddSplitBill: FC<addSplitBillProps> = ({
               </label>
               <select
                 name="category"
-                className="rounded-2xl border border-[#202B3D] p-2"
+                className="rounded-2xl bg-gray-200 dark:border border-[#202B3D] p-2"
               >
                 {CategoryData.map(({ id, category }) => {
                   return (
-                    <option value={category} key={id} className="bg-[#283243] p-2">
+                    <option value={category} key={id} className="dark:bg-[#283243] p-2">
                       {category}
                     </option>
                   );
@@ -102,17 +102,17 @@ export const AddSplitBill: FC<addSplitBillProps> = ({
           </div>
           <div className=" grid grid-cols-12 gap-4">
             <input
-              className="col-start-1 col-end-7 bg-[#283243] p-2 rounded-2xl border border-[#202B3D]"
+              className="col-start-1 col-end-7 dark:bg-[#283243] p-2 rounded-2xl bg-gray-200 dark:border border-[#202B3D]"
               type="text"
               placeholder="Name"
             />
             <input
-              className="col-start-7 col-end-12 bg-[#283243] p-2 rounded-2xl border border-[#202B3D]"
+              className="col-start-7 col-end-12 dark:bg-[#283243] p-2 rounded-2xl bg-gray-200 dark:border border-[#202B3D]"
               type="text"
               placeholder="Email"
             />
 
-            <button className="grid place-content-center border rounded-xl bg-[#283243] mx-2">
+            <button className="grid place-content-center dark:border rounded-xl bg-gray-300 dark:bg-[#283243] mx-2">
               <Plus size={20} />
             </button>
           </div>
