@@ -74,7 +74,7 @@ export const AddSplitBill: FC<addSplitBillProps> = ({
               </label>
               <select
                 name="category"
-                className="rounded-2xl bg-gray-200 dark:border border-[#202B3D] p-2"
+                className="rounded-2xl bg-gray-200 dark:bg-[#283243] dark:border border-[#202B3D] p-2"
               >
                 {CategoryData.map(({ id, category }) => {
                   return (
