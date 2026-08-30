@@ -1,0 +1,4 @@
+GET http://localhost:5000/api/split/splitBills
+Content-Type: application/json
+
+{}

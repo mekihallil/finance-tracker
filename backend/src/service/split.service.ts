@@ -9,3 +9,7 @@ export const createSplitService = async (body: unknown) => {
   const newSplit = await new Split(parsed).save();
   return newSplit;
 };
+export const getSplitBills = async () => {
+  const splitBills = await Split.find();
+  return splitBills;
+};
