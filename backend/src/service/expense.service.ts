@@ -46,7 +46,7 @@ export const GetMonthlyExpense = async () => {
   endDay.setHours(23, 59, 59, 999);
 
   const todayExpenses = await Expense.find({
-    createAt: {
+    createdAt: {
       $gte: startDay,
       $lte: endDay,
     },
@@ -57,8 +57,9 @@ export const GetMonthlyExpense = async () => {
   );
 
   const perDayAvarage =
-    totalDayExpense > 0 &&
-    Number((totalDayExpense / todayExpenses.length).toFixed(2));
+    totalDayExpense > 0
+      ? Number((totalDayExpense / todayExpenses.length).toFixed(2))
+      : 0;
 
   // Monthly Date Range
   const startMonth = new Date();
@@ -70,7 +71,7 @@ export const GetMonthlyExpense = async () => {
   endMonth.setHours(0, 0, 0, 0);
   endMonth.setDate(1);
   const monthExpenses = await Expense.find({
-    createAt: {
+    createdAt: {
       $gte: startMonth,
       $lt: endMonth,
     },
