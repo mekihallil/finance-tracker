@@ -36,17 +36,17 @@ export const useExpense = () => {
   });
   const createExpenseMutation = useMutation({
     mutationFn: (data: ExpenseFormData) => expenseService.create(data),
-    onSuccess: () => invalidateAllQueries,
+    onSuccess: () => invalidateAllQueries(),
   });
   const updateExpenseMutation = useMutation({
     mutationFn: ({ id, data }: { id: string; data: ExpenseFormData }) =>
       expenseService.update(id, data),
-    onSuccess: () => invalidateAllQueries,
+    onSuccess: () => invalidateAllQueries(),
   });
 
   const deleteExpenseMutation = useMutation({
     mutationFn: (id: string) => expenseService.delete(id),
-    onSuccess: () => invalidateAllQueries,
+    onSuccess: () => invalidateAllQueries(),
   });
 
   return {
