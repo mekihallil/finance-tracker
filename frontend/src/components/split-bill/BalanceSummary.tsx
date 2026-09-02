@@ -30,7 +30,10 @@ export const BalanceSummary: FC = (): ReactElement => {
     <main className="grid grid-cols-3 gap-6.25">
       {utils.map(({ name, icon, amount }) => {
         return (
-          <section className="flex gap-3.5 rounded-3xl dark:bg-[#2C3546] shadow-2xl p-5.5">
+          <section
+            key={name}
+            className="flex gap-3.5 rounded-3xl dark:bg-[#2C3546] shadow-2xl p-5.5"
+          >
             <section className="my-auto">{icon}</section>
             <section>
               <h1>{name}</h1>

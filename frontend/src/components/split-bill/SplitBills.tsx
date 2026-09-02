@@ -13,14 +13,14 @@ export const SplitBills: FC = (): ReactElement | null => {
   const split = getSplitQuery;
   const { isError, error, isLoading } = split;
 
-  function formatDate(date: string) {
+  const formatDate = (date: string) => {
     const formattedDate = new Date(date).toLocaleDateString("en-US", {
       month: "short",
       day: "numeric",
       year: "numeric",
     });
     return formattedDate;
-  }
+  };
 
   useEffect(() => {
     if (error) {
@@ -96,10 +96,13 @@ export const SplitBills: FC = (): ReactElement | null => {
               {/* Participants detail information */}
               <section className="mt-2">
                 <h1>Participants</h1>
-                {participants.map(({ _id, name }: splitParticipantsProps) => {
-                  return (
-                    <div key={_id} className="grid grid-cols-2 gap-2 mt-1">
-                      <section className="flex justify-between border-[0.5px] border-gray-600 rounded-xl p-2">
+                <div className="grid grid-cols-2 gap-2 mt-1">
+                  {participants.map(({ _id, name }: splitParticipantsProps) => {
+                    return (
+                      <section
+                        key={_id}
+                        className="flex justify-between border-[0.5px] border-gray-600 rounded-xl p-2"
+                      >
                         <div className="flex gap-3 ">
                           <h1 className="bg-gray-500 rounded-full px-2 my-auto">
                             Y
@@ -107,13 +110,13 @@ export const SplitBills: FC = (): ReactElement | null => {
                           <h1 className="my-auto">{name}</h1>
                         </div>
                         <div className="flex gap-2">
-                          <h1>$30.13</h1>
+                          <h1>$ </h1>
                           <Check size={15} className="my-auto" />
                         </div>
                       </section>
-                    </div>
-                  );
-                })}
+                    );
+                  })}
+                </div>
               </section>
             </main>
           </article>
