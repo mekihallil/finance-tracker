@@ -22,6 +22,10 @@ export const SplitBills: FC = (): ReactElement | null => {
     return formattedDate;
   };
 
+  const splitBill = (amount: number, participants: number) => {
+    return amount / participants;
+  };
+
   useEffect(() => {
     if (error) {
       toast.error(error.message);
@@ -79,7 +83,7 @@ export const SplitBills: FC = (): ReactElement | null => {
                   <div className="flex gap-5 mr-5 ">
                     <div>
                       <h1 className="text-[18px] font-semibold">
-                        Your share: $30.13
+                        Your share: ${splitBill(amount, participants.length)}
                       </h1>
                       <div className="flex gap-2">
                         <Check size={18} className="my-auto" />
@@ -110,7 +114,7 @@ export const SplitBills: FC = (): ReactElement | null => {
                           <h1 className="my-auto">{name}</h1>
                         </div>
                         <div className="flex gap-2">
-                          <h1>$ </h1>
+                          <h1>${splitBill(amount, participants.length)} </h1>
                           <Check size={15} className="my-auto" />
                         </div>
                       </section>
