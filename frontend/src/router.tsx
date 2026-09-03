@@ -1,5 +1,5 @@
 import { createBrowserRouter } from "react-router";
-import { App } from "./App";
+import { App } from "./app";
 import { Dashboard } from "./page/Dashborad";
 import { Expense } from "./page/Expense";
 import { Saving } from "./page/Saving";
