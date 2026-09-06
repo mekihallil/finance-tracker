@@ -3,8 +3,6 @@ import { StatusCodes } from "http-status-codes";
 import { ZodError } from "zod";
 import { NotFoundError, sendError } from "../error/error.js";
 import { createSaving, getSavingProgress } from "../service/saving.service.js";
-
-import { getAmount, getGoals } from "../service/goal.service.js";
 import type { ISaving } from "../validations/saving.validation.js";
 
 // Add savings
@@ -20,7 +18,12 @@ export const addSaving = async (
       return res
         .status(StatusCodes.BAD_REQUEST)
         .json({ message: error.flatten() });
-    sendError(res,StatusCodes.INTERNAL_SERVER_ERROR,"Internal Server error",error)
+    sendError(
+      res,
+      StatusCodes.INTERNAL_SERVER_ERROR,
+      "Internal Server error",
+      error,
+    );
   }
 };
 
@@ -31,9 +34,12 @@ export const getGoalSaving = async (req: Request, res: Response) => {
     res.status(StatusCodes.OK).json(getGoal);
   } catch (error) {
     if (error instanceof NotFoundError)
-      return res.status(StatusCodes.NOT_FOUND).json({ message: error.message });
-    res
-      .status(StatusCodes.INTERNAL_SERVER_ERROR)
-      .json({ message: "Internal server error" });
+      return sendError(res, StatusCodes.NOT_FOUND, `${error.message} `);
+    sendError(
+      res,
+      StatusCodes.INTERNAL_SERVER_ERROR,
+      "Internal server error",
+      error,
+    );
   }
 };
