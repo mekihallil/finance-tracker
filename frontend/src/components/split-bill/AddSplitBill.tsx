@@ -78,7 +78,11 @@ export const AddSplitBill: FC<addSplitBillProps> = ({
               >
                 {CategoryData.map(({ id, category }) => {
                   return (
-                    <option value={category} key={id} className="dark:bg-[#283243] p-2">
+                    <option
+                      value={category}
+                      key={id}
+                      className="dark:bg-[#283243] p-2"
+                    >
                       {category}
                     </option>
                   );

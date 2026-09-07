@@ -32,7 +32,7 @@ const actionList: ActionItem[] = [
   {
     label: "Split Bill",
     icon: Users,
-    href: "/",
+    href: "/split-bill",
     bgColor: "#A840FF",
   },
   {
