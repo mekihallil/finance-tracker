@@ -1,11 +1,11 @@
 import type { Request, Response } from "express";
 import { StatusCodes } from "http-status-codes";
 import { sendError } from "../error/error.js";
-import { createSplitService, getSplitBills } from "../service/split.service.js";
+import { AddSplitService, getSplitBills } from "../service/split.service.js";
 
-export const createSplit = async (req: Request, res: Response) => {
+export const AddSplit = async (req: Request, res: Response) => {
   try {
-    const newSplit = await createSplitService(req.body);
+    const newSplit = await AddSplitService(req.body);
     res.status(StatusCodes.CREATED).json(newSplit);
   } catch (error) {
     sendError(

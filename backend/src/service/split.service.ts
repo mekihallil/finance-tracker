@@ -4,7 +4,7 @@ import {
   type ISplit,
 } from "../validations/split.validation.js";
 
-export const createSplitService = async (body: unknown) => {
+export const AddSplitService = async (body: unknown) => {
   const parsed = splitValidatorSchema.parse(body);
   const newSplit = await new Split(parsed).save();
   return newSplit;
