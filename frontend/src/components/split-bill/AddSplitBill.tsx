@@ -1,5 +1,12 @@
 import { Plus } from "lucide-react";
-import { type FC, type ReactElement } from "react";
+import { useState, type FC, type ReactElement } from "react";
+
+interface participantsProps {
+  id: string;
+  name: string;
+  email: string;
+}
+
 interface addSplitBillProps {
   isOpen: boolean;
   onClose: () => void;
@@ -41,6 +48,32 @@ export const AddSplitBill: FC<addSplitBillProps> = ({
   isOpen,
   onClose,
 }): ReactElement => {
+  const [participants, setParticipants] = useState<participantsProps[]>([
+    {
+      id: crypto.randomUUID(),
+      name: "You",
+      email: "you@gmail.com",
+    },
+  ]);
+
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+
+  const addParticipant = () => {
+    if (!name.trim() || !email.trim()) return;
+
+    const newParticipant: participantsProps = {
+      id: crypto.randomUUID(),
+      name: name.trim(),
+      email: email.trim(),
+    };
+    setParticipants((prev) => [...prev, newParticipant]);
+
+    // clear inputs after adding
+    setName("");
+    setEmail("");
+  };
+
   if (!isOpen) return <></>;
   return (
     <article className="border border-black dark:bg-[#2C3546] rounded-3xl p-7 mt-8">
@@ -94,29 +127,42 @@ export const AddSplitBill: FC<addSplitBillProps> = ({
         <div>
           <label htmlFor="">Participants</label>
           <div>
-            <section className="border rounded-2xl mb-3 mt-1">
-              <div className="flex gap-3 p-2.5">
-                <h1 className="border rounded-full px-3 py-1 my-auto">Y</h1>
-                <div>
-                  <h1>You</h1>
-                  <h1>you@gmail.com</h1>
-                </div>
-              </div>
-            </section>
+            {participants.map(({ id, name, email }) => {
+              return (
+                <section className="border rounded-2xl mb-3 mt-1">
+                  <div id={id} className="flex gap-3 p-2.5">
+                    <h1 className="border rounded-full px-3 py-1 my-auto capitalizex">
+                      {name.slice(0, 1)}
+                    </h1>
+                    <div>
+                      <h1>{name}</h1>
+                      <h1>{email}</h1>
+                    </div>
+                  </div>
+                </section>
+              );
+            })}
           </div>
           <div className=" grid grid-cols-12 gap-4">
             <input
               className="col-start-1 col-end-7 dark:bg-[#283243] p-2 rounded-2xl bg-gray-200 dark:border border-[#202B3D]"
               type="text"
-              placeholder="Name"
+              placeholder="name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
             />
             <input
               className="col-start-7 col-end-12 dark:bg-[#283243] p-2 rounded-2xl bg-gray-200 dark:border border-[#202B3D]"
               type="text"
-              placeholder="Email"
+              placeholder="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
 
-            <button className="grid place-content-center dark:border rounded-xl bg-gray-300 dark:bg-[#283243] mx-2">
+            <button
+              onClick={addParticipant}
+              className="grid place-content-center dark:border rounded-xl bg-gray-300 dark:bg-[#283243] mx-2"
+            >
               <Plus size={20} />
             </button>
           </div>
