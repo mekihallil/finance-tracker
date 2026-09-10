@@ -1,5 +1,10 @@
+import { useSplit } from "@/hook/userSplit.hook";
+import { splitSchema, type splitFormData } from "@/types/splitSchema.types";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { Plus } from "lucide-react";
 import { useState, type FC, type ReactElement } from "react";
+import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 
 interface participantsProps {
   id: string;
@@ -48,6 +53,16 @@ export const AddSplitBill: FC<addSplitBillProps> = ({
   isOpen,
   onClose,
 }): ReactElement => {
+  const { AddSplitMutation } = useSplit();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm({
+    resolver: zodResolver(splitSchema),
+  });
+
   const [participants, setParticipants] = useState<participantsProps[]>([
     {
       id: crypto.randomUUID(),
@@ -68,18 +83,36 @@ export const AddSplitBill: FC<addSplitBillProps> = ({
       email: email.trim(),
     };
     setParticipants((prev) => [...prev, newParticipant]);
-
     // clear inputs after adding
     setName("");
     setEmail("");
+  };
+
+  const onSubmit = (data: splitFormData) => {
+    const payload = {
+      ...data,
+      participants: participants.map(({ name, email }) => ({
+        name: name,
+        email: email,
+      })),
+    };
+    AddSplitMutation.mutate(payload, {
+      onSuccess: () => {
+        toast.success("Split bill added successfully");
+        reset();
+      },
+      onError: () => {
+        toast.error("Failed to add split");
+      },
+    });
   };
 
   if (!isOpen) return <></>;
   return (
     <article className="border border-black dark:bg-[#2C3546] rounded-3xl p-7 mt-8">
       <h1 className="mb-8">Create New Split</h1>
-      <div className="grid gap-6.5">
-        <div className="grid">
+      <form onSubmit={handleSubmit(onSubmit)} className="grid">
+        <div className="grid gap-6.5">
           <div className="grid grid-cols-3 gap-3">
             <div className="grid ">
               <label htmlFor="" className="p-1">
@@ -89,7 +122,13 @@ export const AddSplitBill: FC<addSplitBillProps> = ({
                 className="dark:bg-[#283243] p-2 rounded-2xl bg-gray-200 dark:border border-[#202B3D]"
                 type="text"
                 placeholder="e.g., Dinner at Pizza Place"
+                {...register("title")}
               />
+              {errors.title && (
+                <span className="text-red-500 text-sm">
+                  {errors.title.message}
+                </span>
+              )}
             </div>
             <div className="grid">
               <label htmlFor="" className="p-1">
@@ -99,15 +138,22 @@ export const AddSplitBill: FC<addSplitBillProps> = ({
                 className="dark:bg-[#283243] p-2 rounded-2xl bg-gray-200 dark:border border-[#202B3D]"
                 type="number"
                 placeholder="0.00"
+                {...register("amount", { valueAsNumber: true })}
               />
+              {errors.amount && (
+                <span className="text-red-500 text-sm">
+                  {errors.amount.message}
+                </span>
+              )}
             </div>
             <div className="grid">
               <label htmlFor="" className="p-1">
                 Category
               </label>
               <select
-                name="category"
+                id="category"
                 className="rounded-2xl bg-gray-200 dark:bg-[#283243] dark:border border-[#202B3D] p-2"
+                {...register("category")}
               >
                 {CategoryData.map(({ id, category }) => {
                   return (
@@ -121,59 +167,76 @@ export const AddSplitBill: FC<addSplitBillProps> = ({
                   );
                 })}
               </select>
+              {errors.category && (
+                <span className="text-red-500 text-sm">
+                  {errors.category.message}
+                </span>
+              )}
+            </div>
+          </div>
+          <div>
+            <label htmlFor="">Participants</label>
+            <div>
+              {participants.map(({ id, name, email }) => {
+                return (
+                  <section key={id} className="border rounded-2xl mb-3 mt-1">
+                    <div className="flex gap-3 p-2.5">
+                      <h1 className="border rounded-full px-3 py-1 my-auto capitalizex">
+                        {name.slice(0, 1)}
+                      </h1>
+                      <div>
+                        <h1>{name}</h1>
+                        <h1>{email}</h1>
+                      </div>
+                    </div>
+                  </section>
+                );
+              })}
+            </div>
+            <div>
+              <div className=" grid grid-cols-12 gap-4">
+                <input
+                  className="col-start-1 col-end-7 dark:bg-[#283243] p-2 rounded-2xl bg-gray-200 dark:border border-[#202B3D]"
+                  type="text"
+                  placeholder="name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
+                <input
+                  className="col-start-7 col-end-12 dark:bg-[#283243] p-2 rounded-2xl bg-gray-200 dark:border border-[#202B3D]"
+                  type="text"
+                  placeholder="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+                <button
+                  type="button"
+                  onClick={addParticipant}
+                  className="grid place-content-center dark:border rounded-xl bg-gray-300 dark:bg-[#283243] mx-2"
+                >
+                  <Plus size={20} />
+                </button>
+              </div>
+              {errors.participants && (
+                <span className="text-red-500 text-sm">
+                  {errors.participants.message}
+                  console.log(errors.participants.message)
+                </span>
+              )}
             </div>
           </div>
         </div>
-        <div>
-          <label htmlFor="">Participants</label>
-          <div>
-            {participants.map(({ id, name, email }) => {
-              return (
-                <section className="border rounded-2xl mb-3 mt-1">
-                  <div id={id} className="flex gap-3 p-2.5">
-                    <h1 className="border rounded-full px-3 py-1 my-auto capitalizex">
-                      {name.slice(0, 1)}
-                    </h1>
-                    <div>
-                      <h1>{name}</h1>
-                      <h1>{email}</h1>
-                    </div>
-                  </div>
-                </section>
-              );
-            })}
-          </div>
-          <div className=" grid grid-cols-12 gap-4">
-            <input
-              className="col-start-1 col-end-7 dark:bg-[#283243] p-2 rounded-2xl bg-gray-200 dark:border border-[#202B3D]"
-              type="text"
-              placeholder="name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-            <input
-              className="col-start-7 col-end-12 dark:bg-[#283243] p-2 rounded-2xl bg-gray-200 dark:border border-[#202B3D]"
-              type="text"
-              placeholder="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-
-            <button
-              onClick={addParticipant}
-              className="grid place-content-center dark:border rounded-xl bg-gray-300 dark:bg-[#283243] mx-2"
-            >
-              <Plus size={20} />
-            </button>
-          </div>
+        <div className="flex gap-6 ml-5 mt-5">
+          <button type="submit">Create Split</button>
+          <button
+            type="button"
+            className="border py-1 px-4 rounded-xl"
+            onClick={onClose}
+          >
+            Cancel
+          </button>
         </div>
-      </div>
-      <div className="flex gap-6 ml-5 mt-5">
-        <button>Create Split</button>
-        <button className="border py-1 px-4 rounded-xl" onClick={onClose}>
-          Cancel
-        </button>
-      </div>
+      </form>
     </article>
   );
 };
