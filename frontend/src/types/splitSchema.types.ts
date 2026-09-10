@@ -3,6 +3,7 @@ import { z } from "zod";
 export const splitSchema = z.object({
   title: z.string().min(3, "Title must be at least 3 characters long"),
   amount: z.number().min(0, "Amount cannot be negative"),
+  category: z.string(),
   participants: z
     .array(
       z.object({
