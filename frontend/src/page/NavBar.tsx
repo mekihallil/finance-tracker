@@ -13,15 +13,21 @@ import { Link, useLocation } from "react-router";
 import { toast } from "sonner";
 
 type nav = {
+  id: number;
   title: string;
   icon: ReactElement;
   url: string;
 };
 const navData: nav[] = [
-  { title: "Dashboard", icon: <House size={15} />, url: "/" },
-  { title: "Expenses", icon: <CirclePlus size={15} />, url: "/expense" },
-  { title: "Savings", icon: <Target size={15} />, url: "/saving" },
-  { title: "Split Bills", icon: <Users size={15} />, url: "/split-bill" },
+  { id: 1, title: "Dashboard", icon: <House size={15} />, url: "/" },
+  { id: 2, title: "Expenses", icon: <CirclePlus size={15} />, url: "/expense" },
+  { id: 3, title: "Savings", icon: <Target size={15} />, url: "/saving" },
+  {
+    id: 4,
+    title: "Split Bills",
+    icon: <Users size={15} />,
+    url: "/split-bill",
+  },
 ];
 
 export const NavBar: FC = (): ReactElement => {
@@ -74,11 +80,13 @@ export const NavBar: FC = (): ReactElement => {
             <hr className="dark:text-gray-700 text-[#e3e2e2]" />
           </header>
           <section className="mt-8 mx-4.5">
-            {navData.map(({ title, url, icon }) => {
+            {navData.map(({ id, title, url, icon }) => {
               return (
-                <div  className="hover:text-black hover:translate-x-2 duration-300">
+                <div
+                  key={id}
+                  className="hover:text-black hover:translate-x-2 duration-300"
+                >
                   <Link
-                    key={title}
                     to={url}
                     className={`flex justify-between items-center h-12 w-63.75 my-4 pl-4 cursor-pointer ${path == url ? "border rounded-2xl  bg-[#29B866]" : ""} `}
                   >
