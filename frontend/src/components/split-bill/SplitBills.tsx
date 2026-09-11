@@ -109,7 +109,7 @@ export const SplitBills: FC = (): ReactElement | null => {
                       >
                         <div className="flex gap-3 ">
                           <h1 className="bg-gray-500 rounded-full px-2 my-auto">
-                            Y
+                            {name.slice(0, 1).toLocaleUpperCase()}
                           </h1>
                           <h1 className="my-auto">{name}</h1>
                         </div>
