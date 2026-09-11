@@ -105,6 +105,7 @@ export const AddSplitBill: FC<addSplitBillProps> = ({
         toast.error("Failed to add split");
       },
     });
+    setParticipants([]);
   };
 
   if (!isOpen) return <></>;
@@ -217,12 +218,6 @@ export const AddSplitBill: FC<addSplitBillProps> = ({
                   <Plus size={20} />
                 </button>
               </div>
-              {errors.participants && (
-                <span className="text-red-500 text-sm">
-                  {errors.participants.message}
-                  console.log(errors.participants.message)
-                </span>
-              )}
             </div>
           </div>
         </div>
