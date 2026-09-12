@@ -182,8 +182,8 @@ export const AddSplitBill: FC<addSplitBillProps> = ({
                 return (
                   <section key={id} className="border rounded-2xl mb-3 mt-1">
                     <div className="flex gap-3 p-2.5">
-                      <h1 className="border rounded-full px-3 py-1 my-auto capitalizex">
-                        {name.slice(0, 1)}
+                      <h1 className="border rounded-full px-3 py-1 my-auto">
+                        {name.slice(0, 1).toUpperCase()}
                       </h1>
                       <div>
                         <h1>{name}</h1>
