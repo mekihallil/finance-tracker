@@ -1,10 +1,20 @@
 import { useSplit } from "@/hook/userSplit.hook";
 import { splitSchema, type splitFormData } from "@/types/splitSchema.types";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Plus } from "lucide-react";
+import { Plus, X } from "lucide-react";
 import { useState, type FC, type ReactElement } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
+
+type ownerDataProps = {
+  name: string;
+  email: string;
+};
+
+const owmerdata: ownerDataProps = {
+  name: "You",
+  email: "you@gmail.com",
+};
 
 interface participantsProps {
   id: string;
@@ -66,8 +76,8 @@ export const AddSplitBill: FC<addSplitBillProps> = ({
   const [participants, setParticipants] = useState<participantsProps[]>([
     {
       id: crypto.randomUUID(),
-      name: "You",
-      email: "you@gmail.com",
+      name: owmerdata.name,
+      email: owmerdata.email,
     },
   ]);
 
@@ -86,6 +96,14 @@ export const AddSplitBill: FC<addSplitBillProps> = ({
     // clear inputs after adding
     setName("");
     setEmail("");
+  };
+
+  const deleteParticipant = (id: string) => {
+    setParticipants((prev) =>
+      prev.filter((partic) => {
+        return partic.id !== id;
+      }),
+    );
   };
 
   const onSubmit = (data: splitFormData) => {
@@ -180,15 +198,24 @@ export const AddSplitBill: FC<addSplitBillProps> = ({
             <div>
               {participants.map(({ id, name, email }) => {
                 return (
-                  <section key={id} className="border rounded-2xl mb-3 mt-1">
-                    <div className="flex gap-3 p-2.5">
-                      <h1 className="border rounded-full px-3 py-1 my-auto">
-                        {name.slice(0, 1).toUpperCase()}
-                      </h1>
-                      <div>
-                        <h1>{name}</h1>
-                        <h1>{email}</h1>
+                  <section key={id} className="border rounded-2xl mb-3 mt-1 ">
+                    <div className="flex justify-between p-2.5">
+                      <div className="flex gap-3 ">
+                        <h1 className="border rounded-full px-3 py-1 my-auto">
+                          {name.slice(0, 1).toUpperCase()}
+                        </h1>
+                        <div>
+                          <h1>{name}</h1>
+                          <h1>{email}</h1>
+                        </div>
                       </div>
+                      <button
+                        type="button"
+                        onClick={() => deleteParticipant(id)}
+                        className={`my-auto pr-2 ${email === owmerdata.email ? "hidden" : "block"}`}
+                      >
+                        <X />
+                      </button>
                     </div>
                   </section>
                 );
