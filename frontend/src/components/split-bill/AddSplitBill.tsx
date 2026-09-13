@@ -71,6 +71,12 @@ export const AddSplitBill: FC<addSplitBillProps> = ({
     reset,
   } = useForm({
     resolver: zodResolver(splitSchema),
+    defaultValues: {
+      title: "",
+      amount: 0,
+      category: "",
+      participants: [],
+    },
   });
 
   const [participants, setParticipants] = useState<participantsProps[]>([
@@ -245,6 +251,11 @@ export const AddSplitBill: FC<addSplitBillProps> = ({
                   <Plus size={20} />
                 </button>
               </div>
+              {errors.participants && (
+                <span className="text-red-500 text-sm">
+                  {errors.participants.message}
+                </span>
+              )}
             </div>
           </div>
         </div>
