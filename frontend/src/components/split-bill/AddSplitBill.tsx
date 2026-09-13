@@ -2,7 +2,7 @@ import { useSplit } from "@/hook/userSplit.hook";
 import { splitSchema, type splitFormData } from "@/types/splitSchema.types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Plus, X } from "lucide-react";
-import { useState, type FC, type ReactElement } from "react";
+import { useEffect, useState, type FC, type ReactElement } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
@@ -67,15 +67,20 @@ export const AddSplitBill: FC<addSplitBillProps> = ({
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
     reset,
   } = useForm({
     resolver: zodResolver(splitSchema),
     defaultValues: {
       title: "",
-      amount: 0,
-      category: "",
-      participants: [],
+      category: "Other",
+      participants: [
+        {
+          name: owmerdata.name,
+          email: owmerdata.email,
+        },
+      ],
     },
   });
 
@@ -86,7 +91,13 @@ export const AddSplitBill: FC<addSplitBillProps> = ({
       email: owmerdata.email,
     },
   ]);
-
+  useEffect(() => {
+    setValue(
+      "participants",
+      participants.map(({ name, email }) => ({ name, email })),
+      { shouldValidate: false },
+    );
+  }, [participants, setValue]);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
 
@@ -103,7 +114,6 @@ export const AddSplitBill: FC<addSplitBillProps> = ({
     setName("");
     setEmail("");
   };
-
   const deleteParticipant = (id: string) => {
     setParticipants((prev) =>
       prev.filter((partic) => {
@@ -112,7 +122,7 @@ export const AddSplitBill: FC<addSplitBillProps> = ({
     );
   };
 
-  const onSubmit = (data: splitFormData) => {
+  const onSubmit = (data: Omit<splitFormData, "participants">) => {
     const payload = {
       ...data,
       participants: participants.map(({ name, email }) => ({
@@ -129,7 +139,13 @@ export const AddSplitBill: FC<addSplitBillProps> = ({
         toast.error("Failed to add split");
       },
     });
-    setParticipants([]);
+    setParticipants([
+      {
+        id: crypto.randomUUID(),
+        name: owmerdata.name,
+        email: owmerdata.email,
+      },
+    ]);
   };
 
   if (!isOpen) return <></>;
