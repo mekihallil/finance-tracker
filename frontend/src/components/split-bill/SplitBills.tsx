@@ -23,7 +23,7 @@ export const SplitBills: FC = (): ReactElement | null => {
   };
 
   const splitBill = (amount: number, participants: number) => {
-    return amount / participants;
+    return (amount / participants).toFixed(2);
   };
 
   useEffect(() => {
