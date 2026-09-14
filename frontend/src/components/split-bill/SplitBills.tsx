@@ -108,7 +108,7 @@ export const SplitBills: FC = (): ReactElement | null => {
                         className="flex justify-between border-[0.5px] border-gray-600 rounded-xl p-2"
                       >
                         <div className="flex gap-3 ">
-                          <h1 className="bg-gray-500 rounded-full px-2 my-auto">
+                          <h1 className="bg-gray-500/30 rounded-full px-2 my-auto">
                             {name.slice(0, 1).toLocaleUpperCase()}
                           </h1>
                           <h1 className="my-auto">{name}</h1>
