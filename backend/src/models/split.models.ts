@@ -1,6 +1,8 @@
 import { model, Model, Schema } from "mongoose";
 import type { ISplit } from "../validations/split.validation.js";
 
+const categoryEnum = ["Food", "Rent", "Taxi", "Travel", "Utilities", "Other"];
+
 export const SplitSchema: Schema<ISplit> = new Schema(
   {
     title: {
@@ -13,6 +15,12 @@ export const SplitSchema: Schema<ISplit> = new Schema(
       type: Number,
       required: true,
       trim: true,
+    },
+    category: {
+      type: String,
+      required: true,
+      enum: categoryEnum,
+      default: "Other",
     },
     participants: [
       {

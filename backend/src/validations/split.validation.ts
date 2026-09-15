@@ -1,8 +1,18 @@
 import { z } from "zod";
 
+const categoryEnum = z.enum([
+  "Food",
+  "Rent",
+  "Taxi",
+  "Travel",
+  "Utilities",
+  "Other",
+]);
+
 export const splitValidatorSchema = z.object({
   title: z.string().min(3, "Title must be at least 3 characters long"),
   amount: z.number().min(0, "Amount cannot be negative"),
+  category: categoryEnum,
   participants: z
     .array(
       z.object({
