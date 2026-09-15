@@ -32,3 +32,4 @@ export const splitSchema = z.object({
     ),
 });
 export type splitFormData = z.infer<typeof splitSchema>;
+export type categoryEnumFormData = z.infer<typeof categoryEnum>;

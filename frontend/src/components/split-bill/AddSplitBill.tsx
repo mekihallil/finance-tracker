@@ -1,5 +1,9 @@
 import { useSplit } from "@/hook/userSplit.hook";
-import { splitSchema, type splitFormData } from "@/types/splitSchema.types";
+import {
+  splitSchema,
+  type categoryEnumFormData,
+  type splitFormData,
+} from "@/types/splitSchema.types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Plus, X } from "lucide-react";
 import { useEffect, useState, type FC, type ReactElement } from "react";
@@ -29,7 +33,7 @@ interface addSplitBillProps {
 
 type Category = {
   id: number;
-  category: string;
+  category: categoryEnumFormData;
 };
 
 const CategoryData: Category[] = [
@@ -74,7 +78,6 @@ export const AddSplitBill: FC<addSplitBillProps> = ({
     resolver: zodResolver(splitSchema),
     defaultValues: {
       title: "",
-      category: "Other",
       participants: [
         {
           name: owmerdata.name,
@@ -195,7 +198,11 @@ export const AddSplitBill: FC<addSplitBillProps> = ({
                 id="category"
                 className="rounded-2xl bg-gray-200 dark:bg-[#283243] dark:border border-[#202B3D] p-2"
                 {...register("category")}
+                defaultValue=""
               >
+                <option value="" disabled>
+                  Select a category
+                </option>
                 {CategoryData.map(({ id, category }) => {
                   return (
                     <option
