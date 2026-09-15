@@ -1,7 +1,48 @@
 import { useSplit } from "@/hook/userSplit.hook";
-import { Check, PizzaIcon, Trash2 } from "lucide-react";
-import { useEffect, type FC, type ReactElement } from "react";
+import {
+  CarTaxiFront,
+  Check,
+  House,
+  MoreHorizontal,
+  PizzaIcon,
+  Plane,
+  Trash2,
+  Zap,
+} from "lucide-react";
+import { useEffect, type FC, type ReactElement, type ReactNode } from "react";
 import { toast } from "sonner";
+
+interface categoryProps {
+  categoryId: string;
+  icon: ReactNode;
+}
+
+const categoryIcon: categoryProps[] = [
+  {
+    categoryId: "Food",
+    icon: <PizzaIcon size={20} />,
+  },
+  {
+    categoryId: "Rent",
+    icon: <House size={20} />,
+  },
+  {
+    categoryId: "Taxi",
+    icon: <CarTaxiFront size={20} />,
+  },
+  {
+    categoryId: "Travel",
+    icon: <Plane size={20} />,
+  },
+  {
+    categoryId: "Utilities",
+    icon: <Zap size={20} />,
+  },
+  {
+    categoryId: "Other",
+    icon: <MoreHorizontal size={20} />,
+  },
+];
 
 interface splitParticipantsProps {
   _id: string;
@@ -54,7 +95,11 @@ export const SplitBills: FC = (): ReactElement | null => {
   if (!data || !Array.isArray(data)) return null;
   return (
     <div>
-      {data.map(({ _id, title, amount, participants, createdAt }) => {
+      {data.map(({ _id, title, category, amount, participants, createdAt }) => {
+        const CategoryIcon = categoryIcon.find(
+          (c) => c.categoryId === category,
+        )?.icon;
+        console.log(category);
         return (
           <article
             key={_id}
@@ -63,9 +108,7 @@ export const SplitBills: FC = (): ReactElement | null => {
             <main>
               <div className="flex justify-between">
                 <section className="flex gap-4">
-                  <div>
-                    <PizzaIcon size={20} />
-                  </div>
+                  <div>{CategoryIcon}</div>
                   <div>
                     <p className="text-[17px] font-semibold">{title}</p>
                     <p className="text-[14px] text-gray-400 font-medium">
