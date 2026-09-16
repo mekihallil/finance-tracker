@@ -13,17 +13,20 @@ import { toast } from "sonner";
 type ownerDataProps = {
   name: string;
   email: string;
+  paid: boolean;
 };
 
 const owmerdata: ownerDataProps = {
   name: "You",
   email: "you@gmail.com",
+  paid: true,
 };
 
 interface participantsProps {
   id: string;
   name: string;
   email: string;
+  paid?: boolean;
 }
 
 interface addSplitBillProps {
@@ -82,6 +85,7 @@ export const AddSplitBill: FC<addSplitBillProps> = ({
         {
           name: owmerdata.name,
           email: owmerdata.email,
+          paid: owmerdata.paid,
         },
       ],
     },
@@ -92,6 +96,7 @@ export const AddSplitBill: FC<addSplitBillProps> = ({
       id: crypto.randomUUID(),
       name: owmerdata.name,
       email: owmerdata.email,
+      paid: owmerdata.paid,
     },
   ]);
   useEffect(() => {
@@ -128,9 +133,10 @@ export const AddSplitBill: FC<addSplitBillProps> = ({
   const onSubmit = (data: Omit<splitFormData, "participants">) => {
     const payload = {
       ...data,
-      participants: participants.map(({ name, email }) => ({
+      participants: participants.map(({ paid, name, email }) => ({
         name: name,
         email: email,
+        paid: paid ?? false,
       })),
     };
     AddSplitMutation.mutate(payload, {
@@ -147,6 +153,7 @@ export const AddSplitBill: FC<addSplitBillProps> = ({
         id: crypto.randomUUID(),
         name: owmerdata.name,
         email: owmerdata.email,
+        paid: owmerdata.paid,
       },
     ]);
   };
