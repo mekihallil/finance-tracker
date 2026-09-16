@@ -4,9 +4,12 @@ Content-Type: application/json
 {
     "title": "split title",
     "amount": 2000,
-    "category":"Rent", //["Food","Rent","Taxi","Travel","Utilities","Other"]
+    "category":"Rent",
     "participants": [
-        { "name": "meki", "email": "email@gmail.com" },
-        { "name": "meki", "email": "email@gmail.com" }
+        { "name": "meki", 
+        "email": "email@gmail.com", 
+        "paid":false
+        },
+        { "name": "meki", "email": "emailnhgb@gmail.com", "paid":true }
     ]
 }

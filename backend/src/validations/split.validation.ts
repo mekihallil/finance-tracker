@@ -18,6 +18,7 @@ export const splitValidatorSchema = z.object({
       z.object({
         name: z.string().min(3, "name must be at least 3 characters long"),
         email: z.string(),
+        paid: z.boolean().default(false),
       }),
     )
     .min(1, "At least one Participants is required"),
