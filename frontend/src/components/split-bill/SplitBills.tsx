@@ -2,6 +2,7 @@ import { useSplit } from "@/hook/userSplit.hook";
 import {
   CarTaxiFront,
   Check,
+  Clock,
   House,
   MoreHorizontal,
   PizzaIcon,
@@ -47,6 +48,7 @@ const categoryIcon: categoryProps[] = [
 interface splitParticipantsProps {
   _id: string;
   name: string;
+  paid: boolean;
 }
 
 export const SplitBills: FC = (): ReactElement | null => {
@@ -99,6 +101,10 @@ export const SplitBills: FC = (): ReactElement | null => {
         const CategoryIcon = categoryIcon.find(
           (c) => c.categoryId === category,
         )?.icon;
+
+        const UnpaidLength = participants.filter(
+          (p: splitParticipantsProps) => !p.paid,
+        ).length;
         return (
           <article
             key={_id}
@@ -115,7 +121,7 @@ export const SplitBills: FC = (): ReactElement | null => {
                     </p>
                     <div className="flex gap-2 mt-1">
                       <h2 className="font-semibold text-[12px] capitalize bg-gray-400/25 rounded-2xl my-auto py-0.5 px-2">
-                        2 Pending
+                        {UnpaidLength} Pending
                       </h2>
                       <h2>Total: ${amount}</h2>
                     </div>
@@ -143,25 +149,35 @@ export const SplitBills: FC = (): ReactElement | null => {
               <section className="mt-2">
                 <h1>Participants</h1>
                 <div className="grid grid-cols-2 gap-2 mt-1">
-                  {participants.map(({ _id, name }: splitParticipantsProps) => {
-                    return (
-                      <section
-                        key={_id}
-                        className="flex justify-between border-[0.5px] border-gray-600 rounded-xl p-2"
-                      >
-                        <div className="flex gap-3 ">
-                          <h1 className="bg-gray-500/30 rounded-full px-2 my-auto">
-                            {name.slice(0, 1).toLocaleUpperCase()}
-                          </h1>
-                          <h1 className="my-auto">{name}</h1>
-                        </div>
-                        <div className="flex gap-2">
-                          <h1>${splitBill(amount, participants.length)} </h1>
-                          <Check size={15} className="my-auto" />
-                        </div>
-                      </section>
-                    );
-                  })}
+                  {participants.map(
+                    ({ _id, name, paid }: splitParticipantsProps) => {
+                      return (
+                        <section
+                          key={_id}
+                          className="flex justify-between border-[0.5px] border-gray-600 rounded-xl p-2"
+                        >
+                          <div className="flex gap-3 ">
+                            <h1 className="bg-gray-500/30 rounded-full px-2 my-auto">
+                              {name.slice(0, 1).toLocaleUpperCase()}
+                            </h1>
+                            <h1 className="my-auto capitalize">{name}</h1>
+                          </div>
+                          <div className="flex gap-2">
+                            <h1>${splitBill(amount, participants.length)} </h1>
+                            {paid == true ? (
+                              <Check size={15} className="my-auto " />
+                            ) : (
+                              <Clock
+                                size={15}
+                                color="#FE9A00"
+                                className="my-auto"
+                              />
+                            )}
+                          </div>
+                        </section>
+                      );
+                    },
+                  )}
                 </div>
               </section>
             </main>
