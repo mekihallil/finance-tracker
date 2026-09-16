@@ -99,7 +99,6 @@ export const SplitBills: FC = (): ReactElement | null => {
         const CategoryIcon = categoryIcon.find(
           (c) => c.categoryId === category,
         )?.icon;
-        console.log(category);
         return (
           <article
             key={_id}

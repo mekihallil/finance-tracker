@@ -27,7 +27,8 @@ export const splitSchema = z.object({
     .array(participants)
     .min(2, "At least one participant is required  ")
     .refine(
-      (list) => new Set(list.map((p) => p.email.toLowerCase())).size === list.length,
+      (list) =>
+        new Set(list.map((p) => p.email.toLowerCase())).size === list.length,
       { message: "Duplicate participant emails are not allowed" },
     ),
 });
