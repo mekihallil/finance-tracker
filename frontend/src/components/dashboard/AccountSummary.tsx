@@ -51,7 +51,7 @@ const StatCardItem: FC<StatCardItemProps> = ({ card }): ReactElement => {
       <section>
         <div className="text-[#94A3B8] font-semibold">{card.label}</div>
         <div className="text-[#2CC66D] font-bold text-[28px]">
-          {card.value.toLocaleString()}
+          {card.value}
         </div>
         <div className="text-[#94A3B8] text-[12px]">{card.subLabel}</div>
       </section>
