@@ -1,4 +1,5 @@
 import {
+  Bell,
   CirclePlus,
   Dot,
   House,
@@ -27,6 +28,12 @@ const navData: nav[] = [
     title: "Split Bills",
     icon: <Users size={15} />,
     url: "/split-bill",
+  },
+  {
+    id: 5,
+    title: "Notification",
+    icon: <Bell size={15} />,
+    url: "/notification",
   },
 ];
 
