@@ -50,7 +50,9 @@ const StatCardItem: FC<StatCardItemProps> = ({ card }): ReactElement => {
 
       <section>
         <div className="text-[#94A3B8] font-semibold">{card.label}</div>
-        <div className="text-[#2CC66D] font-bold text-[28px]">{card.value}</div>
+        <div className="text-[#2CC66D] font-bold text-[28px]">
+          {card.value.toLocaleString()}
+        </div>
         <div className="text-[#94A3B8] text-[12px]">{card.subLabel}</div>
       </section>
     </article>
@@ -86,7 +88,12 @@ export const AccountSummary: FC = (): ReactElement => {
     {
       id: "saving-progress",
       label: "Saving Progress",
-      value: topGoal ? `$${topGoal.amount.toFixed(2)}` : "$0.00",
+      value: topGoal
+        ? `${topGoal.amount.toLocaleString("en-US", {
+            style: "currency",
+            currency: "USD",
+          })}`
+        : "$0.00",
       percentageChange: topGoal ? topGoal.percentage : 0,
       subLabel: topGoal ? `${topGoal.percentage}% of goal` : "No goals yet",
     },
