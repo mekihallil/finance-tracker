@@ -13,3 +13,7 @@ export const getSplitBills = async () => {
   const splitBills = await Split.find();
   return splitBills;
 };
+export const DeleteSplitBill = async (id: any) => {
+  const deleteSplit = await Split.findByIdAndDelete(id);
+  return deleteSplit;
+};
