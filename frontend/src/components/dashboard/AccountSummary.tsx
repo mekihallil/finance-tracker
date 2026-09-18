@@ -25,21 +25,17 @@ const StatCardItem: FC<StatCardItemProps> = ({ card }): ReactElement => {
   const isNegative = card.percentageChange < 0;
 
   return (
-    <article className="flex flex-col justify-between dark:bg-linear-to-tl dark:to-[#30373E] border border-gray-200 rounded-2xl shadow-2xl w-68.75 p-6.25">
+    <article className="flex flex-col justify-between dark:bg-linear-to-tl dark:to-[#30373E] border border-gray-200 rounded-2xl shadow-2xl  p-6.25">
       <header className="flex justify-between">
         <Wallet size={20} className="mx-4 my-5" />
         <div className="flex items-start">
-          <div className="flex gap-1 items-center rounded-2xl text-xl py-1 px-2 ">
+          <div
+            className={`flex gap-1 items-center rounded-2xl text-xl py-1 px-2 ${isNegative ? " bg-red-500/10" : "bg-green-500/10"}`}
+          >
             {isNegative ? (
-              <TrendingDown
-                size={13}
-                className="ml-0.5 bg-red-500/10 text-red-500"
-              />
+              <TrendingDown size={13} className="ml-0.5 text-red-500" />
             ) : (
-              <TrendingUp
-                size={13}
-                className="ml-0.5 bg-green-500/10 text-green-500"
-              />
+              <TrendingUp size={13} className="ml-0.5 text-green-500" />
             )}
             <p className="text-[12px] font-semibold">
               {Math.abs(card.percentageChange)}%
@@ -50,9 +46,7 @@ const StatCardItem: FC<StatCardItemProps> = ({ card }): ReactElement => {
 
       <section>
         <div className="text-[#94A3B8] font-semibold">{card.label}</div>
-        <div className="text-[#2CC66D] font-bold text-[28px]">
-          {card.value}
-        </div>
+        <div className="text-[#2CC66D] font-bold text-[28px]">{card.value}</div>
         <div className="text-[#94A3B8] text-[12px]">{card.subLabel}</div>
       </section>
     </article>
@@ -110,7 +104,7 @@ export const AccountSummary: FC = (): ReactElement => {
   if (isError) return <div>Error: {error.message}</div>;
 
   return (
-    <section className="grid grid-cols-4 gap-8 mb-8.75">
+    <section className="grid grid-cols-4 gap-7 w-full mb-8.75">
       {statCards.map((card) => (
         <StatCardItem key={card.id} card={card} />
       ))}
