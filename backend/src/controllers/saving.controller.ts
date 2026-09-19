@@ -2,7 +2,11 @@ import type { Request, Response } from "express";
 import { StatusCodes } from "http-status-codes";
 import { ZodError } from "zod";
 import { NotFoundError, sendError } from "../error/error.js";
-import { createSaving, getSavingProgress } from "../service/saving.service.js";
+import {
+  createSaving,
+  DeleteSaving,
+  getSavingProgress,
+} from "../service/saving.service.js";
 import type { ISaving } from "../validations/saving.validation.js";
 
 // Add savings
@@ -35,6 +39,29 @@ export const getGoalSaving = async (req: Request, res: Response) => {
   } catch (error) {
     if (error instanceof NotFoundError)
       return sendError(res, StatusCodes.NOT_FOUND, `${error.message} `);
+    sendError(
+      res,
+      StatusCodes.INTERNAL_SERVER_ERROR,
+      "Internal server error",
+      error,
+    );
+  }
+};
+
+export const deleteSaving = async (
+  req: Request<{ id: string }>,
+  res: Response,
+) => {
+  try {
+    const { id } = req.params;
+    const savingDelete = await DeleteSaving(id);
+    if (!savingDelete) {
+      return sendError(res, StatusCodes.BAD_REQUEST, "Saving not Found");
+    }
+    res
+      .status(StatusCodes.OK)
+      .json({ message: "Saving deleted successfully " });
+  } catch (error) {
     sendError(
       res,
       StatusCodes.INTERNAL_SERVER_ERROR,
