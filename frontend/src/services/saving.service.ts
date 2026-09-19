@@ -18,4 +18,8 @@ export const savingService = {
     const { data } = await apiClient.patch(`/saving/update/${id}`, { amount });
     return data;
   },
+  deleteSaving: async (id: string) => {
+    const { data } = await apiClient.delete(`/saving/delete/${id}`);
+    return data;
+  },
 };

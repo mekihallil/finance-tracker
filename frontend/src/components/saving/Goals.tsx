@@ -1,11 +1,11 @@
 import { useSaving } from "@/hook/userSaving.hook";
-import { Calendar } from "lucide-react";
+import { Calendar, Trash2 } from "lucide-react";
 import { useEffect, type FC, type ReactElement } from "react";
 import { toast } from "sonner";
 import { AddMoneyPopover } from "./AddMoneyPoppver";
 
 export const Goals: FC = (): ReactElement | null => {
-  const { goalsQuery } = useSaving();
+  const { goalsQuery, DeleteSaving } = useSaving();
   const goals = goalsQuery;
   useEffect(() => {
     if (goals.isError) {
@@ -55,7 +55,8 @@ export const Goals: FC = (): ReactElement | null => {
       label = `${months} month${months > 1 ? "s" : ""} left`;
     else if (days >= 1) label = `${days} day${days > 1 ? "s" : ""} left`;
     else if (hours >= 1) label = `${hours} hour${hours > 1 ? "s" : ""} left`;
-    else if (minutes >= 1) label = `${minutes} minute${minutes > 1 ? "s" : ""} left`;
+    else if (minutes >= 1)
+      label = `${minutes} minute${minutes > 1 ? "s" : ""} left`;
     else label = `0 day left`;
 
     return label;
@@ -81,9 +82,14 @@ export const Goals: FC = (): ReactElement | null => {
             >
               <header className="flex justify-between gap-2">
                 <h2 className="font-medium text-xl capitalize">{name}</h2>
-                <h2 className="font-semibold text-[12px] capitalize bg-gray-400/25 rounded-2xl py-1 px-2">
-                  {category}
-                </h2>
+                <div className="flex">
+                  <h2 className="font-semibold text-[12px] capitalize bg-gray-400/25 rounded-2xl py-1 px-2">
+                    {category}
+                  </h2>
+                  <button onClick={() => DeleteSaving.mutate(_id)}>
+                    <Trash2 size={20} />
+                  </button>
+                </div>
               </header>
               <section className="flex justify-between py-7">
                 <h1 className="font-semibold text-2xl">${amount}</h1>

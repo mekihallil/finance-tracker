@@ -30,13 +30,24 @@ export const useSaving = () => {
 
   const createSavingMutation = useMutation({
     mutationFn: (data: SavingFormData) => savingService.create(data),
-    onSuccess: invalidateAllQueries,
+    onSuccess: () => invalidateAllQueries(),
   });
 
   const AddMoney = useMutation({
     mutationFn: ({ id, amount }: { id: string; amount: number }) =>
       goalService.updateGoals(id, amount),
-    onSuccess: invalidateAllQueries,
+    onSuccess: () => invalidateAllQueries(),
   });
-  return { savingQuery, goalsQuery, createSavingMutation, AddMoney };
+
+  const DeleteSaving = useMutation({
+    mutationFn: (id: string) => savingService.deleteSaving(id),
+    onSuccess: () => invalidateAllQueries(),
+  });
+  return {
+    savingQuery,
+    goalsQuery,
+    createSavingMutation,
+    AddMoney,
+    DeleteSaving,
+  };
 };
