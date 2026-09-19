@@ -52,7 +52,7 @@ interface splitParticipantsProps {
 }
 
 export const SplitBills: FC = (): ReactElement | null => {
-  const { getSplitQuery } = useSplit();
+  const { getSplitQuery, DeleteSplitMutation } = useSplit();
   const split = getSplitQuery;
   const { isError, error, isLoading } = split;
 
@@ -138,9 +138,12 @@ export const SplitBills: FC = (): ReactElement | null => {
                         <h1>Paid</h1>
                       </div>
                     </div>
-                    <div className="my-auto">
+                    <button
+                      onClick={() => DeleteSplitMutation.mutate(_id)}
+                      className="my-auto"
+                    >
                       <Trash2 size={16} />
-                    </div>
+                    </button>
                   </div>
                 </section>
               </div>

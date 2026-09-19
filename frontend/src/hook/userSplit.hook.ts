@@ -8,9 +8,13 @@ export const useSplit = () => {
     queryKey: ["getSplit"],
     queryFn: splitBillService.getSplitBills,
   });
-  const AddSplitMutation= useMutation({
+  const AddSplitMutation = useMutation({
     mutationFn: (data: splitFormData) => splitBillService.AddSplit(data),
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ["getSplit"] }),
   });
-  return { getSplitQuery, AddSplitMutation };
+  const DeleteSplitMutation = useMutation({
+    mutationFn: (id: string) => splitBillService.DeleteSplit(id),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["getSplit"] }),
+  });
+  return { getSplitQuery, AddSplitMutation, DeleteSplitMutation };
 };

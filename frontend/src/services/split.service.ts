@@ -10,4 +10,8 @@ export const splitBillService = {
     const { data } = await apiClient.post("/split/create", split);
     return data;
   },
+  DeleteSplit: async (id: string) => {
+    const { data } = await apiClient.delete(`/split/delete/${id}`);
+    return data;
+  },
 };
