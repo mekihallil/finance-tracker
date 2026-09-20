@@ -1,12 +1,15 @@
 import { useSaving } from "@/hook/userSaving.hook";
 import { Calendar, X } from "lucide-react";
-import { useEffect, type FC, type ReactElement } from "react";
+import { useEffect, useState, type FC, type ReactElement } from "react";
 import { toast } from "sonner";
 import { AddMoneyPopover } from "./AddMoneyPoppver";
 
 export const Goals: FC = (): ReactElement | null => {
   const { goalsQuery, DeleteSaving } = useSaving();
   const goals = goalsQuery;
+
+  const [IsHovered, setIsHovered] = useState(false);
+
   useEffect(() => {
     if (goals.isError) {
       toast.error(goals.error.message);
@@ -77,6 +80,8 @@ export const Goals: FC = (): ReactElement | null => {
           const Percentage = percentage ?? 0;
           return (
             <section
+              onMouseEnter={() => setIsHovered(true)}
+              onMouseLeave={() => setIsHovered(false)}
               key={_id}
               className="rounded-[20px] border border-gray-300 dark:bg-[#2C3546] dark:border-none p-7 "
             >
@@ -86,9 +91,13 @@ export const Goals: FC = (): ReactElement | null => {
                   <h2 className="font-semibold text-[12px] capitalize bg-gray-400/25 rounded-2xl py-1 px-2">
                     {category}
                   </h2>
-                  <button onClick={() => DeleteSaving.mutate(_id)} >
-                    <X size={20} className="hover:text-red-500"/>
-                  </button>
+                  {IsHovered ? (
+                    <button onClick={() => DeleteSaving.mutate(_id)}>
+                      <X size={20} className="hover:text-red-500" />
+                    </button>
+                  ) : (
+                    <div className="mr-5"></div>
+                  )}
                 </div>
               </header>
               <section className="flex justify-between py-7">
