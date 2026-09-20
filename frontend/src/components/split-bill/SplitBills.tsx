@@ -10,7 +10,13 @@ import {
   Trash2,
   Zap,
 } from "lucide-react";
-import { useEffect, type FC, type ReactElement, type ReactNode } from "react";
+import {
+  useEffect,
+  useState,
+  type FC,
+  type ReactElement,
+  type ReactNode,
+} from "react";
 import { toast } from "sonner";
 
 interface categoryProps {
@@ -75,6 +81,8 @@ export const SplitBills: FC = (): ReactElement | null => {
     }
   }, [isError, error]);
 
+  const [IsHovered, setIsHovered] = useState(false);
+
   if (isLoading) {
     return (
       <div className="flex justify-center p-10">
@@ -107,6 +115,8 @@ export const SplitBills: FC = (): ReactElement | null => {
         ).length;
         return (
           <article
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
             key={_id}
             className="border border-gray-300 rounded-3xl p-7 mt-8 shadow-2xl dark:bg-[#2C3546]"
           >
@@ -138,12 +148,16 @@ export const SplitBills: FC = (): ReactElement | null => {
                         <h1>Paid</h1>
                       </div>
                     </div>
-                    <button
-                      onClick={() => DeleteSplitMutation.mutate(_id)}
-                      className="my-auto"
-                    >
-                      <Trash2 size={16} />
-                    </button>
+                    {IsHovered ? (
+                      <button
+                        onClick={() => DeleteSplitMutation.mutate(_id)}
+                        className="my-auto"
+                      >
+                        <Trash2 size={16} />
+                      </button>
+                    ) : (
+                      <div className="mr-4"></div>
+                    )}
                   </div>
                 </section>
               </div>
