@@ -1,5 +1,5 @@
 import { useSaving } from "@/hook/userSaving.hook";
-import { Calendar, Trash2 } from "lucide-react";
+import { Calendar, X } from "lucide-react";
 import { useEffect, type FC, type ReactElement } from "react";
 import { toast } from "sonner";
 import { AddMoneyPopover } from "./AddMoneyPoppver";
@@ -86,8 +86,8 @@ export const Goals: FC = (): ReactElement | null => {
                   <h2 className="font-semibold text-[12px] capitalize bg-gray-400/25 rounded-2xl py-1 px-2">
                     {category}
                   </h2>
-                  <button onClick={() => DeleteSaving.mutate(_id)}>
-                    <Trash2 size={20} />
+                  <button onClick={() => DeleteSaving.mutate(_id)} >
+                    <X size={20} className="hover:text-red-500"/>
                   </button>
                 </div>
               </header>
