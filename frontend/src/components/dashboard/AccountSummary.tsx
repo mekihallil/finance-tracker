@@ -1,3 +1,4 @@
+import { useExpense } from "@/hook/userExpense.hook";
 import { useSaving } from "@/hook/userSaving.hook";
 import { TrendingDown, TrendingUp, Wallet } from "lucide-react";
 import { type FC, type ReactElement } from "react";
@@ -12,7 +13,7 @@ interface GoalData {
 interface StatCard {
   id: string;
   label: string;
-  value: string;
+  value: number;
   percentageChange: number;
   subLabel: string;
 }
@@ -46,7 +47,12 @@ const StatCardItem: FC<StatCardItemProps> = ({ card }): ReactElement => {
 
       <section>
         <div className="text-[#94A3B8] font-semibold">{card.label}</div>
-        <div className="text-[#2CC66D] font-bold text-[28px]">{card.value}</div>
+        <div className="text-[#2CC66D] font-bold text-[28px]">
+          {card.value.toLocaleString("en-US", {
+            style: "currency",
+            currency: "USD",
+          })}
+        </div>
         <div className="text-[#94A3B8] text-[12px]">{card.subLabel}</div>
       </section>
     </article>
@@ -56,6 +62,9 @@ const StatCardItem: FC<StatCardItemProps> = ({ card }): ReactElement => {
 export const AccountSummary: FC = (): ReactElement => {
   const { goalsQuery } = useSaving();
   const { data, isLoading, isError, error } = goalsQuery;
+
+  const { expenseMonthlyQuery } = useExpense();
+  const expense = expenseMonthlyQuery;
 
   const topGoal =
     data && data.length > 0
@@ -68,14 +77,14 @@ export const AccountSummary: FC = (): ReactElement => {
     {
       id: "total-spent",
       label: "Total Spent",
-      value: "$1,250.75",
+      value: expense.data?.totalMonthExpense || 0.0,
       percentageChange: -12,
       subLabel: "from last month",
     },
     {
       id: "monthly-budget",
       label: "Monthly Budget",
-      value: "$3,000.00",
+      value: 30,
       percentageChange: 5,
       subLabel: "remaining this month",
     },
@@ -83,18 +92,18 @@ export const AccountSummary: FC = (): ReactElement => {
       id: "saving-progress",
       label: "Saving Progress",
       value: topGoal
-        ? `${topGoal.amount.toLocaleString("en-US", {
+        ? topGoal.amount.toLocaleString("en-US", {
             style: "currency",
             currency: "USD",
-          })}`
-        : "$0.00",
+          })
+        : 0.0,
       percentageChange: topGoal ? topGoal.percentage : 0,
       subLabel: topGoal ? `${topGoal.percentage}% of goal` : "No goals yet",
     },
     {
       id: "group-expense",
       label: "Group Expense",
-      value: "$320.50",
+      value: 320,
       percentageChange: 3,
       subLabel: "shared this month",
     },
