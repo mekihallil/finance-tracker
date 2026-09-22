@@ -2,6 +2,7 @@ import { useExpense } from "@/hook/userExpense.hook";
 import { useSaving } from "@/hook/userSaving.hook";
 import { TrendingDown, TrendingUp, Wallet } from "lucide-react";
 import { type FC, type ReactElement } from "react";
+import { Link } from "react-router";
 
 interface GoalData {
   _id: string;
@@ -12,6 +13,7 @@ interface GoalData {
 
 interface StatCard {
   id: string;
+  link: string;
   label: string;
   value: number;
   percentageChange: number;
@@ -35,6 +37,7 @@ export const AccountSummary: FC = (): ReactElement => {
   const statCards: StatCard[] = [
     {
       id: "total-spent",
+      link: "/expense",
       label: "Total Spent",
       value: expense.data?.totalMonthExpense || 0.0,
       percentageChange: -12,
@@ -42,6 +45,7 @@ export const AccountSummary: FC = (): ReactElement => {
     },
     {
       id: "monthly-budget",
+      link: "/expense",
       label: "Monthly Budget",
       value: 30,
       percentageChange: 5,
@@ -49,6 +53,7 @@ export const AccountSummary: FC = (): ReactElement => {
     },
     {
       id: "saving-progress",
+      link: "/saving",
       label: "Saving Progress",
       value: topGoal
         ? topGoal.amount.toLocaleString("en-US", {
@@ -61,6 +66,7 @@ export const AccountSummary: FC = (): ReactElement => {
     },
     {
       id: "group-expense",
+      link: "/split-bill",
       label: "Group Expense",
       value: 320,
       percentageChange: 3,
@@ -73,8 +79,11 @@ export const AccountSummary: FC = (): ReactElement => {
 
   return (
     <section className="grid grid-cols-4 gap-7 w-full mb-8.75">
-      {statCards.map(({ percentageChange, value, label, subLabel }) => (
-        <article className="flex flex-col justify-between dark:bg-linear-to-tl dark:to-[#30373E] border border-gray-200 rounded-2xl shadow-2xl  p-6.25">
+      {statCards.map(({ link, percentageChange, value, label, subLabel }) => (
+        <Link
+          to={link}
+          className="flex flex-col justify-between dark:bg-linear-to-tl dark:to-[#30373E] border border-gray-200 rounded-2xl shadow-2xl  p-6.25"
+        >
           <header className="flex justify-between">
             <Wallet size={20} className="mx-4 my-5" />
             <div className="flex items-start">
@@ -103,7 +112,7 @@ export const AccountSummary: FC = (): ReactElement => {
             </div>
             <div className="text-[#94A3B8] text-[12px]">{subLabel}</div>
           </section>
-        </article>
+        </Link>
       ))}
     </section>
   );
