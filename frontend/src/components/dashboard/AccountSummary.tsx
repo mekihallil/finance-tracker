@@ -25,7 +25,17 @@ export const AccountSummary: FC = (): ReactElement => {
   const { data, isLoading, isError, error } = goalsQuery;
 
   const { expenseMonthlyQuery } = useExpense();
-  const expense = expenseMonthlyQuery;
+  const expense = expenseMonthlyQuery.data;
+
+  const lastWithcurrentDifference =
+    expense?.totalMonthExpense - expense?.totalLastMonthExpense || 0;
+
+  const lastWithcurrentPercentage =
+    (Math.abs(lastWithcurrentDifference) /
+      (expense?.totalLastMonthExpense > 0
+        ? expense?.totalLastMonthExpense
+        : 1)) *
+    100;
 
   const topGoal =
     data && data.length > 0
@@ -39,8 +49,8 @@ export const AccountSummary: FC = (): ReactElement => {
       id: "total-spent",
       link: "/expense",
       label: "Total Spent",
-      value: expense.data?.totalMonthExpense || 0.0,
-      percentageChange: -12,
+      value: expense?.totalMonthExpense || 0.0,
+      percentageChange: lastWithcurrentPercentage || 0,
       subLabel: "from last month",
     },
     {
@@ -79,41 +89,43 @@ export const AccountSummary: FC = (): ReactElement => {
 
   return (
     <section className="grid grid-cols-4 gap-7 w-full mb-8.75">
-      {statCards.map(({ link, percentageChange, value, label, subLabel }) => (
-        <Link
-          to={link}
-          className="flex flex-col justify-between dark:bg-linear-to-tl dark:to-[#30373E] border border-gray-200 rounded-2xl shadow-2xl  p-6.25"
-        >
-          <header className="flex justify-between">
-            <Wallet size={20} className="mx-4 my-5" />
-            <div className="flex items-start">
-              <div
-                className={`flex gap-1 items-center rounded-2xl text-xl py-1 px-2 ${percentageChange < 0 ? " bg-red-500/10" : "bg-green-500/10"}`}
-              >
-                {percentageChange < 0 ? (
-                  <TrendingDown size={13} className="ml-0.5 text-red-500" />
-                ) : (
-                  <TrendingUp size={13} className="ml-0.5 text-green-500" />
-                )}
-                <p className="text-[12px] font-semibold">
-                  {Math.abs(percentageChange)}%
-                </p>
+      {statCards.map(
+        ({ id, link, percentageChange, value, label, subLabel }) => (
+          <Link
+            key={id}
+            to={link}
+            className="flex flex-col justify-between dark:bg-linear-to-tl dark:to-[#30373E] border border-gray-200 rounded-2xl shadow-2xl  p-6.25"
+          >
+            <header className="flex justify-between">
+              <Wallet size={20} className="mx-4 my-5" />
+              <div className="flex items-start">
+                <div
+                  className={`flex gap-1 items-center rounded-2xl text-xl py-1 px-2 ${percentageChange < 0 ? " bg-red-500/10" : "bg-green-500/10"}`}
+                >
+                  {lastWithcurrentDifference < 0 ? (
+                    <TrendingDown size={13} className="ml-0.5 text-red-500" />
+                  ) : (
+                    <TrendingUp size={13} className="ml-0.5 text-green-500" />
+                  )}
+                  <p className="text-[12px] font-semibold">
+                    {Math.abs(percentageChange)}%
+                  </p>
+                </div>
               </div>
-            </div>
-          </header>
-
-          <section>
-            <div className="text-[#94A3B8] font-semibold">{label}</div>
-            <div className="text-[#2CC66D] font-bold text-[28px]">
-              {value.toLocaleString("en-US", {
-                style: "currency",
-                currency: "USD",
-              })}
-            </div>
-            <div className="text-[#94A3B8] text-[12px]">{subLabel}</div>
-          </section>
-        </Link>
-      ))}
+            </header>
+            <section>
+              <div className="text-[#94A3B8] font-semibold">{label}</div>
+              <div className="text-[#2CC66D] font-bold text-[28px]">
+                {value.toLocaleString("en-US", {
+                  style: "currency",
+                  currency: "USD",
+                })}
+              </div>
+              <div className="text-[#94A3B8] text-[12px]">{subLabel}</div>
+            </section>
+          </Link>
+        ),
+      )}
     </section>
   );
 };
