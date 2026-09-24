@@ -22,13 +22,12 @@ export const savingService = {
     const { data } = await apiClient.delete(`/saving/delete/${id}`);
     return data;
   },
-   getAllGoals: async () => {
-    const { data } = await apiClient.get("/goal/goals");
+  getAllGoals: async () => {
+    const { data } = await apiClient.get("/saving/goals");
     return data;
   },
   updateGoals: async (id: string, amount: number) => {
-    const { data } = await apiClient.patch(`/goal/update/${id}`, { amount });
+    const { data } = await apiClient.patch(`/saving/update/${id}`, { amount });
     return data;
   },
 };
-
