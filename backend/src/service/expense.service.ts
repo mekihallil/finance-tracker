@@ -82,9 +82,31 @@ export const GetMonthlyExpense = async () => {
     0,
   );
 
+// last Month Date Range
+  const today = new Date();
+  const startDate = new Date(today.getFullYear(), today.getMonth() - 1, 1);
+  const endDate = new Date(
+    today.getFullYear(),
+    today.getMonth() - 1,
+    today.getDate(),
+  );
+
+  const lastMonthExpenses = await Expense.find({
+    createdAt: {
+      $gte: startDate,
+      $lt: endDate,
+    },
+  });
+
+  const totalLastMonthExpense = lastMonthExpenses.reduce(
+    (acc, item) => acc + item.amount,
+    0,
+  );
+
   return {
     totalMonthExpense,
     perDayAvarage,
     totalExpenseTransaction: monthExpenses.length,
+    totalLastMonthExpense,
   };
 };
