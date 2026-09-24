@@ -17,6 +17,7 @@ interface StatCard {
   label: string;
   value: number;
   percentageChange: number;
+  trendStatus: number;
   subLabel: string;
 }
 
@@ -51,6 +52,7 @@ export const AccountSummary: FC = (): ReactElement => {
       label: "Total Spent",
       value: expense?.totalMonthExpense || 0.0,
       percentageChange: lastWithcurrentPercentage || 0,
+      trendStatus: lastWithcurrentDifference,
       subLabel: "from last month",
     },
     {
@@ -59,6 +61,7 @@ export const AccountSummary: FC = (): ReactElement => {
       label: "Monthly Budget",
       value: 30,
       percentageChange: 5,
+      trendStatus: -2,
       subLabel: "remaining this month",
     },
     {
@@ -72,6 +75,7 @@ export const AccountSummary: FC = (): ReactElement => {
           })
         : 0.0,
       percentageChange: topGoal ? topGoal.percentage : 0,
+      trendStatus: 2,
       subLabel: topGoal ? `${topGoal.percentage}% of goal` : "No goals yet",
     },
     {
@@ -80,6 +84,7 @@ export const AccountSummary: FC = (): ReactElement => {
       label: "Group Expense",
       value: 320,
       percentageChange: 3,
+      trendStatus: -2,
       subLabel: "shared this month",
     },
   ];
@@ -90,7 +95,15 @@ export const AccountSummary: FC = (): ReactElement => {
   return (
     <section className="grid grid-cols-4 gap-7 w-full mb-8.75">
       {statCards.map(
-        ({ id, link, percentageChange, value, label, subLabel }) => (
+        ({
+          id,
+          link,
+          percentageChange,
+          trendStatus,
+          value,
+          label,
+          subLabel,
+        }) => (
           <Link
             key={id}
             to={link}
@@ -100,15 +113,15 @@ export const AccountSummary: FC = (): ReactElement => {
               <Wallet size={20} className="mx-4 my-5" />
               <div className="flex items-start">
                 <div
-                  className={`flex gap-1 items-center rounded-2xl text-xl py-1 px-2 ${percentageChange < 0 ? " bg-red-500/10" : "bg-green-500/10"}`}
+                  className={`flex gap-1 items-center rounded-2xl text-xl py-1 px-2 ${trendStatus < 0 ? " bg-red-500/10" : "bg-green-500/10"}`}
                 >
-                  {lastWithcurrentDifference < 0 ? (
+                  {trendStatus < 0 ? (
                     <TrendingDown size={13} className="ml-0.5 text-red-500" />
                   ) : (
                     <TrendingUp size={13} className="ml-0.5 text-green-500" />
                   )}
                   <p className="text-[12px] font-semibold">
-                    {Math.abs(percentageChange)}%
+                    {Math.round(percentageChange)}%
                   </p>
                 </div>
               </div>
