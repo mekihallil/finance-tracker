@@ -29,15 +29,16 @@ export const AccountSummary: FC = (): ReactElement => {
   const expense = expenseMonthlyQuery.data;
 
   const lastWithcurrentDifference =
-    expense?.totalMonthExpense - expense?.totalLastMonthExpense || 0;
+    expense?.totalMonthExpense - expense?.totalLastMonthExpense;
 
   const lastWithcurrentPercentage =
-    (Math.abs(lastWithcurrentDifference) /
-      (expense?.totalLastMonthExpense > 0
-        ? expense?.totalLastMonthExpense
-        : 1)) *
-    100;
-
+    expense?.totalLastMonthExpense > 0
+      ? (Math.abs(lastWithcurrentDifference) / expense?.totalLastMonthExpense) *
+        100
+      : 0;
+  console.log(
+    expense?.totalLastMonthExpense > 0 ? expense?.totalLastMonthExpense : 0,
+  );
   const topGoal =
     data && data.length > 0
       ? data.reduce((highest: GoalData, goal: GoalData) =>
@@ -75,7 +76,7 @@ export const AccountSummary: FC = (): ReactElement => {
           })
         : 0.0,
       percentageChange: topGoal ? topGoal.percentage : 0,
-      trendStatus: 2,
+      trendStatus: topGoal,
       subLabel: topGoal ? `${topGoal.percentage}% of goal` : "No goals yet",
     },
     {
@@ -121,7 +122,7 @@ export const AccountSummary: FC = (): ReactElement => {
                     <TrendingUp size={13} className="ml-0.5 text-green-500" />
                   )}
                   <p className="text-[12px] font-semibold">
-                    {Math.round(percentageChange)}%
+                    {percentageChange > 0 ? Math.round(percentageChange) : 0}%
                   </p>
                 </div>
               </div>
