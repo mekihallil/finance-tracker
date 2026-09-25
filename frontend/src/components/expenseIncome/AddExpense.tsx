@@ -16,7 +16,7 @@ import { type FC, type ReactElement } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
-import { useExpense } from "@/hook/userExpense.hook";
+import { useExpenseIncome } from "@/hook/userExpenseIncome.hook";
 import {
   expenseSchema,
   type ExpenseFormData,
@@ -39,7 +39,7 @@ const categoryData: Category[] = [
 ];
 
 export const AddExpense: FC = (): ReactElement => {
-  const { createExpenseMutation } = useExpense();
+  const { createExpenseMutation } = useExpenseIncome();
 
   const {
     register,

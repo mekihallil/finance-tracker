@@ -1,5 +1,5 @@
 import { expenseService } from "@/services/expense.service";
-import type { ExpenseFormData, ExpenseFormDataWithId } from "@/types/expenseSchema.type";
+import type { ExpenseFormData,} from "@/types/expenseSchema.type";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 const EXPENSEINCOME_QUERY_KEYS = {
@@ -19,7 +19,7 @@ export const useExpenseIncome = () => {
     );
   };
 
-  const getExpenseIncomeQuery = useQuery<ExpenseFormDataWithId[]>({
+  const getExpenseIncomeQuery = useQuery({
     queryKey: EXPENSEINCOME_QUERY_KEYS.expenseIncome,
     queryFn: expenseService.getExpenseIncome,
   });

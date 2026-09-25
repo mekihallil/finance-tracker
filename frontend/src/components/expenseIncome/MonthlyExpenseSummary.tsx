@@ -1,5 +1,5 @@
 // import { expenseService } from "@/services/expense.service";
-import { useExpense } from "@/hook/userExpense.hook";
+import { useExpenseIncome } from "@/hook/userExpenseIncome.hook";
 import { Calendar, DollarSign, Tag } from "lucide-react";
 import type { FC, ReactElement } from "react";
 import { toast } from "sonner";
@@ -13,8 +13,8 @@ type MonthData = {
 };
 
 export const MonthlyExpenseSummary: FC = (): ReactElement => {
-  const { expenseMonthlyQuery } = useExpense();
-  const expense = expenseMonthlyQuery;
+  const { getExpenseIncomeQuery } = useExpenseIncome();
+  const expense = getExpenseIncomeQuery;
   const data = expense.data;
 
   if (expense.isLoading) {

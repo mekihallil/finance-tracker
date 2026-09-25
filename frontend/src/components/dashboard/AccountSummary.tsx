@@ -1,4 +1,4 @@
-import { useExpense } from "@/hook/userExpense.hook";
+import { useExpenseIncome } from "@/hook/userExpenseIncome.hook";
 import { useSaving } from "@/hook/userSaving.hook";
 import { TrendingDown, TrendingUp, Wallet } from "lucide-react";
 import { type FC, type ReactElement } from "react";
@@ -25,8 +25,8 @@ export const AccountSummary: FC = (): ReactElement => {
   const { goalsQuery } = useSaving();
   const { data, isLoading, isError, error } = goalsQuery;
 
-  const { expenseMonthlyQuery } = useExpense();
-  const expense = expenseMonthlyQuery.data;
+  const { getExpenseIncomeQuery } = useExpenseIncome();
+  const expense = getExpenseIncomeQuery.data;
 
   const lastWithcurrentDifference =
     expense?.totalMonthExpense - expense?.totalLastMonthExpense;
@@ -36,9 +36,7 @@ export const AccountSummary: FC = (): ReactElement => {
       ? (Math.abs(lastWithcurrentDifference) / expense?.totalLastMonthExpense) *
         100
       : 0;
-  console.log(
-    expense?.totalLastMonthExpense > 0 ? expense?.totalLastMonthExpense : 0,
-  );
+
   const topGoal =
     data && data.length > 0
       ? data.reduce((highest: GoalData, goal: GoalData) =>
