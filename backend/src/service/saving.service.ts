@@ -1,5 +1,4 @@
 import { NotFoundError } from "../error/error.js";
-import { Expense } from "../models/expense.models.js";
 import { Saving } from "../models/saving.models.js";
 import { savingValidateSchema } from "../validations/saving.validation.js";
 

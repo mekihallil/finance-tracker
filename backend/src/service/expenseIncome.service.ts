@@ -1,13 +1,13 @@
-import { Expense } from "../models/expense.models.js";
-import type { IExpense } from "../validations/expense.validation.js";
+import { ExpenseIncome } from "../models/expenseIncome.models.js";
+import type { IExpenseIncome } from "../validations/expenseIncome.validation.js";
 
 export const GetExpense = async () => {
-  const expenses: IExpense[] = await Expense.find();
-  return expenses;
+  const expenseIncome: IExpenseIncome[] = await ExpenseIncome.find();
+  return expenseIncome;
 };
 
 export const GetSummary = async () => {
-  const expenses = await Expense.find();
+  const expenses = await ExpenseIncome.find();
 
   // Total income
   const totalIncome = expenses
@@ -29,12 +29,12 @@ export const GetSummary = async () => {
   };
 };
 
-export const CreateExpense = async (expense: IExpense) => {
-  const newExpense = await new Expense(expense).save();
+export const CreateExpense = async (expense: IExpenseIncome) => {
+  const newExpense = await new ExpenseIncome(expense).save();
   return newExpense;
 };
 export const DeleteExpense = async (id: any) => {
-  const deleteExpense = await Expense.findByIdAndDelete(id);
+  const deleteExpense = await ExpenseIncome.findByIdAndDelete(id);
   return deleteExpense;
 };
 
@@ -45,7 +45,7 @@ export const GetMonthlyExpense = async () => {
   const endDay = new Date();
   endDay.setHours(23, 59, 59, 999);
 
-  const todayExpenses = await Expense.find({
+  const todayExpenses = await ExpenseIncome.find({
     createdAt: {
       $gte: startDay,
       $lte: endDay,
@@ -70,7 +70,7 @@ export const GetMonthlyExpense = async () => {
   endMonth.setMonth(endMonth.getMonth() + 1);
   endMonth.setHours(0, 0, 0, 0);
   endMonth.setDate(1);
-  const monthExpenses = await Expense.find({
+  const monthExpenses = await ExpenseIncome.find({
     createdAt: {
       $gte: startMonth,
       $lt: endMonth,
@@ -91,7 +91,7 @@ export const GetMonthlyExpense = async () => {
     today.getDate(),
   );
 
-  const lastMonthExpenses = await Expense.find({
+  const lastMonthExpenses = await ExpenseIncome.find({
     createdAt: {
       $gte: startDate,
       $lt: endDate,

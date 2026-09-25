@@ -6,8 +6,8 @@ import {
   GetExpense,
   GetMonthlyExpense,
   GetSummary,
-} from "../service/expense.service.js";
-import type { IExpense } from "../validations/expense.validation.js";
+} from "../service/expenseIncome.service.js";
+import type { IExpenseIncome } from "../validations/expenseIncome.validation.js";
 import { sendError } from "../error/error.js";
 
 // get expenses
@@ -47,7 +47,7 @@ export const getSummary = async (
 
 // Create expenses
 export const createExpense = async (
-  req: Request<Record<string, never>, unknown, IExpense>,
+  req: Request<Record<string, never>, unknown, IExpenseIncome>,
   res: Response,
 ) => {
   try {

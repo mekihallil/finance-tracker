@@ -1,7 +1,7 @@
 import cors from "cors";
 import dotenv from "dotenv";
 import express from "express";
-import expenseRouter from "./routes/expense.route.js";
+import expenseRouter from "./routes/expenseIncome.route.js";
 import savingRouter from "./routes/saving.route.js";
 import splitRouter from "./routes/split.route.js";
 
