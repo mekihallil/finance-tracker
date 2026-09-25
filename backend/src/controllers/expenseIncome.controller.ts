@@ -3,9 +3,7 @@ import { StatusCodes } from "http-status-codes";
 import {
   CreateExpense,
   DeleteExpense,
-  GetExpense,
-  GetMonthlyExpense,
-  GetSummary,
+  GetExpenseIncome,
 } from "../service/expenseIncome.service.js";
 import type { IExpenseIncome } from "../validations/expenseIncome.validation.js";
 import { sendError } from "../error/error.js";
@@ -16,30 +14,13 @@ export const getExpenseIncome = async (
   res: Response,
 ): Promise<void> => {
   try {
-    const expenses = await GetExpense();
-    res.status(StatusCodes.OK).json(expenses);
+    const expenseAndIncome = await GetExpenseIncome();
+    res.status(StatusCodes.OK).json(expenseAndIncome);
   } catch (error) {
     sendError(
       res,
       StatusCodes.INTERNAL_SERVER_ERROR,
-      "Expense not found",
-      error,
-    );
-  }
-};
-// Summery expenses
-export const getSummary = async (
-  _req: Request,
-  res: Response,
-): Promise<void> => {
-  try {
-    const expenses = await GetSummary();
-    res.status(StatusCodes.OK).json(expenses);
-  } catch (error) {
-    sendError(
-      res,
-      StatusCodes.INTERNAL_SERVER_ERROR,
-      "Expense not found",
+      "Expense And/or Income not found",
       error,
     );
   }
@@ -79,19 +60,6 @@ export const deleteExpense = async (
     res
       .status(StatusCodes.OK)
       .json({ message: "Expense deleted successfully" });
-  } catch (error) {
-    sendError(res, StatusCodes.BAD_REQUEST, "Failed to delete Expense", error);
-  }
-};
-
-// monthly Expense
-export const getMonthlyExpense = async (
-  _req: Request,
-  res: Response,
-): Promise<void> => {
-  try {
-    const getSummary = await GetMonthlyExpense();
-    res.status(StatusCodes.OK).json(getSummary);
   } catch (error) {
     sendError(res, StatusCodes.BAD_REQUEST, "Failed to delete Expense", error);
   }

@@ -1,44 +1,24 @@
 import { ExpenseIncome } from "../models/expenseIncome.models.js";
 import type { IExpenseIncome } from "../validations/expenseIncome.validation.js";
 
-export const GetExpense = async () => {
+export const GetExpenseIncome = async () => {
   const expenseIncome: IExpenseIncome[] = await ExpenseIncome.find();
-  return expenseIncome;
-};
-
-export const GetSummary = async () => {
-  const expenses = await ExpenseIncome.find();
-
   // Total income
-  const totalIncome = expenses
+  const totalIncome = expenseIncome
     .filter((t) => t.type === "income")
     .reduce((sum, t) => sum + t.amount, 0);
 
   // Total expense
-  const totalExpense = expenses
+  const totalExpense = expenseIncome
     .filter((t) => t.type === "expense")
     .reduce((sum, t) => sum + t.amount, 0);
 
+  const countTotalExpense = expenseIncome.filter(
+    (t) => t.type === "expense",
+  ).length;
+
   const balance = totalIncome - totalExpense;
 
-  return {
-    totalIncome,
-    totalExpense,
-    balance,
-    expenseCount: expenses.length,
-  };
-};
-
-export const CreateExpense = async (expense: IExpenseIncome) => {
-  const newExpense = await new ExpenseIncome(expense).save();
-  return newExpense;
-};
-export const DeleteExpense = async (id: any) => {
-  const deleteExpense = await ExpenseIncome.findByIdAndDelete(id);
-  return deleteExpense;
-};
-
-export const GetMonthlyExpense = async () => {
   // Daily Date Range
   const startDay = new Date();
   startDay.setHours(0, 0, 0, 0);
@@ -82,7 +62,7 @@ export const GetMonthlyExpense = async () => {
     0,
   );
 
-// last Month Date Range
+  // last Month Date Range
   const today = new Date();
   const startDate = new Date(today.getFullYear(), today.getMonth() - 1, 1);
   const endDate = new Date(
@@ -104,9 +84,24 @@ export const GetMonthlyExpense = async () => {
   );
 
   return {
+    expenseIncome,
+    totalIncome,
+    totalExpense,
+    balance,
+    totalExpenseTransaction: countTotalExpense,
     totalMonthExpense,
     perDayAvarage,
-    totalExpenseTransaction: monthExpenses.length,
-    totalLastMonthExpense,
+    totalLastMonthExpense
   };
 };
+
+
+export const CreateExpense = async (expense: IExpenseIncome) => {
+  const newExpense = await new ExpenseIncome(expense).save();
+  return newExpense;
+};
+export const DeleteExpense = async (id: any) => {
+  const deleteExpense = await ExpenseIncome.findByIdAndDelete(id);
+  return deleteExpense;
+};
+
