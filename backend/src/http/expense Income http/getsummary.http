@@ -1,2 +1,2 @@
-GET http://localhost:5000/api/expense/summary
+GET http://localhost:5000/api/expense-income/summary
 Content-Type :application/json

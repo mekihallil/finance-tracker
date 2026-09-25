@@ -12,7 +12,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-app.use("/api/expense", expenseRouter);
+app.use("/api/expense-income", expenseRouter);
 app.use("/api/saving", savingRouter);
 app.use("/api/split", splitRouter);
 

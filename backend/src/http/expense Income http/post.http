@@ -1,4 +1,4 @@
-POST http://localhost:5000/api/expense/create
+POST http://localhost:5000/api/expense-income/create
 Content-Type :application/json
 
 {

@@ -11,7 +11,7 @@ import type { IExpenseIncome } from "../validations/expenseIncome.validation.js"
 import { sendError } from "../error/error.js";
 
 // get expenses
-export const getExpense = async (
+export const getExpenseIncome = async (
   req: Request,
   res: Response,
 ): Promise<void> => {

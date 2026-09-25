@@ -2,7 +2,7 @@ import { Router } from "express";
 import {
   createExpense,
   deleteExpense,
-  getExpense,
+  getExpenseIncome,
   getSummary,
   getMonthlyExpense,
 } from "../controllers/expenseIncome.controller.js";
@@ -11,7 +11,7 @@ import { expenseIncomeValidationSchema } from "../validations/expenseIncome.vali
 
 const router = Router();
 
-router.get("/", getExpense);
+router.get("/", getExpenseIncome);
 router.get("/summary", getSummary);
 router.get("/monthly-expense", getMonthlyExpense);
 router.post("/create", validate(expenseIncomeValidationSchema), createExpense);
