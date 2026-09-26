@@ -1,4 +1,4 @@
-import { expenseService } from "@/services/expense.service";
+import { expenseService } from "@/services/expenseIncome.service";
 import type { ExpenseFormData,} from "@/types/expenseSchema.type";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
