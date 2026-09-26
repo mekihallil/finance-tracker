@@ -49,9 +49,9 @@ export const RecentExpenses: FC = (): ReactElement => {
       </div>
     );
   }
-  const expense = data?.filter(
+  const expense = Array.isArray(data) ? data?.filter(
     (item: ExpenseFormDataWithId) => item.type === "expense",
-  );
+  ): [];
   return (
     <article className="mb-10">
       <section className="w-full rounded-3xl shadow-2xl dark:bg-[#2C3546] my-8 mr-30 p-10 max-lg:mx-auto ">
