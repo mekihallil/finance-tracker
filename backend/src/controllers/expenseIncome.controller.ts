@@ -5,7 +5,7 @@ import {
   DeleteExpense,
   GetExpenseIncome,
 } from "../service/expenseIncome.service.js";
-import type { IExpenseIncome } from "../validations/expenseIncome.validation.js";
+import type { ExpenseIncomeInput } from "../validations/expenseIncome.validation.js";
 import { sendError } from "../error/error.js";
 
 // get expenses
@@ -28,7 +28,7 @@ export const getExpenseIncome = async (
 
 // Create expenses
 export const createExpense = async (
-  req: Request<Record<string, never>, unknown, IExpenseIncome>,
+  req: Request<Record<string, never>, unknown, ExpenseIncomeInput>,
   res: Response,
 ) => {
   try {
