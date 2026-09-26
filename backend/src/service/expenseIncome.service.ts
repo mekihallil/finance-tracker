@@ -51,6 +51,7 @@ export const GetExpenseIncome = async () => {
   endMonth.setHours(0, 0, 0, 0);
   endMonth.setDate(1);
   const monthExpenses = await ExpenseIncome.find({
+    type: "expense",
     createdAt: {
       $gte: startMonth,
       $lt: endMonth,
@@ -72,6 +73,7 @@ export const GetExpenseIncome = async () => {
   );
 
   const lastMonthExpenses = await ExpenseIncome.find({
+    type:"expense",
     createdAt: {
       $gte: startDate,
       $lt: endDate,
@@ -91,10 +93,9 @@ export const GetExpenseIncome = async () => {
     totalExpenseTransaction: countTotalExpense,
     totalMonthExpense,
     perDayAvarage,
-    totalLastMonthExpense
+    totalLastMonthExpense,
   };
 };
-
 
 export const CreateExpense = async (expense: IExpenseIncome) => {
   const newExpense = await new ExpenseIncome(expense).save();
@@ -104,4 +105,3 @@ export const DeleteExpense = async (id: any) => {
   const deleteExpense = await ExpenseIncome.findByIdAndDelete(id);
   return deleteExpense;
 };
-
