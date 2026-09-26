@@ -8,7 +8,6 @@ import { toast } from "sonner";
 export const RecentExpenseIncome: FC = (): ReactElement | null => {
   const { getExpenseIncomeQuery, deleteExpenseMutation } = useExpenseIncome();
   const { data, isLoading, isError, error } = getExpenseIncomeQuery;
-
   if (isLoading) {
     return (
       <div className="flex justify-center p-10">
@@ -28,8 +27,8 @@ export const RecentExpenseIncome: FC = (): ReactElement | null => {
       </div>
     );
   }
-  if (!data || !Array.isArray(data)) return null;
-  const expenseIncome = data;
+  if (!data) return null;
+  const {expenseIncome} = data
   return (
     <article className="">
       <section className="w-full rounded-3xl shadow-2xl dark:bg-[#182029] my-8 mr-28 p-10 max-lg:mx-auto ">

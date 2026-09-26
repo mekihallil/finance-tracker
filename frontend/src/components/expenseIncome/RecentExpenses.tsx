@@ -49,7 +49,8 @@ export const RecentExpenses: FC = (): ReactElement => {
       </div>
     );
   }
-  const expense = Array.isArray(data) ? data?.filter(
+  const {expenseIncome} = data
+  const expense = Array.isArray(expenseIncome) ? expenseIncome?.filter(
     (item: ExpenseFormDataWithId) => item.type === "expense",
   ): [];
   return (
