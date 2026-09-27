@@ -1,4 +1,4 @@
-import { useTransactionIncome } from "@/hook/userNewTransaction.hook";
+import { useTransaction } from "@/hook/userNewTransaction.hook";
 import type { TransactionFormDataWithId } from "@/types/transactionSchema.type";
 import {
   Car,
@@ -26,9 +26,9 @@ const Category: Record<string, { icon: LucideIcon; bg: string }> = {
   Health: { icon: Heart, bg: "#FB2C36" },
 };
 
-export const RecentTransactions: FC = (): ReactElement => {
-  const { getTransactionIncomeQuery, deleteTransactionMutation } = useTransactionIncome();
-  const { data, isLoading, isError, error } = getTransactionIncomeQuery;
+export const RecentTransaction: FC = (): ReactElement => {
+  const { getTransactionQuery, deleteTransactionMutation } = useTransaction();
+  const { data, isLoading, isError, error } = getTransactionQuery;
 
   if (isLoading) {
     return (
@@ -49,8 +49,8 @@ export const RecentTransactions: FC = (): ReactElement => {
       </div>
     );
   }
-  const {Transaction} = data
-  const Transaction = Array.isArray(TransactionIncome) ? TransactionIncome?.filter(
+  const {transaction} = data
+  const Transaction = Array.isArray(transaction) ? transaction?.filter(
     (item: TransactionFormDataWithId) => item.type === "Transaction",
   ): [];
   return (
@@ -62,7 +62,7 @@ export const RecentTransactions: FC = (): ReactElement => {
 
         {/* <ul> is the semantic tag for lists of items */}
         <ul className="space-y-2.5 px-3 pb-5">
-          {Transaction?.map(
+          {transaction?.map(
             ({
               _id,
               title,

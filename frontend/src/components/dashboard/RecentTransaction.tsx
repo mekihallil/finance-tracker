@@ -1,13 +1,13 @@
 import { timeAgo } from "@/context/data";
-import { useTransactionIncome } from "@/hook/userNewTransaction.hook";
+import { useTransaction } from "@/hook/userNewTransaction.hook";
 import type { TransactionFormDataWithId } from "@/types/transactionSchema.type";
 import { DollarSign, TrendingDown, TrendingUp, X } from "lucide-react";
 import type { FC, ReactElement } from "react";
 import { toast } from "sonner";
 
 export const RecentTransaction: FC = (): ReactElement | null => {
-  const { getTransactionIncomeQuery, deleteTransactionMutation } = useTransactionIncome();
-  const { data, isLoading, isError, error } = getTransactionIncomeQuery;
+  const { getTransactionQuery, deleteTransactionMutation } = useTransaction();
+  const { data, isLoading, isError, error } = getTransactionQuery;
   if (isLoading) {
     return (
       <div className="flex justify-center p-10">
@@ -28,7 +28,7 @@ export const RecentTransaction: FC = (): ReactElement | null => {
     );
   }
   if (!data) return null;
-  const {TransactionIncome} = data
+  const { transaction } = data;
   return (
     <article className="">
       <section className="w-full rounded-3xl shadow-2xl dark:bg-[#182029] my-8 mr-28 p-10 max-lg:mx-auto ">
@@ -44,7 +44,7 @@ export const RecentTransaction: FC = (): ReactElement | null => {
 
         {/* <ul> is the semantic tag for lists of items */}
         <ul className="space-y-1.5">
-          {TransactionIncome.map((Transaction: TransactionFormDataWithId) => {
+          {transaction.map((Transaction: TransactionFormDataWithId) => {
             /* <li> represents a single list item */
             return (
               <li
@@ -78,7 +78,8 @@ export const RecentTransaction: FC = (): ReactElement | null => {
                           {Transaction.category}
                         </span>
                         <span className="font-semibold ml-3 text-center text-[13px] rounded-full text-gray-500">
-                          {Transaction.createdAt && timeAgo(Transaction.createdAt)}
+                          {Transaction.createdAt &&
+                            timeAgo(Transaction.createdAt)}
                         </span>
                       </section>
                     </section>
@@ -109,13 +110,16 @@ export const RecentTransaction: FC = (): ReactElement | null => {
                             action: {
                               label: "Delete",
                               onClick: () => {
-                                deleteTransactionMutation.mutate(Transaction._id, {
-                                  onError: () => {
-                                    toast.error(
-                                      "Failed to delete Transaction Or Income",
-                                    );
+                                deleteTransactionMutation.mutate(
+                                  Transaction._id,
+                                  {
+                                    onError: () => {
+                                      toast.error(
+                                        "Failed to delete Transaction Or Income",
+                                      );
+                                    },
                                   },
-                                });
+                                );
                               },
                             },
                             cancel: {
@@ -137,7 +141,7 @@ export const RecentTransaction: FC = (): ReactElement | null => {
         </ul>
 
         {/* Empty State */}
-        {TransactionIncome.length === 0 && (
+        {transaction.length === 0 && (
           <div className="text-center py-20 border-2 border-dashed border-gray-200 rounded-3xl">
             <p className="text-gray-400">Your Transaction history is empty.</p>
           </div>

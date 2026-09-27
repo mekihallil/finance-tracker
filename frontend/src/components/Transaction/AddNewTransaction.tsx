@@ -16,7 +16,7 @@ import { type FC, type ReactElement } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
-import { useTransactionIncome } from "@/hook/userNewTransaction.hook";
+import { useTransaction } from "@/hook/userNewTransaction.hook";
 import {
   TransactionSchema,
   type TransactionFormData,
@@ -39,7 +39,7 @@ const categoryData: Category[] = [
 ];
 
 export const NewTransaction: FC = (): ReactElement => {
-  const { createTransactionMutation } = useTransactionIncome();
+  const { createTransactionMutation } = useTransaction();
 
   const {
     register,

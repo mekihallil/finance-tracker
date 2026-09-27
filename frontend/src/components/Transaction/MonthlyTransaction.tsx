@@ -1,5 +1,5 @@
 // import { TransactionService } from "@/services/Transaction.service";
-import { useTransactionIncome } from "@/hook/userNewTransaction.hook";
+import { useTransaction } from "@/hook/userNewTransaction.hook";
 import { Calendar, DollarSign, Tag } from "lucide-react";
 import type { FC, ReactElement } from "react";
 import { toast } from "sonner";
@@ -13,8 +13,8 @@ type MonthData = {
 };
 
 export const MonthlyTransaction: FC = (): ReactElement => {
-  const { getTransactionIncomeQuery } = useTransactionIncome();
-  const Transaction = getTransactionIncomeQuery;
+  const { getTransactionQuery } = useTransaction();
+  const Transaction = getTransactionQuery;
   const data = Transaction.data;
 
   if (Transaction.isLoading) {

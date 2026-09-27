@@ -1,7 +1,7 @@
 import { NewTransaction } from "@/components/Transaction/AddNewTransaction";
 import { TransactionTitle } from "@/components/Transaction/TransactionTitle";
 import { MonthlyTransaction } from "@/components/Transaction/MonthlyTransaction";
-import { RecentTransactions } from "@/components/Transaction/RecentTransaction";
+import { RecentTransaction } from "@/components/Transaction/RecentTransaction";
 import type { FC, ReactElement } from "react";
 
 export const Transaction: FC = (): ReactElement => {
@@ -11,7 +11,7 @@ export const Transaction: FC = (): ReactElement => {
         <TransactionTitle />
         <NewTransaction />
         <MonthlyTransaction />
-        <RecentTransactions />
+        <RecentTransaction />
       </div>
     </main>
   );

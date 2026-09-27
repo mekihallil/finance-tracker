@@ -8,7 +8,7 @@ const TransactionINCOME_QUERY_KEYS = {
   goal: ["goals"],
 };
 
-export const useTransactionIncome = () => {
+export const useTransaction = () => {
   const queryClient = useQueryClient();
   // invalidate all queries
   const invalidateAllQueries = () => {
@@ -19,7 +19,7 @@ export const useTransactionIncome = () => {
     );
   };
 
-  const getTransactionIncomeQuery = useQuery({
+  const getTransactionQuery = useQuery({
     queryKey: TransactionINCOME_QUERY_KEYS.TransactionIncome,
     queryFn: TransactionService.getTransactionIncome,
   });
@@ -40,7 +40,7 @@ export const useTransactionIncome = () => {
   });
 
   return {
-    getTransactionIncomeQuery,
+    getTransactionQuery,
     createTransactionMutation,
     updateTransactionMutation,
     deleteTransactionMutation,

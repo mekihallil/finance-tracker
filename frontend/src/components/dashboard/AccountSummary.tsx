@@ -1,4 +1,4 @@
-import { useTransactionIncome } from "@/hook/userNewTransaction.hook";
+import { useTransaction } from "@/hook/userNewTransaction.hook";
 import { useSaving } from "@/hook/userSaving.hook";
 import { TrendingDown, TrendingUp, Wallet } from "lucide-react";
 import { type FC, type ReactElement } from "react";
@@ -25,15 +25,16 @@ export const AccountSummary: FC = (): ReactElement => {
   const { goalsQuery } = useSaving();
   const { data, isLoading, isError, error } = goalsQuery;
 
-  const { getTransactionIncomeQuery } = useTransactionIncome();
-  const Transaction = getTransactionIncomeQuery.data;
+  const { getTransactionQuery } = useTransaction();
+  const Transaction = getTransactionQuery.data;
 
   const lastWithcurrentDifference =
     Transaction?.totalMonthTransaction - Transaction?.totalLastMonthTransaction;
 
   const lastWithcurrentPercentage =
     Transaction?.totalLastMonthTransaction > 0
-      ? (Math.abs(lastWithcurrentDifference) / Transaction?.totalLastMonthTransaction) *
+      ? (Math.abs(lastWithcurrentDifference) /
+          Transaction?.totalLastMonthTransaction) *
         100
       : 0;
 
