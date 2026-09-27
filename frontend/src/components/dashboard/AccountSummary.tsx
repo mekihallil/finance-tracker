@@ -26,15 +26,15 @@ export const AccountSummary: FC = (): ReactElement => {
   const { data, isLoading, isError, error } = goalsQuery;
 
   const { getTransactionQuery } = useTransaction();
-  const Transaction = getTransactionQuery.data;
-
+  const expense = getTransactionQuery.data;
+  console.log(expense);
   const lastWithcurrentDifference =
-    Transaction?.totalMonthTransaction - Transaction?.totalLastMonthTransaction;
+    expense?.totalMonthExpense - expense?.totalLastMonthExpense;
 
   const lastWithcurrentPercentage =
-    Transaction?.totalLastMonthTransaction > 0
+    expense?.totalLastMonthExpense > 0
       ? (Math.abs(lastWithcurrentDifference) /
-          Transaction?.totalLastMonthTransaction) *
+          expense?.totalLastMonthExpense) *
         100
       : 0;
 
@@ -50,7 +50,7 @@ export const AccountSummary: FC = (): ReactElement => {
       id: "total-spent",
       link: "/Transaction",
       label: "Total Spent",
-      value: Transaction?.totalMonthTransaction || 0.0,
+      value: expense?.totalMonthExpense || 0.0,
       percentageChange: lastWithcurrentPercentage || 0,
       trendStatus: lastWithcurrentDifference,
       subLabel: "from last month",
