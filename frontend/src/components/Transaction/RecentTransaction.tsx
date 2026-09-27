@@ -1,5 +1,5 @@
-import { useExpenseIncome } from "@/hook/userExpenseIncome.hook";
-import type { ExpenseFormDataWithId } from "@/types/expenseSchema.type";
+import { useTransactionIncome } from "@/hook/userNewTransaction.hook";
+import type { TransactionFormDataWithId } from "@/types/transactionSchema.type";
 import {
   Car,
   Coffee,
@@ -26,9 +26,9 @@ const Category: Record<string, { icon: LucideIcon; bg: string }> = {
   Health: { icon: Heart, bg: "#FB2C36" },
 };
 
-export const RecentExpenses: FC = (): ReactElement => {
-  const { getExpenseIncomeQuery, deleteExpenseMutation } = useExpenseIncome();
-  const { data, isLoading, isError, error } = getExpenseIncomeQuery;
+export const RecentTransactions: FC = (): ReactElement => {
+  const { getTransactionIncomeQuery, deleteTransactionMutation } = useTransactionIncome();
+  const { data, isLoading, isError, error } = getTransactionIncomeQuery;
 
   if (isLoading) {
     return (
@@ -49,27 +49,27 @@ export const RecentExpenses: FC = (): ReactElement => {
       </div>
     );
   }
-  const {expenseIncome} = data
-  const expense = Array.isArray(expenseIncome) ? expenseIncome?.filter(
-    (item: ExpenseFormDataWithId) => item.type === "expense",
+  const {Transaction} = data
+  const Transaction = Array.isArray(TransactionIncome) ? TransactionIncome?.filter(
+    (item: TransactionFormDataWithId) => item.type === "Transaction",
   ): [];
   return (
     <article className="mb-10">
       <section className="w-full rounded-3xl shadow-2xl dark:bg-[#2C3546] my-8 mr-30 p-10 max-lg:mx-auto ">
         <h2 className="flex items-center text-gray-800 dark:text-white">
-          <p className="font-bold text-xl">Recent Expenses</p>
+          <p className="font-bold text-xl">Recent Transactions</p>
         </h2>
 
         {/* <ul> is the semantic tag for lists of items */}
         <ul className="space-y-2.5 px-3 pb-5">
-          {expense?.map(
+          {Transaction?.map(
             ({
               _id,
               title,
               category,
               amount,
               createdAt,
-            }: ExpenseFormDataWithId) => {
+            }: TransactionFormDataWithId) => {
               const categoryInfo = Category[category] || {
                 icon: ShoppingBag,
                 bg: "#6B7280",
@@ -125,17 +125,17 @@ export const RecentExpenses: FC = (): ReactElement => {
                         </span>
                       </div>
                       <div>
-                        {/* Delete Expense  */}
+                        {/* Delete Transaction  */}
                         <del className="">
                           <button
                             className="p-2 text-gray-400 hover:text-red-500 transition-colors"
                             onClick={() => {
                               toast.warning("Are you sure?", {
-                                description: `${category}/${expense.toLocaleString()}ETB expense will be permanently deleted.`,
+                                description: `${category}/${Transaction.toLocaleString()}ETB Transaction will be permanently deleted.`,
                                 action: {
                                   label: "Delete",
                                   onClick: () => {
-                                    deleteExpenseMutation.mutate(_id);
+                                    deleteTransactionMutation.mutate(_id);
                                   },
                                 },
                                 cancel: {
@@ -161,7 +161,7 @@ export const RecentExpenses: FC = (): ReactElement => {
         {/* Empty State */}
         {data?.length === 0 && (
           <div className="text-center py-20 border-2 border-dashed border-gray-200 rounded-3xl">
-            <p className="text-gray-400">Your expense history is empty.</p>
+            <p className="text-gray-400">Your Transaction history is empty.</p>
           </div>
         )}
       </section>

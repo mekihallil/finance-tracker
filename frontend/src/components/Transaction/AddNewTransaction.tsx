@@ -16,11 +16,11 @@ import { type FC, type ReactElement } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
-import { useExpenseIncome } from "@/hook/userExpenseIncome.hook";
+import { useTransactionIncome } from "@/hook/userNewTransaction.hook";
 import {
-  expenseSchema,
-  type ExpenseFormData,
-} from "@/types/expenseSchema.type";
+  TransactionSchema,
+  type TransactionFormData,
+} from "@/types/transactionSchema.type";
 
 type Category = {
   id: number;
@@ -38,31 +38,31 @@ const categoryData: Category[] = [
   { id: 8, icons: <Heart />, categoryName: "Health" },
 ];
 
-export const AddExpense: FC = (): ReactElement => {
-  const { createExpenseMutation } = useExpenseIncome();
+export const NewTransaction: FC = (): ReactElement => {
+  const { createTransactionMutation } = useTransactionIncome();
 
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<ExpenseFormData>({
-    resolver: zodResolver(expenseSchema),
+  } = useForm<TransactionFormData>({
+    resolver: zodResolver(TransactionSchema),
     defaultValues: {
       title: "",
-      type: "expense",
+      type: "Transaction",
       category: "",
     },
   });
 
-  const onSubmit = (data: ExpenseFormData) => {
-    createExpenseMutation.mutate(data, {
+  const onSubmit = (data: TransactionFormData) => {
+    createTransactionMutation.mutate(data, {
       onSuccess: () => {
-        toast.success("Expense registered successfully!");
+        toast.success("Transaction registered successfully!");
         reset();
       },
       onError: () => {
-        toast.error("Failed to register expense.");
+        toast.error("Failed to register Transaction.");
       },
     });
   };
@@ -75,7 +75,7 @@ export const AddExpense: FC = (): ReactElement => {
             <i>
               <DollarSign />
             </i>
-            <h1>Add New Expense</h1>
+            <h1>Add New Transaction</h1>
           </div>
         </header>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
@@ -136,15 +136,15 @@ export const AddExpense: FC = (): ReactElement => {
               {/* Submit Button */}
               <button
                 type="submit"
-                disabled={createExpenseMutation.isPending}
+                disabled={createTransactionMutation.isPending}
                 className="w-full flex items-center justify-center gap-2 p-4 rounded-2xl font-bold dark:bg-[#131c2a] bg-[#c1c1c1] hover:scale-95 transition-all disabled:bg-gray-300"
               >
-                {createExpenseMutation.isPending ? (
+                {createTransactionMutation.isPending ? (
                   <Loader2 className="animate-spin" size={20} />
                 ) : (
                   <>
                     <PlusCircle size={20} />
-                    <span>Save Expense</span>
+                    <span>Save Transaction</span>
                   </>
                 )}
               </button>

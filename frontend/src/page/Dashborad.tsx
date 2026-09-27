@@ -1,7 +1,7 @@
 import { AccountSummary } from "@/components/dashboard/AccountSummary";
 import { FinancialDashbaord } from "@/components/dashboard/FinancialDashboard";
 import { QuickActions } from "@/components/dashboard/QuickActionsCard";
-import { RecentExpenseIncome } from "@/components/dashboard/RecentExpenseIncome";
+import { RecentExpenseIncome } from "@/components/dashboard/RecentTransaction";
 import type { FC, ReactElement } from "react";
 
 export const Dashboard: FC = (): ReactElement => {

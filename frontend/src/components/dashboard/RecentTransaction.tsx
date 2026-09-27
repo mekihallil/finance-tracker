@@ -1,13 +1,13 @@
 import { timeAgo } from "@/context/data";
-import { useExpenseIncome } from "@/hook/userExpenseIncome.hook";
-import type { ExpenseFormDataWithId } from "@/types/expenseSchema.type";
+import { useTransactionIncome } from "@/hook/userNewTransaction.hook";
+import type { TransactionFormDataWithId } from "@/types/transactionSchema.type";
 import { DollarSign, TrendingDown, TrendingUp, X } from "lucide-react";
 import type { FC, ReactElement } from "react";
 import { toast } from "sonner";
 
-export const RecentExpenseIncome: FC = (): ReactElement | null => {
-  const { getExpenseIncomeQuery, deleteExpenseMutation } = useExpenseIncome();
-  const { data, isLoading, isError, error } = getExpenseIncomeQuery;
+export const RecentTransaction: FC = (): ReactElement | null => {
+  const { getTransactionIncomeQuery, deleteTransactionMutation } = useTransactionIncome();
+  const { data, isLoading, isError, error } = getTransactionIncomeQuery;
   if (isLoading) {
     return (
       <div className="flex justify-center p-10">
@@ -28,7 +28,7 @@ export const RecentExpenseIncome: FC = (): ReactElement | null => {
     );
   }
   if (!data) return null;
-  const {expenseIncome} = data
+  const {TransactionIncome} = data
   return (
     <article className="">
       <section className="w-full rounded-3xl shadow-2xl dark:bg-[#182029] my-8 mr-28 p-10 max-lg:mx-auto ">
@@ -38,17 +38,17 @@ export const RecentExpenseIncome: FC = (): ReactElement | null => {
           </div>
           <div>
             <p className="text-[#29B866] font-bold">Recent Activity</p>
-            <p className="text-[#84A3B8]">Your latest expenses</p>
+            <p className="text-[#84A3B8]">Your latest transaction</p>
           </div>
         </h2>
 
         {/* <ul> is the semantic tag for lists of items */}
         <ul className="space-y-1.5">
-          {expenseIncome.map((expense: ExpenseFormDataWithId) => {
+          {TransactionIncome.map((Transaction: TransactionFormDataWithId) => {
             /* <li> represents a single list item */
             return (
               <li
-                key={expense._id}
+                key={Transaction._id}
                 className="border border-gray-100 rounded-3xl px-5 py-3 hover:border-black dark:hover:border-white  dark:border-gray-800"
               >
                 <div className="flex justify-between">
@@ -56,12 +56,12 @@ export const RecentExpenseIncome: FC = (): ReactElement | null => {
                     <div className="content-center ">
                       <section
                         className={`rounded-2xl text-xl mr-5 p-1 ${
-                          expense.type === "income"
+                          Transaction.type === "income"
                             ? "text-green-600 bg-green-600/15"
                             : "text-red-500 bg-red-500/15"
                         }`}
                       >
-                        {expense.type === "income" ? (
+                        {Transaction.type === "income" ? (
                           <TrendingUp />
                         ) : (
                           <TrendingDown />
@@ -70,15 +70,15 @@ export const RecentExpenseIncome: FC = (): ReactElement | null => {
                     </div>
                     <section className="content-center">
                       <h3 className="text-[16px] font-semibold text-gray-900 dark:text-white capitalize">
-                        {expense.title}
+                        {Transaction.title}
                       </h3>
                       {/* Category and Time ago */}
                       <section>
                         <span className="font-medium mt-1 px-1.5 text-[14px] rounded-full bg-[#F0F3F4] dark:bg-[#4B5567]">
-                          {expense.category}
+                          {Transaction.category}
                         </span>
                         <span className="font-semibold ml-3 text-center text-[13px] rounded-full text-gray-500">
-                          {expense.createdAt && timeAgo(expense.createdAt)}
+                          {Transaction.createdAt && timeAgo(Transaction.createdAt)}
                         </span>
                       </section>
                     </section>
@@ -89,30 +89,30 @@ export const RecentExpenseIncome: FC = (): ReactElement | null => {
                     <div className="">
                       <span
                         className={`flex justify-end text-xl font-bold ${
-                          expense.type === "income"
+                          Transaction.type === "income"
                             ? "text-green-600"
                             : "text-red-500"
                         }`}
                       >
-                        {expense.type === "income" ? "+" : ""}$
-                        {expense.amount.toLocaleString()}
+                        {Transaction.type === "income" ? "+" : ""}$
+                        {Transaction.amount.toLocaleString()}
                       </span>
                     </div>
                     <div>
-                      {/* Delete Expense  */}
+                      {/* Delete Transaction  */}
 
                       <button
                         className="p-2 text-gray-400 hover:text-red-500 transition-colors"
                         onClick={() => {
                           toast.warning("Are you sure?", {
-                            description: `${expense.category}/$${expense.amount.toLocaleString()}expense will be permanently deleted.`,
+                            description: `${Transaction.category}/$${Transaction.amount.toLocaleString()}Transaction will be permanently deleted.`,
                             action: {
                               label: "Delete",
                               onClick: () => {
-                                deleteExpenseMutation.mutate(expense._id, {
+                                deleteTransactionMutation.mutate(Transaction._id, {
                                   onError: () => {
                                     toast.error(
-                                      "Failed to delete expense Or Income",
+                                      "Failed to delete Transaction Or Income",
                                     );
                                   },
                                 });
@@ -137,9 +137,9 @@ export const RecentExpenseIncome: FC = (): ReactElement | null => {
         </ul>
 
         {/* Empty State */}
-        {expenseIncome.length === 0 && (
+        {TransactionIncome.length === 0 && (
           <div className="text-center py-20 border-2 border-dashed border-gray-200 rounded-3xl">
-            <p className="text-gray-400">Your expense history is empty.</p>
+            <p className="text-gray-400">Your Transaction history is empty.</p>
           </div>
         )}
       </section>

@@ -1,5 +1,5 @@
-// import { expenseService } from "@/services/expense.service";
-import { useExpenseIncome } from "@/hook/userExpenseIncome.hook";
+// import { TransactionService } from "@/services/Transaction.service";
+import { useTransactionIncome } from "@/hook/userNewTransaction.hook";
 import { Calendar, DollarSign, Tag } from "lucide-react";
 import type { FC, ReactElement } from "react";
 import { toast } from "sonner";
@@ -12,12 +12,12 @@ type MonthData = {
   color: string;
 };
 
-export const MonthlyExpenseSummary: FC = (): ReactElement => {
-  const { getExpenseIncomeQuery } = useExpenseIncome();
-  const expense = getExpenseIncomeQuery;
-  const data = expense.data;
+export const MonthlyTransaction: FC = (): ReactElement => {
+  const { getTransactionIncomeQuery } = useTransactionIncome();
+  const Transaction = getTransactionIncomeQuery;
+  const data = Transaction.data;
 
-  if (expense.isLoading) {
+  if (Transaction.isLoading) {
     return (
       <div className="flex justify-center p-10">
         <span className="animate-pulse text-gray-400 font-medium">
@@ -26,31 +26,31 @@ export const MonthlyExpenseSummary: FC = (): ReactElement => {
       </div>
     );
   }
-  if (expense.isError) {
+  if (Transaction.isError) {
     return (
       <div role="alert" className="p-4 bg-red-50 rounded-lg">
         <span className="text-red-500 font-bold">
-          Error: {expense.error.message}
-          {toast.error(expense.error.message)}
+          Error: {Transaction.error.message}
+          {toast.error(Transaction.error.message)}
         </span>
       </div>
     );
   }
   if (!data) {
-    console.log("No expenses this month");
+    console.log("No Transactions this month");
   }
   const monthData: MonthData[] = [
     {
       id: 1,
       title: "This Month",
-      amount: data?.totalMonthExpense || 0.0,
+      amount: data?.totalMonthTransaction || 0.0,
       icon: <Calendar size={20} />,
       color: "text-blue-600",
     },
     {
       id: 2,
       title: "Transctions",
-      amount: data?.totalExpenseTransaction || 0,
+      amount: data?.totalTransactionTransaction || 0,
       icon: <Tag size={30} />,
       color: "text-green-600",
     },

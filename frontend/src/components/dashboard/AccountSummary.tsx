@@ -1,4 +1,4 @@
-import { useExpenseIncome } from "@/hook/userExpenseIncome.hook";
+import { useTransactionIncome } from "@/hook/userNewTransaction.hook";
 import { useSaving } from "@/hook/userSaving.hook";
 import { TrendingDown, TrendingUp, Wallet } from "lucide-react";
 import { type FC, type ReactElement } from "react";
@@ -25,15 +25,15 @@ export const AccountSummary: FC = (): ReactElement => {
   const { goalsQuery } = useSaving();
   const { data, isLoading, isError, error } = goalsQuery;
 
-  const { getExpenseIncomeQuery } = useExpenseIncome();
-  const expense = getExpenseIncomeQuery.data;
+  const { getTransactionIncomeQuery } = useTransactionIncome();
+  const Transaction = getTransactionIncomeQuery.data;
 
   const lastWithcurrentDifference =
-    expense?.totalMonthExpense - expense?.totalLastMonthExpense;
+    Transaction?.totalMonthTransaction - Transaction?.totalLastMonthTransaction;
 
   const lastWithcurrentPercentage =
-    expense?.totalLastMonthExpense > 0
-      ? (Math.abs(lastWithcurrentDifference) / expense?.totalLastMonthExpense) *
+    Transaction?.totalLastMonthTransaction > 0
+      ? (Math.abs(lastWithcurrentDifference) / Transaction?.totalLastMonthTransaction) *
         100
       : 0;
 
@@ -47,16 +47,16 @@ export const AccountSummary: FC = (): ReactElement => {
   const statCards: StatCard[] = [
     {
       id: "total-spent",
-      link: "/expense",
+      link: "/Transaction",
       label: "Total Spent",
-      value: expense?.totalMonthExpense || 0.0,
+      value: Transaction?.totalMonthTransaction || 0.0,
       percentageChange: lastWithcurrentPercentage || 0,
       trendStatus: lastWithcurrentDifference,
       subLabel: "from last month",
     },
     {
       id: "monthly-budget",
-      link: "/expense",
+      link: "/Transaction",
       label: "Monthly Budget",
       value: 30,
       percentageChange: 5,
@@ -78,9 +78,9 @@ export const AccountSummary: FC = (): ReactElement => {
       subLabel: topGoal ? `${topGoal.percentage}% of goal` : "No goals yet",
     },
     {
-      id: "group-expense",
+      id: "group-Transaction",
       link: "/split-bill",
-      label: "Group Expense",
+      label: "Group Transaction",
       value: 320,
       percentageChange: 3,
       trendStatus: -2,

@@ -21,7 +21,7 @@ type nav = {
 };
 const navData: nav[] = [
   { id: 1, title: "Dashboard", icon: <House size={15} />, url: "/" },
-  { id: 2, title: "Expenses", icon: <CirclePlus size={15} />, url: "/expense" },
+  { id: 2, title: "Transaction", icon: <CirclePlus size={15} />, url: "/Transaction" },
   { id: 3, title: "Savings", icon: <Target size={15} />, url: "/saving" },
   {
     id: 4,

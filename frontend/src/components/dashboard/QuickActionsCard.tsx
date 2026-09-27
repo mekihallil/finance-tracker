@@ -18,9 +18,9 @@ interface ActionItem {
 
 const actionList: ActionItem[] = [
   {
-    label: "Add Expenses",
+    label: "Add Transactions",
     icon: Plus,
-    href: "/expense",
+    href: "/Transaction",
     bgColor: "#15AE7B",
   },
   {
