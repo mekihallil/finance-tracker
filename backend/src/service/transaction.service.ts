@@ -1,8 +1,8 @@
-import { ExpenseIncome } from "../models/expenseIncome.models.js";
+import { Transaction } from "../models/transaction.models.js";
 import type {
-  ExpenseIncomeInput,
-  IExpenseIncome,
-} from "../validations/expenseIncome.validation.js";
+  TransactionInput,
+  ITransaction,
+} from "../validations/transaction.validation.js";
 
 interface DateRange {
   start: Date;
@@ -23,15 +23,15 @@ const getLastMonthRange = (): DateRange => {
   return { start, end };
 };
 
-const sumAmount = (items: IExpenseIncome[]) =>
+const sumAmount = (items: ITransaction[]) =>
   items.reduce((sum, item) => sum + item.amount, 0);
 
-export const GetExpenseIncome = async () => {
-  const expenseIncome: IExpenseIncome[] = await ExpenseIncome.find();
+export const GetTransaction = async () => {
+  const transaction: ITransaction[] = await Transaction.find();
 
   // item of income and expense
-  const incomeItems = expenseIncome.filter((t) => t.type === "income");
-  const expenseItems = expenseIncome.filter((t) => t.type === "expense");
+  const incomeItems = transaction.filter((t) => t.type === "income");
+  const expenseItems = transaction.filter((t) => t.type === "expense");
 
   const totalIncome = sumAmount(incomeItems);
   const totalExpense = sumAmount(expenseItems);
@@ -43,11 +43,13 @@ export const GetExpenseIncome = async () => {
   const thisMonth = getThisMonthRange();
   const lastMonth = getLastMonthRange();
 
-  const monthExpenses = expenseItems.filter((item) => 
-    item.createdAt >= thisMonth.start && item.createdAt < thisMonth.end,
+  const monthExpenses = expenseItems.filter(
+    (item) =>
+      item.createdAt >= thisMonth.start && item.createdAt < thisMonth.end,
   );
-  const lastMonthExpenses = expenseItems.filter((item) => 
-    item.createdAt >= lastMonth.start && item.createdAt < lastMonth.end,
+  const lastMonthExpenses = expenseItems.filter(
+    (item) =>
+      item.createdAt >= lastMonth.start && item.createdAt < lastMonth.end,
   );
   const totalMonthExpense = sumAmount(monthExpenses);
   const totalLastMonthExpense = sumAmount(lastMonthExpenses);
@@ -59,7 +61,7 @@ export const GetExpenseIncome = async () => {
       : 0;
 
   return {
-    expenseIncome,
+    transaction,
     totalIncome,
     totalExpense,
     balance,
@@ -70,11 +72,11 @@ export const GetExpenseIncome = async () => {
   };
 };
 
-export const CreateExpense = async (expense: ExpenseIncomeInput) => {
-  const newExpense = await new ExpenseIncome(expense).save();
+export const CreateTransaction = async (expense: TransactionInput) => {
+  const newExpense = await new Transaction(expense).save();
   return newExpense;
 };
-export const DeleteExpense = async (id: any) => {
-  const deleteExpense = await ExpenseIncome.findByIdAndDelete(id);
+export const DeleteTransaction = async (id: any) => {
+  const deleteExpense = await Transaction.findByIdAndDelete(id);
   return deleteExpense;
 };

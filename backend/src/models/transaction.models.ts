@@ -1,7 +1,7 @@
 import { Model, model, Schema } from "mongoose";
-import type { IExpenseIncome } from "../validations/expenseIncome.validation.js";
+import type { ITransaction } from "../validations/transaction.validation.js";
 
-const ExpenseIncomeSchema: Schema<IExpenseIncome> = new Schema(
+const TransactionSchema: Schema<ITransaction> = new Schema(
   {
     title: {
       type: String,
@@ -21,4 +21,4 @@ const ExpenseIncomeSchema: Schema<IExpenseIncome> = new Schema(
   { timestamps: true },
 );
 
-export const ExpenseIncome: Model<IExpenseIncome> = model("Expense", ExpenseIncomeSchema);
+export const Transaction: Model<ITransaction> = model("Expense", TransactionSchema);
