@@ -49,19 +49,14 @@ export const AccountSummary: FC = (): ReactElement | null => {
 
   const {
     totalMonthExpense,
-    totalLastMonthExpense,
+    diffrenceFromLastMonth,
+    percentageFromLastMonth,
     monthlyBudget,
     monthlyRemainingBudget,
     budgetDifferenceFromLastMonth,
     budgetPercentageFromLastMonth,
   } = transactions;
   console.log(transactions);
-  const lastWithcurrentDifference = totalMonthExpense - totalLastMonthExpense;
-
-  const lastWithcurrentPercentage =
-    totalLastMonthExpense > 0
-      ? (Math.abs(lastWithcurrentDifference) / totalLastMonthExpense) * 100
-      : 0;
 
   const topGoal =
     goals && goals.length > 0
@@ -76,8 +71,8 @@ export const AccountSummary: FC = (): ReactElement | null => {
       link: "/Transaction",
       label: "Total Spent",
       value: totalMonthExpense || 0.0,
-      percentageChange: lastWithcurrentPercentage || 0,
-      trendStatus: lastWithcurrentDifference,
+      percentageChange: percentageFromLastMonth || 0,
+      trendStatus: diffrenceFromLastMonth,
       subLabel: "from last month",
     },
     {
