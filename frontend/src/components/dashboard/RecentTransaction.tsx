@@ -44,100 +44,105 @@ export const RecentTransaction: FC = (): ReactElement | null => {
 
         {/* <ul> is the semantic tag for lists of items */}
         <ul className="space-y-1.5">
-          {transaction.map((Transaction: TransactionFormDataWithId) => {
-            /* <li> represents a single list item */
-            return (
-              <li
-                key={Transaction._id}
-                className="border border-gray-100 rounded-3xl px-5 py-3 hover:border-black dark:hover:border-white  dark:border-gray-800"
-              >
-                <div className="flex justify-between">
-                  <section className="flex ">
-                    <div className="content-center ">
-                      <section
-                        className={`rounded-2xl text-xl mr-5 p-1 ${
-                          Transaction.type === "income"
-                            ? "text-green-600 bg-green-600/15"
-                            : "text-red-500 bg-red-500/15"
-                        }`}
-                      >
-                        {Transaction.type === "income" ? (
-                          <TrendingUp />
-                        ) : (
-                          <TrendingDown />
-                        )}
-                      </section>
-                    </div>
-                    <section className="content-center">
-                      <h3 className="text-[16px] font-semibold text-gray-900 dark:text-white capitalize">
-                        {Transaction.title}
-                      </h3>
-                      {/* Category and Time ago */}
-                      <section>
-                        <span className="font-medium mt-1 px-1.5 text-[14px] rounded-full bg-[#F0F3F4] dark:bg-[#4B5567]">
-                          {Transaction.category}
-                        </span>
-                        <span className="font-semibold ml-3 text-center text-[13px] rounded-full text-gray-500">
-                          {Transaction.createdAt &&
-                            timeAgo(Transaction.createdAt)}
-                        </span>
+          {transaction.map(
+            ({
+              _id,
+              type,
+              title,
+              category,
+              createdAt,
+              amount,
+            }: TransactionFormDataWithId) => {
+              /* <li> represents a single list item */
+              return (
+                <li
+                  key={_id}
+                  className="border border-gray-100 rounded-3xl px-5 py-3 hover:border-black dark:hover:border-white  dark:border-gray-800"
+                >
+                  <div className="flex justify-between">
+                    <section className="flex ">
+                      <div className="content-center ">
+                        <section
+                          className={`rounded-2xl text-xl mr-5 p-1 ${
+                            type === "income"
+                              ? "text-green-600 bg-green-600/15"
+                              : "text-red-500 bg-red-500/15"
+                          }`}
+                        >
+                          {type === "income" ? (
+                            <TrendingUp />
+                          ) : (
+                            <TrendingDown />
+                          )}
+                        </section>
+                      </div>
+                      <section className="content-center">
+                        <h3 className="text-[16px] font-semibold text-gray-900 dark:text-white capitalize">
+                          {title}
+                        </h3>
+                        {/* Category and Time ago */}
+                        <section>
+                          <span className="font-medium mt-1 px-1.5 text-[14px] rounded-full bg-[#F0F3F4] dark:bg-[#4B5567]">
+                            {category}
+                          </span>
+                          <span className="font-semibold ml-3 text-center text-[13px] rounded-full text-gray-500">
+                            {createdAt && timeAgo(createdAt)}
+                          </span>
+                        </section>
                       </section>
                     </section>
-                  </section>
 
-                  {/* Amount */}
-                  <div className="flex gap-1 items-center">
-                    <div className="">
-                      <span
-                        className={`flex justify-end text-xl font-bold ${
-                          Transaction.type === "income"
-                            ? "text-green-600"
-                            : "text-red-500"
-                        }`}
-                      >
-                        {Transaction.type === "income" ? "+" : ""}$
-                        {Transaction.amount.toLocaleString()}
-                      </span>
-                    </div>
-                    <div>
-                      {/* Delete Transaction  */}
+                    {/* Amount */}
+                    <div className="flex gap-1 items-center">
+                      <div className="">
+                        <span
+                          className={`flex justify-end text-xl font-bold ${
+                            type === "income"
+                              ? "text-green-600"
+                              : "text-red-500"
+                          }`}
+                        >
+                          {type === "income" ? "+" : ""}$
+                          {amount.toLocaleString()}
+                        </span>
+                      </div>
+                      <div>
+                        {/* Delete Transaction  */}
 
-                      <button
-                        className="p-2 text-gray-400 hover:text-red-500 transition-colors"
-                        onClick={() => {
-                          toast.warning("Are you sure?", {
-                            description: `${Transaction.category}/$${Transaction.amount.toLocaleString()}Transaction will be permanently deleted.`,
-                            action: {
-                              label: "Delete",
-                              onClick: () => {
-                                deleteTransactionMutation.mutate(
-                                  Transaction._id,
-                                  {
+                        <button
+                          className="p-2 text-gray-400 hover:text-red-500 transition-colors"
+                          onClick={() => {
+                            toast.warning("Are you sure?", {
+                              description: `${category}/$${amount.toLocaleString()}Transaction will be permanently deleted.`,
+                              action: {
+                                label: "Delete",
+                                onClick: () => {
+                                  deleteTransactionMutation.mutate(_id, {
                                     onError: () => {
                                       toast.error(
                                         "Failed to delete Transaction Or Income",
                                       );
                                     },
-                                  },
-                                );
+                                  });
+                                },
                               },
-                            },
-                            cancel: {
-                              label: "Cancel",
-                              onClick: () => console.log("Cancel"),
-                            },
-                            duration: 10000,
-                          });
-                        }}
-                      >
-                        <X size={18} />
-                      </button>
+                              cancel: {
+                                label: "Cancel",
+                                onClick: () => console.log("Cancel"),
+                              },
+                              duration: 10000,
+                            });
+                          }}
+                        >
+                          <X size={18} />
+                        </button>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </li>
-            );
-          })}
+                </li>
+              );
+            },
+          )}
         </ul>
 
         {/* Empty State */}
