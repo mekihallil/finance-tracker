@@ -1,6 +1,0 @@
-DELETE http://localhost:5000/api/expense-income/delete/{id}
-Content-Type :application/json
-
-{
- 
-}

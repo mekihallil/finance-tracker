@@ -21,26 +21,51 @@ interface StatCard {
   subLabel: string;
 }
 
-export const AccountSummary: FC = (): ReactElement => {
+export const AccountSummary: FC = (): ReactElement | null => {
   const { goalsQuery } = useSaving();
-  const { data, isLoading, isError, error } = goalsQuery;
+  const {
+    data: goals,
+    isLoading: goalIsLoading,
+    isError: goalIsError,
+    error: goalError,
+  } = goalsQuery;
 
   const { getTransactionQuery } = useTransaction();
-  const expense = getTransactionQuery.data;
-  console.log(expense);
-  const lastWithcurrentDifference =
-    expense?.totalMonthExpense - expense?.totalLastMonthExpense;
+  const {
+    data: transactions,
+    isLoading: transactionIsLoading,
+    isError: transactionIsError,
+    error: transactionError,
+  } = getTransactionQuery;
+
+  // error handling
+  if (!goals || !transactions) return null;
+  const isLoading = goalIsLoading || transactionIsLoading;
+  const isError = goalIsError || transactionIsError;
+  const error = goalError || transactionError;
+
+  if (isLoading) return <div>Loading...</div>;
+  if (isError) return <div>Error: {error?.message}</div>;
+
+  const {
+    totalMonthExpense,
+    totalLastMonthExpense,
+    monthlyBudget,
+    monthlyRemainingBudget,
+    budgetDifferenceFromLastMonth,
+    budgetPercentageFromLastMonth,
+  } = transactions;
+  console.log(transactions);
+  const lastWithcurrentDifference = totalMonthExpense - totalLastMonthExpense;
 
   const lastWithcurrentPercentage =
-    expense?.totalLastMonthExpense > 0
-      ? (Math.abs(lastWithcurrentDifference) /
-          expense?.totalLastMonthExpense) *
-        100
+    totalLastMonthExpense > 0
+      ? (Math.abs(lastWithcurrentDifference) / totalLastMonthExpense) * 100
       : 0;
 
   const topGoal =
-    data && data.length > 0
-      ? data.reduce((highest: GoalData, goal: GoalData) =>
+    goals && goals.length > 0
+      ? goals.reduce((highest: GoalData, goal: GoalData) =>
           goal.percentage > highest.percentage ? goal : highest,
         )
       : null;
@@ -50,7 +75,7 @@ export const AccountSummary: FC = (): ReactElement => {
       id: "total-spent",
       link: "/Transaction",
       label: "Total Spent",
-      value: expense?.totalMonthExpense || 0.0,
+      value: totalMonthExpense || 0.0,
       percentageChange: lastWithcurrentPercentage || 0,
       trendStatus: lastWithcurrentDifference,
       subLabel: "from last month",
@@ -59,10 +84,13 @@ export const AccountSummary: FC = (): ReactElement => {
       id: "monthly-budget",
       link: "/Transaction",
       label: "Monthly Budget",
-      value: 30,
-      percentageChange: 5,
-      trendStatus: -2,
-      subLabel: "remaining this month",
+      value: monthlyBudget,
+      percentageChange: budgetPercentageFromLastMonth,
+      trendStatus: budgetDifferenceFromLastMonth,
+      subLabel: `${monthlyRemainingBudget.toLocaleString("en-us", {
+        style: "currency",
+        currency: "USD",
+      })} remaining `,
     },
     {
       id: "saving-progress",
@@ -88,9 +116,6 @@ export const AccountSummary: FC = (): ReactElement => {
       subLabel: "shared this month",
     },
   ];
-
-  if (isLoading) return <div>Loading...</div>;
-  if (isError) return <div>Error: {error.message}</div>;
 
   return (
     <section className="grid grid-cols-4 gap-7 w-full mb-8.75">

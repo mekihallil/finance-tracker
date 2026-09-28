@@ -1,9 +1,0 @@
-PATCH http://localhost:5000/api/expense-income/update/6aaece34330a4303bc7d822c
-Content-Type :application/json
-
-{
-  "title": "N",
-  "amount": 500,
-  "type": "income",
-  "category": "Test"
-}
