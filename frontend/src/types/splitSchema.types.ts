@@ -1,6 +1,7 @@
 import { z } from "zod";
 
 export const participants = z.object({
+  _id: z.string(),
   name: z.string().min(1, "Name is required").max(50, "Name is too long"),
   email: z.email("Enter a valid email"),
   paid: z.boolean().default(false),
@@ -16,6 +17,7 @@ export const categoryEnum = z.enum([
 ]);
 
 export const splitSchema = z.object({
+  _id: z.string(),
   title: z
     .string()
     .min(3, "Title must be at least 3 characters long")
@@ -24,6 +26,7 @@ export const splitSchema = z.object({
     .number("Amount must be a number")
     .positive("Amount must be greater than 0"),
   category: categoryEnum,
+  createdAt: z.coerce.date(),
   participants: z
     .array(participants)
     .min(2, "At least one participant is required  ")
@@ -35,3 +38,4 @@ export const splitSchema = z.object({
 });
 export type splitFormData = z.infer<typeof splitSchema>;
 export type categoryEnumFormData = z.infer<typeof categoryEnum>;
+export type participantsEnumFormData = z.infer<typeof participants>;

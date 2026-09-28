@@ -1,5 +1,6 @@
 import { useTransaction } from "@/hook/userNewTransaction.hook";
 import { useSaving } from "@/hook/userSaving.hook";
+import { useSplit } from "@/hook/userSplit.hook";
 import { TrendingDown, TrendingUp, Wallet } from "lucide-react";
 import { type FC, type ReactElement } from "react";
 import { Link } from "react-router";
@@ -37,12 +38,19 @@ export const AccountSummary: FC = (): ReactElement | null => {
     isError: transactionIsError,
     error: transactionError,
   } = getTransactionQuery;
+  const { getSplitQuery } = useSplit();
+  const {
+    data: split,
+    isLoading: splitIsLoading,
+    isError: splitIsError,
+    error: splitError,
+  } = getSplitQuery;
 
   // error handling
-  if (!goals || !transactions) return null;
-  const isLoading = goalIsLoading || transactionIsLoading;
-  const isError = goalIsError || transactionIsError;
-  const error = goalError || transactionError;
+  if (!goals || !transactions || !split) return null;
+  const isLoading = goalIsLoading || transactionIsLoading || splitIsLoading;
+  const isError = goalIsError || transactionIsError || splitIsError;
+  const error = goalError || transactionError || splitError;
 
   if (isLoading) return <div>Loading...</div>;
   if (isError) return <div>Error: {error?.message}</div>;
@@ -56,7 +64,8 @@ export const AccountSummary: FC = (): ReactElement | null => {
     budgetDifferenceFromLastMonth,
     budgetPercentageFromLastMonth,
   } = transactions;
-  console.log(transactions);
+
+  const { individualExpense } = split;
 
   const topGoal =
     goals && goals.length > 0
@@ -102,13 +111,13 @@ export const AccountSummary: FC = (): ReactElement | null => {
       subLabel: topGoal ? `${topGoal.percentage}% of goal` : "No goals yet",
     },
     {
-      id: "group-Transaction",
+      id: "group-Expense",
       link: "/split-bill",
-      label: "Group Transaction",
-      value: 320,
-      percentageChange: 3,
+      label: "Group Expenses",
+      value: individualExpense,
+      percentageChange: 0,
       trendStatus: -2,
-      subLabel: "shared this month",
+      subLabel: "shared with friends",
     },
   ];
 
@@ -133,7 +142,7 @@ export const AccountSummary: FC = (): ReactElement | null => {
               <Wallet size={20} className="mx-4 my-5" />
               <div className="flex items-start">
                 <div
-                  className={`flex gap-1 items-center rounded-2xl text-xl py-1 px-2 ${trendStatus < 0 ? " bg-red-500/10" : "bg-green-500/10"}`}
+                  className={`flex gap-1 items-center rounded-2xl text-xl py-1 px-2 ${trendStatus < 0 ? " bg-red-500/10" : "bg-green-500/10"} ${id === "group-Expense" ? "hidden" : "block"}`}
                 >
                   {trendStatus < 0 ? (
                     <TrendingDown size={13} className="ml-0.5 text-red-500" />

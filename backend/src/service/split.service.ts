@@ -11,7 +11,12 @@ export const AddSplitService = async (body: ISplit) => {
 };
 export const getSplitBills = async () => {
   const splitBills = await Split.find();
-  return splitBills;
+
+  const individualExpense = splitBills
+    .map((split) => split.amount / split.participants.length)
+    .reduce((sum, split) => sum + split, 0);
+
+  return { splitBills, individualExpense };
 };
 export const DeleteSplitBill = async (id: any) => {
   const deleteSplit = await Split.findByIdAndDelete(id);
