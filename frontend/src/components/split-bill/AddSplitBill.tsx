@@ -23,10 +23,10 @@ const owmerdata: ownerDataProps = {
 };
 
 interface participantsProps {
-  id: string;
+  _id: string;
   name: string;
   email: string;
-  paid?: boolean;
+  paid: boolean;
 }
 
 interface addSplitBillProps {
@@ -93,7 +93,7 @@ export const AddSplitBill: FC<addSplitBillProps> = ({
 
   const [participants, setParticipants] = useState<participantsProps[]>([
     {
-      id: crypto.randomUUID(),
+      _id: crypto.randomUUID(),
       name: owmerdata.name,
       email: owmerdata.email,
       paid: owmerdata.paid,
@@ -102,8 +102,13 @@ export const AddSplitBill: FC<addSplitBillProps> = ({
   useEffect(() => {
     setValue(
       "participants",
-      participants.map(({ name, email }) => ({ name, email })),
-      { shouldValidate: false },
+      participants.map(({ _id, name, email, paid }) => ({
+        _id,
+        name,
+        email,
+        paid,
+      })),
+      { shouldValidate: true },
     );
   }, [participants, setValue]);
   const [name, setName] = useState("");
@@ -113,9 +118,10 @@ export const AddSplitBill: FC<addSplitBillProps> = ({
     if (!name.trim() || !email.trim()) return;
 
     const newParticipant: participantsProps = {
-      id: crypto.randomUUID(),
+      _id: crypto.randomUUID(),
       name: name.trim(),
       email: email.trim(),
+      paid: false,
     };
     setParticipants((prev) => [...prev, newParticipant]);
     // clear inputs after adding
@@ -125,7 +131,7 @@ export const AddSplitBill: FC<addSplitBillProps> = ({
   const deleteParticipant = (id: string) => {
     setParticipants((prev) =>
       prev.filter((partic) => {
-        return partic.id !== id;
+        return partic._id !== id;
       }),
     );
   };
@@ -133,7 +139,8 @@ export const AddSplitBill: FC<addSplitBillProps> = ({
   const onSubmit = (data: Omit<splitFormData, "participants">) => {
     const payload = {
       ...data,
-      participants: participants.map(({ paid, name, email }) => ({
+      participants: participants.map(({ _id, paid, name, email }) => ({
+        _id: _id,
         name: name,
         email: email,
         paid: paid ?? false,
@@ -150,7 +157,7 @@ export const AddSplitBill: FC<addSplitBillProps> = ({
     });
     setParticipants([
       {
-        id: crypto.randomUUID(),
+        _id: crypto.randomUUID(),
         name: owmerdata.name,
         email: owmerdata.email,
         paid: owmerdata.paid,
@@ -232,9 +239,9 @@ export const AddSplitBill: FC<addSplitBillProps> = ({
           <div>
             <label htmlFor="">Participants</label>
             <div>
-              {participants.map(({ id, name, email }) => {
+              {participants.map(({ _id, name, email }) => {
                 return (
-                  <section key={id} className="border rounded-2xl mb-3 mt-1 ">
+                  <section key={_id} className="border rounded-2xl mb-3 mt-1 ">
                     <div className="flex justify-between p-2.5">
                       <div className="flex gap-3 ">
                         <h1 className="border rounded-full px-3 py-1 my-auto">
@@ -247,7 +254,7 @@ export const AddSplitBill: FC<addSplitBillProps> = ({
                       </div>
                       <button
                         type="button"
-                        onClick={() => deleteParticipant(id)}
+                        onClick={() => deleteParticipant(_id)}
                         className={`my-auto pr-2 ${email === owmerdata.email ? "hidden" : "block"}`}
                       >
                         <X />
