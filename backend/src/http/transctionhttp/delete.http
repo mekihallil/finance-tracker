@@ -1,0 +1,6 @@
+DELETE http://localhost:5000/api/transaction/delete/{id}
+Content-Type :application/json
+
+{
+ 
+}
