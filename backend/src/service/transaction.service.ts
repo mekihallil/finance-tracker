@@ -36,13 +36,14 @@ export const GetTransaction = async () => {
   const totalIncome = sumAmount(incomeItems);
   const totalExpense = sumAmount(expenseItems);
 
-  const totalExpenseTransaction = expenseItems.length;
-
   const balance = totalIncome - totalExpense;
+
+  const totalExpenseTransaction = expenseItems.length;
 
   const thisMonth = getThisMonthRange();
   const lastMonth = getLastMonthRange();
 
+  // last and current month expense
   const monthExpenses = expenseItems.filter(
     (item) =>
       item.createdAt >= thisMonth.start && item.createdAt < thisMonth.end,
@@ -54,6 +55,29 @@ export const GetTransaction = async () => {
   const totalMonthExpense = sumAmount(monthExpenses);
   const totalLastMonthExpense = sumAmount(lastMonthExpenses);
 
+  // last and current month income
+  const monthIncome = incomeItems.filter(
+    (item) =>
+      item.createdAt >= thisMonth.start && item.createdAt < thisMonth.end,
+  );
+  const lastMonthIncome = incomeItems.filter(
+    (item) =>
+      item.createdAt >= lastMonth.start && item.createdAt < lastMonth.end,
+  );
+  const totalMonthIncome = sumAmount(monthIncome);
+  const totalLastMonthIncome = sumAmount(lastMonthIncome);
+
+  const monthlyBudget = totalMonthIncome;
+
+  // monthly remaining budget balance
+  const monthlyRemainingBudget = totalMonthIncome - totalMonthExpense;
+
+  const budgetDifferenceFromLastMonth = totalMonthIncome - totalLastMonthIncome;
+  // percentage diffrence for last month
+  const budgetPercentageFromLastMonth =
+    totalLastMonthIncome > 0
+      ? (Math.abs(budgetDifferenceFromLastMonth) / totalLastMonthIncome) * 100
+      : 0;
   const daysElapsed = new Date().getDate();
   const perDayAvarage =
     totalMonthExpense > 0
@@ -68,6 +92,10 @@ export const GetTransaction = async () => {
     totalExpenseTransaction,
     totalMonthExpense,
     totalLastMonthExpense,
+    monthlyBudget,
+    monthlyRemainingBudget,
+    budgetDifferenceFromLastMonth,
+    budgetPercentageFromLastMonth,
     perDayAvarage,
   };
 };
