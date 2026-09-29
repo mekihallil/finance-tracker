@@ -55,13 +55,12 @@ export const GetTransaction = async () => {
   const totalMonthExpense = sumAmount(monthExpenses);
   const totalLastMonthExpense = sumAmount(lastMonthExpenses);
 
-   const diffrenceFromLastMonth = totalMonthExpense - totalLastMonthExpense;
+  const diffrenceFromLastMonth = totalMonthExpense - totalLastMonthExpense;
 
   const percentageFromLastMonth =
     totalLastMonthExpense > 0
       ? (Math.abs(diffrenceFromLastMonth) / totalLastMonthExpense) * 100
       : 0;
-
 
   // last and current month income
   const monthIncome = incomeItems.filter(
@@ -82,7 +81,7 @@ export const GetTransaction = async () => {
 
   const budgetDifferenceFromLastMonth = totalMonthIncome - totalLastMonthIncome;
 
-  // percentage diffrence for income last month 
+  // percentage diffrence for income last month
   const budgetPercentageFromLastMonth =
     totalLastMonthIncome > 0
       ? (Math.abs(budgetDifferenceFromLastMonth) / totalLastMonthIncome) * 100
@@ -95,11 +94,13 @@ export const GetTransaction = async () => {
 
   return {
     transaction,
+    monthExpenses,
     totalIncome,
     totalExpense,
     balance,
     totalExpenseTransaction,
     totalMonthExpense,
+    totalMonthExpenseTransactions: monthExpenses.length,
     diffrenceFromLastMonth,
     percentageFromLastMonth,
     monthlyBudget,

@@ -12,12 +12,12 @@ type MonthData = {
   color: string;
 };
 
-export const MonthlyTransaction: FC = (): ReactElement => {
+export const MonthlyTransaction: FC = (): ReactElement | null => {
   const { getTransactionQuery } = useTransaction();
-  const Transaction = getTransactionQuery;
-  const data = Transaction.data;
+  const { data, isLoading, isError, error } = getTransactionQuery;
+  if (!data) return null;
 
-  if (Transaction.isLoading) {
+  if (isLoading) {
     return (
       <div className="flex justify-center p-10">
         <span className="animate-pulse text-gray-400 font-medium">
@@ -26,38 +26,37 @@ export const MonthlyTransaction: FC = (): ReactElement => {
       </div>
     );
   }
-  if (Transaction.isError) {
+  if (isError) {
     return (
       <div role="alert" className="p-4 bg-red-50 rounded-lg">
         <span className="text-red-500 font-bold">
-          Error: {Transaction.error.message}
-          {toast.error(Transaction.error.message)}
+          Error: {error.message}
+          {toast.error(error.message)}
         </span>
       </div>
     );
   }
-  if (!data) {
-    console.log("No Transactions this month");
-  }
+  const { totalMonthExpense, totalMonthExpenseTransactions, perDayAvarage } =
+    data;
   const monthData: MonthData[] = [
     {
       id: 1,
       title: "This Month",
-      amount: data?.totalMonthTransaction || 0.0,
+      amount: totalMonthExpense || 0.0,
       icon: <Calendar size={20} />,
       color: "text-blue-600",
     },
     {
       id: 2,
       title: "Transctions",
-      amount: data?.totalTransactionTransaction || 0,
+      amount: totalMonthExpenseTransactions || 0,
       icon: <Tag size={30} />,
       color: "text-green-600",
     },
     {
       id: 3,
       title: "Average Per Day",
-      amount: data?.perDayAvarage || 0.0,
+      amount: perDayAvarage || 0.0,
       icon: <DollarSign size={20} />,
       color: "text-red-600",
     },
