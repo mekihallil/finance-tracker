@@ -13,7 +13,7 @@ import {
   Utensils,
 } from "lucide-react";
 import { type FC, type ReactElement } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 import { toast } from "sonner";
 
 import { useTransaction } from "@/hook/userNewTransaction.hook";
@@ -45,6 +45,7 @@ export const NewTransaction: FC = (): ReactElement => {
     register,
     handleSubmit,
     reset,
+    control,
     formState: { errors },
   } = useForm<TransactionFormData>({
     resolver: zodResolver(TransactionSchema),
@@ -54,7 +55,7 @@ export const NewTransaction: FC = (): ReactElement => {
       category: "",
     },
   });
-
+  const selectedType = useWatch({ control, name: "type" });
   const onSubmit = (data: TransactionFormData) => {
     createTransactionMutation.mutate(data, {
       onSuccess: () => {
@@ -133,14 +134,39 @@ export const NewTransaction: FC = (): ReactElement => {
                   </span>
                 )}
               </div>
-              <div className="">
-                <input type="radio" value="expense" />
-                <span>Expense</span>
+              <div className="flex justify-center border-[#131c2a] rounded-xl bg-[#1d283d]">
+                <div className="w-1/2 p-3 rounded-xl cursor-pointer has-checked:bg-white dark:bg-transparent bg-[#c1c1c1] dark:has-checked:bg-[#131c2a] transition-all">
+                  <input
+                    type="radio"
+                    id="expense"
+                    value="expense"
+                    className="sr-only"
+
+                    {...register("type")}
+                  />
+                  <label htmlFor="expense" className="flex justify-center">
+                    Expense
+                  </label>
+                </div>
+                <div className="w-1/2 p-3 rounded-xl cursor-pointer has-checked:bg-white dark:bg-transparent bg-[#c1c1c1] dark:has-checked:bg-[#131c2a]  transition-all">
+                  <input
+                    type="radio"
+                    id="income"
+                    value="income"
+                    className="sr-only"
+
+                    {...register("type")}
+                  />
+                  <label htmlFor="income" className="flex justify-center">
+                    Income
+                  </label>
+                </div>
               </div>
-              <div>
-                <input type="radio" value="income" />
-                <span>income</span>
-              </div>
+              {errors.type && (
+                <span className="text-red-500 text-sm">
+                  {errors.type.message}
+                </span>
+              )}
               {/* Submit Button */}
               <button
                 type="submit"
@@ -158,46 +184,48 @@ export const NewTransaction: FC = (): ReactElement => {
               </button>
             </div>
             {/* Category Select */}
-            <div className="flex w-1/2">
-              <section className="w-full">
-                <label
-                  htmlFor="category"
-                  className="text-[14px] font-bold text-gray-400"
-                >
-                  Category
-                </label>
+            {selectedType === "expense" && (
+              <div className="flex w-1/2">
+                <section className="w-full">
+                  <label
+                    htmlFor="category"
+                    className="text-[14px] font-bold text-gray-400"
+                  >
+                    Category
+                  </label>
 
-                <div className="grid grid-cols-2 gap-2">
-                  {categoryData.map(({ id, icons, categoryName }) => {
-                    return (
-                      <label
-                        key={id}
-                        className=" p-3 rounded-xl  cursor-pointer has-checked:bg-white dark:bg-[#131c2a] bg-[#c1c1c1] hover:rounded-3xl dark:has-checked:bg-transparent  transition-all"
-                      >
-                        <input
-                          {...register("category")}
-                          type="radio"
-                          value={categoryName}
-                          className="sr-only"
-                        />
-                        <div className="flex flex-col justify-center text-center">
-                          <i className="mx-auto">{icons}</i>
-                          <span className="font-semibold text-[13px] text-gray-600 dark:text-white">
-                            {categoryName}
-                          </span>
-                        </div>
-                      </label>
-                    );
-                  })}
-                </div>
-                {errors.category && (
-                  <span className="text-xs text-red-500 font-medium">
-                    {errors.category.message}
-                    {/* {toast.error(`${errors.category.message}`)} */}
-                  </span>
-                )}
-              </section>
-            </div>
+                  <div className="grid grid-cols-2 gap-2 ">
+                    {categoryData.map(({ id, icons, categoryName }) => {
+                      return (
+                        <label
+                          key={id}
+                          className=" p-3 rounded-xl  cursor-pointer has-checked:bg-white dark:bg-[#131c2a] bg-[#c1c1c1] hover:rounded-3xl dark:has-checked:bg-transparent  transition-all"
+                        >
+                          <input
+                            {...register("category")}
+                            type="radio"
+                            value={categoryName}
+                            className="sr-only"
+                          />
+                          <div className="flex flex-col justify-center text-center">
+                            <i className="mx-auto">{icons}</i>
+                            <span className="font-semibold text-[13px] text-gray-600 dark:text-white">
+                              {categoryName}
+                            </span>
+                          </div>
+                        </label>
+                      );
+                    })}
+                  </div>
+                  {errors.category && (
+                    <span className="text-xs text-red-500 font-medium">
+                      {errors.category.message}
+                      {/* {toast.error(`${errors.category.message}`)} */}
+                    </span>
+                  )}
+                </section>
+              </div>
+            )}
           </section>
         </form>
       </section>
