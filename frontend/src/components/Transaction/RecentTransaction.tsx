@@ -26,10 +26,10 @@ const Category: Record<string, { icon: LucideIcon; bg: string }> = {
   Health: { icon: Heart, bg: "#FB2C36" },
 };
 
-export const RecentTransaction: FC = (): ReactElement => {
+export const RecentTransaction: FC = (): ReactElement | null => {
   const { getTransactionQuery, deleteTransactionMutation } = useTransaction();
   const { data, isLoading, isError, error } = getTransactionQuery;
-
+  if (!data) return null;
   if (isLoading) {
     return (
       <div className="flex justify-center p-10">
@@ -49,10 +49,8 @@ export const RecentTransaction: FC = (): ReactElement => {
       </div>
     );
   }
-  const {transaction} = data
-  const Transaction = Array.isArray(transaction) ? transaction?.filter(
-    (item: TransactionFormDataWithId) => item.type === "Transaction",
-  ): [];
+  const { monthExpenses } = data;
+
   return (
     <article className="mb-10">
       <section className="w-full rounded-3xl shadow-2xl dark:bg-[#2C3546] my-8 mr-30 p-10 max-lg:mx-auto ">
@@ -62,7 +60,7 @@ export const RecentTransaction: FC = (): ReactElement => {
 
         {/* <ul> is the semantic tag for lists of items */}
         <ul className="space-y-2.5 px-3 pb-5">
-          {transaction?.map(
+          {monthExpenses.map(
             ({
               _id,
               title,
@@ -131,7 +129,7 @@ export const RecentTransaction: FC = (): ReactElement => {
                             className="p-2 text-gray-400 hover:text-red-500 transition-colors"
                             onClick={() => {
                               toast.warning("Are you sure?", {
-                                description: `${category}/${Transaction.toLocaleString()}ETB Transaction will be permanently deleted.`,
+                                description: `${category} ${amount.toLocaleString()}ETB Transaction will be permanently deleted.`,
                                 action: {
                                   label: "Delete",
                                   onClick: () => {
