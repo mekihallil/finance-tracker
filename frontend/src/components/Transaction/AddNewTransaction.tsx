@@ -50,7 +50,7 @@ export const NewTransaction: FC = (): ReactElement => {
     resolver: zodResolver(TransactionSchema),
     defaultValues: {
       title: "",
-      type: "Transaction",
+      type: "expense",
       category: "",
     },
   });
@@ -133,6 +133,14 @@ export const NewTransaction: FC = (): ReactElement => {
                   </span>
                 )}
               </div>
+              <div className="">
+                <input type="radio" value="expense" />
+                <span>Expense</span>
+              </div>
+              <div>
+                <input type="radio" value="income" />
+                <span>income</span>
+              </div>
               {/* Submit Button */}
               <button
                 type="submit"
@@ -160,7 +168,7 @@ export const NewTransaction: FC = (): ReactElement => {
                 </label>
 
                 <div className="grid grid-cols-2 gap-2">
-                  {categoryData.map(({id,icons,categoryName,}) => {
+                  {categoryData.map(({ id, icons, categoryName }) => {
                     return (
                       <label
                         key={id}

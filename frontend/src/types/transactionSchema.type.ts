@@ -5,7 +5,7 @@ export const TransactionSchema = z.object({
   amount: z
     .number({ error: "Please enter a valid number" })
     .positive("Amount must be a positive number"),
-  type: z.enum(["income", "Transaction"]),
+  type: z.enum(["income", "expense"]),
   category: z
     .string({ error: "Please select a category" })
     .min(1, "Please select a category"),
