@@ -16,7 +16,17 @@ export const getSplitBills = async () => {
     .map((split) => split.amount / split.participants.length)
     .reduce((sum, split) => sum + split, 0);
 
-  return { splitBills, individualExpense };
+  const OwedToYou = splitBills
+    .map((split) => {
+      const individualvalue = split.amount / split.participants.length;
+      const unPaidParticipantsLength = split.participants.filter(
+        (par) => par.paid === false,
+      ).length;
+      return unPaidParticipantsLength * individualvalue;
+    })
+    .reduce((sum, split) => sum + split, 0);
+
+  return { splitBills, individualExpense, OwedToYou };
 };
 export const DeleteSplitBill = async (id: any) => {
   const deleteSplit = await Split.findByIdAndDelete(id);
