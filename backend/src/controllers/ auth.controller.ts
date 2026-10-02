@@ -10,7 +10,7 @@ export const userRegister = async (
   res: Response,
 ) => {
   try {
-    const newUser = registerUser(req.body);
+    const newUser = await registerUser(req.body);
     res.status(StatusCodes.CREATED).json({
       success: true,
       message: "User registered successfully",
@@ -26,9 +26,12 @@ export const userRegister = async (
   }
 };
 
-export const userLogin = async (req: Request, res: Response) => {
+export const userLogin = async (
+  req: Request<{}, {}, ILogin>,
+  res: Response,
+) => {
   try {
-    const userLogin = loginUser(req.body);
+    const userLogin = await loginUser(req.body);
     res.status(StatusCodes.OK).json({
       success: true,
       message: "User login successfully",
