@@ -6,11 +6,10 @@ import {
   type ILogin,
   type IRegister,
 } from "../validations/auth.validation.js";
-import { string } from "zod";
 
 export const registerUser = async (body: IRegister) => {
   const parsed = registerValidationSchema.parse(body);
-  const existingUser = await User.find({ email: parsed.email });
+  const existingUser = await User.findOne({ email: parsed.email });
   if (existingUser) {
     throw new Error("Email is already registered");
   }
