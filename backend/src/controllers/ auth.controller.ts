@@ -1,6 +1,6 @@
 import type { Request, Response } from "express";
-import { registerUser } from "../service/auth.service.js";
-import type { IRegister } from "../validations/auth.validation.js";
+import { loginUser, registerUser } from "../service/auth.service.js";
+import type { ILogin, IRegister } from "../validations/auth.validation.js";
 import { StatusCodes } from "http-status-codes";
 import { sendError } from "../error/error.js";
 import { success } from "zod";
@@ -23,5 +23,18 @@ export const userRegister = async (
       "Registration failed",
       error,
     );
+  }
+};
+
+export const userLogin = async (req: Request, res: Response) => {
+  try {
+    const userLogin = loginUser(req.body);
+    res.status(StatusCodes.OK).json({
+      success: true,
+      message: "User login successfully",
+      data: userLogin,
+    });
+  } catch (error) {
+    sendError(res, StatusCodes.INTERNAL_SERVER_ERROR, "login failed", error);
   }
 };
