@@ -1,7 +1,7 @@
 import { Check, Eye, LockKeyhole, Mail } from "lucide-react";
 import type { FC, ReactElement } from "react";
 
-export const LeftSidePage: FC = (): ReactElement => {
+export const RightSidePage: FC = (): ReactElement => {
   return (
     <article className="mt-8.25">
       <section>
