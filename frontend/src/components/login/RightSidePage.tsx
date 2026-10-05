@@ -17,7 +17,7 @@ export const RightSidePage: FC = (): ReactElement => {
           <div className="w-112.5">
             {/* greeting  */}
             <div className="mb-9">
-              <p className="text-5xl leading-tight tracking-tight text-gray-900">
+              <p className="text-5xl leading-tight tracking-tight text-gray-900 font-display">
                 Welcome back
               </p>
               <p className="text-slate-500 mt-3">
