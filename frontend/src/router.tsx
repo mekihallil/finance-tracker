@@ -4,9 +4,15 @@ import { Dashboard } from "./page/Dashborad";
 import { Transaction } from "./page/Transaction";
 import { Saving } from "./page/Saving";
 import { SplitBill } from "./page/SplitBill";
+import { Auth } from "./page/Auth";
 export const router = createBrowserRouter([
   {
     path: "/",
+    element: <Auth />,
+  },
+  // Protected application
+  {
+    path: "/app",
     element: <App />,
 
     children: [
@@ -15,7 +21,7 @@ export const router = createBrowserRouter([
         element: <Dashboard />,
       },
       {
-        path: "Transaction",
+        path: "transaction",
         element: <Transaction />,
       },
       {

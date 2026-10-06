@@ -20,20 +20,20 @@ type nav = {
   url: string;
 };
 const navData: nav[] = [
-  { id: 1, title: "Dashboard", icon: <House size={15} />, url: "/" },
-  { id: 2, title: "Transaction", icon: <CirclePlus size={15} />, url: "/Transaction" },
-  { id: 3, title: "Savings", icon: <Target size={15} />, url: "/saving" },
+  { id: 1, title: "Dashboard", icon: <House size={15} />, url: "/app" },
+  { id: 2, title: "Transaction", icon: <CirclePlus size={15} />, url: "/app/transaction" },
+  { id: 3, title: "Savings", icon: <Target size={15} />, url: "/app/saving" },
   {
     id: 4,
     title: "Split Bills",
     icon: <Users size={15} />,
-    url: "/split-bill",
+    url: "/app/split-bill",
   },
   {
     id: 5,
-    title: "Notification",
+    title: "notification",
     icon: <Bell size={15} />,
-    url: "/notification",
+    url: "/app/notification",
   },
 ];
 
