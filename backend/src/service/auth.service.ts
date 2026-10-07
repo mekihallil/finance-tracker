@@ -24,9 +24,13 @@ export const registerUser = async (body: IRegister) => {
     password: hashPassword,
   });
   return {
-    id: newUser._id,
-    name: newUser.name,
-    email: newUser.email,
+    success: true,
+    message: "User registered successfully",
+    data: {
+      id: newUser._id,
+      name: newUser.name,
+      email: newUser.email,
+    },
   };
 };
 
@@ -57,8 +61,12 @@ export const loginUser = async (body: ILogin) => {
     };
   }
   return {
-    id: existingUser.id,
-    name: existingUser.name,
-    email: existingUser.email,
+    success: true,
+    message: "User login successfully",
+    data: {
+      id: existingUser.id,
+      name: existingUser.name,
+      email: existingUser.email,
+    },
   };
 };
