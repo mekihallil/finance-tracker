@@ -11,11 +11,7 @@ export const userRegister = async (
 ) => {
   try {
     const newUser = await registerUser(req.body);
-    res.status(StatusCodes.CREATED).json({
-      success: true,
-      message: "User registered successfully",
-      data: newUser,
-    });
+    res.status(StatusCodes.CREATED).json(newUser);
   } catch (error) {
     sendError(
       res,
@@ -32,11 +28,7 @@ export const userLogin = async (
 ) => {
   try {
     const userLogin = await loginUser(req.body);
-    res.status(StatusCodes.OK).json({
-      success: true,
-      message: "User login successfully",
-      data: userLogin,
-    });
+    res.status(StatusCodes.OK).json(userLogin);
   } catch (error) {
     sendError(res, StatusCodes.INTERNAL_SERVER_ERROR, "login failed", error);
   }

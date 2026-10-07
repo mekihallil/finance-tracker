@@ -11,7 +11,11 @@ export const registerUser = async (body: IRegister) => {
   const parsed = registerValidationSchema.parse(body);
   const existingUser = await User.findOne({ email: parsed.email });
   if (existingUser) {
-    throw new Error("Email is already registered");
+    return {
+      success: false,
+      message: "Email is already registered",
+      data: null,
+    };
   }
   const hashPassword = await bcrypt.hash(parsed.password, 12);
   const newUser = await User.create({
@@ -34,7 +38,11 @@ export const loginUser = async (body: ILogin) => {
   }).select("+password");
 
   if (!existingUser) {
-    throw new Error("Invalid email or password");
+    return {
+      success: false,
+      message: "Invalid email or password",
+      data: null,
+    };
   }
 
   const isPasswordCorrect = await bcrypt.compare(
@@ -42,7 +50,11 @@ export const loginUser = async (body: ILogin) => {
     existingUser.password,
   );
   if (!isPasswordCorrect) {
-    throw new Error("Invalid email or password");
+    return {
+      success: false,
+      message: "Invalid email or password",
+      data: null,
+    };
   }
   return {
     id: existingUser.id,
