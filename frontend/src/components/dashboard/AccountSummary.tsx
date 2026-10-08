@@ -77,7 +77,7 @@ export const AccountSummary: FC = (): ReactElement | null => {
   const statCards: StatCard[] = [
     {
       id: "total-spent",
-      link: "/Transaction",
+      link: "/app/transaction",
       label: "Total Spent",
       value: totalMonthExpense || 0.0,
       percentageChange: percentageFromLastMonth || 0,
@@ -86,7 +86,7 @@ export const AccountSummary: FC = (): ReactElement | null => {
     },
     {
       id: "monthly-budget",
-      link: "/Transaction",
+      link: "/app/transaction",
       label: "Monthly Budget",
       value: monthlyBudget,
       percentageChange: budgetPercentageFromLastMonth,
@@ -98,7 +98,7 @@ export const AccountSummary: FC = (): ReactElement | null => {
     },
     {
       id: "saving-progress",
-      link: "/saving",
+      link: "/app/saving",
       label: "Saving Progress",
       value: topGoal
         ? topGoal.amount.toLocaleString("en-US", {
@@ -112,7 +112,7 @@ export const AccountSummary: FC = (): ReactElement | null => {
     },
     {
       id: "group-Expense",
-      link: "/split-bill",
+      link: "/app/split-bill",
       label: "Group Expenses",
       value: individualExpense,
       percentageChange: 0,

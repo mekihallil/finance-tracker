@@ -20,7 +20,7 @@ export const FinancialDashbaord = () => {
 
           <div className="flex items-center">
             <Plus size={15} />
-            <Link to={"/Transaction"} className="pl-2">
+            <Link to={"/app/transaction"} className="pl-2">
               Add Transactions
             </Link>
           </div>
