@@ -5,6 +5,7 @@ import { Transaction } from "./page/Transaction";
 import { Saving } from "./page/Saving";
 import { SplitBill } from "./page/SplitBill";
 import { Auth } from "./page/Auth";
+import { Notification } from "./page/Notification";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -31,6 +32,10 @@ export const router = createBrowserRouter([
       {
         path: "split-bill",
         element: <SplitBill />,
+      },
+      {
+        path: "notification",
+        element: <Notification />,
       },
     ],
   },
