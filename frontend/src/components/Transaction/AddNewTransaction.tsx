@@ -1,15 +1,22 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
+  BriefcaseBusiness,
   CarTaxiFront,
+  CircleDollarSign,
   Coffee,
   DollarSign,
   Gamepad2,
+  Gift,
   GraduationCap,
   Heart,
   House,
+  Laptop,
   Loader2,
   PlusCircle,
+  RotateCcw,
   ShoppingBag,
+  Store,
+  TrendingUp,
   Utensils,
 } from "lucide-react";
 import { type FC, type ReactElement } from "react";
@@ -27,7 +34,7 @@ type Category = {
   icons: ReactElement;
   categoryName: string;
 };
-const categoryData: Category[] = [
+const categoryExpenseData: Category[] = [
   { id: 1, icons: <Utensils />, categoryName: "Food" },
   { id: 2, icons: <CarTaxiFront />, categoryName: "Transport" },
   { id: 3, icons: <Coffee />, categoryName: "Coffee" },
@@ -36,6 +43,17 @@ const categoryData: Category[] = [
   { id: 6, icons: <GraduationCap />, categoryName: "Education" },
   { id: 7, icons: <Gamepad2 />, categoryName: "Entertainment" },
   { id: 8, icons: <Heart />, categoryName: "Health" },
+];
+
+const categoryIncomeData: Category[] = [
+  { id: 1, icons: <BriefcaseBusiness />, categoryName: "Salary" },
+  { id: 2, icons: <Laptop />, categoryName: "Freelance" },
+  { id: 3, icons: <Store />, categoryName: "Business" },
+  { id: 4, icons: <TrendingUp />, categoryName: "Investment" },
+  { id: 5, icons: <House />, categoryName: "Rental Income" },
+  { id: 6, icons: <Gift />, categoryName: "Bonus" },
+  { id: 7, icons: <RotateCcw />, categoryName: "Refund" },
+  { id: 8, icons: <CircleDollarSign />, categoryName: "Other" },
 ];
 
 export const NewTransaction: FC = (): ReactElement => {
@@ -52,10 +70,12 @@ export const NewTransaction: FC = (): ReactElement => {
     defaultValues: {
       title: "",
       type: "expense",
-      category: "",
     },
   });
   const selectedType = useWatch({ control, name: "type" });
+  const categoryData =
+    selectedType === "expense" ? categoryExpenseData : categoryIncomeData;
+
   const onSubmit = (data: TransactionFormData) => {
     createTransactionMutation.mutate(data, {
       onSuccess: () => {
@@ -184,48 +204,46 @@ export const NewTransaction: FC = (): ReactElement => {
               </button>
             </div>
             {/* Category Select */}
-            {selectedType === "expense" && (
-              <div className="flex w-1/2">
-                <section className="w-full">
-                  <label
-                    htmlFor="category"
-                    className="text-[14px] font-bold text-gray-400"
-                  >
-                    Category
-                  </label>
+            <div className="flex w-1/2">
+              <section className="w-full">
+                <label
+                  htmlFor="category"
+                  className="text-[14px] font-bold text-gray-400"
+                >
+                  Category
+                </label>
 
-                  <div className="grid grid-cols-2 gap-2 ">
-                    {categoryData.map(({ id, icons, categoryName }) => {
-                      return (
-                        <label
-                          key={id}
-                          className=" p-3 rounded-xl  cursor-pointer has-checked:bg-white dark:bg-[#131c2a] bg-[#c1c1c1] hover:rounded-3xl dark:has-checked:bg-transparent  transition-all"
-                        >
-                          <input
-                            {...register("category")}
-                            type="radio"
-                            value={categoryName}
-                            className="sr-only"
-                          />
-                          <div className="flex flex-col justify-center text-center">
-                            <i className="mx-auto">{icons}</i>
-                            <span className="font-semibold text-[13px] text-gray-600 dark:text-white">
-                              {categoryName}
-                            </span>
-                          </div>
-                        </label>
-                      );
-                    })}
-                  </div>
-                  {errors.category && (
-                    <span className="text-xs text-red-500 font-medium">
-                      {errors.category.message}
-                      {/* {toast.error(`${errors.category.message}`)} */}
-                    </span>
-                  )}
-                </section>
-              </div>
-            )}
+                <div className="grid grid-cols-2 gap-2 ">
+                  {categoryData.map(({ id, icons, categoryName }) => {
+                    return (
+                      <label
+                        key={id}
+                        className=" p-3 rounded-xl  cursor-pointer has-checked:bg-white dark:bg-[#131c2a] bg-[#c1c1c1] hover:rounded-3xl dark:has-checked:bg-transparent  transition-all"
+                      >
+                        <input
+                          {...register("category")}
+                          type="radio"
+                          value={categoryName}
+                          className="sr-only"
+                        />
+                        <div className="flex flex-col justify-center text-center">
+                          <i className="mx-auto">{icons}</i>
+                          <span className="font-semibold text-[13px] text-gray-600 dark:text-white">
+                            {categoryName}
+                          </span>
+                        </div>
+                      </label>
+                    );
+                  })}
+                </div>
+                {errors.category && (
+                  <span className="text-xs text-red-500 font-medium">
+                    {errors.category.message}
+                    {/* {toast.error(`${errors.category.message}`)} */}
+                  </span>
+                )}
+              </section>
+            </div>
           </section>
         </form>
       </section>
