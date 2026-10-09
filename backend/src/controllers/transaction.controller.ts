@@ -9,18 +9,18 @@ import type { TransactionInput } from "../validations/transaction.validation.js"
 import { sendError } from "../error/error.js";
 
 // get Transactions
-export const getTransactionIncome = async (
+export const getTransaction = async (
   req: Request,
   res: Response,
 ): Promise<void> => {
   try {
-    const TransactionAndIncome = await GetTransaction();
-    res.status(StatusCodes.OK).json(TransactionAndIncome);
+    const Transaction = await GetTransaction();
+    res.status(StatusCodes.OK).json(Transaction);
   } catch (error) {
     sendError(
       res,
       StatusCodes.INTERNAL_SERVER_ERROR,
-      "Transaction And/or Income not found",
+      "Transaction  not found",
       error,
     );
   }

@@ -2,8 +2,8 @@ import { TransactionService } from "@/services/transaction.service";
 import type { TransactionFormData,} from "@/types/transactionSchema.type";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
-const TransactionINCOME_QUERY_KEYS = {
-  TransactionIncome: ["Transactionsincome"],
+const Transaction_QUERY_KEYS = {
+  Transaction: ["Transactions"],
   getsaving: ["getsaving"],
   goal: ["goals"],
 };
@@ -13,15 +13,15 @@ export const useTransaction = () => {
   // invalidate all queries
   const invalidateAllQueries = () => {
     Promise.all(
-      Object.values(TransactionINCOME_QUERY_KEYS).map((queryKey) => {
+      Object.values(Transaction_QUERY_KEYS).map((queryKey) => {
         queryClient.invalidateQueries({ queryKey });
       }),
     );
   };
 
   const getTransactionQuery = useQuery({
-    queryKey: TransactionINCOME_QUERY_KEYS.TransactionIncome,
-    queryFn: TransactionService.getTransactionIncome,
+    queryKey: Transaction_QUERY_KEYS.Transaction,
+    queryFn: TransactionService.getTransaction,
   });
 
   const createTransactionMutation = useMutation({

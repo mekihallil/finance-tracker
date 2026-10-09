@@ -2,22 +2,22 @@ import type { TransactionFormData } from "@/types/transactionSchema.type";
 import { apiClient } from "./api.service";
 
 export const TransactionService = {
-  getTransactionIncome: async () => {
-    const { data } = await apiClient.get("/Transaction");
+  getTransaction: async () => {
+    const { data } = await apiClient.get("/transaction");
     return data;
   },
   create: async (Transaction: TransactionFormData) => {
-    const { data } = await apiClient.post("/Transaction/create", Transaction);
+    const { data } = await apiClient.post("/transaction/create", Transaction);
     return data;
   },
   update: async (_id: string, Transactions: TransactionFormData) => {
     const { data } = await apiClient.patch(
-      `/Transaction-income/update/${_id}`,
+      `/transaction/update/${_id}`,
       Transactions,
     );
     return data;
   },
   delete: async (_id: string) => {
-    await apiClient.delete(`Transaction/delete/${_id}`);
+    await apiClient.delete(`transaction/delete/${_id}`);
   },
 };
