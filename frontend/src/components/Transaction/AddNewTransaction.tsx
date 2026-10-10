@@ -154,8 +154,8 @@ export const NewTransaction: FC = (): ReactElement => {
                   </span>
                 )}
               </div>
-              <div className="flex justify-center border-[#131c2a] rounded-xl bg-[#1d283d]">
-                <div className="w-1/2 p-3 rounded-xl cursor-pointer has-checked:bg-white dark:bg-transparent bg-[#c1c1c1] dark:has-checked:bg-[#131c2a] transition-all">
+              <div className="flex justify-center border-[#131c2a] rounded-xl dark:bg-[#1d283d]">
+                <div className="w-1/2 p-3 rounded-xl cursor-pointer bg-white dark:bg-transparent has-checked:bg-[#c1c1c1] dark:has-checked:bg-[#131c2a] transition-all">
                   <input
                     type="radio"
                     id="expense"
@@ -168,7 +168,7 @@ export const NewTransaction: FC = (): ReactElement => {
                     Expense
                   </label>
                 </div>
-                <div className="w-1/2 p-3 rounded-xl cursor-pointer has-checked:bg-white dark:bg-transparent bg-[#c1c1c1] dark:has-checked:bg-[#131c2a]  transition-all">
+                <div className="w-1/2 p-3 rounded-xl cursor-pointer bg-white dark:bg-transparent has-checked:bg-[#c1c1c1] dark:has-checked:bg-[#131c2a]  transition-all">
                   <input
                     type="radio"
                     id="income"
