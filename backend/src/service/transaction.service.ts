@@ -11,15 +11,27 @@ interface DateRange {
 
 const getThisMonthRange = (): DateRange => {
   const now = new Date();
-  const start = new Date(now.getFullYear(), now.getMonth(), 1);
-  const end = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  const start = new Date(
+    now.getFullYear(),
+    now.getMonth() - 1,
+    now.getDate() + 1,
+  );
+  const end = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
   return { start, end };
 };
 
 const getLastMonthRange = (): DateRange => {
   const now = new Date();
-  const start = new Date(now.getFullYear(), now.getMonth() - 1, 1);
-  const end = new Date(now.getFullYear(), now.getMonth() - 1, now.getDate());
+  const start = new Date(
+    now.getFullYear(),
+    now.getMonth() - 2,
+    now.getDate() + 1,
+  );
+  const end = new Date(
+    now.getFullYear(),
+    now.getMonth() - 1,
+    now.getDate() + 1,
+  );
   return { start, end };
 };
 
