@@ -2,7 +2,7 @@ import { Zap } from "lucide-react";
 import type { FC, ReactElement } from "react";
 import PremiumKpiSparklines from "./ChartCard";
 import { Avatar, AvatarFallback, AvatarGroup } from "@/components/ui/avatar";
-export const LeftSidePage: FC = (): ReactElement => {
+export const LeftSideLogin: FC = (): ReactElement => {
   return (
     <div className="pt-13.5 mx-16">
       <section className="flex gap-3">

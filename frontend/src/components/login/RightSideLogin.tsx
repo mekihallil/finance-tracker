@@ -5,10 +5,10 @@ import { Check, Eye, LockKeyhole, Mail } from "lucide-react";
 import type { FC, ReactElement } from "react";
 import { useForm } from "react-hook-form";
 import { FcGoogle } from "react-icons/fc";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { toast } from "sonner";
 
-export const RightSidePage: FC = (): ReactElement => {
+export const RightSideLogin: FC = (): ReactElement => {
   const navigate = useNavigate();
   const { userLogin } = useAuth();
   const {
@@ -44,9 +44,12 @@ export const RightSidePage: FC = (): ReactElement => {
       <section>
         <div className="flex justify-end px-20.5 text-gray-900">
           New to Vestia?
-          <button className="font-bold text-gray-700 underline underline-offset-4 decoration-2 decoration-emerald-400 transition hover:text-gray-400 px-2">
+          <Link
+            to="/register"
+            className="font-bold text-gray-700 underline underline-offset-4 decoration-2 decoration-emerald-400 transition hover:text-gray-400 px-2"
+          >
             Create an account
-          </button>
+          </Link>
         </div>
         <form onSubmit={handleSubmit(onSubmit)}>
           <section className="grid justify-center w-full py-36">
