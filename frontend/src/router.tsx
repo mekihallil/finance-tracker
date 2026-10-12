@@ -4,12 +4,17 @@ import { Dashboard } from "./page/Dashborad";
 import { Transaction } from "./page/Transaction";
 import { Saving } from "./page/Saving";
 import { SplitBill } from "./page/SplitBill";
-import { Auth } from "./page/Auth";
+import { LoginPage } from "./page/Login";
 import { Notification } from "./page/Notification";
+import { RegisterPage } from "./page/Register";
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <Auth />,
+    element: <LoginPage />,
+  },
+  {
+    path: "/register",
+    element: <RegisterPage />,
   },
   // Protected application
   {
