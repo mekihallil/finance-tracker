@@ -1,5 +1,8 @@
 import { authService } from "@/services/auth.service";
-import { type LoginFormData } from "@/types/authSchema.type";
+import {
+  type LoginFormData,
+  type RegisterFormData,
+} from "@/types/authSchema.type";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 export const useAuth = () => {
@@ -14,5 +17,15 @@ export const useAuth = () => {
       queryClient.invalidateQueries({ queryKey: ["transaction"] });
     },
   });
-  return { userLogin };
+
+  const userRegister = useMutation({
+    mutationFn: ({ name, email, password }: RegisterFormData) =>
+      authService.userRegister({ name, email, password }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["splits"] });
+      queryClient.invalidateQueries({ queryKey: ["summary"] });
+      queryClient.invalidateQueries({ queryKey: ["transaction"] });
+    },
+  });
+  return { userLogin, userRegister };
 };
