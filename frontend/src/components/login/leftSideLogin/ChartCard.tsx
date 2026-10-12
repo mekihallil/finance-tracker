@@ -1,13 +1,13 @@
 import { useMemo, useRef } from "react";
 import { Chart } from "@tanstack/charts/react/core";
-import { premiumKpisForRevision } from "./model";
-import type { PremiumKpiMetric } from "./model";
+import { premiumKpisForRevision } from "../leftSideLogin/model";
+import type { PremiumKpiMetric } from "../leftSideLogin/model";
 import { areaY, d3Curve, defineChart, lineY } from "@tanstack/charts";
 import { motion } from "@tanstack/charts/motion";
 import { scaleLinear } from "@tanstack/charts/scales/linear";
 import { scalePoint } from "@tanstack/charts/scales/point";
 import { curveMonotoneX } from "d3-shape";
-import type { PremiumKpiId } from "./model";
+import type { PremiumKpiId } from "../leftSideLogin/model";
 const fullGap = 12;
 
 function KpiCard({
