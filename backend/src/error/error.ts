@@ -10,7 +10,10 @@ export const sendError = (
   if (error != undefined) {
     console.error(message, error);
   }
-  res.status(status).json({ message });
+  res.status(status).json({
+    success: false,
+    message,
+  });
 };
 
 export class NotFoundError extends Error {
