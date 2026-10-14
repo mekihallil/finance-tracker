@@ -6,10 +6,14 @@ import {
   type ILogin,
   type IRegister,
 } from "../validations/auth.validation.js";
+import { generateToken } from "../utils/generateToken.js";
 
 export const registerUser = async (body: IRegister) => {
-  const parsed = registerValidationSchema.parse(body);
-  const existingUser = await User.findOne({ email: parsed.email });
+  const { name, email, password } = registerValidationSchema.parse(body);
+
+  const normalizedEmail = email.trim().toLocaleLowerCase();
+
+  const existingUser = await User.findOne({ email: normalizedEmail });
   if (existingUser) {
     return {
       success: false,
@@ -17,12 +21,15 @@ export const registerUser = async (body: IRegister) => {
       data: null,
     };
   }
-  const hashPassword = await bcrypt.hash(parsed.password, 12);
+  const hashPassword = await bcrypt.hash(password, 12);
   const newUser = await User.create({
-    name: parsed.name,
-    email: parsed.email,
+    name: name,
+    email: normalizedEmail,
     password: hashPassword,
   });
+
+  const token = generateToken(newUser._id.toString());
+
   return {
     success: true,
     message: "User registered successfully",
@@ -31,14 +38,17 @@ export const registerUser = async (body: IRegister) => {
       name: newUser.name,
       email: newUser.email,
     },
+    token,
   };
 };
 
 export const loginUser = async (body: ILogin) => {
-  const parsed = loginValidationSchema.parse(body);
+  const { email, password } = loginValidationSchema.parse(body);
 
+  const normalizedEmail = email.trim().toLocaleLowerCase();
+  
   const existingUser = await User.findOne({
-    email: parsed.email,
+    email: normalizedEmail,
   }).select("+password");
 
   if (!existingUser) {
@@ -50,7 +60,7 @@ export const loginUser = async (body: ILogin) => {
   }
 
   const isPasswordCorrect = await bcrypt.compare(
-    parsed.password,
+    password,
     existingUser.password,
   );
   if (!isPasswordCorrect) {
@@ -60,13 +70,16 @@ export const loginUser = async (body: ILogin) => {
       data: null,
     };
   }
+
+  const token = generateToken(existingUser._id.toString());
   return {
     success: true,
     message: "User login successfully",
     data: {
-      id: existingUser.id,
+      id: existingUser._id,
       name: existingUser.name,
       email: existingUser.email,
     },
+    token,
   };
 };
