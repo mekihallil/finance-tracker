@@ -1,8 +1,16 @@
-import { Model, model, Schema } from "mongoose";
+import { Model, model, Schema, Types } from "mongoose";
 import type { ISaving } from "../validations/saving.validation.js";
 
-const SavingSchema: Schema<ISaving> = new Schema(
+interface Isaving extends ISaving {
+  userId: Types.ObjectId;
+}
+const SavingSchema: Schema<Isaving> = new Schema(
   {
+    userId: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
     name: {
       type: String,
       required: true,
@@ -19,4 +27,4 @@ const SavingSchema: Schema<ISaving> = new Schema(
   },
   { timestamps: true },
 );
-export const Saving: Model<ISaving> = model("Saving", SavingSchema);
+export const Saving: Model<Isaving> = model("Saving", SavingSchema);

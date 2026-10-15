@@ -1,4 +1,4 @@
-import { Model, model, Schema } from "mongoose";
+import { Model, model, Schema, Types } from "mongoose";
 import type { ITransaction } from "../validations/transaction.validation.js";
 
 const categoryEnum = [
@@ -20,8 +20,17 @@ const categoryEnum = [
   "Health",
   "Other",
 ];
-const TransactionSchema: Schema<ITransaction> = new Schema(
+export interface ITransactionDoc extends ITransaction {
+  userId: Types.ObjectId;
+}
+const TransactionSchema: Schema<ITransactionDoc> = new Schema(
   {
+    userId: {
+      type: Types.ObjectId,
+      ref: "User",
+      required: true,
+      index: true,
+    },
     title: {
       type: String,
       required: true,
@@ -44,7 +53,7 @@ const TransactionSchema: Schema<ITransaction> = new Schema(
   { timestamps: true },
 );
 
-export const Transaction: Model<ITransaction> = model(
+export const Transaction: Model<ITransactionDoc> = model(
   "Expense",
   TransactionSchema,
 );

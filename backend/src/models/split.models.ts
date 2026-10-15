@@ -1,11 +1,19 @@
-import { model, Model, Schema } from "mongoose";
+import { model, Model, Schema, Types } from "mongoose";
 import type { ISplit } from "../validations/split.validation.js";
 import { string } from "zod";
 
 const categoryEnum = ["Food", "Rent", "Taxi", "Travel", "Utilities", "Other"];
-
-export const SplitSchema: Schema<ISplit> = new Schema(
+export interface ISplitDoc extends ISplit {
+  userId: Types.ObjectId;
+}
+export const SplitSchema: Schema<ISplitDoc> = new Schema(
   {
+    userId: {
+      type: Types.ObjectId,
+      ref: "User",
+      required: true,
+      index: true,
+    },
     title: {
       type: String,
       required: true,
@@ -46,4 +54,4 @@ export const SplitSchema: Schema<ISplit> = new Schema(
   { timestamps: true },
 );
 
-export const Split: Model<ISplit> = model("split", SplitSchema);
+export const Split: Model<ISplitDoc> = model("split", SplitSchema);
