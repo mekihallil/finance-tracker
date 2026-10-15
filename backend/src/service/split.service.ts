@@ -4,13 +4,13 @@ import {
   type ISplit,
 } from "../validations/split.validation.js";
 
-export const AddSplitService = async (body: ISplit) => {
+export const AddSplitService = async (body: ISplit, userId: string) => {
   const parsed = splitValidatorSchema.parse(body);
-  const newSplit = await new Split(parsed).save();
+  const newSplit = await new Split({ ...parsed, userId: userId }).save();
   return newSplit;
 };
-export const getSplitBills = async () => {
-  const splitBills = await Split.find();
+export const getSplitBills = async (userId: string) => {
+  const splitBills = await Split.find({ userId: userId });
 
   const individualExpense = splitBills
     .map((split) => split.amount / split.participants.length)
@@ -28,7 +28,7 @@ export const getSplitBills = async () => {
 
   return { splitBills, individualExpense, OwedToYou };
 };
-export const DeleteSplitBill = async (id: any) => {
-  const deleteSplit = await Split.findByIdAndDelete(id);
+export const DeleteSplitBill = async (id: any, userId: string) => {
+  const deleteSplit = await Split.findByIdAndDelete({ id, userId: userId });
   return deleteSplit;
 };

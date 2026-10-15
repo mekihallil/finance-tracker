@@ -6,10 +6,13 @@ import {
   DeleteSplitBill,
   getSplitBills,
 } from "../service/split.service.js";
+import type { AuthRequest } from "../middlewares/authMiddleware.js";
+import { checkAuthentication } from "../utils/checkAuthentication.js";
 
-export const AddSplit = async (req: Request, res: Response) => {
+export const AddSplit = async (req: AuthRequest, res: Response) => {
   try {
-    const newSplit = await AddSplitService(req.body);
+    if (!checkAuthentication(req.userId, res)) return;
+    const newSplit = await AddSplitService(req.body, req.userId);
     res.status(StatusCodes.CREATED).json(newSplit);
   } catch (error) {
     sendError(
@@ -21,22 +24,23 @@ export const AddSplit = async (req: Request, res: Response) => {
   }
 };
 
-export const getSplit = async (_req: Request, res: Response) => {
+export const getSplit = async (req: AuthRequest, res: Response) => {
   try {
-    const splitBills = await getSplitBills();
+    if (!checkAuthentication(req.userId, res)) return;
+
+    const splitBills = await getSplitBills(req.userId);
     res.status(StatusCodes.ACCEPTED).json(splitBills);
   } catch (error) {
     sendError(res, StatusCodes.INTERNAL_SERVER_ERROR, "Not Found", error);
   }
 };
 
-export const deleteSplitBill = async (
-  req: Request<{ id: string }>,
-  res: Response,
-) => {
+export const deleteSplitBill = async (req: AuthRequest, res: Response) => {
   try {
+    if (!checkAuthentication(req.userId, res)) return;
+
     const { id } = req.params;
-    const splitDelete = await DeleteSplitBill(id);
+    const splitDelete = await DeleteSplitBill(id, req.userId);
     if (!splitDelete) {
       sendError(res, StatusCodes.BAD_REQUEST, "SplitBill not found");
     }

@@ -38,8 +38,10 @@ const getLastMonthRange = (): DateRange => {
 const sumAmount = (items: ITransaction[]) =>
   items.reduce((sum, item) => sum + item.amount, 0);
 
-export const GetTransaction = async () => {
-  const transaction: ITransaction[] = await Transaction.find();
+export const GetTransaction = async (userId: string) => {
+  const transaction: ITransaction[] = await Transaction.find({
+    userId: userId,
+  });
 
   // item of income and expense
   const incomeItems = transaction.filter((t) => t.type === "income");
@@ -123,11 +125,17 @@ export const GetTransaction = async () => {
   };
 };
 
-export const CreateTransaction = async (expense: TransactionInput) => {
-  const newExpense = await new Transaction(expense).save();
+export const CreateTransaction = async (
+  expense: TransactionInput,
+  userId: string,
+) => {
+  const newExpense = await new Transaction({ expense, userId: userId }).save();
   return newExpense;
 };
-export const DeleteTransaction = async (id: any) => {
-  const deleteExpense = await Transaction.findByIdAndDelete(id);
+export const DeleteTransaction = async (id: any, userId: string) => {
+  const deleteExpense = await Transaction.findByIdAndDelete({
+    id,
+    userId: userId,
+  });
   return deleteExpense;
 };

@@ -7,22 +7,24 @@ import {
   DeleteSaving,
   getSavingProgress,
 } from "../service/saving.service.js";
-import type { ISaving } from "../validations/saving.validation.js";
 import { getAmount, getGoals } from "../service/saving.service.js";
+import type { AuthRequest } from "../middlewares/authMiddleware.js";
+import { checkAuthentication } from "../utils/checkAuthentication.js";
 
 // Add savings
 export const addSaving = async (
-  req: Request<{}, {}, ISaving>,
+  req: AuthRequest,
   res: Response,
-) => {
+): Promise<void> => {
   try {
-    const saving = await createSaving(req.body);
+    if (!checkAuthentication(req.userId, res)) return;
+    const saving = await createSaving(req.body, req.userId);
     res.status(StatusCodes.CREATED).json(saving);
   } catch (error) {
-    if (error instanceof ZodError)
-      return res
-        .status(StatusCodes.BAD_REQUEST)
-        .json({ message: error.flatten() });
+    if (error instanceof ZodError) {
+      res.status(StatusCodes.BAD_REQUEST).json({ message: error.flatten() });
+      return;
+    }
     sendError(
       res,
       StatusCodes.INTERNAL_SERVER_ERROR,
@@ -33,9 +35,14 @@ export const addSaving = async (
 };
 
 // Get Goal Savings
-export const getGoalSaving = async (req: Request, res: Response) => {
+export const getGoalSaving = async (
+  req: AuthRequest,
+  res: Response,
+): Promise<void> => {
   try {
-    const getGoal = await getSavingProgress();
+    if (!checkAuthentication(req.userId, res)) return;
+
+    const getGoal = await getSavingProgress(req.userId);
     res.status(StatusCodes.OK).json(getGoal);
   } catch (error) {
     if (error instanceof NotFoundError)
@@ -50,12 +57,19 @@ export const getGoalSaving = async (req: Request, res: Response) => {
 };
 
 export const deleteSaving = async (
-  req: Request<{ id: string }>,
+  req: AuthRequest,
   res: Response,
-) => {
+): Promise<void> => {
   try {
     const { id } = req.params;
-    const savingDelete = await DeleteSaving(id);
+
+    if (!checkAuthentication(req.userId, res)) return;
+
+    if (!id || Array.isArray(id)) {
+      sendError(res, StatusCodes.BAD_REQUEST, "Invalid saving ID");
+      return;
+    }
+    const savingDelete = await DeleteSaving(id, req.userId);
     if (!savingDelete) {
       return sendError(res, StatusCodes.BAD_REQUEST, "Saving not Found");
     }
@@ -73,9 +87,11 @@ export const deleteSaving = async (
 };
 
 // Each Goals
-export const goals = async (req: Request, res: Response) => {
+export const goals = async (req: AuthRequest, res: Response) => {
   try {
-    const goals = await getGoals();
+    if (!checkAuthentication(req.userId, res)) return;
+
+    const goals = await getGoals(req.userId);
     res.status(StatusCodes.OK).json(goals);
   } catch (error) {
     if (error instanceof NotFoundError)
@@ -90,7 +106,7 @@ export const goals = async (req: Request, res: Response) => {
 };
 
 // Update amount
-export const addMoneyToGoal = async (req: Request, res: Response) => {
+export const addMoneyToGoal = async (req: AuthRequest, res: Response) => {
   try {
     const { id } = req.params;
     const { amount } = req.body;
@@ -102,8 +118,8 @@ export const addMoneyToGoal = async (req: Request, res: Response) => {
     if (typeof amount !== "number" || isNaN(amount)) {
       return sendError(res, StatusCodes.BAD_REQUEST, "Valid ID is required");
     }
-
-    const addamount = await getAmount(id, amount);
+    if (!checkAuthentication(req.userId, res)) return;
+    const addamount = await getAmount(id, amount, req.userId);
 
     if (!addamount) {
       return sendError(res, StatusCodes.BAD_REQUEST, "Valid ID is required");

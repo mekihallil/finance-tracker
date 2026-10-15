@@ -1,14 +1,17 @@
 import { NotFoundError } from "../error/error.js";
 import { Saving } from "../models/saving.models.js";
-import { savingValidateSchema } from "../validations/saving.validation.js";
+import {
+  savingValidateSchema,
+  type ISaving,
+} from "../validations/saving.validation.js";
 
-export const createSaving = async (body: unknown) => {
+export const createSaving = async (body: ISaving, userId: string) => {
   const saving = savingValidateSchema.parse(body);
-  return await new Saving(saving).save();
+  return await new Saving({ ...saving, userId: userId }).save();
 };
 
-export const getSavingProgress = async () => {
-  const savings = await Saving.find();
+export const getSavingProgress = async (userId: string) => {
+  const savings = await Saving.find({ userId: userId });
 
   if (!savings.length) {
     return {
@@ -44,14 +47,14 @@ export const getSavingProgress = async () => {
     isComplete,
   };
 };
-export const DeleteSaving = (id: string) => {
-  const deletesaving = Saving.findByIdAndDelete(id);
+export const DeleteSaving = (id: string, userId: string) => {
+  const deletesaving = Saving.findByIdAndDelete({ id, userId: userId });
   return deletesaving;
 };
 
 // goals
-export const getGoals = async () => {
-  const goals = await Saving.find();
+export const getGoals = async (userId: string) => {
+  const goals = await Saving.find({ userId: userId });
 
   if (!goals.length) return [];
 
@@ -64,9 +67,9 @@ export const getGoals = async () => {
 };
 
 // update
-export const getAmount = async (id: string, amount: number) => {
+export const getAmount = async (id: string, amount: number, userId: string) => {
   const addAmonut = await Saving.findByIdAndUpdate(
-    id,
+    { userId: userId, id },
     { $inc: { amount } },
     { new: true, runValidators: true },
   );

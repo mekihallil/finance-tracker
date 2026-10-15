@@ -5,16 +5,19 @@ import {
   DeleteTransaction,
   GetTransaction,
 } from "../service/transaction.service.js";
-import type { TransactionInput } from "../validations/transaction.validation.js";
 import { sendError } from "../error/error.js";
+import type { AuthRequest } from "../middlewares/authMiddleware.js";
+import { checkAuthentication } from "../utils/checkAuthentication.js";
 
 // get Transactions
 export const getTransaction = async (
-  req: Request,
+  req: AuthRequest,
   res: Response,
 ): Promise<void> => {
   try {
-    const Transaction = await GetTransaction();
+    if (!checkAuthentication(req.userId, res)) return;
+
+    const Transaction = await GetTransaction(req.userId);
     res.status(StatusCodes.OK).json(Transaction);
   } catch (error) {
     sendError(
@@ -27,18 +30,19 @@ export const getTransaction = async (
 };
 
 // Create Transactions
-export const createTransaction = async (
-  req: Request<Record<string, never>, unknown, TransactionInput>,
-  res: Response,
-) => {
+export const createTransaction = async (req: AuthRequest, res: Response) => {
   try {
+    if (!checkAuthentication(req.userId, res)) return;
     const { title, amount, type, category } = req.body;
-    const newTransaction = await CreateTransaction({
-      title,
-      amount,
-      type,
-      category,
-    });
+    const newTransaction = await CreateTransaction(
+      {
+        title,
+        amount,
+        type,
+        category,
+      },
+      req.userId,
+    );
     res.status(StatusCodes.CREATED).json(newTransaction);
   } catch (error) {
     sendError(
@@ -51,13 +55,12 @@ export const createTransaction = async (
 };
 
 // Delete Transaction
-export const deleteTransaction = async (
-  req: Request<{ _id: string }>,
-  res: Response,
-) => {
+export const deleteTransaction = async (req: AuthRequest, res: Response) => {
   try {
+    if (!checkAuthentication(req.userId, res)) return;
+
     const { _id } = req.params;
-    const deletTransaction = await DeleteTransaction(_id);
+    const deletTransaction = await DeleteTransaction(_id, req.userId);
     if (!deletTransaction) {
       sendError(res, StatusCodes.BAD_REQUEST, "Transaction not found");
       return;
