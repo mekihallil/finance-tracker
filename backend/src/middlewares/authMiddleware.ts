@@ -1,6 +1,6 @@
 import type { NextFunction, Request, Response } from "express";
 import { StatusCodes } from "http-status-codes";
-import jwt, { JsonWebTokenError, TokenExpiredError } from "jsonwebtoken";
+import jwt from "jsonwebtoken";
 import { sendError } from "../error/error.js";
 export interface AuthRequest extends Request {
   userId?: string;
@@ -22,7 +22,10 @@ export const protect = (
       );
     }
 
-    const token = authHeader.split(" ")[1];
+    const token = authHeader?.startsWith("Bearer ")
+      ? authHeader.slice(7)
+      : undefined;
+
     const secret = process.env.JWT_SECRET;
 
     if (!token) {
@@ -40,6 +43,7 @@ export const protect = (
     req.userId = decoded.userId;
     next();
   } catch (error) {
+    const { JsonWebTokenError, TokenExpiredError } = jwt;
     if (
       error instanceof JsonWebTokenError ||
       error instanceof TokenExpiredError
