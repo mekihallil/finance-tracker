@@ -7,11 +7,12 @@ import {
   deleteSplitBill,
   getSplit,
 } from "../controllers/split.controller.js";
+import { protect } from "../middlewares/authMiddleware.js";
 
 const router = Router();
 
-router.post("/create", validate(splitValidatorSchema), AddSplit);
-router.get("/splitBills", getSplit);
-router.delete(`/delete/:id`, deleteSplitBill);
+router.post("/create",protect, validate(splitValidatorSchema), AddSplit);
+router.get("/splitBills",protect, getSplit);
+router.delete(`/delete/:id`,protect, deleteSplitBill);
 
 export default router;
