@@ -40,7 +40,7 @@ const sumAmount = (items: ITransaction[]) =>
 
 export const GetTransaction = async (userId: string) => {
   const transaction: ITransaction[] = await Transaction.find({
-    userId: userId,
+    userId,
   });
 
   // item of income and expense
@@ -126,11 +126,11 @@ export const GetTransaction = async (userId: string) => {
 };
 
 export const CreateTransaction = async (
-  expense: TransactionInput,
+  transaction: TransactionInput,
   userId: string,
 ) => {
-  const newExpense = await new Transaction({ expense, userId: userId }).save();
-  return newExpense;
+  const newTransaction = await new Transaction({ ...transaction, userId }).save();
+  return newTransaction;
 };
 export const DeleteTransaction = async (id: any, userId: string) => {
   const deleteExpense = await Transaction.findByIdAndDelete({
