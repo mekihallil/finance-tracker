@@ -48,13 +48,13 @@ export const getSavingProgress = async (userId: string) => {
   };
 };
 export const DeleteSaving = (id: string, userId: string) => {
-  const deletesaving = Saving.findByIdAndDelete({ id, userId: userId });
+  const deletesaving = Saving.findByIdAndDelete({ _id: id, userId });
   return deletesaving;
 };
 
 // goals
 export const getGoals = async (userId: string) => {
-  const goals = await Saving.find({ userId: userId });
+  const goals = await Saving.find({ userId });
 
   if (!goals.length) return [];
 
@@ -69,7 +69,7 @@ export const getGoals = async (userId: string) => {
 // update
 export const getAmount = async (id: string, amount: number, userId: string) => {
   const addAmonut = await Saving.findByIdAndUpdate(
-    { userId: userId, id },
+    { _id: id, userId },
     { $inc: { amount } },
     { new: true, runValidators: true },
   );
