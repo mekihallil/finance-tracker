@@ -1,17 +1,8 @@
 import { model, Schema } from "mongoose";
-import type { ILogin, IRegister } from "../validations/auth.validation.js";
+import type { IRegister } from "../validations/auth.validation.js";
 
-export interface IUser extends IRegister {
-  userId: Schema.Types.ObjectId;
-}
-
-export const userAuthSchema = new Schema<IUser>(
+export const userAuthSchema = new Schema<IRegister>(
   {
-    userId: {
-      type: Schema.Types.ObjectId,
-      ref: "User",
-      required: true,
-    },
     name: {
       type: String,
       required: true,
@@ -39,4 +30,4 @@ export const userAuthSchema = new Schema<IUser>(
   { timestamps: true },
 );
 
-export const User = model<IUser>("UserAuth", userAuthSchema);
+export const User = model<IRegister>("UserAuth", userAuthSchema);
