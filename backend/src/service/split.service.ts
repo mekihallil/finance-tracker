@@ -6,11 +6,11 @@ import {
 
 export const AddSplitService = async (body: ISplit, userId: string) => {
   const parsed = splitValidatorSchema.parse(body);
-  const newSplit = await new Split({ ...parsed, userId: userId }).save();
+  const newSplit = await new Split({ ...parsed, userId }).save();
   return newSplit;
 };
 export const getSplitBills = async (userId: string) => {
-  const splitBills = await Split.find({ userId: userId });
+  const splitBills = await Split.find({ userId });
 
   const individualExpense = splitBills
     .map((split) => split.amount / split.participants.length)
@@ -29,6 +29,6 @@ export const getSplitBills = async (userId: string) => {
   return { splitBills, individualExpense, OwedToYou };
 };
 export const DeleteSplitBill = async (id: any, userId: string) => {
-  const deleteSplit = await Split.findByIdAndDelete({ id, userId: userId });
+  const deleteSplit = await Split.findByIdAndDelete({ _id: id, userId });
   return deleteSplit;
 };
