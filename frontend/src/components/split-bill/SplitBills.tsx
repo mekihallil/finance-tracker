@@ -23,6 +23,11 @@ import {
 } from "react";
 import { toast } from "sonner";
 
+interface splitBillDoc extends splitFormData {
+  _id: string;
+  createdAt: Date;
+}
+
 interface categoryProps {
   categoryId: string;
   icon: ReactNode;
@@ -66,7 +71,7 @@ export const SplitBills: FC = (): ReactElement | null => {
     }
   }, [isError, error]);
 
-  const [IsHovered, setIsHovered] = useState(false);
+  const [IsHovered, setIsHovered] = useState<string | null>(null);
   if (isLoading) {
     return (
       <div className="flex justify-center p-10">
@@ -100,7 +105,7 @@ export const SplitBills: FC = (): ReactElement | null => {
           amount,
           participants,
           createdAt,
-        }: splitFormData) => {
+        }: splitBillDoc) => {
           const CategoryIcon = categoryIcon.find(
             (c) => c.categoryId === category,
           )?.icon;
@@ -111,8 +116,8 @@ export const SplitBills: FC = (): ReactElement | null => {
           return (
             <article
               key={_id}
-              onMouseEnter={() => setIsHovered(true)}
-              onMouseLeave={() => setIsHovered(false)}
+              onMouseEnter={() => setIsHovered(_id)}
+              onMouseLeave={() => setIsHovered(null)}
               className="border border-gray-300 rounded-3xl p-7 mt-8 shadow-2xl dark:bg-[#2C3546]"
             >
               <main>
@@ -148,15 +153,15 @@ export const SplitBills: FC = (): ReactElement | null => {
                           <h1>Paid</h1>
                         </div>
                       </div>
-                      {IsHovered ? (
+                      {IsHovered === _id ? (
                         <button
                           onClick={() => DeleteSplitMutation.mutate(_id)}
                           className="my-auto"
                         >
-                          <Trash2 size={16} />
+                          <Trash2 className="text-red-500" size={20} />
                         </button>
                       ) : (
-                        <div className="mr-4"></div>
+                        <div className="mr-5"></div>
                       )}
                     </div>
                   </section>
