@@ -17,7 +17,6 @@ export const categoryEnum = z.enum([
 ]);
 
 export const splitSchema = z.object({
-  _id: z.string(),
   title: z
     .string()
     .min(3, "Title must be at least 3 characters long")
@@ -26,7 +25,6 @@ export const splitSchema = z.object({
     .number("Amount must be a number")
     .positive("Amount must be greater than 0"),
   category: categoryEnum,
-  createdAt: z.coerce.date(),
   participants: z
     .array(participants)
     .min(2, "At least one participant is required  ")
