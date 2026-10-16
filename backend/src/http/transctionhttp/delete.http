@@ -1,4 +1,5 @@
 DELETE http://localhost:5000/api/transaction/delete/{id}
+Authorization: Bearer YOUR_JWT_TOKEN
 Content-Type :application/json
 
 {

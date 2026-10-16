@@ -1,4 +1,5 @@
-DELETE http://localhost:5000/api/saving/delete/6aaee71aafcc613ef85a88da
+DELETE http://localhost:5000/api/saving/delete/{id}
+Authorization: Bearer YOUR_JWT_TOKEN
 Content-Type :application/json
 
 {

@@ -1,9 +1,10 @@
-PATCH http://localhost:5000/api/transaction/update/6aaece34330a4303bc7d822c
+PATCH http://localhost:5000/api/transaction/update/{id}
+Authorization: Bearer YOUR_JWT_TOKEN
 Content-Type :application/json
 
 {
-  "title": "N",
-  "amount": 500,
-  "type": "income",
-  "category": "Test"
+  "title": "title",
+  "amount": 37,
+  "type": "income or expense",
+  "category": "category"
 }

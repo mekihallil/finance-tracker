@@ -1,10 +1,11 @@
 POST http://localhost:5000/api/saving/create
+Authorization: Bearer YOUR_JWT_TOKEN
 Content-Type: application/json
 
 {
-  "name": "Emergency Fund",
-  "category": "savings",
-  "amount": 500,
-  "goal": 5000,
-  "date": "2026-06-18"
+  "name": "name",
+  "category": "categry",
+  "amount": 37,
+  "goal": 37,
+  "date": "yyyy-mm-dd"
 }

@@ -1,12 +1,13 @@
 POST http://localhost:5000/api/split/create
+Authorization: Bearer YOUR_JWT_TOKEN
 Content-Type: application/json
 
 {
     "title": "split title",
-    "amount": 2000,
-    "category":"Rent",
+    "amount": 37,
+    "category":"Category",
     "participants": [
-        { "name": "meki", 
+        { "name": "name", 
         "email": "email@gmail.com", 
         "paid":false
         },

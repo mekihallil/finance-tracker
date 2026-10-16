@@ -1,4 +1,5 @@
 GET http://localhost:5000/api/saving/goals
+Authorization: Bearer YOUR_JWT_TOKEN
 Content-Type :application/json
 
 
