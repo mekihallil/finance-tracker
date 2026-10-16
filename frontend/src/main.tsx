@@ -4,7 +4,7 @@ import { RouterProvider } from "react-router";
 import { Toaster } from "sonner";
 import { ThemeProvider } from "./context/theme";
 import "./index.css";
-import { router } from "./router";
+import { router } from "./router/router";
 
 const queryClient = new QueryClient();
 const isDark = window.matchMedia("(prefers-color-scheme: light)").matches;
