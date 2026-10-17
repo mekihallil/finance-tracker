@@ -13,12 +13,13 @@ export const BalanceSummary: FC = (): ReactElement | null => {
   const { data } = getSplitQuery;
 
   if (!data) return null;
-  const { OwedToYou } = data;
+  const { YouOwe, OwedToYou, NetBalance } = data;
+
   const utils: Utils[] = [
     {
       name: "You Owe",
       icon: <DollarSign />,
-      amount: 3.24,
+      amount: YouOwe,
     },
     {
       name: "Owed to You",
@@ -28,7 +29,7 @@ export const BalanceSummary: FC = (): ReactElement | null => {
     {
       name: "Net Balance",
       icon: <Calculator />,
-      amount: 60.25,
+      amount: NetBalance,
     },
   ];
   return (
@@ -42,7 +43,9 @@ export const BalanceSummary: FC = (): ReactElement | null => {
             <section className="my-auto">{icon}</section>
             <section>
               <h1>{name}</h1>
-              <h1 className="text-2xl font-semibold">
+              <h1
+                className={`text-2xl font-semibold ${NetBalance < 0 && name === "Net Balance" ? "text-red-600" : " "}  ${OwedToYou < YouOwe && name === "You Owe" ? "text-red-600" : ""}`}
+              >
                 {amount.toLocaleString("en-us", {
                   style: "currency",
                   currency: "USD",
