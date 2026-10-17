@@ -1,3 +1,5 @@
+import { email } from "zod";
+import { User, userAuthSchema } from "../models/auth.models.js";
 import { Split } from "../models/split.models.js";
 import {
   splitValidatorSchema,
@@ -11,6 +13,15 @@ export const AddSplitService = async (body: ISplit, userId: string) => {
 };
 export const getSplitBills = async (userId: string) => {
   const splitBills = await Split.find({ userId });
+  const user = await User.find({ _id: userId });
+  const yourEmail = user.map((use) => use.email)[0] as string;
+  const yourName =
+    user
+      .map((use) => use.name)[0]
+      ?.trim()
+      .split(/\s+/)[0] ?? "";
+
+  const splitBillsc = await Split.find();
 
   const individualExpense = splitBills
     .map((split) => split.amount / split.participants.length)
@@ -26,7 +37,26 @@ export const getSplitBills = async (userId: string) => {
     })
     .reduce((sum, split) => sum + split, 0);
 
-  return { splitBills, individualExpense, OwedToYou };
+  const YouOwe = splitBillsc
+    .filter((split) =>
+      split.participants.some(
+        (participant) =>
+          participant.email.toLowerCase() === yourEmail.toLowerCase() &&
+          participant.paid === false,
+      ),
+    )
+    .map((split) => split.amount / split.participants.length)
+    .reduce((total, split) => total + split, 0);
+  const NetBalance = OwedToYou - YouOwe;
+  return {
+    YouOwe,
+    OwedToYou,
+    NetBalance,
+    yourEmail,
+    yourName,
+    splitBills,
+    individualExpense,
+  };
 };
 export const DeleteSplitBill = async (id: any, userId: string) => {
   const deleteSplit = await Split.findByIdAndDelete({ _id: id, userId });
