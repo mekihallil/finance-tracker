@@ -6,7 +6,7 @@ import {
 } from "@/types/splitSchema.types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Plus, X } from "lucide-react";
-import { useEffect, useState, type FC, type ReactElement } from "react";
+import { useEffect, useState, type FC } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
@@ -14,12 +14,6 @@ type ownerDataProps = {
   name: string;
   email: string;
   paid: boolean;
-};
-
-const owmerdata: ownerDataProps = {
-  name: "You",
-  email: "you@gmail.com",
-  paid: true,
 };
 
 interface participantsProps {
@@ -66,10 +60,29 @@ const CategoryData: Category[] = [
   },
 ];
 
-export const AddSplitBill: FC<addSplitBillProps> = ({
-  isOpen,
+export const AddSplitBill: FC<addSplitBillProps> = ({ isOpen, onClose }) => {
+  const { getSplitQuery } = useSplit();
+  const { data, isLoading, isError } = getSplitQuery;
+
+  const name = data?.yourName;
+  const email = data?.yourEmail;
+
+  if (isLoading) return <div>Loading...</div>;
+  if (!isOpen) return null;
+  if (isError || !name || !email) return null;
+
+  return <SplitForm owner={{ name, email, paid: true }} onClose={onClose} />;
+};
+
+const SplitForm: FC<{ owner: ownerDataProps; onClose: () => void }> = ({
+  owner,
   onClose,
-}): ReactElement => {
+}) => {
+  const owmerdata: ownerDataProps = {
+    name: owner.name,
+    email: owner.email,
+    paid: owner.paid,
+  };
   const { AddSplitMutation } = useSplit();
   const {
     register,
@@ -143,7 +156,7 @@ export const AddSplitBill: FC<addSplitBillProps> = ({
         _id: _id,
         name: name,
         email: email,
-        paid: paid ?? false,
+        paid,
       })),
     };
     AddSplitMutation.mutate(payload, {
@@ -165,7 +178,6 @@ export const AddSplitBill: FC<addSplitBillProps> = ({
     ]);
   };
 
-  if (!isOpen) return <></>;
   return (
     <article className="border border-black dark:bg-[#2C3546] rounded-3xl p-7 mt-8">
       <h1 className="mb-8">Create New Split</h1>
@@ -288,16 +300,18 @@ export const AddSplitBill: FC<addSplitBillProps> = ({
                   <Plus size={20} />
                 </button>
               </div>
-              {errors.participants && (
-                <span className="text-red-500 text-sm">
-                  {errors.participants.message}
-                </span>
-              )}
             </div>
+            {errors.participants && (
+              <span className="ml-2 px-0.5 text-[12px]">
+                {errors.participants.message}
+              </span>
+            )}
           </div>
         </div>
         <div className="flex gap-6 ml-5 mt-5">
-          <button type="submit">Create Split</button>
+          <button type="submit" disabled={AddSplitMutation.isPending}>
+            Create Split
+          </button>
           <button
             type="button"
             className="border py-1 px-4 rounded-xl"
