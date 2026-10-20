@@ -54,6 +54,6 @@ const TransactionSchema: Schema<ITransactionDoc> = new Schema(
 );
 
 export const Transaction: Model<ITransactionDoc> = model(
-  "Expense",
+  "Transaction",
   TransactionSchema,
 );
