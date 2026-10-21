@@ -1,8 +1,10 @@
+import { useAuth } from "@/hook/useAuth.hook";
 import {
   Bell,
   CirclePlus,
   Dot,
   House,
+  LogOut,
   Moon,
   Sun,
   Target,
@@ -21,7 +23,12 @@ type nav = {
 };
 const navData: nav[] = [
   { id: 1, title: "Dashboard", icon: <House size={15} />, url: "/app" },
-  { id: 2, title: "Transaction", icon: <CirclePlus size={15} />, url: "/app/transaction" },
+  {
+    id: 2,
+    title: "Transaction",
+    icon: <CirclePlus size={15} />,
+    url: "/app/transaction",
+  },
   { id: 3, title: "Savings", icon: <Target size={15} />, url: "/app/saving" },
   {
     id: 4,
@@ -38,6 +45,8 @@ const navData: nav[] = [
 ];
 
 export const NavBar: FC = (): ReactElement => {
+  const { logout } = useAuth();
+
   const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
   const [mode, setMode] = useState(isDark);
   useEffect(() => {
@@ -48,7 +57,6 @@ export const NavBar: FC = (): ReactElement => {
     }
   }, [mode]);
   const path = useLocation().pathname;
-  // console.log(path);
 
   return (
     <>
@@ -95,7 +103,7 @@ export const NavBar: FC = (): ReactElement => {
                 >
                   <Link
                     to={url}
-                    className={`flex justify-between items-center h-12 w-63.75 my-4 pl-4 cursor-pointer ${path == url ? "border rounded-2xl  bg-[#29B866]" : ""} `}
+                    className={`flex justify-between items-center h-12 w-63.75 my-4 pl-4 cursor-pointer ${path == url && "border rounded-3xl  bg-[#29B866]"} `}
                   >
                     <div className="flex ">
                       <div className="flex items-center px-3">{icon}</div>
@@ -108,10 +116,16 @@ export const NavBar: FC = (): ReactElement => {
             })}
           </section>
         </section>
-        <footer className="text-center text-[13px] py-3">
-          <hr className="dark:text-gray-700 text-[#e3e2e2]" />
-          <p className="mt-4">Professional Finance Tracker</p>
-          <p>v1.0 Premiun</p>
+        <footer>
+          <div className="flex justify-end mx-4 items-center gap-2 cursor-pointer">
+            <LogOut size={15} />
+            <button onClick={() => logout()}>Login</button>
+          </div>
+          <div className="text-center text-[13px] py-3">
+            <hr className="dark:text-gray-700 text-[#e3e2e2]" />
+            <p className="mt-4">Professional Finance Tracker</p>
+            <p>v1.0 Premiun</p>
+          </div>
         </footer>
       </section>
     </>
