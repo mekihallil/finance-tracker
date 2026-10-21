@@ -31,7 +31,7 @@ export const RecentTransaction: FC = (): ReactElement | null => {
   const { transaction } = data;
   return (
     <article className="">
-      <section className="w-full rounded-3xl shadow-2xl dark:bg-[#182029] my-8 mr-28 p-10 max-lg:mx-auto ">
+      <section className="w-full rounded-3xl shadow-2xl dark:bg-[#182029] my-8 mr-28 p-5 md:p-10 max-lg:mx-auto ">
         <h2 className="flex items-center text-gray-800 pb-8 dark:text-white">
           <div className="mr-5 ">
             <DollarSign />
@@ -81,7 +81,7 @@ export const RecentTransaction: FC = (): ReactElement | null => {
                           {title}
                         </h3>
                         {/* Category and Time ago */}
-                        <section>
+                        <section className="grid md:inline">
                           <span className="font-medium mt-1 px-1.5 text-[14px] rounded-full bg-[#F0F3F4] dark:bg-[#4B5567]">
                             {category}
                           </span>

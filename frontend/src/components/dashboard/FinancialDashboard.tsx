@@ -5,9 +5,9 @@ export const FinancialDashbaord = () => {
   return (
     <>
       <article>
-        <section className="flex justify-between place-items-center h-31.25 my-8.75 px-11  border-gray-200 rounded-4xl dark:bg-[#182029] ">
-          <section className="flex  items-center ">
-            <Sparkles />
+        <section className="lg:justify-between place-items-center my-8.75 px-11 py-8 border-gray-200 rounded-4xl dark:bg-[#182029] lg:h-31.25 md:flex grid gap-5">
+          <section className="flex items-center ">
+            <Sparkles className="size-10" />
             <h1 className=" pl-6">
               <p className="text-3xl text-[#29B866] font-bold">
                 Financial Dashboard
@@ -18,9 +18,9 @@ export const FinancialDashbaord = () => {
             </h1>
           </section>
 
-          <div className="flex items-center">
+          <div className="flex lg:items-center">
             <Plus size={15} />
-            <Link to={"/app/transaction"} className="pl-2">
+            <Link to={"/app/transaction"} className="pl-2 ">
               Add Transactions
             </Link>
           </div>

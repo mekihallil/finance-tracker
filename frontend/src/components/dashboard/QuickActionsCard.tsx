@@ -46,16 +46,16 @@ const actionList: ActionItem[] = [
 export const QuickActions: FC = (): ReactElement => {
   return (
     <section>
-      <section className="my-8.75 px-11 border border-gray-200 rounded-3xl shadow-2xl  dark:bg-[#182029] dark:border-[#182029] ">
+      <section className="my-8.75 px-7 border border-gray-200 rounded-3xl shadow-2xl  dark:bg-[#182029] dark:border-[#182029] lg:px-11">
         <section className="flex items-center pt-4">
-          <Sparkles size={15} />
+          <Sparkles size={15} className="size-6"/>
           <div className=" pl-4">
-            <p className="text-[#29B866] font-bold">Quick Actions</p>
+            <p className="text-[#29B866] font-bold text-xl">Quick Actions</p>
             <p className="text-[#84A3B8]">Manage your finances efficiently</p>
           </div>
         </section>
         {/* quick cardes */}
-        <nav className="grid grid-cols-4 gap-4 mt-8 mb-6">
+        <nav className="grid grid-cols-2 gap-4 mt-8 mb-6 lg:grid-cols-4">
           {actionList.map(({ icon, label, href, bgColor }) => {
             const Icon = icon;
             return (
@@ -65,8 +65,8 @@ export const QuickActions: FC = (): ReactElement => {
                 className="grid gap-3 rounded-2xl text-center p-5"
                 style={{ backgroundColor: bgColor }}
               >
-                <Icon size={20} className="m-auto" />
-                <p className="pl-2">{label}</p>
+                <Icon size={20} className="m-auto lg:pl-2" />
+                <p className="">{label}</p>
               </Link>
             );
           })}

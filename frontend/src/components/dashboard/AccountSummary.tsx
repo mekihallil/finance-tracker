@@ -122,7 +122,7 @@ export const AccountSummary: FC = (): ReactElement | null => {
   ];
 
   return (
-    <section className="grid grid-cols-4 gap-7 w-full mb-8.75">
+    <section className="grid lg:grid-cols-4 md:grid-cols-2 gap-7 w-full mb-8.75">
       {statCards.map(
         ({
           id,

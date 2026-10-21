@@ -7,9 +7,9 @@ import type { FC, ReactElement } from "react";
 export const Dashboard: FC = (): ReactElement => {
   return (
     <main>
-      <div className="ml-80 mr-10">
+      <div className="lg:ml-80 lg:mr-10 px-6">
         <FinancialDashbaord />
-        <div className="flex justify-center">
+        <div className="md:flex justify-center ">
           <AccountSummary />
         </div>
         <QuickActions />
