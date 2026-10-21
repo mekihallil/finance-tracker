@@ -41,6 +41,7 @@ export const useAuth = () => {
   const logout = () => {
     localStorage.removeItem("token");
     queryClient.clear();
+    window.location.reload();
   };
   return { userLogin, userRegister, logout };
 };
