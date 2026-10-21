@@ -52,7 +52,7 @@ export const NavBar: FC = (): ReactElement => {
 
   return (
     <>
-      <section className="flex flex-col justify-between fixed top-0 dark:bg-[#181E27] shadow-2xl h-dvh w-72.5">
+      <section className="lg:flex flex-col justify-between fixed top-0 dark:bg-[#181E27] shadow-2xl h-dvh w-72.5 hidden">
         <section>
           <header className="text-center text-2xl ">
             <div className="flex items-center justify-between py-6.25 px-8">
