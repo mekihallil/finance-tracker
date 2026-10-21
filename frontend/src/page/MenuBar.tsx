@@ -1,8 +1,10 @@
+import { useAuth } from "@/hook/useAuth.hook";
 import {
   Bell,
   CirclePlus,
   Dot,
   House,
+  LogOut,
   Menu,
   Moon,
   Sun,
@@ -21,7 +23,7 @@ type nav = {
   icon: ReactElement;
   url: string;
 };
-const navData: nav[] = [
+const menuData: nav[] = [
   { id: 1, title: "Dashboard", icon: <House size={15} />, url: "/app" },
   {
     id: 2,
@@ -42,9 +44,16 @@ const navData: nav[] = [
     icon: <Bell size={15} />,
     url: "/app/notification",
   },
+  {
+    id: 6,
+    title: "Log out",
+    icon: <LogOut size={15} />,
+    url: "",
+  },
 ];
 
 export const MenuBar: FC = (): ReactElement => {
+  const { logout } = useAuth();
   const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
   const [mode, setMode] = useState(isDark);
 
@@ -57,7 +66,6 @@ export const MenuBar: FC = (): ReactElement => {
     }
   }, [mode]);
   const path = useLocation().pathname;
-  // console.log(path);
 
   return (
     <section className="flex flex-col justify-between top-0 right-0 left-0 dark:bg-[#181E27] shadow-2xl">
@@ -105,15 +113,19 @@ export const MenuBar: FC = (): ReactElement => {
         </section>
       </section>
       {menuOpen &&
-        navData.map(({ id, title, url, icon }) => {
+        menuData.map(({ id, title, url, icon }) => {
           return (
             <div
               key={id}
               className="hover:text-black hover:translate-x-2 duration-300"
             >
               <Link
+                onClick={() => {
+                  if (id === 6) return logout();
+                  setMenuOpen(false);
+                }}
                 to={url}
-                className={`flex justify-between items-center h-10 mx-3 pl-4 cursor-pointer ${path == url ? "border rounded-3xl  bg-[#29B866]" : ""} `}
+                className={`${id === 6 && "flex justify-center mx-auto w-30 mb-2 rounded-2xl"} flex justify-between items-center h-10 mx-3 cursor-pointer ${path == url && "border rounded-3xl  bg-[#29B866]"} `}
               >
                 <div className="flex ">
                   <div className="flex items-center px-3">{icon}</div>
