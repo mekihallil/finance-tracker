@@ -1,7 +1,7 @@
 import { useAuth } from "@/hook/useAuth.hook";
 import { loginSchema, type LoginFormData } from "@/types/authSchema.type";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Check, Eye, LockKeyhole, Mail } from "lucide-react";
+import { Check, Eye, LockKeyhole, Mail, Zap } from "lucide-react";
 import type { FC, ReactElement } from "react";
 import { useForm } from "react-hook-form";
 import { FcGoogle } from "react-icons/fc";
@@ -42,7 +42,7 @@ export const RightSideLogin: FC = (): ReactElement => {
   return (
     <article className="bg-white pt-12">
       <section>
-        <div className="flex justify-end px-20.5 text-gray-900">
+        <div className="md:flex justify-end px-20.5 text-gray-900 hidden">
           New to Vestia?
           <Link
             to="/register"
@@ -51,9 +51,20 @@ export const RightSideLogin: FC = (): ReactElement => {
             Create an account
           </Link>
         </div>
+
+        <section className="flex gap-3 md:hidden justify-center">
+          <Zap size={30} className="my-auto  text-gray-900 " />
+          <div>
+            <p className="text-2xl text-[#29B866] font-bold">FinanceTracker</p>
+            <p className="text-[13px] -mt-1 text-start text-gray-500 font-semibold">
+              Professional Edition
+            </p>
+          </div>
+        </section>
+
         <form onSubmit={handleSubmit(onSubmit)}>
-          <section className="grid justify-center w-full py-36">
-            <div className="w-112.5">
+          <section className="grid md:justify-center px-8 w-full py-15 md:py-36">
+            <div className="md:w-112.5 min-w-65 ">
               {/* greeting  */}
               <div className="mb-9">
                 <p className="text-5xl leading-tight tracking-tight text-gray-900 font-display">
@@ -152,6 +163,17 @@ export const RightSideLogin: FC = (): ReactElement => {
                   </span>
                   <button>Continue With Google</button>
                 </div>
+
+                <div className="flex justify-center text-gray-900 py-8 md:hidden">
+                  New to Vestia?
+                  <Link
+                    to="/register"
+                    className="font-bold text-gray-700 underline underline-offset-4 decoration-2 decoration-emerald-400 transition hover:text-gray-400 px-2"
+                  >
+                    Create an account
+                  </Link>
+                </div>
+
                 <p className="text-center text-xs leading-relaxed mt-8 text-gray-500">
                   By continuing, you agree to our
                   <button className="underline underline-offset-2 px-1">

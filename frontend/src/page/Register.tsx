@@ -4,11 +4,11 @@ import type { FC, ReactElement } from "react";
 
 export const RegisterPage: FC = (): ReactElement => {
   return (
-    <div className="flex w-full ">
-      <div className="w-1/2">
+    <div className="flex lg:w-full justify-center ">
+      <div className="lg:w-1/2 w-full">
         <LeftSideRegisterPage />
       </div>
-      <div className="w-1/2">
+      <div className="lg:w-1/2">
         <RightSideRegisterPage />
       </div>
     </div>

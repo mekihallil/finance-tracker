@@ -357,8 +357,8 @@ export default function PremiumKpiSparklines({
       data-conformance-view="main"
       data-premium-kpi-shell=""
       aria-label="Business metrics"
-      className="premium-kpi-shell"
-      style={{ width: input.width, height: input.height }}
+      className="premium-kpi-shell md:max-w-lg "
+      // style={{ width: input.width,  height: input.height }}
     >
       <style>{premiumKpiStyles}</style>
       <div className="premium-kpi-grid">

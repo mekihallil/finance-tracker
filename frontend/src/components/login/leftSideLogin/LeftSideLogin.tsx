@@ -4,7 +4,7 @@ import PremiumKpiSparklines from "./ChartCard";
 import { Avatar, AvatarFallback, AvatarGroup } from "@/components/ui/avatar";
 export const LeftSideLogin: FC = (): ReactElement => {
   return (
-    <div className="pt-13.5 mx-16">
+    <div className="pt-13.5 mx-16 hidden lg:block">
       <section className="flex gap-3">
         <Zap size={30} className="my-auto" />
         <div>
