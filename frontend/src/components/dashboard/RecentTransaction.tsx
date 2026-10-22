@@ -59,7 +59,7 @@ export const RecentTransaction: FC = (): ReactElement | null => {
                   key={_id}
                   className="border border-gray-100 rounded-3xl px-5 py-3 hover:border-black dark:hover:border-white  dark:border-gray-800"
                 >
-                  <div className="flex justify-between">
+                  <div className="grid grid-cols-2">
                     <section className="flex ">
                       <div className="content-center ">
                         <section
@@ -81,11 +81,11 @@ export const RecentTransaction: FC = (): ReactElement | null => {
                           {title}
                         </h3>
                         {/* Category and Time ago */}
-                        <section className="grid md:inline">
+                        <section className="flex ">
                           <span className="font-medium mt-1 px-1.5 text-[14px] rounded-full bg-[#F0F3F4] dark:bg-[#4B5567]">
                             {category}
                           </span>
-                          <span className="font-semibold ml-3 text-center text-[13px] rounded-full text-gray-500">
+                          <span className="font-semibold my-auto ml-3 text-center text-[13px] rounded-full text-gray-500">
                             {createdAt && timeAgo(createdAt)}
                           </span>
                         </section>
