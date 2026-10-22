@@ -31,7 +31,7 @@ export const LeftSideRegisterPage: FC = (): ReactElement => {
         }
         toast.success("Register in successfully");
         reset();
-        navigate("/login");
+        navigate("/");
       },
       onError: (error) => {
         toast.error(error.message || "Failed to register");
