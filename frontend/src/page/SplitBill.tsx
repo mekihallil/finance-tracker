@@ -12,7 +12,7 @@ export const SplitBill: FC = (): ReactElement => {
 
   return (
     <section className="bg-[#FAFAFB] dark:bg-[#11161D]">
-        <div className="ml-80 mr-10">
+        <div className="px-5 lg:ml-80 lg:mr-10">
         <SplitTitle onOpen={openAddBill} />
         <BalanceSummary />
         <AddSplitBill isOpen={isAddOpen} onClose={closeAddBill} />

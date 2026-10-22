@@ -183,7 +183,7 @@ const SplitForm: FC<{ owner: ownerDataProps; onClose: () => void }> = ({
       <h1 className="mb-8">Create New Split</h1>
       <form onSubmit={handleSubmit(onSubmit)} className="grid">
         <div className="grid gap-6.5">
-          <div className="grid grid-cols-3 gap-3">
+          <div className="grid gap-3 md:grid-cols-3">
             <div className="grid ">
               <label htmlFor="" className="p-1">
                 What's this for?
@@ -277,16 +277,16 @@ const SplitForm: FC<{ owner: ownerDataProps; onClose: () => void }> = ({
               })}
             </div>
             <div>
-              <div className=" grid grid-cols-12 gap-4">
+              <div className="grid grid-cols-5 gap-2 md:grid-cols-12 lg:gap-4">
                 <input
-                  className="col-start-1 col-end-7 dark:bg-[#283243] p-2 rounded-2xl bg-gray-200 dark:border border-[#202B3D]"
+                  className="col-start-1 col-end-5 md:col-start-1 md:col-end-7 dark:bg-[#283243] p-2 rounded-2xl bg-gray-200 dark:border border-[#202B3D]"
                   type="text"
                   placeholder="name"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                 />
                 <input
-                  className="col-start-7 col-end-12 dark:bg-[#283243] p-2 rounded-2xl bg-gray-200 dark:border border-[#202B3D]"
+                  className="col-start-1 col-end-5 md:col-start-7 md:col-end-12 dark:bg-[#283243] p-2 rounded-2xl bg-gray-200 dark:border border-[#202B3D]"
                   type="text"
                   placeholder="email"
                   value={email}

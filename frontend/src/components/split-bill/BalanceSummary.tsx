@@ -33,7 +33,7 @@ export const BalanceSummary: FC = (): ReactElement | null => {
     },
   ];
   return (
-    <main className="grid grid-cols-3 gap-6.25">
+    <main className="grid gap-5 md:grid-cols-3 ">
       {utils.map(({ name, icon, amount }) => {
         return (
           <section

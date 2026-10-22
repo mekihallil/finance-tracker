@@ -122,7 +122,7 @@ export const SplitBills: FC = (): ReactElement | null => {
             >
               <main>
                 <div className="flex justify-between">
-                  <section className="flex gap-4">
+                  <section className="flex gap-2 md:gap-4">
                     <div>{CategoryIcon}</div>
                     <div>
                       <p className="text-[17px] font-semibold">{title}</p>
@@ -134,7 +134,7 @@ export const SplitBills: FC = (): ReactElement | null => {
                           year: "numeric",
                         })}
                       </p>
-                      <div className="flex gap-2 mt-1">
+                      <div className="grid md:flex justify-center gap-2 mt-1">
                         <h2 className="font-semibold text-[12px] capitalize bg-gray-400/25 rounded-2xl my-auto py-0.5 px-2">
                           {UnpaidLength} Pending
                         </h2>
@@ -143,7 +143,7 @@ export const SplitBills: FC = (): ReactElement | null => {
                     </div>
                   </section>
                   <section>
-                    <div className="flex gap-5 mr-5 ">
+                    <div className="flex md:gap-5 md:mr-5 ">
                       <div>
                         <h1 className="text-[18px] font-semibold">
                           Your share: ${splitBill(amount, participants.length)}
@@ -153,16 +153,24 @@ export const SplitBills: FC = (): ReactElement | null => {
                           <h1>Paid</h1>
                         </div>
                       </div>
-                      {IsHovered === _id ? (
+                      <div>
                         <button
                           onClick={() => DeleteSplitMutation.mutate(_id)}
-                          className="my-auto"
+                          className="my-auto md:hidden"
                         >
                           <Trash2 className="text-red-500" size={20} />
                         </button>
-                      ) : (
-                        <div className="mr-5"></div>
-                      )}
+                        {IsHovered === _id ? (
+                          <button
+                            onClick={() => DeleteSplitMutation.mutate(_id)}
+                            className="my-auto"
+                          >
+                            <Trash2 className="text-red-500" size={20} />
+                          </button>
+                        ) : (
+                          <div className="md:mr-5"></div>
+                        )}
+                      </div>
                     </div>
                   </section>
                 </div>
@@ -170,7 +178,7 @@ export const SplitBills: FC = (): ReactElement | null => {
                 {/* Participants detail information */}
                 <section className="mt-2">
                   <h1>Participants</h1>
-                  <div className="grid grid-cols-2 gap-2 mt-1">
+                  <div className="grid gap-2 mt-1 md:grid-cols-2">
                     {participants.map(
                       ({ _id, name, paid }: participantsEnumFormData) => {
                         return (
