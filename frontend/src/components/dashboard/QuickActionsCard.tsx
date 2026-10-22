@@ -20,25 +20,25 @@ const actionList: ActionItem[] = [
   {
     label: "Add Transactions",
     icon: Plus,
-    href: "/app/transaction",
+    href: "/transaction",
     bgColor: "#15AE7B",
   },
   {
     label: "Set Goal",
     icon: Goal,
-    href: "/app/saving",
+    href: "/saving",
     bgColor: "#246CFE",
   },
   {
     label: "Split Bill",
     icon: Users,
-    href: "/app/split-bill",
+    href: "/split-bill",
     bgColor: "#A840FF",
   },
   {
     label: "View Trends",
     icon: TrendingUp,
-    href: "/app/",
+    href: "/",
     bgColor: "#F8590C",
   },
 ];

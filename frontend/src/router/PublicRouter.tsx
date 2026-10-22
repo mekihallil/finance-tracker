@@ -4,7 +4,7 @@ export const PublicRouter = () => {
   const token = localStorage.getItem("token");
 
   if (token) {
-    return <Navigate to="/app" replace />;
+    return <Navigate to="/" replace />;
   }
   return <Outlet />;
 };

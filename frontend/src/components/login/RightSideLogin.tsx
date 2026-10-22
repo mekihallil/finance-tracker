@@ -31,7 +31,7 @@ export const RightSideLogin: FC = (): ReactElement => {
         }
         toast.success("Logged in successfully");
         reset();
-        navigate("/app");
+        navigate("/");
       },
       onError: (error) => {
         toast.error(error.message || "Failed to login");

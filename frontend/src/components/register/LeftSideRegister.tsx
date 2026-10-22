@@ -31,7 +31,7 @@ export const LeftSideRegisterPage: FC = (): ReactElement => {
         }
         toast.success("Register in successfully");
         reset();
-        navigate("/app");
+        navigate("/login");
       },
       onError: (error) => {
         toast.error(error.message || "Failed to register");
@@ -45,7 +45,7 @@ export const LeftSideRegisterPage: FC = (): ReactElement => {
         <div className="md:flex justify-end px-20.5 text-gray-900 hidden">
           Already have an account?
           <Link
-            to="/"
+            to="/login"
             className="font-bold text-gray-700 underline underline-offset-4 decoration-2 decoration-emerald-400 transition hover:text-gray-400 px-2"
           >
             Sign in

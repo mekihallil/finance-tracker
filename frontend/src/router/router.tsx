@@ -16,7 +16,7 @@ export const router = createBrowserRouter([
     element: <PublicRouter />,
     children: [
       {
-        path: "/",
+        path: "/login",
         element: <LoginPage />,
       },
       {
@@ -29,7 +29,7 @@ export const router = createBrowserRouter([
     element: <ProtectedRouter />,
     children: [
       {
-        path: "/app",
+        path: "/",
         element: <App />,
         children: [
           {

@@ -24,25 +24,25 @@ type nav = {
   url: string;
 };
 const menuData: nav[] = [
-  { id: 1, title: "Dashboard", icon: <House size={15} />, url: "/app" },
+  { id: 1, title: "Dashboard", icon: <House size={15} />, url: "/" },
   {
     id: 2,
     title: "Transaction",
     icon: <CirclePlus size={15} />,
-    url: "/app/transaction",
+    url: "/transaction",
   },
-  { id: 3, title: "Savings", icon: <Target size={15} />, url: "/app/saving" },
+  { id: 3, title: "Savings", icon: <Target size={15} />, url: "/saving" },
   {
     id: 4,
     title: "Split Bills",
     icon: <Users size={15} />,
-    url: "/app/split-bill",
+    url: "/split-bill",
   },
   {
     id: 5,
     title: "notification",
     icon: <Bell size={15} />,
-    url: "/app/notification",
+    url: "/notification",
   },
   {
     id: 6,
