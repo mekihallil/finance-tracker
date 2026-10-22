@@ -46,7 +46,7 @@ export const AddSaving: FC<AddSavinglProps> = ({
       <section className="w-full mb-5">
         <h2 className="mb-5 font-medium ">Add New Savings Goal</h2>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <section className="grid grid-cols-4 gap-3 my-3 ">
+          <section className="grid gap-3 my-3 md:grid-cols-2 lg:grid-cols-4">
             <div className="grid">
               <label htmlFor="name">Goal Name</label>
               <input

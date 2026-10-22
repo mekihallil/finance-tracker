@@ -39,12 +39,12 @@ export const SmartSavingsTips: FC = (): ReactElement => {
           <TrendingUp />
           <h2 className="font-medium ">Smart Savings Tips</h2>
         </header>
-        <section className="grid grid-cols-2 gap-4 justify-center mt-5">
+        <section className="grid gap-4 mt-5 md:grid-cols-2">
           {tips.map(({id,name,description}) => {
             return (
               <div
                 key={id}
-                className="grid gap-2 text-[15px] font-semibold border border-gray-600 rounded-2xl p-4"
+                className="grid gap-2 text-[15px] font-semibold border border-gray-600 rounded-2xl p-4 "
               >
                 <h3>{name}</h3>
                 <h6 className="text-sm text-gray-400">{description}</h6>

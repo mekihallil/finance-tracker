@@ -50,18 +50,18 @@ const reward: Reward[] = [
 
 export const BadgesAndRewards: FC = (): ReactElement => {
   return (
-    <article className="rounded-[20px] dark:bg-[#2C3546] border border-gray-300 dark:border-none p-7 mb-7 mt-7">
-      <header className="flex gap-2">
+    <article className="rounded-[20px] dark:bg-[#2C3546] border border-gray-300 dark:border-none p-7 my-7">
+      <header className="flex gap-2 mb-6">
         <Award />
         <h2 className="font-medium ">Badges & Rewards</h2>
       </header>
-      <section className="grid grid-cols-4 gap-3 justify-center">
+      <section className="grid gap-3 lg:grid-cols-4 md:grid-cols-2 ">
         {reward.map(({id,name,description,status,icon,iconBg}) => {
           const Icon = icon;
           return (
             <div
               key={id}
-              className="grid place-items-center border-2 rounded-[20px] pt-6.5 pb-4.5 mt-6"
+              className="grid place-items-center border-2 rounded-[20px] pt-6.5 pb-4.5 "
             >
               <span
                 className={cn(

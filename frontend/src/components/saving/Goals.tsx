@@ -65,7 +65,7 @@ export const Goals: FC = (): ReactElement | null => {
     return label;
   };
   return (
-    <article className="grid grid-cols-2 gap-5 ">
+    <article className="grid gap-5 lg:grid-cols-2 ">
       {data.map(
         ({
           _id,
