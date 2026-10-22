@@ -89,7 +89,7 @@ export const NewTransaction: FC = (): ReactElement => {
   };
 
   return (
-    <section className=" max-lg:w-77 max-lg:mx-auto">
+    <section className="">
       <section className="p-8 rounded-3xl shadow-sm border-gray-100 dark:bg-[#2C3546] dark:border-black">
         <header className="mb-6">
           <div className="flex gap-3 font-bold  tracking-tight">
@@ -100,8 +100,8 @@ export const NewTransaction: FC = (): ReactElement => {
           </div>
         </header>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
-          <section className="flex space-x-10">
-            <div className="w-1/2 space-y-10">
+          <section className=" grid md:space-x-10 md:flex">
+            <div className="md:w-1/2 space-y-10">
               {/* Amount Input */}
               <div className="flex flex-col">
                 <label
@@ -191,7 +191,7 @@ export const NewTransaction: FC = (): ReactElement => {
               <button
                 type="submit"
                 disabled={createTransactionMutation.isPending}
-                className="w-full flex items-center justify-center gap-2 p-4 rounded-2xl font-bold dark:bg-[#131c2a] bg-[#c1c1c1] hover:scale-95 transition-all disabled:bg-gray-300"
+                className="w-full md:flex items-center justify-center gap-2 p-4 rounded-2xl font-bold dark:bg-[#131c2a] bg-[#c1c1c1] hover:scale-95 transition-all disabled:bg-gray-300 hidden "
               >
                 {createTransactionMutation.isPending ? (
                   <Loader2 className="animate-spin" size={20} />
@@ -204,7 +204,7 @@ export const NewTransaction: FC = (): ReactElement => {
               </button>
             </div>
             {/* Category Select */}
-            <div className="flex w-1/2">
+            <div className="flex md:w-1/2">
               <section className="w-full">
                 <label
                   htmlFor="category"
@@ -244,6 +244,21 @@ export const NewTransaction: FC = (): ReactElement => {
                 )}
               </section>
             </div>
+              {/* Submit Button */}
+              <button
+                type="submit"
+                disabled={createTransactionMutation.isPending}
+                className="w-full flex items-center justify-center gap-2 p-4 mt-4 rounded-2xl font-bold dark:bg-[#131c2a] bg-[#c1c1c1] hover:scale-95 transition-all disabled:bg-gray-300 md:hidden"
+              >
+                {createTransactionMutation.isPending ? (
+                  <Loader2 className="animate-spin" size={20} />
+                ) : (
+                  <>
+                    <PlusCircle size={20} />
+                    <span>Save Transaction</span>
+                  </>
+                )}
+              </button>
           </section>
         </form>
       </section>

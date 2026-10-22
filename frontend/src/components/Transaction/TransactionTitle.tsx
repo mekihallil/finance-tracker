@@ -2,7 +2,6 @@ import type { FC, ReactElement } from "react";
 
 export const TransactionTitle: FC = (): ReactElement => {
   return (
-    <>
       <article>
         <div className="py-6">
           <p className="text-[26px] font-semibold">Transaction Tracker</p>
@@ -11,6 +10,5 @@ export const TransactionTitle: FC = (): ReactElement => {
           </p>
         </div>
       </article>
-    </>
   );
 };

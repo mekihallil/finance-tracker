@@ -7,7 +7,7 @@ import type { FC, ReactElement } from "react";
 export const Transaction: FC = (): ReactElement => {
   return (
     <main>
-      <div className="ml-80 mr-10">
+      <div className="px-5 lg:ml-80 lg:mr-10">
         <TransactionTitle />
         <NewTransaction />
         <MonthlyTransaction />

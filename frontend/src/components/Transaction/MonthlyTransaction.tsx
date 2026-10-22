@@ -63,7 +63,7 @@ export const MonthlyTransaction: FC = (): ReactElement | null => {
   ];
   return (
     <section className="mt-8">
-      <div className="grid grid-cols-3 gap-8 ">
+      <div className="grid md:grid-cols-3 md:gap-8 gap-5 ">
         {monthData.map(({ id, icon, title, amount }) => {
           return (
             <article

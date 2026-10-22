@@ -53,13 +53,13 @@ export const RecentTransaction: FC = (): ReactElement | null => {
 
   return (
     <article className="mb-10">
-      <section className="w-full rounded-3xl shadow-2xl dark:bg-[#2C3546] my-8 mr-30 p-10 max-lg:mx-auto ">
+      <section className="w-full rounded-3xl shadow-2xl dark:bg-[#2C3546] my-8 mr-30 p-4 md:p-10  ">
         <h2 className="flex items-center text-gray-800 dark:text-white">
           <p className="font-bold text-xl">Recent Transactions</p>
         </h2>
 
         {/* <ul> is the semantic tag for lists of items */}
-        <ul className="space-y-2.5 px-3 pb-5">
+        <ul className="space-y-2.5 md:px-3 pb-5">
           {monthExpenses.map(
             ({
               _id,
@@ -77,7 +77,7 @@ export const RecentTransaction: FC = (): ReactElement | null => {
               return (
                 <li
                   key={_id}
-                  className="border-b-2 border-gray-100 rounded-3xl p-4 hover:bg-[#fcfcfc] bg-[#FFFFFF] dark:bg-[#2C3546] dark:hover:bg-[#333C4E] dark:border-gray-800"
+                  className="border-b-2 border-gray-100 rounded-3xl hover:bg-[#fcfcfc] bg-[#FFFFFF] dark:bg-[#2C3546] dark:hover:bg-[#333C4E] dark:border-gray-800 p-2 md:p-4"
                 >
                   <div className="flex justify-between">
                     <section className="flex ">
@@ -157,9 +157,9 @@ export const RecentTransaction: FC = (): ReactElement | null => {
         </ul>
 
         {/* Empty State */}
-        {data?.length === 0 && (
+        {monthExpenses.length === 0 && (
           <div className="text-center py-20 border-2 border-dashed border-gray-200 rounded-3xl">
-            <p className="text-gray-400">Your Transaction history is empty.</p>
+            <p className="text-gray-400">Your Expense history is empty.</p>
           </div>
         )}
       </section>
